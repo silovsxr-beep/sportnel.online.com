@@ -102,7 +102,6 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
 
 <div class="player-wrapper">
 <div class="video-ratio">
-    <!-- Стартовая заглушка возвращена на место -->
     <div class="player-cover" id="screenCover">
         <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
         <p>Select the active match from the schedule below</p>
@@ -122,8 +121,8 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
 </div>
 <div class="match-status"><span class="live-dot">●</span> 02:00 AM · NHL Regular Season</div>
 </div>
-<!-- Кнопка при клике мгновенно подгружает нужный матч, скрывая заглушку -->
-<button class="btn-stream" onclick="loadNhlStream('https://matchora.to')">Watch Live</button>
+<!-- Кнопка теперь открывает трансляцию напрямую в новой вкладке/окне, защищая от сброса в меню -->
+<button class="btn-stream" onclick="openMatchStream('https://matchora.to')">Watch Live</button>
 </div>
 </div>
 
@@ -147,15 +146,13 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
 <script>
 const myUserId = Math.floor(1000 + Math.random() * 9000);
 
-function loadNhlStream(streamUrl) {
-    const cover = document.getElementById('screenCover');
-    const iframe = document.getElementById('nhlStreamIframe');
+// Новая функция: открывает плеер в обход iframe, чтобы избежать сброса на главную Matchora
+function openMatchStream(streamUrl) {
     if(streamUrl && streamUrl !== '#') {
-        cover.style.display = 'none';
-        iframe.style.display = 'block';
-        iframe.src = streamUrl;
+        window.location.href = streamUrl;
     }
 }
+
 function sendMessage() {
     const input = document.getElementById('chatInput');
     const text = input.value.trim();
