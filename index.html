@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPORTNEL — Прямая трансляция NHL</title>
-    <!-- Подключаем иконки FontAwesome (для соцсетей, шайбы и плеера) -->
-    <link rel="stylesheet" href="https://cloudflare.com">
+    <title>SPORTNEL — NHL Live Streams</title>
     <style>
         :root {
             --bg-body: #080a10;
@@ -41,7 +39,6 @@
             flex-grow: 1;
         }
 
-        /* Красивая шапка со всеми нужными иконками соцсетей */
         header {
             background-color: var(--bg-card);
             border: 1px solid var(--border-line);
@@ -71,24 +68,34 @@
             color: var(--accent-nhl);
         }
 
-        /* Кнопки соцсетей (TikTok, YouTube, Telegram) */
         .social-links {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 16px;
         }
 
         .social-icon {
-            color: var(--text-grey);
-            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-decoration: none;
-            transition: color 0.2s, transform 0.2s;
+            transition: transform 0.2s;
         }
 
-        /* Эффект подсвечивания при наведении/нажатии */
-        .social-icon.tg:hover { color: #24A1DE; transform: scale(1.1); }
-        .social-icon.tt:hover { color: #ff007f; transform: scale(1.1); }
-        .social-icon.yt:hover { color: #FF0000; transform: scale(1.1); }
+        .social-icon:hover {
+            transform: scale(1.15);
+        }
+
+        .social-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: var(--text-grey);
+            transition: fill 0.2s;
+        }
+
+        .social-icon.tg:hover svg { fill: #24A1DE; }
+        .social-icon.tt:hover svg { fill: #ff007f; }
+        .social-icon.yt:hover svg { fill: #FF0000; }
 
         .player-wrapper {
             background-color: var(--bg-card);
@@ -137,9 +144,11 @@
             font-weight: 500;
         }
 
-        .player-cover i {
-            font-size: 52px;
-            color: var(--accent-nhl);
+        .player-cover svg {
+            width: 52px;
+            height: 52px;
+            fill: var(--accent-nhl);
+            margin-bottom: 5px;
         }
 
         .grid-header {
@@ -208,7 +217,6 @@
             box-shadow: 0 4px 12px rgba(229, 9, 20, 0.3);
         }
 
-        /* Стильный англоязычный футер с описанием сайта */
         footer {
             margin-top: 40px;
             padding: 20px 10px;
@@ -224,30 +232,43 @@
             letter-spacing: 0.8px;
             font-weight: 600;
             text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .footer-text svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--accent-nhl);
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Шапка с логотипом и иконками соцсетей -->
         <header>
             <div class="brand-block">
                 <div class="brand">SPORT<span>NEL</span></div>
             </div>
             <div class="social-links">
-                <!-- Замени знак # внутри href="..." на ссылки на свои аккаунты, когда захочешь -->
-                <a href="#" class="social-icon tg" title="Telegram" target="_blank"><i class="fa-brands fa-telegram"></i></a>
-                <a href="#" class="social-icon tt" title="TikTok" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
-                <a href="#" class="social-icon yt" title="YouTube" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" class="social-icon tg" title="Telegram" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M11.944 0C5.344 0 0 5.344 0 11.944c0 6.6 5.344 11.944 11.944 11.944 6.6 0 11.944-5.344 11.944-11.944C23.888 5.344 18.544 0 11.944 0zm5.813 8.356c-.169 1.782-1.013 7.025-1.444 9.332-.181.975-.544 1.3-.894 1.331-.762.069-1.338-.506-2.075-.988-1.156-.756-1.806-1.225-2.931-1.969-1.3-.856-.456-1.325.281-2.094.194-.2.3.563 1.131-1.431.394-.7.712-1.362.438-1.744-.069-.1-.281-.156-.581-.031-.425.175-2.613 1.619-2.613 1.619-.387.262-.738.394-1.05.381-.35-.006-1.025-.194-1.525-.356-.613-.2-1.1-.306-1.056-.65.025-.175.269-.35.731-.531 2.856-1.244 4.763-2.063 5.719-2.456 2.719-1.119 3.281-1.313 3.65-.119.081.044.256.244.219.531z"/></svg>
+                </a>
+                <a href="#" class="social-icon tt" title="TikTok" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.01.08 1.53.63 3.03 1.65 4.16.94.99 2.22 1.6 3.59 1.73v3.9c-1.42-.01-2.83-.45-3.99-1.29-.42-.31-.81-.66-1.15-1.05v5.33c.06 2.45-1.2 4.88-3.4 5.99-2.44 1.25-5.56.81-7.53-1.11-2.11-2.04-2.52-5.38-1.01-7.89 1.4-2.38 4.25-3.6 7.02-3 .04-.61.02-1.23.02-1.84-2.28-.31-4.63.35-6.39 1.87-2.43 2.07-3.15 5.62-1.75 8.56 1.42 3.03 4.85 4.77 8.16 4.22 3.09-.48 5.63-2.91 5.99-6V3.68c-1.11-.76-2-1.82-2.55-3.05-.28-.62-.43-1.29-.49-1.97-.13.11-.27.22-.42.36z"/></svg>
+                </a>
+                <a href="#" class="social-icon yt" title="YouTube" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.516 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.872.507 9.388.507 9.388.507s7.517 0 9.389-.507a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
             </div>
         </header>
 
-        <!-- Модуль плеера -->
         <div class="player-wrapper">
             <div class="video-ratio">
                 <div class="player-cover" id="screenCover">
-                    <i class="fa-solid fa-circle-play"></i>
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
                     <p>Выберите интересующий матч из расписания ниже</p>
                 </div>
                 <iframe id="nhlStreamIframe" src="" allow="autoplay; fullscreen" allowfullscreen style="display:none;"></iframe>
@@ -257,37 +278,26 @@
         <div class="grid-header">МАТЧИ СЕГОДНЯ (ЛАТВИЙСКОЕ ВРЕМЯ)</div>
         
         <div class="match-list">
-            <!-- Оставили только матч Vancouver - Florida -->
             <div class="match-row">
                 <div class="teams-block">
                     <div class="teams-title">Vancouver — Florida</div>
                     <div class="match-status"><span class="live-dot">●</span> 00:00 · NHL Регулярный сезон</div>
                 </div>
-                <!-- Тестовая ссылка Mux, ночью поменяешь на реальный фрейм с OnHockey -->
                 <button class="btn-stream" onclick="loadNhlStream('https://media-player.host')">Смотреть</button>
             </div>
         </div>
     </div>
 
-    <!-- Футер с красивым описанием на английском языке -->
     <footer>
         <div class="footer-text">
-            <i class="fa-solid fa-puck" style="color: var(--accent-nhl); margin-right: 5px;"></i> 
-            The best website for watching NHL live streams
-        </div>
-    </footer>
+The best website for watching NHL live streams
 
-    <script>
-        function loadNhlStream(streamUrl) {
-            const cover = document.getElementById('screenCover');
-            const iframe = document.getElementById('nhlStreamIframe');
-            
-            if(streamUrl && streamUrl !== '#') {
-                cover.style.display = 'none';
-                iframe.style.display = 'block';
-                iframe.src = streamUrl;
-            }
-        }
-    </script>
-</body>
-</html>
+function loadNhlStream(streamUrl) {
+const cover = document.getElementById('screenCover');
+const iframe = document.getElementById('nhlStreamIframe');
+if(streamUrl && streamUrl !== '#') {
+cover.style.display = 'none';
+iframe.style.display = 'block';
+iframe.src = streamUrl;
+}
+}
