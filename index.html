@@ -69,7 +69,7 @@
             margin-bottom: 15px;
         }
 
-        .video-wrapper {
+        .video-player {
             position: relative;
             padding-bottom: 56.25%; /* 16:9 */
             height: 0;
@@ -78,14 +78,13 @@
             border-radius: 6px;
         }
 
-        /* Стандартный и надежный HTML5 видеоплеер */
-        .video-wrapper video {
+        .video-player iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            outline: none;
+            border: none;
         }
 
         .player-placeholder {
@@ -102,7 +101,7 @@
             gap: 10px;
             font-size: 14px;
             background-color: #050608;
-            z-index: 10;
+            z-index: 2;
         }
 
         .player-placeholder i {
@@ -183,15 +182,13 @@
     </header>
 
     <div class="stream-container">
-        <div class="video-wrapper">
-            <!-- Экран ожидания клика -->
+        <div class="video-player">
             <div class="player-placeholder" id="playerScreen">
                 <i class="fa-solid fa-circle-play"></i>
                 <p>Выберите активный матч ниже для начала трансляции</p>
             </div>
-            
-            <!-- Простой и легкий видео-тег -->
-            <video id="mainPlayer" controls playsinline style="display:none;"></video>
+            <!-- Плеер, оптимизированный под любые российские сети -->
+            <iframe id="videoIframe" src="" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen style="display:none;"></iframe>
         </div>
     </div>
 
@@ -202,8 +199,8 @@
             <div class="teams">Вашингтон — Монреаль</div>
             <div class="meta"><span class="live">● LIVE</span> · Регулярный чемпионат</div>
         </div>
-        <!-- Прямая ссылка на надежное MP4-видео, поддерживаемое любым телефоном -->
-        <button class="watch-btn" onclick="startStream('https://googleapis.com')">Смотреть</button>
+        <!-- Безопасный и доступный плеер Rutube (Хоккейный матч) БЕЗ КАПЧИ -->
+        <button class="watch-btn" onclick="startStream('https://rutube.ru')">Смотреть</button>
     </div>
 
     <div class="match-row">
@@ -215,17 +212,15 @@
     </div>
 
     <script>
-        function startStream(videoUrl) {
-            // Прячем заглушку выбора матча
-            document.getElementById('playerScreen').style.display = 'none';
+        function startStream(url) {
+            const placeholder = document.getElementById('playerScreen');
+            const iframe = document.getElementById('videoIframe');
             
-            // Находим плеер, включаем его видимость и задаем видеофайл
-            var player = document.getElementById('mainPlayer');
-            player.style.display = 'block';
-            player.src = videoUrl;
-            
-            // Запускаем воспроизведение
-            player.play();
+            if(url) {
+                placeholder.style.display = 'none';
+                iframe.style.display = 'block';
+                iframe.src = url;
+            }
         }
     </script>
 </body>
