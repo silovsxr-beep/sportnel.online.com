@@ -71,22 +71,21 @@
 
         .video-player {
             position: relative;
-            padding-bottom: 56.25%; /* Соотношение сторон 16:9 */
+            padding-bottom: 56.25%; /* Пропорции экрана 16:9 */
             height: 0;
             overflow: hidden;
             background-color: #000;
             border-radius: 6px;
         }
 
-        /* Адаптивный стандартный HTML5 плеер */
-        .video-player video {
+        /* Делаем чужой iframe полностью адаптивным под экран телефона */
+        .video-player iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             border: none;
-            outline: none;
         }
 
         .player-placeholder {
@@ -178,7 +177,6 @@
 </head>
 <body>
 
-    <!-- Название вашего сайта -->
     <header>
         <div class="logo">SPORT<span>NEL</span></div>
         <div class="live-badge"><i class="fa-solid fa-circle-dot"></i> Эфир NHL</div>
@@ -190,8 +188,8 @@
                 <i class="fa-solid fa-circle-play"></i>
                 <p>Выберите активный матч ниже для начала трансляции</p>
             </div>
-            <!-- Стандартный видео тег, работающий на всех смартфонах -->
-            <video id="mainVideoPlayer" controls playsinline style="display:none;"></video>
+            <!-- Сюда JavaScript автоматически подставит ваше видео при клике -->
+            <iframe id="videoIframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="display:none;"></iframe>
         </div>
     </div>
 
@@ -202,8 +200,8 @@
             <div class="teams">Вашингтон — Монреаль</div>
             <div class="meta"><span class="live">● LIVE</span> · Регулярный чемпионат</div>
         </div>
-        <!-- Прямая ссылка на надежное тестовое видео (MP4) без блокировок и капчи -->
-        <button class="watch-btn" onclick="startStream('https://zencdn.net')">Смотреть</button>
+        <!-- Внутрь функции передается адрес из вашего iframe (с добавлением автозапуска) -->
+        <button class="watch-btn" onclick="startStream('https://youtube.com')">Смотреть</button>
     </div>
 
     <div class="match-row">
@@ -217,15 +215,12 @@
     <script>
         function startStream(url) {
             const placeholder = document.getElementById('playerScreen');
-            const video = document.getElementById('mainVideoPlayer');
+            const iframe = document.getElementById('videoIframe');
             
             if(url) {
                 placeholder.style.display = 'none';
-                video.style.display = 'block'; // Исправлена опечатка в отображении плеера
-                video.src = url;
-                video.play().catch(function(error) {
-                    console.log("Автовоспроизведение заблокировано браузером, пользователь должен нажать Play вручную.");
-                });
+                iframe.style.display = 'block';
+                iframe.src = url;
             }
         }
     </script>
