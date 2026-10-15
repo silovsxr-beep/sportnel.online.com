@@ -3,82 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Современный Плеер Трансляций</title>
+    <title>SPORTNEL — Прямые трансляции матчей NHL</title>
+    <!-- Подключаем стильный шрифт и иконки -->
+    <link rel="stylesheet" href="https://cloudflare.com">
     <style>
-        /* Общие стили для красивого внешнего вида */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #141414;
-            color: #ffffff;
+        :root {
+            --bg-body: #080a10;
+            --bg-card: #111522;
+            --accent-nhl: #0070f3;
+            --accent-live: #e50914;
+            --text-main: #ffffff;
+            --text-grey: #858fa3;
+            --border-line: #1d2438;
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            padding: 15px;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 650px;
+        }
+
+        /* Премиальная хоккейная шапка */
+        header {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-line);
+            padding: 16px 20px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
         }
 
-        h1 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            text-align: center;
+        .brand {
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
         }
 
-        /* Контейнер для ввода ссылки */
-        .controls {
-            width: 100%;
-            max-width: 800px;
-            margin-bottom: 20px;
-            display: flex;
-            gap: 10px;
+        .brand span {
+            color: var(--accent-nhl);
         }
 
-        input[type="text"] {
-            flex: 1;
+        .nhl-badge {
+            background: rgba(0, 112, 243, 0.1);
+            color: var(--accent-nhl);
+            border: 1px solid rgba(0, 112, 243, 0.25);
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Профессиональный блок видеоплеера */
+        .player-wrapper {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-line);
+            border-radius: 16px;
             padding: 12px;
-            border: 1px solid #333;
-            border-radius: 6px;
-            background-color: #222;
-            color: #fff;
-            font-size: 1rem;
-            outline: none;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6);
         }
 
-        input[type="text"]:focus {
-            border-color: #ff0000;
-        }
-
-        button {
-            padding: 12px 24px;
-            background-color: #ff0000;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 1rem;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.2s;
-        }
-
-        button:hover {
-            background-color: #cc0000;
-        }
-
-        /* 📱 Адаптивный контейнер для видео (соотношение сторон 16:9) */
-        .video-container {
+        .video-ratio {
             position: relative;
-            width: 100%;
-            max-width: 800px;
-            padding-bottom: 56.25%; /* Соотношение 16:9 */
+            padding-bottom: 56.25%; /* Четкий формат 16:9 */
             height: 0;
-            background-color: #000;
-            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background-color: #020305;
+            border-radius: 10px;
         }
 
-        /* Сам плеер растягивается на весь контейнер */
-        .video-container iframe, 
-        .video-container div {
+        .video-ratio iframe {
             position: absolute;
             top: 0;
             left: 0;
@@ -86,75 +101,214 @@
             height: 100%;
             border: none;
         }
+
+        /* Красивое пре-лаунч состояние экрана */
+        .player-cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-grey);
+            gap: 12px;
+            font-size: 13px;
+            background: linear-gradient(135deg, #0d111f 0%, #05070d 100%);
+            z-index: 10;
+            text-align: center;
+            padding: 20px;
+            font-weight: 500;
+        }
+
+        .player-cover i {
+            font-size: 52px;
+            color: var(--accent-nhl);
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0% { text-shadow: 0 0 10px rgba(0, 112, 243, 0.2); transform: scale(1); }
+            50% { text-shadow: 0 0 25px rgba(0, 112, 243, 0.6); transform: scale(1.03); }
+            100% { text-shadow: 0 0 10px rgba(0, 112, 243, 0.2); transform: scale(1); }
+        }
+
+        /* Список хоккейных матчей */
+        .grid-header {
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--text-grey);
+            margin: 0 0 12px 5px;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .match-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .match-row {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-line);
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+        }
+
+        .match-row:hover {
+            border-color: #2a3454;
+            background-color: #141929;
+        }
+
+        .teams-block {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .teams-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: 0.3px;
+        }
+
+        .match-status {
+            font-size: 12px;
+            color: var(--text-grey);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+        }
+
+        .match-status .live-dot {
+            color: var(--accent-live);
+            font-weight: 800;
+            animation: blinker 1.5s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% { opacity: 0; }
+        }
+
+        .btn-stream {
+            background-color: var(--accent-live);
+            color: var(--text-main);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 4px 12px rgba(229, 9, 20, 0.3);
+        }
+
+        .btn-stream:hover {
+            background-color: #ff1a26;
+            transform: translateY(-1px);
+        }
+
+        .btn-stream.disabled {
+            background-color: #171c2b;
+            border: 1px solid var(--border-line);
+            color: var(--text-grey);
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        
+        .btn-stream.disabled:hover {
+            transform: none;
+            background-color: #171c2b;
+        }
     </style>
 </head>
 <body>
 
-    <h1>Трансляция Видео из YouTube</h1>
-
-    <div class="controls">
-        <input type="text" id="videoUrl" placeholder="Вставьте ссылку на видео или трансляцию YouTube...">
-        <button onclick="loadVideo()">Запустить</button>
-    </div>
-
-    <!-- Контейнер, куда скрипт вставит плеер -->
-    <div class="video-container">
-        <div id="player"></div>
-    </div>
-
-    <script>
-        // Подключаем официальное API YouTube
-        var tag = document.createElement('script');
-        tag.src = "https://youtube.com";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        var player;
+    <div class="container">
         
-        // Видео по умолчанию (можно заменить на ID вашей трансляции)
-        var defaultVideoId = 'dQw4w9WgXcQ'; 
+        <!-- Шапка -->
+        <header>
+            <div class="brand">SPORT<span>NEL</span></div>
+            <div class="nhl-badge"><i class="fa-solid fa-puck"></i> NHL LIVE</div>
+        </header>
 
-        // Эта функция вызывается автоматически, когда API готово
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                videoId: defaultVideoId,
-                playerVars: {
-                    'autoplay': 1,        // Автоматический старт (может блокироваться браузерами без приглушения звука)
-                    'controls': 1,        // Показывать стандартные элементы управления
-                    'rel': 0,             // Не показывать похожие видео в конце
-                    'showinfo': 0,        // Скрывать название видео перед стартом
-                    'modestbranding': 1   // Меньше логотипов YouTube
-                }
-            });
-        }
+        <!-- Модуль профессионального видеоплеера -->
+        <div class="player-wrapper">
+            <div class="video-ratio">
+                <!-- Заглушка экрана -->
+                <div class="player-cover" id="screenCover">
+                    <i class="fa-solid fa-circle-play"></i>
+                    <p>Выберите интересующий матч из расписания ниже</p>
+                </div>
+                <!-- Интерактивный плеер под любые европейские трансляции -->
+                <iframe id="nhlStreamIframe" src="" allowfullscreen style="display:none;"></iframe>
+            </div>
+        </div>
 
-        // Функция для извлечения ID видео из любой ссылки YouTube
-        function getYouTubeId(url) {
-            var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-            var match = url.match(regExp);
-            return (match && match[2].length == 11) ? match[2] : null;
-        }
+        <!-- Сетка матчей -->
+        <div class="grid-header">Расписание трансляций</div>
+        
+        <div class="match-list">
+            
+            <!-- Активный матч 1 -->
+            <div class="match-row">
+                <div class="teams-block">
+                    <div class="teams-title">Вашингтон Кэпиталз — Нью-Джерси Девилз</div>
+                    <div class="match-status">
+                        <span class="live-dot">● LIVE</span> · Регулярный сезон NHL
+                    </div>
+                </div>
+                <!-- Чтобы поставить реальный стрим хоккея, просто замените адрес в кавычках ниже -->
+                <button class="btn-stream" onclick="loadNhlStream('https://youtube.com')">Смотреть</button>
+            </div>
 
-        // Функция смены видео
-        function loadVideo() {
-            var urlInput = document.getElementById('videoUrl').value;
-            if (!urlInput) {
-                alert('Пожалуйста, вставьте ссылку!');
-                return;
-            }
+            <!-- Матч 2 -->
+            <div class="match-row">
+                <div class="teams-block">
+                    <div class="teams-title">Нью-Йорк Рейнджерс — Коламбус Блю Джекетс</div>
+                    <div class="match-status">Сегодня, 23:55 · Регулярный сезон</div>
+                </div>
+                <button class="btn-stream disabled" onclick="alert('Трансляция начнется перед стартом матча!')">Ожидание</button>
+            </div>
 
-            var videoId = getYouTubeId(urlInput);
+            <!-- Матч 3 -->
+            <div class="match-row">
+                <div class="teams-block">
+                    <div class="teams-title">Питтсбург Пингвинз — Колорадо Эвеланш</div>
+                    <div class="match-status">Завтра, 03:00 · Регулярный сезон</div>
+                </div>
+                <button class="btn-stream disabled" onclick="alert('Трансляция начнется перед стартом матча!')">Ожидание</button>
+            </div>
 
-            if (videoId) {
-                // Если плеер уже создан, просто меняем видео
-                if (player && typeof player.loadVideoById === 'function') {
-                    player.loadVideoById(videoId);
-                }
-            } else {
-                alert('Не удалось распознать ссылку. Убедитесь, что это правильная ссылка на YouTube.');
+        </div>
+    </div>
+
+    <!-- Легкий скрипт управления трансляцией -->
+    <script>
+        function loadNhlStream(streamUrl) {
+            const cover = document.getElementById('screenCover');
+            const iframe = document.getElementById('nhlStreamIframe');
+            
+            if(streamUrl && streamUrl !== '#') {
+                cover.style.display = 'none';
+                iframe.style.display = 'block';
+                iframe.src = streamUrl;
             }
         }
     </script>
-
 </body>
 </html>
