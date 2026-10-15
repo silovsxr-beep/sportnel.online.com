@@ -10,7 +10,6 @@
 body {background-color:var(--bg-body);color:var(--text-main);padding:15px;display:flex;flex-direction:column;align-items:center;min-height:100vh;}
 .container {width:100%;max-width:650px;flex-grow:1;}
 
-/* Шапка с сочной синей неоновой подсветкой снизу */
 header {
     background-color:var(--bg-card);
     border: 1px solid var(--border-line);
@@ -30,7 +29,6 @@ header {
 .social-icon:hover {transform:scale(1.15);}
 .social-icon svg {width:24px;height:24px;display:block;}
 
-/* Главный плеер с переливающейся рамкой */
 .player-wrapper {
     background-color:var(--bg-card);
     border:1px solid var(--border-line);
@@ -58,34 +56,67 @@ header {
 
 .grid-header {font-size:12px;font-weight:800;text-transform:uppercase;color:var(--text-grey);margin:0 0 12px 5px;letter-spacing:1.5px;}
 
-/* Карточка матча с плотной синей неоновой подсветкой снизу */
 .match-row {
     background-color:var(--bg-card);
     border:1px solid var(--border-line);
-    border-bottom: 3px solid var(--accent-nhl);
     border-radius: 16px;
-    padding: 18px 20px;
+    padding: 6px;
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: space-between;
-    box-shadow: 0 8px 25px rgba(0, 112, 243, 0.15);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
-.teams-block {display:flex;flex-direction:column;gap:8px;}
-.team-item {display:flex;align-items:center;gap:12px;}
+/* 1. Нажимаемая синяя кнопка-карточка слева */
+.teams-btn-clickable {
+    background: none;
+    border: none;
+    border-bottom: 3px solid var(--accent-nhl);
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+    cursor: pointer;
+    flex-grow: 1;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(0, 112, 243, 0.1);
+}
+.teams-btn-clickable:hover {
+    background-color: #121624;
+    box-shadow: 0 6px 20px rgba(0, 112, 243, 0.25);
+}
+.teams-btn-clickable:active { transform: scale(0.99); }
 
-/* Стили для вшитых логотипов */
-.team-logo-svg {width:28px;height:28px;display:block;}
-.teams-title {font-size:16px;font-weight:700;color:var(--text-main);letter-spacing:0.3px;}
-.match-status {font-size:12px;color:var(--text-grey);display:flex;align-items:center;gap:6px;margin-top:2px;font-weight:500;}
+.team-item {display:flex;align-items:center;gap:10px;}
+
+/* 3. Простые и надежные новые значки хоккея (клюшки и шайба) */
+.hockey-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.hockey-icon svg { width: 100%; height: 100%; }
+
+.teams-title {font-size:15px;font-weight:700;color:var(--text-main);letter-spacing:0.3px;}
+.match-status {font-size:12px;color:var(--text-grey);display:flex;align-items:center;gap:6px;font-weight:500;}
 .match-status .live-dot {color:var(--accent-live);font-weight:900;animation:blinker 1.5s linear infinite;}
 @keyframes blinker {50% {opacity:0;}}
+
+.right-action-block {
+    display: flex;
+    align-items: center;
+    padding: 0 10px 0 14px;
+}
 
 .btn-stream {
     background: linear-gradient(135deg, var(--accent-live) 0%, #b8070f 100%);
     color:var(--text-main);
     border:none;
-    padding:11px 22px;
+    padding:12px 20px;
     border-radius:10px;
     font-size:11px;
     font-weight:800;
@@ -97,10 +128,34 @@ header {
 }
 .btn-stream:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(229, 9, 20, 0.6); }
 
-footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid var(--border-line);width:100%;max-width:650px;}
-.footer-text {font-size:12px;color:var(--text-grey);letter-spacing:1px;font-weight:600;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:8px;}
-.footer-text svg {width:16px;height:16px;fill:var(--accent-nhl);animation: spinPuck 4s linear infinite;}
-@keyframes spinPuck { 100% { transform: rotate(360deg); } }
+footer {
+    margin-top: auto;
+    padding: 25px 10px;
+    text-align: center;
+    border-top: 1px solid var(--border-line);
+    width: 100%;
+    max-width: 650px;
+}
+
+/* 2. Текст внизу с раздельным сине-красным неоновым свечением */
+.footer-text {
+    font-size:12px;
+    letter-spacing:1px;
+    font-weight:700;
+    text-transform:uppercase;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+}
+.neon-blue-txt {
+    color: #45f3ff;
+    text-shadow: 0 0 12px rgba(69, 243, 255, 0.6);
+}
+.neon-red-txt {
+    color: var(--accent-live);
+    text-shadow: 0 0 12px rgba(229, 9, 20, 0.6);
+}
 </style>
 </head>
 <body>
@@ -124,23 +179,35 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
 <div class="grid-header">TODAY'S SCHEDULE</div>
 <div class="match-list">
 <div class="match-row">
-<div class="teams-block">
-<div class="team-item">
-<!-- Вшитые хоккейные логотипы (Шайбы NHL) высокой четкости -->
-<svg class="team-logo-svg" viewBox="0 0 24 24" style="margin-right: -4px;"><circle cx="12" cy="12" r="10" fill="none" stroke="#0070f3" stroke-width="2"/><path d="M7 12h10M9 9l3 3-3 3M15 9l-3 3 3 3" stroke="#0070f3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-<svg class="team-logo-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="#e50914" stroke-width="2"/><path d="M7 12h10M9 9l3 3-3 3M15 9l-3 3 3 3" stroke="#e50914" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-<div class="teams-title">Vancouver Canucks — Florida Panthers</div>
-</div>
-<div class="match-status"><span class="live-dot">●</span> 02:00 AM · NHL Regular Season</div>
-</div>
-<button class="btn-stream" onclick="loadNhlStream('https://media-player.host')">Watch Live</button>
+    
+    <!-- Нажимаемая карточка-кнопка слева (запускает трансляцию так же, как красная кнопка) -->
+    <button class="teams-btn-clickable" onclick="loadNhlStream('https://media-player.host')">
+        <div class="team-item">
+            <!-- 3. Вшитые векторные скрещенные клюшки для Ванкувера -->
+            <div class="hockey-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#0070f3" stroke-width="2.5" stroke-linecap="round"><path d="M5 19L17 7M19 5l-2 2M17 7l2 2M4 20c-1 1-1.5 0 0-1.5L6 16M19 5c1-1 2-.5.5.5L16 9"/></svg>
+            </div>
+            <!-- Вшитые векторные скрещенные клюшки для Флориды -->
+            <div class="hockey-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#e50914" stroke-width="2.5" stroke-linecap="round"><path d="M5 19L17 7M19 5l-2 2M17 7l2 2M4 20c-1 1-1.5 0 0-1.5L6 16M19 5c1-1 2-.5.5.5L16 9"/></svg>
+            </div>
+            <div class="teams-title">Vancouver Canucks — Florida Panthers</div>
+        </div>
+        <div class="match-status"><span class="live-dot">●</span> 02:00 AM · NHL Regular Season</div>
+    </button>
+    
+    <div class="right-action-block">
+        <button class="btn-stream" onclick="loadNhlStream('https://media-player.host')">Watch Live</button>
+    </div>
+    
 </div>
 </div>
 </div>
 <footer>
+<!-- 2. Двойной неоновый текст (Голубой + Красный) -->
 <div class="footer-text">
-<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 3.8 2 6v12c0 2.2 4.48 4 10 4s10-1.8 10-4V6c0-2.2-4.48-4-10-4zm0 2c4.83 0 8.57 1.41 8.95 2-.38.59-4.12 2-8.95 2S3.43 6.59 3.05 6c.38-.59 4.12-2 8.95-2zm0 14c-4.97 0-9-1.57-9-3.5V10.1c1.42 1.15 4.88 1.9 9 1.9s7.58-.75 9-1.9v4.4c0 1.93-4.03 3.5-9 3.5z"/></svg>
-The best website for watching NHL live streams
+    <span class="neon-blue-txt">The best website</span> 
+    <span class="neon-red-txt">for watching NHL live streams</span>
 </div>
 </footer>
 <script>
