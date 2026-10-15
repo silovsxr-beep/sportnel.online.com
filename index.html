@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPORTNEL — Прямые трансляции матчей NHL</title>
+    <title>SPORTNEL — Прямая трансляция NHL</title>
     <link rel="stylesheet" href="https://cloudflare.com">
     <style>
         :root {
@@ -205,69 +205,23 @@
                     <i class="fa-solid fa-circle-play"></i>
                     <p>Выберите интересующий матч из расписания ниже</p>
                 </div>
-                <iframe id="nhlStreamIframe" src="" allowfullscreen style="display:none;"></iframe>
+                <!-- Фрейм для трансляции -->
+                <iframe id="nhlStreamIframe" src="" allow="autoplay; fullscreen" allowfullscreen style="display:none;"></iframe>
             </div>
         </div>
 
-        <div class="grid-header">Матчи сегодня (Латвийское время)</div>
+        <div class="grid-header">МАТЧИ СЕГОДНЯ (ЛАТВИЙСКОЕ ВРЕМЯ)</div>
         
         <div class="match-list">
             
-            <!-- Замените тестовые ссылки внутри кавычек ниже на реальные в 00:00! -->
-            <div class="match-row">
-                <div class="teams-block">
-                    <div class="teams-title">Buffalo Sabres — Toronto</div>
-                    <div class="match-status"><span class="live-dot">●</span> 00:00 · NHL Регулярный сезон</div>
-                </div>
-                <button class="btn-stream" onclick="loadNhlStream('https://onhockey.tv/index.php')">Смотреть</button>
-            </div>
-
-            <div class="match-row">
-                <div class="teams-block">
-                    <div class="teams-title">NY Islanders — Ottawa</div>
-                    <div class="match-status"><span class="live-dot">●</span> 00:00 · NHL Регулярный сезон</div>
-                </div>
-                <button class="btn-stream" onclick="loadNhlStream('#')">Смотреть</button>
-            </div>
-
-            <div class="match-row">
-                <div class="teams-block">
-                    <div class="teams-title">Seattle Kraken — Tampa Bay</div>
-                    <div class="match-status"><span class="live-dot">●</span> 00:00 · NHL Регулярный сезон</div>
-                </div>
-                <button class="btn-stream" onclick="loadNhlStream('#')">Смотреть</button>
-            </div>
-
+            <!-- Оставили только матч Vancouver - Florida -->
             <div class="match-row">
                 <div class="teams-block">
                     <div class="teams-title">Vancouver — Florida</div>
                     <div class="match-status"><span class="live-dot">●</span> 00:00 · NHL Регулярный сезон</div>
                 </div>
-                <button class="btn-stream" onclick="loadNhlStream('#')">Смотреть</button>
-            </div>
-
-            <div class="match-row">
-                <div class="teams-block">
-                    <div class="teams-title">NY Rangers — New Jersey</div>
-                    <div class="match-status"><span class="live-dot">●</span> 00:00 · NHL Регулярный сезон</div>
-                </div>
-                <button class="btn-stream" onclick="loadNhlStream('#')">Смотреть</button>
-            </div>
-
-            <div class="match-row">
-                <div class="teams-block">
-                    <div class="teams-title">Philadelphia — Detroit</div>
-                    <div class="match-status"><span class="live-dot">●</span> 00:30 · NHL Регулярный сезон</div>
-                </div>
-                <button class="btn-stream" onclick="loadNhlStream('#')">Смотреть</button>
-            </div>
-
-            <div class="match-row">
-                <div class="teams-block">
-                    <div class="teams-title">Winnipeg Jets — Chicago</div>
-                    <div class="match-status"><span class="live-dot">●</span> 01:00 · NHL Регулярный сезон</div>
-                </div>
-                <button class="btn-stream" onclick="loadNhlStream('#')">Смотреть</button>
+                <!-- Поставили свободный тестовый поток. Ночью заменишь его на реальный фрейм -->
+                <button class="btn-stream" onclick="loadNhlStream('https://media-player.host')">Смотреть</button>
             </div>
 
         </div>
@@ -282,8 +236,6 @@
                 cover.style.display = 'none';
                 iframe.style.display = 'block';
                 iframe.src = streamUrl;
-            } else {
-                alert('Трансляция для этого матча обновится в 00:00 ночи!');
             }
         }
     </script>
