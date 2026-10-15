@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPORTNEL — Прямая трансляция NHL</title>
+    <!-- Подключаем иконки FontAwesome (для соцсетей, шайбы и плеера) -->
     <link rel="stylesheet" href="https://cloudflare.com">
     <style>
         :root {
@@ -29,14 +30,18 @@
             color: var(--text-main);
             padding: 15px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
         }
 
         .container {
             width: 100%;
             max-width: 650px;
+            flex-grow: 1;
         }
 
+        /* Красивая шапка со всеми нужными иконками соцсетей */
         header {
             background-color: var(--bg-card);
             border: 1px solid var(--border-line);
@@ -47,6 +52,12 @@
             align-items: center;
             margin-bottom: 15px;
             box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .brand-block {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .brand {
@@ -60,17 +71,24 @@
             color: var(--accent-nhl);
         }
 
-        .nhl-badge {
-            background: rgba(0, 112, 243, 0.1);
-            color: var(--accent-nhl);
-            border: 1px solid rgba(0, 112, 243, 0.25);
-            padding: 5px 12px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+        /* Кнопки соцсетей (TikTok, YouTube, Telegram) */
+        .social-links {
+            display: flex;
+            align-items: center;
+            gap: 14px;
         }
+
+        .social-icon {
+            color: var(--text-grey);
+            font-size: 18px;
+            text-decoration: none;
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        /* Эффект подсвечивания при наведении/нажатии */
+        .social-icon.tg:hover { color: #24A1DE; transform: scale(1.1); }
+        .social-icon.tt:hover { color: #ff007f; transform: scale(1.1); }
+        .social-icon.yt:hover { color: #FF0000; transform: scale(1.1); }
 
         .player-wrapper {
             background-color: var(--bg-card);
@@ -189,23 +207,49 @@
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(229, 9, 20, 0.3);
         }
+
+        /* Стильный англоязычный футер с описанием сайта */
+        footer {
+            margin-top: 40px;
+            padding: 20px 10px;
+            text-align: center;
+            border-top: 1px solid var(--border-line);
+            width: 100%;
+            max-width: 650px;
+        }
+
+        .footer-text {
+            font-size: 13px;
+            color: var(--text-grey);
+            letter-spacing: 0.8px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
+        <!-- Шапка с логотипом и иконками соцсетей -->
         <header>
-            <div class="brand">SPORT<span>NEL</span></div>
-            <div class="nhl-badge"><i class="fa-solid fa-puck"></i> NHL LIVE</div>
+            <div class="brand-block">
+                <div class="brand">SPORT<span>NEL</span></div>
+            </div>
+            <div class="social-links">
+                <!-- Замени знак # внутри href="..." на ссылки на свои аккаунты, когда захочешь -->
+                <a href="#" class="social-icon tg" title="Telegram" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+                <a href="#" class="social-icon tt" title="TikTok" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="#" class="social-icon yt" title="YouTube" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+            </div>
         </header>
 
+        <!-- Модуль плеера -->
         <div class="player-wrapper">
             <div class="video-ratio">
                 <div class="player-cover" id="screenCover">
                     <i class="fa-solid fa-circle-play"></i>
                     <p>Выберите интересующий матч из расписания ниже</p>
                 </div>
-                <!-- Фрейм для трансляции -->
                 <iframe id="nhlStreamIframe" src="" allow="autoplay; fullscreen" allowfullscreen style="display:none;"></iframe>
             </div>
         </div>
@@ -213,19 +257,25 @@
         <div class="grid-header">МАТЧИ СЕГОДНЯ (ЛАТВИЙСКОЕ ВРЕМЯ)</div>
         
         <div class="match-list">
-            
             <!-- Оставили только матч Vancouver - Florida -->
             <div class="match-row">
                 <div class="teams-block">
                     <div class="teams-title">Vancouver — Florida</div>
                     <div class="match-status"><span class="live-dot">●</span> 00:00 · NHL Регулярный сезон</div>
                 </div>
-                <!-- Поставили свободный тестовый поток. Ночью заменишь его на реальный фрейм -->
+                <!-- Тестовая ссылка Mux, ночью поменяешь на реальный фрейм с OnHockey -->
                 <button class="btn-stream" onclick="loadNhlStream('https://media-player.host')">Смотреть</button>
             </div>
-
         </div>
     </div>
+
+    <!-- Футер с красивым описанием на английском языке -->
+    <footer>
+        <div class="footer-text">
+            <i class="fa-solid fa-puck" style="color: var(--accent-nhl); margin-right: 5px;"></i> 
+            The best website for watching NHL live streams
+        </div>
+    </footer>
 
     <script>
         function loadNhlStream(streamUrl) {
