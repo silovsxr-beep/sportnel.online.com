@@ -56,32 +56,21 @@ header {
     transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 15px rgba(229, 9, 20, 0.4);
 }
 .btn-stream:hover {transform:translateY(-1px);box-shadow:0 6px 20px rgba(229, 9, 20, 0.6);}
-
 footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid var(--border-line);width:100%;max-width:650px;}
 .footer-text {
-    font-size:12px;
-    letter-spacing:1px;
-    font-weight:700;
-    text-transform:uppercase;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
+    font-size:12px;letter-spacing:1px;font-weight:700;text-transform:uppercase;
+    display:flex;align-items:center;justify-content:center;gap:8px;
 }
 .footer-text svg {
-    width:16px;
-    height:16px;
-    fill:#45f3ff;
+    width:16px;height:16px;fill:#45f3ff;
     filter: drop-shadow(0 0 8px rgba(69,243,255,0.8));
     animation:spinPuck 4s linear infinite;
 }
 .neon-blue {
-    color: #45f3ff;
-    text-shadow: 0 0 10px rgba(69, 243, 255, 0.8), 0 0 20px rgba(69, 243, 255, 0.4);
+    color: #45f3ff;text-shadow: 0 0 10px rgba(69, 243, 255, 0.8), 0 0 20px rgba(69, 243, 255, 0.4);
 }
 .neon-red {
-    color: #ff2a3b;
-    text-shadow: 0 0 10px rgba(255, 42, 59, 0.8), 0 0 20px rgba(255, 42, 59, 0.4);
+    color: #ff2a3b;text-shadow: 0 0 10px rgba(255, 42, 59, 0.8), 0 0 20px rgba(255, 42, 59, 0.4);
 }
 @keyframes spinPuck {100% {transform:rotate(360deg);}}
 </style>
@@ -127,13 +116,13 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
 </footer>
 <script>
 function loadNhlStream(streamUrl) {
-const cover = document.getElementById('screenCover');
-const iframe = document.getElementById('nhlStreamIframe');
-if(streamUrl && streamUrl !== '#') {
-cover.style.display = 'none';
-iframe.style.display = 'block';
-iframe.src = streamUrl;
-}
+    const cover = document.getElementById('screenCover');
+    const iframe = document.getElementById('nhlStreamIframe');
+    if(streamUrl && streamUrl !== '#') {
+        cover.style.display = 'none';
+        iframe.style.display = 'block';
+        iframe.src = streamUrl;
+    }
 }
 </script>
 </body>
