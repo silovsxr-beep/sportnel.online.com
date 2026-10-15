@@ -56,9 +56,37 @@ header {
     transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 15px rgba(229,9,20,0.4);
 }
 .btn-stream:hover {transform:translateY(-1px);box-shadow:0 6px 20px rgba(229,9,20,0.6);}
+
+/* ОБНОВЛЕННЫЙ НАГЛУХО ФУТЕР ДЛЯ ЯРКОГО НЕОНОВОГО СВЕЧЕНИЯ */
 footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid var(--border-line);width:100%;max-width:650px;}
-.footer-text {font-size:12px;color:var(--text-grey);letter-spacing:1px;font-weight:600;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:8px;}
-.footer-text svg {width:16px;height:16px;fill:var(--accent-nhl);animation:spinPuck 4s linear infinite;}
+.footer-text {
+    font-size:12px;
+    letter-spacing:1px;
+    font-weight:700;
+    text-transform:uppercase;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+}
+/* Вшитая шайба тоже теперь светится синим неоном */
+.footer-text svg {
+    width:16px;
+    height:16px;
+    fill:#45f3ff;
+    filter: drop-shadow(0 0 8px rgba(69,243,255,0.8));
+    animation:spinPuck 4s linear infinite;
+}
+/* Эффект синего неона */
+.neon-blue {
+    color: #45f3ff;
+    text-shadow: 0 0 10px rgba(69, 243, 255, 0.8), 0 0 20px rgba(69, 243, 255, 0.4);
+}
+/* Эффект красного неона */
+.neon-red {
+    color: #ff2a3b;
+    text-shadow: 0 0 10px rgba(255, 42, 59, 0.8), 0 0 20px rgba(255, 42, 59, 0.4);
+}
 @keyframes spinPuck {100% {transform:rotate(360deg);}}
 </style>
 </head>
@@ -98,7 +126,8 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
 <footer>
 <div class="footer-text">
 <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 3.8 2 6v12c0 2.2 4.48 4 10 4s10-1.8 10-4V6c0-2.2-4.48-4-10-4zm0 2c4.83 0 8.57 1.41 8.95 2-.38.59-4.12 2-8.95 2S3.43 6.59 3.05 6c.38-.59 4.12-2 8.95-2zm0 14c-4.97 0-9-1.57-9-3.5V10.1c1.42 1.15 4.88 1.9 9 1.9s7.58-.75 9-1.9v4.4c0 1.93-4.03 3.5-9 3.5z"/></svg>
-The best website for watching NHL live streams
+<!-- Разделили текст на две сочные неоновые зоны -->
+<span class="neon-blue">The best website</span> <span class="neon-red">for watching NHL live streams</span>
 </div>
 </footer>
 <script>
