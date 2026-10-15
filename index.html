@@ -57,7 +57,6 @@ header {
 }
 .btn-stream:hover {transform:translateY(-1px);box-shadow:0 6px 20px rgba(229, 9, 20, 0.6);}
 
-/* СТИЛИ НОВОГО ЧАТА ДЛЯ ТЕЛЕФОНА */
 .chat-container {
     background-color: var(--bg-card);border: 1px solid var(--border-line);border-top: 2px solid var(--accent-nhl);
     border-radius: 16px;padding: 15px;display: flex;flex-direction: column;gap: 12px;margin-bottom: 25px;
@@ -127,10 +126,7 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
 </div>
 <div class="grid-header">LIVE CHAT</div>
 <div class="chat-container">
-<div class="chat-messages" id="chatWindow">
-<div class="msg-box"><div class="msg-user">User #1105</div><div class="msg-text">Let's go Canucks! 🏒</div></div>
-<div class="msg-box"><div class="msg-user">User #8841</div><div class="msg-text">Bobrovsky will block everything tonight, Panthers win! 🔥</div></div>
-</div>
+<div class="chat-messages" id="chatWindow"></div>
 <div class="chat-input-block">
 <input type="text" class="chat-input" id="chatInput" placeholder="Write a message..." onkeypress="handleKeyPress(event)">
 <button class="btn-send" onclick="sendMessage()">Send</button>
@@ -144,6 +140,9 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
 </div>
 </footer>
 <script>
+// Генерируем ОДИН постоянный ID для пользователя на всё время его нахождения на сайте
+const myUserId = Math.floor(1000 + Math.random() * 9000);
+
 function loadNhlStream(streamUrl) {
     const cover = document.getElementById('screenCover');
     const iframe = document.getElementById('nhlStreamIframe');
@@ -158,10 +157,10 @@ function sendMessage() {
     const text = input.value.trim();
     if(text === '') return;
     const chatWindow = document.getElementById('chatWindow');
-    const randomId = Math.floor(1000 + Math.random() * 9000);
     const msgBox = document.createElement('div');
     msgBox.className = 'msg-box';
-    msgBox.innerHTML = '<div class="msg-user">User #' + randomId + '</div><div class="msg-text">' + escapeHTML(text) + '</div>';
+    // Используем наш постоянный сохраненный ID вместо создания нового
+    msgBox.innerHTML = '<div class="msg-user">User #' + myUserId + '</div><div class="msg-text">' + escapeHTML(text) + '</div>';
     chatWindow.appendChild(msgBox);
     input.value = '';
     chatWindow.scrollTop = chatWindow.scrollHeight;
