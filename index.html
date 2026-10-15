@@ -117,11 +117,11 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
 <div class="team-item">
 <svg class="team-logo-svg" viewBox="0 0 24 24" style="margin-right:-6px;"><circle cx="12" cy="12" r="10" fill="none" stroke="#0070f3" stroke-width="2.5"/><path d="M7 12h10M9 9l3 3-3 3M15 9l-3 3 3 3" stroke="#0070f3" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
 <svg class="team-logo-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="#e50914" stroke-width="2.5"/><path d="M7 12h10M9 9l3 3-3 3M15 9l-3 3 3 3" stroke="#e50914" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-<div class="teams-title">Vancouver Canucks — Florida Panthers</div>
+<div class="teams-title">Florida Panthers — Vancouver Canucks</div>
 </div>
-<div class="match-status"><span class="live-dot">●</span> 02:00 AM · NHL Regular Season</div>
+<div class="match-status"><span class="live-dot">●</span> LIVE NOW · NHL Regular Season</div>
 </div>
-<!-- Кнопка теперь открывает трансляцию напрямую в новой вкладке/окне, защищая от сброса в меню -->
+<!-- Ссылка перенаправляет сразу на чистый внутренний поток матча -->
 <button class="btn-stream" onclick="openMatchStream('https://matchora.to')">Watch Live</button>
 </div>
 </div>
@@ -146,9 +146,9 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
 <script>
 const myUserId = Math.floor(1000 + Math.random() * 9000);
 
-// Новая функция: открывает плеер в обход iframe, чтобы избежать сброса на главную Matchora
 function openMatchStream(streamUrl) {
     if(streamUrl && streamUrl !== '#') {
+        // Скрипт перенаправляет на чистую ссылку видео, чтобы обойти сброс фрейма на меню
         window.location.href = streamUrl;
     }
 }
