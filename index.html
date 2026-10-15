@@ -30,6 +30,13 @@ header {
 }
 .video-ratio {position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background-color:#010204;border-radius:12px;}
 .video-ratio iframe {position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
+.player-cover {position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;color:var(--text-grey);gap:12px;font-size:13px;background:linear-gradient(135deg,#0b0e1a 0%,#030408 100%);z-index:10;text-align:center;padding:20px;}
+.player-cover svg {width:55px;height:55px;fill:var(--accent-nhl);margin-bottom:5px;animation:pulsePlay 2s ease-in-out infinite;}
+@keyframes pulsePlay {
+    0% {transform:scale(1);filter:drop-shadow(0 0 5px rgba(0,112,243,0.3));}
+    50% {transform:scale(1.06);filter:drop-shadow(0 0 15px rgba(0,112,243,0.7));}
+    100% {transform:scale(1);filter:drop-shadow(0 0 5px rgba(0,112,243,0.3));}
+}
 .grid-header {font-size:12px;font-weight:800;text-transform:uppercase;color:var(--text-grey);margin:0 0 10px 5px;letter-spacing:1.5px;}
 .match-list {display:flex;flex-direction:column;gap:12px;margin-bottom:20px;}
 .match-row {
@@ -45,9 +52,10 @@ header {
 @keyframes blinker {50% {opacity:0;}}
 .btn-stream {
     background:linear-gradient(135deg,var(--accent-live) 0%,#b8070f 100%);color:var(--text-main);border:none;padding:11px 22px;
-    border-radius:10px;font-size:11px;font-weight:800;text-transform:uppercase;cursor:not-allowed;letter-spacing:0.8px;
-    opacity:0.6;box-shadow:none;
+    border-radius:10px;font-size:11px;font-weight:800;text-transform:uppercase;cursor:pointer;letter-spacing:0.8px;
+    transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 15px rgba(229, 9, 20, 0.4);
 }
+.btn-stream:hover {transform:translateY(-1px);box-shadow:0 6px 20px rgba(229, 9, 20, 0.6);}
 .chat-container {
     background-color: var(--bg-card);border: 1px solid var(--border-line);border-top: 2px solid var(--accent-nhl);
     border-radius: 16px;padding: 15px;display: flex;flex-direction: column;gap: 12px;margin-bottom: 25px;
@@ -94,14 +102,12 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
 
 <div class="player-wrapper">
 <div class="video-ratio">
-    <!-- Видео встроено напрямую, без заглушек, с полным доступом к автозапуску и экрану -->
-    <iframe 
-        id="nhlStreamIframe" 
-        src="https://matchora.to" 
-        allow="autoplay; encrypted-media; picture-in-picture; fullscreen" 
-        allowfullscreen 
-        style="width: 100%; height: 100%; border: none;">
-    </iframe>
+    <!-- Стартовая заглушка возвращена на место -->
+    <div class="player-cover" id="screenCover">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+        <p>Select the active match from the schedule below</p>
+    </div>
+    <iframe id="nhlStreamIframe" src="" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen style="display:none; width: 100%; height: 100%; border: none;"></iframe>
 </div>
 </div>
 
@@ -116,8 +122,8 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
 </div>
 <div class="match-status"><span class="live-dot">●</span> 02:00 AM · NHL Regular Season</div>
 </div>
-<!-- Кнопка изменена на статус информирования, так как трансляция уже идет автоматически -->
-<button class="btn-stream" style="cursor: default;">ON AIR</button>
+<!-- Кнопка при клике мгновенно подгружает нужный матч, скрывая заглушку -->
+<button class="btn-stream" onclick="loadNhlStream('https://matchora.to')">Watch Live</button>
 </div>
 </div>
 
@@ -141,6 +147,15 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
 <script>
 const myUserId = Math.floor(1000 + Math.random() * 9000);
 
+function loadNhlStream(streamUrl) {
+    const cover = document.getElementById('screenCover');
+    const iframe = document.getElementById('nhlStreamIframe');
+    if(streamUrl && streamUrl !== '#') {
+        cover.style.display = 'none';
+        iframe.style.display = 'block';
+        iframe.src = streamUrl;
+    }
+}
 function sendMessage() {
     const input = document.getElementById('chatInput');
     const text = input.value.trim();
