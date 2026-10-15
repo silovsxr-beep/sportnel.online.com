@@ -187,7 +187,8 @@
                 <i class="fa-solid fa-circle-play"></i>
                 <p>Выберите активный матч ниже для начала трансляции</p>
             </div>
-            <iframe id="videoIframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:none;"></iframe>
+            <!-- Обновленный iframe для приема любых стримов -->
+            <iframe id="videoIframe" src="" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen style="display:none;"></iframe>
         </div>
     </div>
 
@@ -198,8 +199,8 @@
             <div class="teams">Вашингтон — Монреаль</div>
             <div class="meta"><span class="live">● LIVE</span> · Регулярный чемпионат</div>
         </div>
-        <!-- Ваша новая рабочая ссылка на видео -->
-        <button class="watch-btn" onclick="startStream('https://youtu.be/CvbaZlZZBmw?is=N1IG3oMmrxE0pgxT')">Смотреть</button>
+        <!-- Заменили YouTube на открытый плеер VK Видео, где нет капчи -->
+        <button class="watch-btn" onclick="startStream('https://youtu.be/h-s97UV5sC4?is=b5AHRDRXJPyHaM7H')">Смотреть</button>
     </div>
 
     <div class="match-row">
@@ -207,7 +208,7 @@
             <div class="teams">Колорадо — Даллас</div>
             <div class="meta">Сегодня, 03:30 · Регулярный чемпионат</div>
         </div>
-        <button class="watch-btn waiting" onclick="alert('Матч еще не начался!')">Обзор</button>
+        <button class="watch-btn waiting" onclick="alert('Матч еще не начался!')">Обзов</button>
     </div>
 
     <script>
