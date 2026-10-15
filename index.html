@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPORTNEL — Прямые трансляции матчей NHL</title>
-    <!-- Подключаем стильный шрифт и иконки -->
     <link rel="stylesheet" href="https://cloudflare.com">
     <style>
         :root {
@@ -38,7 +37,6 @@
             max-width: 650px;
         }
 
-        /* Премиальная хоккейная шапка */
         header {
             background-color: var(--bg-card);
             border: 1px solid var(--border-line);
@@ -74,7 +72,6 @@
             text-transform: uppercase;
         }
 
-        /* Профессиональный блок видеоплеера */
         .player-wrapper {
             background-color: var(--bg-card);
             border: 1px solid var(--border-line);
@@ -86,7 +83,7 @@
 
         .video-ratio {
             position: relative;
-            padding-bottom: 56.25%; /* Четкий формат 16:9 */
+            padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
             background-color: #020305;
@@ -102,7 +99,6 @@
             border: none;
         }
 
-        /* Красивое пре-лаунч состояние экрана */
         .player-cover {
             position: absolute;
             top: 0;
@@ -126,16 +122,8 @@
         .player-cover i {
             font-size: 52px;
             color: var(--accent-nhl);
-            animation: pulse-glow 2s infinite;
         }
 
-        @keyframes pulse-glow {
-            0% { text-shadow: 0 0 10px rgba(0, 112, 243, 0.2); transform: scale(1); }
-            50% { text-shadow: 0 0 25px rgba(0, 112, 243, 0.6); transform: scale(1.03); }
-            100% { text-shadow: 0 0 10px rgba(0, 112, 243, 0.2); transform: scale(1); }
-        }
-
-        /* Список хоккейных матчей */
         .grid-header {
             font-size: 13px;
             font-weight: 800;
@@ -143,9 +131,6 @@
             color: var(--text-grey);
             margin: 0 0 12px 5px;
             letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
         }
 
         .match-list {
@@ -162,12 +147,6 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            transition: all 0.2s ease;
-        }
-
-        .match-row:hover {
-            border-color: #2a3454;
-            background-color: #141929;
         }
 
         .teams-block {
@@ -180,7 +159,6 @@
             font-size: 15px;
             font-weight: 700;
             color: var(--text-main);
-            letter-spacing: 0.3px;
         }
 
         .match-status {
@@ -189,7 +167,6 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            font-weight: 500;
         }
 
         .match-status .live-dot {
@@ -198,9 +175,7 @@
             animation: blinker 1.5s linear infinite;
         }
 
-        @keyframes blinker {
-            50% { opacity: 0; }
-        }
+        @keyframes blinker { 50% { opacity: 0; } }
 
         .btn-stream {
             background-color: var(--accent-live);
@@ -212,14 +187,7 @@
             font-weight: 800;
             text-transform: uppercase;
             cursor: pointer;
-            letter-spacing: 0.5px;
-            transition: background 0.2s, transform 0.1s;
             box-shadow: 0 4px 12px rgba(229, 9, 20, 0.3);
-        }
-
-        .btn-stream:hover {
-            background-color: #ff1a26;
-            transform: translateY(-1px);
         }
 
         .btn-stream.disabled {
@@ -229,81 +197,54 @@
             cursor: not-allowed;
             box-shadow: none;
         }
-        
-        .btn-stream.disabled:hover {
-            transform: none;
-            background-color: #171c2b;
-        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        
-        <!-- Шапка -->
         <header>
             <div class="brand">SPORT<span>NEL</span></div>
             <div class="nhl-badge"><i class="fa-solid fa-puck"></i> NHL LIVE</div>
         </header>
 
-        <!-- Модуль профессионального видеоплеера -->
         <div class="player-wrapper">
             <div class="video-ratio">
-                <!-- Заглушка экрана -->
                 <div class="player-cover" id="screenCover">
                     <i class="fa-solid fa-circle-play"></i>
                     <p>Выберите интересующий матч из расписания ниже</p>
                 </div>
-                <!-- Интерактивный плеер под любые европейские трансляции -->
                 <iframe id="nhlStreamIframe" src="" allowfullscreen style="display:none;"></iframe>
             </div>
         </div>
 
-        <!-- Сетка матчей -->
         <div class="grid-header">Расписание трансляций</div>
         
         <div class="match-list">
-            
-            <!-- Активный матч 1 -->
             <div class="match-row">
                 <div class="teams-block">
                     <div class="teams-title">Вашингтон Кэпиталз — Нью-Джерси Девилз</div>
-                    <div class="match-status">
-                        <span class="live-dot">● LIVE</span> · Регулярный сезон NHL
-                    </div>
+                    <div class="match-status"><span class="live-dot">● LIVE</span> · Регулярный сезон NHL</div>
                 </div>
-                <!-- Чтобы поставить реальный стрим хоккея, просто замените адрес в кавычках ниже -->
-                <button class="btn-stream" onclick="loadNhlStream('https://onhockey.tv/index.php?place=np_stream400&channel=//videocdn-4727.website/shopping2/?channel_id=oneplay_sport2')">Смотреть</button>
+                <!-- Отредактированная прямая ссылка на видеопоток CDN без родительского сайта -->
+                <button class="btn-stream" onclick="loadNhlStream('https://videocdn-4727.website')">Смотреть</button>
             </div>
 
-            <!-- Матч 2 -->
             <div class="match-row">
                 <div class="teams-block">
                     <div class="teams-title">Нью-Йорк Рейнджерс — Коламбус Блю Джекетс</div>
                     <div class="match-status">Сегодня, 23:55 · Регулярный сезон</div>
                 </div>
-                <button class="btn-stream disabled" onclick="alert('Трансляция начнется перед стартом матча!')">Ожидание</button>
+                <button class="btn-stream disabled" onclick="alert('Ожидание матча!')">Ожидание</button>
             </div>
-
-            <!-- Матч 3 -->
-            <div class="match-row">
-                <div class="teams-block">
-                    <div class="teams-title">Питтсбург Пингвинз — Колорадо Эвеланш</div>
-                    <div class="match-status">Завтра, 03:00 · Регулярный сезон</div>
-                </div>
-                <button class="btn-stream disabled" onclick="alert('Трансляция начнется перед стартом матча!')">Ожидание</button>
-            </div>
-
         </div>
     </div>
 
-    <!-- Легкий скрипт управления трансляцией -->
     <script>
         function loadNhlStream(streamUrl) {
             const cover = document.getElementById('screenCover');
             const iframe = document.getElementById('nhlStreamIframe');
             
-            if(streamUrl && streamUrl !== '#') {
+            if(streamUrl) {
                 cover.style.display = 'none';
                 iframe.style.display = 'block';
                 iframe.src = streamUrl;
