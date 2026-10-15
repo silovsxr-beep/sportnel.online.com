@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPORTNEL — Прямые трансляции NHL</title>
+    <!-- Подключаем современный HTML5 плеер, работающий БЕЗ КАПЧИ -->
+    <link href="https://zencdn.net" rel="stylesheet" />
     <link rel="stylesheet" href="https://cloudflare.com">
     <style>
         :root {
@@ -69,22 +71,19 @@
             margin-bottom: 15px;
         }
 
-        .video-player {
+        /* Адаптивная обертка для нового видеоплеера */
+        .video-wrapper {
             position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            background-color: #000;
+            width: 100%;
             border-radius: 6px;
+            overflow: hidden;
+            background: #000;
         }
 
-        .video-player iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
+        .video-js {
+            width: 100% !important;
+            height: auto !important;
+            aspect-ratio: 16/9;
         }
 
         .player-placeholder {
@@ -101,7 +100,8 @@
             gap: 10px;
             font-size: 14px;
             background-color: #050608;
-            z-index: 2;
+            z-index: 10;
+            pointer-events: none;
         }
 
         .player-placeholder i {
@@ -182,13 +182,15 @@
     </header>
 
     <div class="stream-container">
-        <div class="video-player">
+        <div class="video-wrapper">
+            <!-- Экран ожидания -->
             <div class="player-placeholder" id="playerScreen">
                 <i class="fa-solid fa-circle-play"></i>
                 <p>Выберите активный матч ниже для начала трансляции</p>
             </div>
-            <!-- Обновленный iframe для приема любых стримов -->
-            <iframe id="videoIframe" src="" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen style="display:none;"></iframe>
+            
+            <!-- Профессиональный плеер без блокировок -->
+            <video id="my-video" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" style="display:none;"></video>
         </div>
     </div>
 
@@ -199,8 +201,8 @@
             <div class="teams">Вашингтон — Монреаль</div>
             <div class="meta"><span class="live">● LIVE</span> · Регулярный чемпионат</div>
         </div>
-        <!-- Заменили YouTube на открытый плеер VK Видео, где нет капчи -->
-        <button class="watch-btn" onclick="startStream('https://www.twitch.tv/madamkapubg?tt_content=channel&tt_medium=mobile_web_share')">Смотреть</button>
+        <!-- Прямая ссылка на свободный тестовый поток без ограничений гугла -->
+        <button class="watch-btn" onclick="startStream('https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8')">Смотреть</button>
     </div>
 
     <div class="match-row">
@@ -208,19 +210,27 @@
             <div class="teams">Колорадо — Даллас</div>
             <div class="meta">Сегодня, 03:30 · Регулярный чемпионат</div>
         </div>
-        <button class="watch-btn waiting" onclick="alert('Матч еще не начался!')">Обзов</button>
+        <button class="watch-btn waiting" onclick="alert('Матч еще не начался!')">Обзор</button>
     </div>
 
+    <!-- Подключаем скрипты плеера -->
+    <script src="https://zencdn.net"></script>
     <script>
-        function startStream(url) {
-            const placeholder = document.getElementById('playerScreen');
-            const iframe = document.getElementById('videoIframe');
+        function startStream(streamUrl) {
+            // Прячем заглушку
+            document.getElementById('playerScreen').style.display = 'none';
             
-            if(url) {
-                placeholder.style.display = 'none';
-                iframe.style.display = 'block';
-                iframe.src = url;
-            }
+            // Показываем элемент видео
+            var videoElement = document.getElementById('my-video');
+            videoElement.style.display = 'block';
+            
+            // Инициализируем плеер и запускаем поток
+            var player = videojs('my-video');
+            player.src({
+                src: streamUrl,
+                type: 'application/x-mpegURL' // Формат для .m3u8 стримов
+            });
+            player.play();
         }
     </script>
 </body>
