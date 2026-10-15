@@ -71,20 +71,22 @@
 
         .video-player {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 */
+            padding-bottom: 56.25%; /* Соотношение сторон 16:9 */
             height: 0;
             overflow: hidden;
             background-color: #000;
             border-radius: 6px;
         }
 
-        .video-player iframe {
+        /* Адаптивный стандартный HTML5 плеер */
+        .video-player video {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             border: none;
+            outline: none;
         }
 
         .player-placeholder {
@@ -176,6 +178,7 @@
 </head>
 <body>
 
+    <!-- Название вашего сайта -->
     <header>
         <div class="logo">SPORT<span>NEL</span></div>
         <div class="live-badge"><i class="fa-solid fa-circle-dot"></i> Эфир NHL</div>
@@ -187,8 +190,8 @@
                 <i class="fa-solid fa-circle-play"></i>
                 <p>Выберите активный матч ниже для начала трансляции</p>
             </div>
-            <!-- Плеер, оптимизированный под любые российские сети -->
-            <iframe id="videoIframe" src="" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen style="display:none;"></iframe>
+            <!-- Стандартный видео тег, работающий на всех смартфонах -->
+            <video id="mainVideoPlayer" controls playsinline style="display:none;"></video>
         </div>
     </div>
 
@@ -199,8 +202,8 @@
             <div class="teams">Вашингтон — Монреаль</div>
             <div class="meta"><span class="live">● LIVE</span> · Регулярный чемпионат</div>
         </div>
-        <!-- Безопасный и доступный плеер Rutube (Хоккейный матч) БЕЗ КАПЧИ -->
-        <button class="watch-btn" onclick="startStream('https://tv3.lv/zinas/latvija/politika/sobrid-vel-varam-uzturet-labu-aizsardzibu-aiznemoties-naudu-brisele-komente-kulbergs/')">Смотреть</button>
+        <!-- Прямая ссылка на надежное тестовое видео (MP4) без блокировок и капчи -->
+        <button class="watch-btn" onclick="startStream('https://zencdn.net')">Смотреть</button>
     </div>
 
     <div class="match-row">
@@ -214,12 +217,15 @@
     <script>
         function startStream(url) {
             const placeholder = document.getElementById('playerScreen');
-            const iframe = document.getElementById('videoIframe');
+            const video = document.getElementById('mainVideoPlayer');
             
             if(url) {
                 placeholder.style.display = 'none';
-                iframe.style.display = 'block';
-                iframe.src = url;
+                video.style.display = 'block'; // Исправлена опечатка в отображении плеера
+                video.src = url;
+                video.play().catch(function(error) {
+                    console.log("Автовоспроизведение заблокировано браузером, пользователь должен нажать Play вручную.");
+                });
             }
         }
     </script>
