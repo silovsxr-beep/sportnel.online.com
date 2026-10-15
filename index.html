@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPORTNEL — Прямые трансляции NHL</title>
-    <!-- Подключаем современный HTML5 плеер, работающий БЕЗ КАПЧИ -->
-    <link href="https://zencdn.net" rel="stylesheet" />
     <link rel="stylesheet" href="https://cloudflare.com">
     <style>
         :root {
@@ -71,19 +69,23 @@
             margin-bottom: 15px;
         }
 
-        /* Адаптивная обертка для нового видеоплеера */
         .video-wrapper {
             position: relative;
-            width: 100%;
-            border-radius: 6px;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
             overflow: hidden;
-            background: #000;
+            background-color: #000;
+            border-radius: 6px;
         }
 
-        .video-js {
-            width: 100% !important;
-            height: auto !important;
-            aspect-ratio: 16/9;
+        /* Стандартный и надежный HTML5 видеоплеер */
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            outline: none;
         }
 
         .player-placeholder {
@@ -101,7 +103,6 @@
             font-size: 14px;
             background-color: #050608;
             z-index: 10;
-            pointer-events: none;
         }
 
         .player-placeholder i {
@@ -183,14 +184,14 @@
 
     <div class="stream-container">
         <div class="video-wrapper">
-            <!-- Экран ожидания -->
+            <!-- Экран ожидания клика -->
             <div class="player-placeholder" id="playerScreen">
                 <i class="fa-solid fa-circle-play"></i>
                 <p>Выберите активный матч ниже для начала трансляции</p>
             </div>
             
-            <!-- Профессиональный плеер без блокировок -->
-            <video id="my-video" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" style="display:none;"></video>
+            <!-- Простой и легкий видео-тег -->
+            <video id="mainPlayer" controls playsinline style="display:none;"></video>
         </div>
     </div>
 
@@ -201,8 +202,8 @@
             <div class="teams">Вашингтон — Монреаль</div>
             <div class="meta"><span class="live">● LIVE</span> · Регулярный чемпионат</div>
         </div>
-        <!-- Прямая ссылка на свободный тестовый поток без ограничений гугла -->
-        <button class="watch-btn" onclick="startStream('https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8')">Смотреть</button>
+        <!-- Прямая ссылка на надежное MP4-видео, поддерживаемое любым телефоном -->
+        <button class="watch-btn" onclick="startStream('https://googleapis.com')">Смотреть</button>
     </div>
 
     <div class="match-row">
@@ -213,23 +214,17 @@
         <button class="watch-btn waiting" onclick="alert('Матч еще не начался!')">Обзор</button>
     </div>
 
-    <!-- Подключаем скрипты плеера -->
-    <script src="https://zencdn.net"></script>
     <script>
-        function startStream(streamUrl) {
-            // Прячем заглушку
+        function startStream(videoUrl) {
+            // Прячем заглушку выбора матча
             document.getElementById('playerScreen').style.display = 'none';
             
-            // Показываем элемент видео
-            var videoElement = document.getElementById('my-video');
-            videoElement.style.display = 'block';
+            // Находим плеер, включаем его видимость и задаем видеофайл
+            var player = document.getElementById('mainPlayer');
+            player.style.display = 'block';
+            player.src = videoUrl;
             
-            // Инициализируем плеер и запускаем поток
-            var player = videojs('my-video');
-            player.src({
-                src: streamUrl,
-                type: 'application/x-mpegURL' // Формат для .m3u8 стримов
-            });
+            // Запускаем воспроизведение
             player.play();
         }
     </script>
