@@ -12,11 +12,11 @@ body {background-color:var(--bg-body);color:var(--text-main);padding:15px;displa
 header {background-color:var(--bg-card);border:1px solid var(--border-line);padding:16px 20px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;}
 .brand {font-size:20px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;}
 .brand span {color:var(--accent-nhl);}
-.social-links {display:flex;align-items:center;gap:18px;}
+.social-links {display:flex;align-items:center;gap:20px;}
 .social-icon {display:flex;align-items:center;justify-content:center;text-decoration:none;transition:transform 0.2s;}
 .social-icon:hover {transform:scale(1.15);}
-/* Настройки размеров для оригинальных цветных иконок */
-.social-icon svg {width:26px;height:26px;}
+/* Идеально ровные размеры для официальных картинок-логотипов */
+.social-icon img {width:28px;height:28px;object-fit:contain;}
 .player-wrapper {background-color:var(--bg-card);border:1px solid var(--border-line);border-radius:16px;padding:12px;margin-bottom:25px;}
 .video-ratio {position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background-color:#020305;border-radius:10px;}
 .video-ratio iframe {position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
@@ -40,22 +40,9 @@ footer {margin-top:40px;padding:20px 10px;text-align:center;border-top:1px solid
 <header>
 <div class="brand">SPORT<span>NEL</span></div>
 <div class="social-links">
-<!-- Оригинальный цветной 3D логотип TikTok из вашего фото -->
-<a href="#" class="social-icon tt" target="_blank">
-<svg viewBox="0 0 24 24">
-<circle cx="12" cy="12" r="12" fill="#000000"/>
-<path d="M12.72 6.31c.45 1.13 1.25 1.83 2.37 2.11v1.65c-.86 0-1.61-.26-2.26-.71v4.4c0 2.21-1.79 4-4 4s-4-1.79-4-4 1.79-4 4-4c.4 0 .76.07 1.11.18V11.4c-.36-.08-.73-.13-1.11-.13-2.54 0-4.6 2.06-4.6 4.6s2.06 4.6 4.6 4.6 4.6-2.06 4.6-4.6V6.31h1.92z" fill="#FFFFFF"/>
-<path d="M12.72 6.31v1.44c-.29-.1-.61-.15-.92-.15-1.44 0-2.6 1.16-2.6 2.6s1.16 2.6 2.6 2.6 2.6-1.16 2.6-2.6V6.31h-1.68z" fill="#00f2fe"/>
-<path d="M13.83 7.82c.5.28 1.07.42 1.65.42v1.44c-.75 0-1.48-.22-2.12-.64v1.65c.53.48 1.23.73 1.94.73h.15v1.44c-.6.04-1.18-.13-1.68-.48-.38-.26-.71-.62-.97-1.02V7.82z" fill="#fe0943"/>
-</svg>
-</a>
-<!-- Оригинальный красный логотип YouTube из вашего фото -->
-<a href="#" class="social-icon yt" target="_blank">
-<svg viewBox="0 0 24 24">
-<path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.516 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.872.507 9.388.507 9.388.507s7.517 0 9.389-.507a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837z" fill="#FF0000"/>
-<polygon points="9.545,15.568 15.818,12 9.545,8.432" fill="#FFFFFF"/>
-</svg>
-</a>
+<!-- Чистая оригинальная 3D нота TikTok без черного круга и официальная кнопка YouTube -->
+<a href="#" class="social-icon tt" target="_blank"><img src="https://wikimedia.org" alt="TikTok"></a>
+<a href="#" class="social-icon yt" target="_blank"><img src="https://wikimedia.org" alt="YouTube"></a>
 </div>
 </header>
 <div class="player-wrapper">
