@@ -3,226 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPORTNEL — Прямые трансляции NHL</title>
-    <link rel="stylesheet" href="https://cloudflare.com">
+    <title>Современный Плеер Трансляций</title>
     <style>
-        :root {
-            --bg-dark: #0d0e12;
-            --bg-card: #161920;
-            --accent-red: #e50914;
-            --text-white: #ffffff;
-            --text-muted: #8a8d98;
-            --border-color: #22252f;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-        }
-
+        /* Общие стили для красивого внешнего вида */
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-white);
-            padding: 15px;
-        }
-
-        header {
-            background-color: var(--bg-card);
-            padding: 15px;
-            border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid var(--border-color);
-            margin-bottom: 15px;
-        }
-
-        .logo {
-            font-size: 18px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .logo span {
-            color: var(--accent-red);
-        }
-
-        .live-badge {
-            background-color: rgba(229, 9, 20, 0.1);
-            color: var(--accent-red);
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .stream-container {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 12px;
-            margin-bottom: 15px;
-        }
-
-        .video-player {
-            position: relative;
-            padding-bottom: 56.25%; /* Пропорции экрана 16:9 */
-            height: 0;
-            overflow: hidden;
-            background-color: #000;
-            border-radius: 6px;
-        }
-
-        /* Делаем чужой iframe полностью адаптивным под экран телефона */
-        .video-player iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .player-placeholder {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #141414;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            color: var(--text-muted);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Контейнер для ввода ссылки */
+        .controls {
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 20px;
+            display: flex;
             gap: 10px;
-            font-size: 14px;
-            background-color: #050608;
-            z-index: 2;
         }
 
-        .player-placeholder i {
-            font-size: 40px;
-            color: var(--accent-red);
+        input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #333;
+            border-radius: 6px;
+            background-color: #222;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
         }
 
-        .match-list-title {
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            margin: 20px 0 10px 5px;
-            letter-spacing: 0.5px;
+        input[type="text"]:focus {
+            border-color: #ff0000;
         }
 
-        .match-row {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 12px 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        .match-info {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .teams {
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--text-white);
-        }
-
-        .meta {
-            font-size: 12px;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .meta span.live {
-            color: var(--accent-red);
-            font-weight: 700;
-        }
-
-        .watch-btn {
-            background-color: var(--accent-red);
-            color: var(--text-white);
+        button {
+            padding: 12px 24px;
+            background-color: #ff0000;
+            color: white;
             border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
+            border-radius: 6px;
+            font-size: 1rem;
             cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
         }
 
-        .watch-btn.waiting {
-            background-color: #222530;
-            border: 1px solid #2d3140;
-            color: var(--text-muted);
-            cursor: not-allowed;
+        button:hover {
+            background-color: #cc0000;
+        }
+
+        /* 📱 Адаптивный контейнер для видео (соотношение сторон 16:9) */
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            padding-bottom: 56.25%; /* Соотношение 16:9 */
+            height: 0;
+            background-color: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* Сам плеер растягивается на весь контейнер */
+        .video-container iframe, 
+        .video-container div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo">SPORT<span>NEL</span></div>
-        <div class="live-badge"><i class="fa-solid fa-circle-dot"></i> Эфир NHL</div>
-    </header>
+    <h1>Трансляция Видео из YouTube</h1>
 
-    <div class="stream-container">
-        <div class="video-player">
-            <div class="player-placeholder" id="playerScreen">
-                <i class="fa-solid fa-circle-play"></i>
-                <p>Выберите активный матч ниже для начала трансляции</p>
-            </div>
-            <!-- Сюда JavaScript автоматически подставит ваше видео при клике -->
-            <iframe id="videoIframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="display:none;"></iframe>
-        </div>
+    <div class="controls">
+        <input type="text" id="videoUrl" placeholder="Вставьте ссылку на видео или трансляцию YouTube...">
+        <button onclick="loadVideo()">Запустить</button>
     </div>
 
-    <div class="match-list-title">Расписание трансляций</div>
-
-    <div class="match-row">
-        <div class="match-info">
-            <div class="teams">Вашингтон — Монреаль</div>
-            <div class="meta"><span class="live">● LIVE</span> · Регулярный чемпионат</div>
-        </div>
-        <!-- Внутрь функции передается адрес из вашего iframe (с добавлением автозапуска) -->
-        <button class="watch-btn" onclick="startStream('https://youtu.be/h-s97UV5sC4?is=_W9B1BCztDCW9o8M')">Смотреть</button>
-    </div>
-
-    <div class="match-row">
-        <div class="match-info">
-            <div class="teams">Колорадо — Даллас</div>
-            <div class="meta">Сегодня, 03:30 · Регулярный чемпионат</div>
-        </div>
-        <button class="watch-btn waiting" onclick="alert('Матч еще не начался!')">Обзор</button>
+    <!-- Контейнер, куда скрипт вставит плеер -->
+    <div class="video-container">
+        <div id="player"></div>
     </div>
 
     <script>
-        function startStream(url) {
-            const placeholder = document.getElementById('playerScreen');
-            const iframe = document.getElementById('videoIframe');
-            
-            if(url) {
-                placeholder.style.display = 'none';
-                iframe.style.display = 'block';
-                iframe.src = url;
+        // Подключаем официальное API YouTube
+        var tag = document.createElement('script');
+        tag.src = "https://youtube.com";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        
+        // Видео по умолчанию (можно заменить на ID вашей трансляции)
+        var defaultVideoId = 'dQw4w9WgXcQ'; 
+
+        // Эта функция вызывается автоматически, когда API готово
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                videoId: defaultVideoId,
+                playerVars: {
+                    'autoplay': 1,        // Автоматический старт (может блокироваться браузерами без приглушения звука)
+                    'controls': 1,        // Показывать стандартные элементы управления
+                    'rel': 0,             // Не показывать похожие видео в конце
+                    'showinfo': 0,        // Скрывать название видео перед стартом
+                    'modestbranding': 1   // Меньше логотипов YouTube
+                }
+            });
+        }
+
+        // Функция для извлечения ID видео из любой ссылки YouTube
+        function getYouTubeId(url) {
+            var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            var match = url.match(regExp);
+            return (match && match[2].length == 11) ? match[2] : null;
+        }
+
+        // Функция смены видео
+        function loadVideo() {
+            var urlInput = document.getElementById('videoUrl').value;
+            if (!urlInput) {
+                alert('Пожалуйста, вставьте ссылку!');
+                return;
+            }
+
+            var videoId = getYouTubeId(urlInput);
+
+            if (videoId) {
+                // Если плеер уже создан, просто меняем видео
+                if (player && typeof player.loadVideoById === 'function') {
+                    player.loadVideoById(videoId);
+                }
+            } else {
+                alert('Не удалось распознать ссылку. Убедитесь, что это правильная ссылка на YouTube.');
             }
         }
     </script>
+
 </body>
 </html>
