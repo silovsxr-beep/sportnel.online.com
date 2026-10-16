@@ -112,18 +112,44 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
 
 <div class="grid-header">TODAY'S SCHEDULE</div>
 <div class="match-list">
-<div class="match-row">
-<div class="teams-block">
-<div class="team-item">
-<svg class="team-logo-svg" viewBox="0 0 24 24" style="margin-right:-6px;"><circle cx="12" cy="12" r="10" fill="none" stroke="#0070f3" stroke-width="2.5"/><path d="M7 12h10M9 9l3 3-3 3M15 9l-3 3 3 3" stroke="#0070f3" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-<svg class="team-logo-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="#e50914" stroke-width="2.5"/><path d="M7 12h10M9 9l3 3-3 3M15 9l-3 3 3 3" stroke="#e50914" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-<div class="teams-title">Florida Panthers — Vancouver Canucks</div>
-</div>
-<div class="match-status"><span class="live-dot">●</span> LIVE NOW · NHL Regular Season</div>
-</div>
-<!-- Кнопка с правильной ссылкой встраивания матча -->
-<button class="btn-stream" onclick="loadNhlStream('https://matchora.to/match/florida-panthers-vs-vancouver-canucks-2591596')">Watch Live</button>
-</div>
+    <!-- МАТЧ 1: Флорида — Ванкувер -->
+    <div class="match-row">
+        <div class="teams-block">
+            <div class="team-item">
+                <svg class="team-logo-svg" viewBox="0 0 24 24" style="margin-right:-6px;"><circle cx="12" cy="12" r="10" fill="none" stroke="#e50914" stroke-width="2.5"/><path d="M7 12h10M9 9l3 3-3 3M15 9l-3 3 3 3" stroke="#e50914" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <svg class="team-logo-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="#0070f3" stroke-width="2.5"/><path d="M7 12h10M9 9l3 3-3 3M15 9l-3 3 3 3" stroke="#0070f3" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <div class="teams-title">Florida Panthers — Vancouver Canucks</div>
+            </div>
+            <div class="match-status"><span class="live-dot">●</span> LIVE NOW · NHL Regular Season</div>
+        </div>
+        <button class="btn-stream" onclick="loadNhlStream('https://matchora.to/match/florida-panthers-vs-vancouver-canucks-2591596')">Watch Live</button>
+    </div>
+
+    <!-- МАТЧ 2: Тампа — Торонто (Для примера) -->
+    <div class="match-row">
+        <div class="teams-block">
+            <div class="team-item">
+                <svg class="team-logo-svg" viewBox="0 0 24 24" style="margin-right:-6px;"><circle cx="12" cy="12" r="10" fill="none" stroke="#0070f3" stroke-width="2.5"/></svg>
+                <svg class="team-logo-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="#ffffff" stroke-width="2.5"/></svg>
+                <div class="teams-title">Tampa Bay Lightning — Toronto Maple Leafs</div>
+            </div>
+            <div class="match-status">02:30 AM · NHL Regular Season</div>
+        </div>
+        <button class="btn-stream" onclick="loadNhlStream('https://matchora.to')">Watch Live</button>
+    </div>
+
+    <!-- МАТЧ 3: Нью-Джерси — Рейнджерс (Для примера) -->
+    <div class="match-row">
+        <div class="teams-block">
+            <div class="team-item">
+                <svg class="team-logo-svg" viewBox="0 0 24 24" style="margin-right:-6px;"><circle cx="12" cy="12" r="10" fill="none" stroke="#e50914" stroke-width="2.5"/></svg>
+                <svg class="team-logo-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="#0070f3" stroke-width="2.5"/></svg>
+                <div class="teams-title">New Jersey Devils — New York Rangers</div>
+            </div>
+            <div class="match-status">03:00 AM · NHL Regular Season</div>
+        </div>
+        <button class="btn-stream" onclick="loadNhlStream('https://matchora.to')">Watch Live</button>
+    </div>
 </div>
 
 <div class="grid-header">LIVE CHAT</div>
@@ -155,18 +181,25 @@ function loadNhlStream(streamUrl) {
         iframe.style.display = 'block';
         iframe.src = streamUrl;
 
-        // Бот перехватывает клик по кнопке сайта и принудительно разворачивает этот iframe на весь экран
         setTimeout(() => {
+            // 1. Автоматический запуск полноэкранного режима (Fullscreen)
             if (iframe.requestFullscreen) {
                 iframe.requestFullscreen();
-            } else if (iframe.webkitRequestFullscreen) { // Для Safari на iPhone/iPad
+            } else if (iframe.webkitRequestFullscreen) {
                 iframe.webkitRequestFullscreen();
-            } else if (iframe.mozRequestFullScreen) { // Для Firefox
+            } else if (iframe.mozRequestFullScreen) {
                 iframe.mozRequestFullScreen();
-            } else if (iframe.msRequestFullscreen) { // Для IE/Edge
+            } else if (iframe.msRequestFullscreen) {
                 iframe.msRequestFullscreen();
             }
-        }, 100); // Небольшая задержка, чтобы iframe успел загрузить адрес видео
+
+            // 2. Умный поворот экрана: заваливает телефон горизонтально (набок), на ПК этот код просто игнорируется
+            if (screen.orientation && screen.orientation.lock) {
+                screen.orientation.lock('landscape').catch(function(error) {
+                    console.log("Экран заблокирован от поворота пользователем или устройством.");
+                });
+            }
+        }, 150); 
     }
 }
 
