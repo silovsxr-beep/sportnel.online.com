@@ -561,40 +561,75 @@ header {
         color: #45f3ff;
     ">00:00:00</span>
 </div>
-
-<!-- ФУТЕР С НЕОНОВЫМ ТЕКСТОМ "BEST NHL" -->
-<footer>
-<div class="footer-text" style="
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 20px 0;
-    font-family: 'Segoe UI', Roboto, sans-serif;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    font-size: 16px;
+<!-- НАЧАЛО НОВОГО ФУТЕРА (ИЗ ПЕРВОГО ФОТО) -->
+<footer class="site-footer" style="
+    background-color: #0b0b0b;
+    color: #7b7b7b;
+    font-family: Arial, sans-serif;
+    padding: 40px 20px 20px 20px;
+    font-size: 14px;
+    line-height: 1.6;
+    border-top: 1px solid #1a1a1a;
 ">
-    <!-- Иконка базы данных тоже подсвечена -->
-    <svg viewBox="0 0 24 24" style="width: 24px; height: 24px; fill: #45f3ff; filter: drop-shadow(0 0 5px rgba(69,243,255,0.8));">
-        <path d="M12 2C6.48 2 2 3.8 2 6v12c0 2.2 4.48 4 10 4s10-1.8 10-4V6c0-2.2-4.48-4-10-4zm0 2c4.83 0 8.57 1.41 8.95 2-.38.59-4.12 2-8.95 2S3.43 6.59 3.05 6c.38-.59 4.12-2 8.95-2zm0 14c-4.97 0-9-1.57-9-3.5V10.1c1.42 1.15 4.88 1.9 9 1.9s7.58-.75 9-1.9v4.4c0 1.93-4.03 3.5-9 3.5z"/>
-    </svg>
-    
-    <!-- Левая часть (Голубой неон) -->
-    <span class="neon-blue" style="
-        color: #45f3ff;
-        text-shadow: 0 0 8px rgba(69,243,255,0.9), 0 0 20px rgba(69,243,255,0.5), 0 0 40px rgba(69,243,255,0.3);
-    ">NHL</span> 
-    
-    <!-- Правая часть (Красный неон) -->
-    <span class="neon-red" style="
-        color: #ff2a3b;
-        text-shadow: 0 0 8px rgba(255,42,59,0.9), 0 0 20px rgba(255,42,59,0.5), 0 0 40px rgba(255,42,59,0.3);
-    ">NBA</span>
-</div>
+    <div class="footer-container" style="max-width: 800px; margin: 0 auto;">
+        
+        <!-- Блок контактов и соцсетей -->
+        <div class="footer-section social-links">
+            <h3 style="
+                color: #a5a5a5;
+                font-size: 15px;
+                letter-spacing: 2px;
+                margin: 0 0 15px 0;
+                font-weight: normal;
+                font-family: 'Courier New', Courier, monospace;
+            ">КОНТАКТЫ & СОЦСЕТИ</h3>
+            <ul style="list-style: none; padding: 0; margin: 0;">
+                <li style="margin-bottom: 8px;">
+                    <a href="#" target="_blank" style="color: #007bff; text-decoration: none; font-size: 16px;">Telegram</a>
+                </li>
+                <li style="margin-bottom: 8px;">
+                    <a href="#" target="_blank" style="color: #007bff; text-decoration: none; font-size: 16px;">ВКонтакте</a>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Разделительная линия -->
+        <hr style="border: 0; border-top: 1px solid #1f1f1f; margin: 25px 0;">
+        
+        <!-- Блок юридической информации и контактов -->
+        <div class="footer-section info-section" style="font-size: 13px; color: #7b7b7b;">
+            <p style="margin: 4px 0;">SPORTCAST · Эл № ФС77-92017 · Роскомнадзор</p>
+            <p style="margin: 4px 0;">Учредитель: Кузьмичев А.О. · Главный редактор: Кузьмичев А.О.</p>
+            <p style="margin: 4px 0;">
+                <a href="mailto:kuzmi4yowanton@yandex.ru" style="color: #7b7b7b; text-decoration: underline;">kuzmi4yowanton@yandex.ru</a> · 
+                <a href="tel:+79060487007" style="color: #7b7b7b; text-decoration: underline;">+7 (906) 048-70-07</a>
+            </p>
+        </div>
+        
+        <!-- Разделительная линия -->
+        <hr style="border: 0; border-top: 1px solid #1f1f1f; margin: 25px 0;">
+        
+        <!-- Нижняя плашка: копирайт и тип сайта -->
+        <div class="footer-bottom" style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #555555;
+            font-size: 13px;
+        ">
+            <div class="copyright">
+                © 2026 Sportcast. Все права защищены.
+            </div>
+            <div class="site-type">
+                Онлайн-трансляции
+            </div>
+        </div>
+        
+    </div>
 </footer>
-</div>
+<!-- КОНЕЦ НОВОГО ФУТЕРА -->
+
+</div> <!-- Закрывающий тег контейнера, который был у вас после старого футера -->
 
 <script>
 const myUserId = Math.floor(1000 + Math.random() * 9000);
