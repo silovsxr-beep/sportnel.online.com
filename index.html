@@ -266,12 +266,7 @@ header {
     border-color: var(--accent-nhl);
     box-shadow: 0 8px 25px rgba(0,112,243,0.3);
 }
-.match-info-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
+.match-info-top { display: flex; justify-content: space-between; align-items: center; width: 100%; }
 .match-live-badge {
     font-size: 11px;
     color: #ff2a3b;
@@ -284,21 +279,13 @@ header {
     animation: blinkLive 1.5s infinite ease-in-out;
 }
 .match-live-badge::before {
-    content: '';
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    background-color: #ff2a3b;
-    border-radius: 50%;
-    box-shadow: 0 0 8px #ff2a3b;
+    content: ''; display: inline-block; width: 7px; height: 7px; background-color: #ff2a3b; border-radius: 50%; box-shadow: 0 0 8px #ff2a3b;
 }
 @keyframes blinkLive { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
 
 .match-time { font-size: 12px; font-weight: 700; color: var(--text-grey); background: #161b26; padding: 3px 8px; border-radius: 5px; }
 .teams-container { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 8px; padding: 4px 0; }
 .team-side { display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; text-align: center; min-width: 0; }
-
-/* Красивые логотипы команд из ваших ссылок */
 .team-logo-img { width: 45px; height: 45px; object-fit: contain; display: block; margin-bottom: 6px; }
 .teams-title { font-size: 12px; font-weight: 700; color: var(--text-main); line-height: 1.3; word-wrap: break-word; width: 100%; height: 32px; display: flex; align-items: center; justify-content: center; }
 .vs-divider { font-size: 11px; font-weight: 800; color: var(--text-grey); text-transform: uppercase; background: #1a1f2c; padding: 3px 8px; border-radius: 5px; height: 20px; display: flex; align-items: center; margin-top: 0; }
@@ -317,6 +304,32 @@ header {
 .btn-send { background: var(--accent-nhl); color: #fff; border: none; padding: 0 16px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 700; transition: background 0.2s; }
 .btn-send:hover { background: #0056c6; }
 
+/* Стильный неоновый блок для часов Латвии над футером */
+.latvia-clock-wrapper {
+    width: 100%;
+    max-width: 650px;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #45f3ff;
+    text-shadow: 0 0 8px rgba(69,243,255,0.6);
+    margin-top: 15px;
+}
+.latvia-clock-wrapper span {
+    color: #ffffff;
+    background: #161b26;
+    padding: 3px 8px;
+    border-radius: 5px;
+    margin-left: 6px;
+    border: 1px solid rgba(69,243,255,0.3);
+    box-shadow: 0 0 10px rgba(69,243,255,0.2);
+}
+
 footer { margin-top: auto; padding: 25px 10px; text-align: center; border-top: 1px solid var(--border-line); width: 100%; max-width: 650px; }
 .footer-text { font-size: 12px; letter-spacing: 1px; font-weight: 700; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .footer-text svg { width: 16px; height: 16px; fill: #45f3ff; filter: drop-shadow(0 0 8px rgba(69,243,255,0.8)); animation: spinPuck 4s linear infinite; }
@@ -327,6 +340,7 @@ footer { margin-top: auto; padding: 25px 10px; text-align: center; border-top: 1
 @media (min-width: 992px) {
     .container { max-width: 1280px !important; }
     footer { max-width: 100% !important; }
+    .latvia-clock-wrapper { max-width: 100% !important; padding-right: 20px; }
     .main-layout { display: grid; grid-template-columns: 1.8fr 1.2fr; gap: 24px; width: 100%; align-items: start; }
     .player-column { position: sticky; top: 15px; }
     .right-sidebar { display: flex; flex-direction: column; gap: 8px; }
@@ -361,18 +375,16 @@ footer { margin-top: auto; padding: 25px 10px; text-align: center; border-top: 1
     </div>
 </div>
 
-<!-- НАСТОЯЩИЕ БОЛЬШИЕ НЕОНОВЫЕ ЛОГОТИПЫ НА ГЛАВНОМ ЭКРАНЕ -->
 <div class="welcome-logos-container" id="welcomeLogos">
     <div class="welcome-logo-box nhl-glow">
-        <img src="https://matchora.to" alt="NHL Shield Logo">
+        <img src="https://matchora.to" alt="NHL Logo">
     </div>
     <div class="welcome-logo-box basket-glow">
-        <img src="https://flashscore.com" alt="NBA Basketball Logo">
+        <img src="https://flashscore.com" alt="NBA Logo">
     </div>
 </div>
 
 <div class="main-layout">
-    <!-- Левая колонка ПК: Плеер и чат матча (скрыты до клика по самой карточке) -->
     <div class="player-column">
         <div class="stream-display-container" id="streamDisplay">
             <div class="player-wrapper">
@@ -406,9 +418,8 @@ footer { margin-top: auto; padding: 25px 10px; text-align: center; border-top: 1
                 <div class="info-section-text">Click anywhere directly on the match row to instantly open the broadcast stream player and match chat room.</div>
             </div>
 
-            <!-- СПИСОК NHL МАТЧЕЙ (Возвращены оригинальные ссылки на картинки) -->
+            <!-- СПИСОК NHL МАТЧЕЙ -->
             <div class="match-list" id="nhl-matches">
-                <!-- МАТЧ 1: Питтсбург против Колорадо -->
                 <div class="match-row" onclick="loadNhlStream('https://github.io')">
                     <div class="match-info-top">
                         <div class="match-live-badge">LIVE</div>
@@ -416,18 +427,17 @@ footer { margin-top: auto; padding: 25px 10px; text-align: center; border-top: 1
                     </div>
                     <div class="teams-container">
                         <div class="team-side">
-                            <img class="team-logo-img" src="https://matchora.to" alt="Pittsburgh Penguins">
+                            <img class="team-logo-img" src="https://matchora.to" alt="">
                             <div class="teams-title">Pittsburgh Penguins</div>
                         </div>
                         <div class="vs-divider">vs</div>
                         <div class="team-side">
-                            <img class="team-logo-img" src="https://matchora.to" alt="Colorado Avalanche">
+                            <img class="team-logo-img" src="https://matchora.to" alt="">
                             <div class="teams-title">Colorado Avalanche</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- МАТЧ 2: Бостон против Анахайма -->
                 <div class="match-row" onclick="loadNhlStream('https://github.io')">
                     <div class="match-info-top">
                         <div class="match-live-badge">LIVE</div>
@@ -435,12 +445,12 @@ footer { margin-top: auto; padding: 25px 10px; text-align: center; border-top: 1
                     </div>
                     <div class="teams-container">
                         <div class="team-side">
-                            <img class="team-logo-img" src="https://matchora.to" alt="Boston Bruins">
+                            <img class="team-logo-img" src="https://matchora.to" alt="">
                             <div class="teams-title">Boston Bruins</div>
                         </div>
                         <div class="vs-divider">vs</div>
                         <div class="team-side">
-                            <img class="team-logo-img" src="https://matchora.to" alt="Anaheim Ducks">
+                            <img class="team-logo-img" src="https://matchora.to" alt="">
                             <div class="teams-title">Anaheim Ducks</div>
                         </div>
                     </div>
@@ -456,12 +466,12 @@ footer { margin-top: auto; padding: 25px 10px; text-align: center; border-top: 1
                     </div>
                     <div class="teams-container">
                         <div class="team-side">
-                            <img class="team-logo-img" src="https://flashscore.com" alt="LA Lakers">
+                            <img class="team-logo-img" src="https://flashscore.com" alt="">
                             <div class="teams-title">LA Lakers</div>
                         </div>
                         <div class="vs-divider">vs</div>
                         <div class="team-side">
-                            <img class="team-logo-img" src="https://flashscore.com" alt="Golden State">
+                            <img class="team-logo-img" src="https://flashscore.com" alt="">
                             <div class="teams-title">Golden State</div>
                         </div>
                     </div>
@@ -484,6 +494,11 @@ footer { margin-top: auto; padding: 25px 10px; text-align: center; border-top: 1
     </div>
 </div> <!-- Конец main-layout -->
 
+<!-- БЛОК ВРЕМЕНИ ЛАТВИИ НАД ЛИНИЕЙ ФУТЕРА -->
+<div class="latvia-clock-wrapper">
+    Локация: Латвия <span id="latviaTimer">00:00:00</span>
+</div>
+
 <footer>
 <div class="footer-text">
 <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 3.8 2 6v12c0 2.2 4.48 4 10 4s10-1.8 10-4V6c0-2.2-4.48-4-10-4zm0 2c4.83 0 8.57 1.41 8.95 2-.38.59-4.12 2-8.95 2S3.43 6.59 3.05 6c.38-.59 4.12-2 8.95-2zm0 14c-4.97 0-9-1.57-9-3.5V10.1c1.42 1.15 4.88 1.9 9 1.9s7.58-.75 9-1.9v4.4c0 1.93-4.03 3.5-9 3.5z"/></svg>
@@ -495,12 +510,22 @@ footer { margin-top: auto; padding: 25px 10px; text-align: center; border-top: 1
 <script>
 const myUserId = Math.floor(1000 + Math.random() * 9000);
 
-// Управление вкладками и скрытием логотипов на главном экране
+// Скрипт живых Латвийских часов (всегда точное время Европы/Риги)
+function updateLatviaClock() {
+    const clockElement = document.getElementById('latviaTimer');
+    if (clockElement) {
+        const options = { timeZone: 'Europe/Riga', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+        const latviaTime = new Intl.DateTimeFormat('en-US', options).format(new Date());
+        clockElement.textContent = latviaTime;
+    }
+}
+setInterval(updateLatviaClock, 1000);
+updateLatviaClock(); // Запуск при загрузке
+
 function switchSport(type, element) {
     document.querySelectorAll('.sport-tab-btn').forEach(btn => btn.classList.remove('active-tab'));
     element.classList.add('active-tab');
 
-    // Прячем фоновые логотипы при клике на любой таб
     document.getElementById('welcomeLogos').style.display = 'none';
 
     const contentArea = document.getElementById('contentArea');
@@ -509,7 +534,6 @@ function switchSport(type, element) {
     const nhlList = document.getElementById('nhl-matches');
     const basketList = document.getElementById('basketball-matches');
 
-    // Скрываем плеер при переключении категорий
     streamDisplay.style.display = 'none';
     document.getElementById('nhlStreamIframe').src = '';
 
@@ -530,7 +554,6 @@ function switchSport(type, element) {
     }
 }
 
-// Запуск стрима и показ плеера/чата матча ТОЛЬКО после клика по карточке
 function loadNhlStream(streamUrl) {
     const streamDisplay = document.getElementById('streamDisplay');
     const iframe = document.getElementById('nhlStreamIframe');
@@ -545,8 +568,7 @@ function loadNhlStream(streamUrl) {
     }
 }
 
-// Логика МАТЧ-ЧАТА
-function sendMatchMessage() {
+function sendMessage() {
     const input = document.getElementById('matchChatInput');
     const window = document.getElementById('matchChatWindow');
     if (input.value.trim() !== "") {
@@ -556,10 +578,9 @@ function sendMatchMessage() {
     }
 }
 function handleMatchChatKeyPress(event) {
-    if (event.key === 'Enter') { sendMatchMessage(); }
+    if (event.key === 'Enter') { sendMessage(); }
 }
 
-// Логика ГЛОБАЛЬНОГО ЧАТА
 function sendGlobalMessage() {
     const input = document.getElementById('globalChatInput');
     const window = document.getElementById('globalChatWindow');
