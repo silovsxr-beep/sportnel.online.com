@@ -535,16 +535,63 @@ header {
 
     </div>
 </div>
-
-<!-- ОБНОВЛЕННЫЙ БЛОК ЧАСОВ С НЕОНОВЫМ СВЕЧЕНИЕМ НА АНГЛИЙСКОМ -->
-<div class="latvia-clock-wrapper" style="text-shadow: 0 0 12px rgba(69,243,255,0.8), 0 0 25px rgba(69,243,255,0.4); justify-content: center; font-size: 13px; margin: 25px 0 15px 0;">
-    Location: Latvia <span id="latviaTimer" style="border-color: #45f3ff; box-shadow: 0 0 15px rgba(69,243,255,0.5); font-weight: 900;">00:00:00</span>
+<!-- ОБНОВЛЕННЫЙ БЛОК ЧАСОВ С НЕОНОВЫМ СВЕЧЕНИЕМ -->
+<div class="latvia-clock-wrapper" style="
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    gap: 8px;
+    font-size: 15px; 
+    margin: 25px 0 15px 0;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    color: #45f3ff;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px rgba(69,243,255,0.7), 0 0 20px rgba(69,243,255,0.4);
+">
+    Location: Latvia 
+    <span id="latviaTimer" style="
+        padding: 4px 10px;
+        border: 2px solid #45f3ff; 
+        border-radius: 6px;
+        background: rgba(0, 0, 0, 0.4);
+        box-shadow: 0 0 12px rgba(69,243,255,0.6), inset 0 0 8px rgba(69,243,255,0.3); 
+        font-weight: 900;
+        color: #45f3ff;
+    ">00:00:00</span>
 </div>
 
+<!-- ФУТЕР С НЕОНОВЫМ ТЕКСТОМ "BEST NHL" -->
 <footer>
-<div class="footer-text">
-<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 3.8 2 6v12c0 2.2 4.48 4 10 4s10-1.8 10-4V6c0-2.2-4.48-4-10-4zm0 2c4.83 0 8.57 1.41 8.95 2-.38.59-4.12 2-8.95 2S3.43 6.59 3.05 6c.38-.59 4.12-2 8.95-2zm0 14c-4.97 0-9-1.57-9-3.5V10.1c1.42 1.15 4.88 1.9 9 1.9s7.58-.75 9-1.9v4.4c0 1.93-4.03 3.5-9 3.5z"/></svg>
-<span class="neon-blue">The best website</span> <span class="neon-red">for watching NHL live streams</span>
+<div class="footer-text" style="
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px 0;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 16px;
+">
+    <!-- Иконка базы данных тоже подсвечена -->
+    <svg viewBox="0 0 24 24" style="width: 24px; height: 24px; fill: #45f3ff; filter: drop-shadow(0 0 5px rgba(69,243,255,0.8));">
+        <path d="M12 2C6.48 2 2 3.8 2 6v12c0 2.2 4.48 4 10 4s10-1.8 10-4V6c0-2.2-4.48-4-10-4zm0 2c4.83 0 8.57 1.41 8.95 2-.38.59-4.12 2-8.95 2S3.43 6.59 3.05 6c.38-.59 4.12-2 8.95-2zm0 14c-4.97 0-9-1.57-9-3.5V10.1c1.42 1.15 4.88 1.9 9 1.9s7.58-.75 9-1.9v4.4c0 1.93-4.03 3.5-9 3.5z"/>
+    </svg>
+    
+    <!-- Левая часть (Голубой неон) -->
+    <span class="neon-blue" style="
+        color: #45f3ff;
+        text-shadow: 0 0 8px rgba(69,243,255,0.9), 0 0 20px rgba(69,243,255,0.5), 0 0 40px rgba(69,243,255,0.3);
+    ">The best website</span> 
+    
+    <!-- Правая часть (Красный неон) -->
+    <span class="neon-red" style="
+        color: #ff2a3b;
+        text-shadow: 0 0 8px rgba(255,42,59,0.9), 0 0 20px rgba(255,42,59,0.5), 0 0 40px rgba(255,42,59,0.3);
+    ">for watching NHL live streams</span>
 </div>
 </footer>
 </div>
@@ -552,6 +599,7 @@ header {
 <script>
 const myUserId = Math.floor(1000 + Math.random() * 9000);
 
+// ФУНКЦИЯ ЧАСОВ ДЛЯ ЛАТВИИ
 function updateLatviaClock() {
     const clockElement = document.getElementById('latviaTimer');
     if (clockElement) {
