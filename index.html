@@ -535,44 +535,40 @@ header {
 
     </div>
 </div>
-<!-- ОБНОВЛЕННЫЙ БЛОК ЧАСОВ С НЕОНОВЫМ СВЕЧЕНИЕМ -->
-<div class="latvia-clock-wrapper" style="
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-    gap: 8px;
-    font-size: 15px; 
-    margin: 25px 0 15px 0;
-    font-family: 'Segoe UI', Roboto, sans-serif;
-    color: #45f3ff;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-shadow: 0 0 8px rgba(69,243,255,0.7), 0 0 20px rgba(69,243,255,0.4);
-">
-    Location: Latvia 
-    <span id="latviaTimer" style="
-        padding: 4px 10px;
-        border: 2px solid #45f3ff; 
-        border-radius: 6px;
-        background: rgba(0, 0, 0, 0.4);
-        box-shadow: 0 0 12px rgba(69,243,255,0.6), inset 0 0 8px rgba(69,243,255,0.3); 
-        font-weight: 900;
-        color: #45f3ff;
-    ">00:00:00</span>
-</div>
-<!-- НАЧАЛО НОВОГО ФУТЕРА (ИЗ ПЕРВОГО ФОТО) -->
+<!-- НАЧАЛО ОБНОВЛЕННОГО ПОДВАЛА С КОМПАКТНЫМ ТАЙМЕРОМ -->
 <footer class="site-footer" style="
     background-color: #0b0b0b;
     color: #7b7b7b;
     font-family: Arial, sans-serif;
-    padding: 40px 20px 20px 20px;
+    padding: 30px 20px 20px 20px;
     font-size: 14px;
     line-height: 1.6;
     border-top: 1px solid #1a1a1a;
 ">
     <div class="footer-container" style="max-width: 800px; margin: 0 auto;">
         
+        <!-- Уменьшенный и аккуратный таймер без лишнего неона -->
+        <div class="location-timer-row" style="
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 10px;
+            margin-bottom: 25px;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+        ">
+            <span style="color: #555555;">Location: <strong style="color: #999999; font-weight: 600;">Latvia</strong></span>
+            <span style="color: #333333;">•</span>
+            <span id="latviaTimer" style="
+                color: #45f3ff; 
+                font-family: monospace; 
+                font-size: 14px; 
+                font-weight: bold;
+            ">00:00:00</span>
+        </div>
+
         <!-- Блок контактов и соцсетей -->
         <div class="footer-section social-links">
             <h3 style="
@@ -627,14 +623,14 @@ header {
         
     </div>
 </footer>
-<!-- КОНЕЦ НОВОГО ФУТЕРА -->
+<!-- КОНЕЦ ПОДВАЛА -->
 
-</div> <!-- Закрывающий тег контейнера, который был у вас после старого футера -->
+</div> <!-- Закрывающий тег контейнера -->
 
 <script>
 const myUserId = Math.floor(1000 + Math.random() * 9000);
 
-// ФУНКЦИЯ ЧАСОВ ДЛЯ ЛАТВИИ
+// ИСПРАВЛЕННАЯ ФУНКЦИЯ ЧАСОВ ДЛЯ ЛАТВИИ
 function updateLatviaClock() {
     const clockElement = document.getElementById('latviaTimer');
     if (clockElement) {
@@ -645,7 +641,8 @@ function updateLatviaClock() {
             second: '2-digit', 
             hour12: false 
         };
-        clockElement.textContent = new Intl.DateTimeFormat('en-US', options).format(new Date());
+        const timeString = new Intl.DateTimeFormat('en-US', options).format(new Date());
+        clockElement.textContent = timeString;
     }
 }
 setInterval(updateLatviaClock, 1000);
