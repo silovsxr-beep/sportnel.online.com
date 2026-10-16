@@ -35,7 +35,6 @@ header {
 .grid-header {font-size:12px;font-weight:800;text-transform:uppercase;color:var(--text-grey);margin:0 0 10px 5px;letter-spacing:1.5px;}
 .match-list {display:flex;flex-direction:column;gap:16px;margin-bottom:20px;}
 
-/* Карточка матча */
 .match-row {
     background-color:var(--bg-card);border:1px solid var(--border-line);border-bottom:3px solid var(--accent-nhl);border-radius:16px;
     padding:20px;display:flex;flex-direction:column;gap:12px;box-shadow:0 8px 25px rgba(0,112,243,0.15);position:relative;
@@ -44,19 +43,15 @@ header {
 .match-status {font-size:12px;color:var(--text-grey);display:flex;align-items:center;gap:6px;font-weight:700;}
 .match-time {font-size:13px;font-weight:700;color:var(--text-grey);background:#161b26;padding:4px 10px;border-radius:6px;}
 
-/* Контейнер команд */
-.teams-container {display:flex;align-items:stretch;justify-content:space-between;width:100%;gap:10px;padding:5px 0;}
+/* Новая контейнерная система: выравнивание по верхней линии картинок */
+.teams-container {display:flex;align-items:stretch;justify-content:space-between;width:100%;gap:10px;padding:10px 0;}
 .team-side {display:flex;flex-direction:column;align-items:center;justify-content:flex-start;flex:1;text-align:center;min-width: 0;}
+.team-logo-img {width:65px;height:65px;object-fit:contain;display:block;margin-bottom:12px;}
 
-/* Поля под ваши логотипы */
-.team-logo-box {width:65px;height:65px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
-.team-logo-img {max-width:100%;max-height:100%;object-fit:contain;display:block;}
-
-/* Идеально ровный текстовый блок снизу */
+/* Фиксированная высота для текста, чтобы длинные и короткие названия занимали одинаковое место */
 .teams-title {font-size:13px;font-weight:700;color:var(--text-main);line-height:1.4;word-wrap:break-word;width:100%;height:38px;display:flex;align-items:center;justify-content:center;}
 .vs-divider {font-size:13px;font-weight:800;color:var(--text-grey);text-transform:uppercase;background:#1a1f2c;padding:4px 10px;border-radius:6px;height:24px;display:flex;align-items:center;margin-top:20px;}
 
-/* Кнопка */
 .btn-stream {
     background:linear-gradient(135deg,var(--accent-live) 0%,#b8070f 100%);color:var(--text-main);border:none;padding:12px 0;width:100%;
     border-radius:10px;font-size:11px;font-weight:800;text-transform:uppercase;cursor:pointer;letter-spacing:1px;
@@ -128,18 +123,12 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
         </div>
         <div class="teams-container">
             <div class="team-side">
-                <div class="team-logo-box">
-                    <!-- Замените "logo1.png" на ссылку вашего первого логотипа -->
-                    <img class="team-logo-img" src="logo1.png" alt="https://matchora.to/img?k=HdE5NHsl4MxzKVPP_Nitr-PIbIG9P5UX3lJF5JTWuCFH1ccbavEGy9qFDMMMPFjmXyqzHPi1CJ7AlbLNWLvL-wZUrrJj1gHbAyQ-S01Nt2lA6HpmfQqIsHSIrxzi3BsvFF5n">
-                </div>
+                <img class="team-logo-img" src="https://wikimedia.org" alt="Pittsburgh Penguins">
                 <div class="teams-title">Pittsburgh Penguins</div>
             </div>
             <div class="vs-divider">vs</div>
             <div class="team-side">
-                <div class="team-logo-box">
-                    <!-- Замените "logo2.png" на ссылку вашего второго логотипа -->
-                    <img class="team-logo-img" src="logo2.png" alt="https://matchora.to/img?k=rpdmEgXTocO6pd1HIUBuh0x8vBJcfPRqYU3xVjq4Ys2-VTApHXYZqGPf9NJE_TYb0oaxts9OWykBGtho6orAx2pcgEleUVNj_1zqfxM0b6CaMbf5o_lbzofZf_d0YrtNc1Ec">
-                </div>
+                <img class="team-logo-img" src="https://wikimedia.org" alt="Colorado Avalanche">
                 <div class="teams-title">Colorado Avalanche</div>
             </div>
         </div>
@@ -154,18 +143,12 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
         </div>
         <div class="teams-container">
             <div class="team-side">
-                <div class="team-logo-box">
-                    <!-- Замените "logo3.png" на ссылку вашего третьего логотипа -->
-                    <img class="team-logo-img" src="logo3.png" alt="">
-                </div>
+                <img class="team-logo-img" src="https://wikimedia.org" alt="Boston Bruins">
                 <div class="teams-title">Boston Bruins</div>
             </div>
             <div class="vs-divider">vs</div>
             <div class="team-side">
-                <div class="team-logo-box">
-                    <!-- Замените "logo4.png" на ссылку вашего четвертого логотипа -->
-                    <img class="team-logo-img" src="logo4.png" alt="">
-                </div>
+                <img class="team-logo-img" src="https://wikimedia.org" alt="Anaheim Ducks">
                 <div class="teams-title">Anaheim Ducks</div>
             </div>
         </div>
@@ -203,7 +186,6 @@ function loadNhlStream(streamUrl) {
     }
 }
 
-// Заглушки для функций чата
 function sendMessage() {
     const input = document.getElementById('chatInput');
     const window = document.getElementById('chatWindow');
