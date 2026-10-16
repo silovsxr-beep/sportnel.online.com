@@ -37,18 +37,24 @@ body {
     display: flex;
     flex-direction: column;
 }
+/* Обновленная шапка с новой неоновой пульсирующей рамкой */
 header {
     background-color: var(--bg-card);
-    border: 1px solid var(--border-line);
-    border-bottom: 2px solid var(--accent-nhl);
+    border: 2px solid #0070f3;
     padding: 16px 20px;
     border-radius: 14px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    box-shadow: 0 4px 25px rgba(0,112,243,0.25);
+    box-shadow: 0 0 15px rgba(0,112,243,0.4), inset 0 0 10px rgba(0,112,243,0.1);
+    animation: headerNeonPulse 4s ease-in-out infinite;
 }
+@keyframes headerNeonPulse {
+    0%, 100% { border-color: #0070f3; box-shadow: 0 0 15px rgba(0,112,243,0.4); }
+    50% { border-color: #45f3ff; box-shadow: 0 0 25px rgba(69,243,255,0.6); }
+}
+
 .brand {
     font-size: 20px;
     font-weight: 900;
@@ -114,7 +120,7 @@ header {
 }
 .sport-tab-btn svg { width: 18px; height: 18px; fill: currentColor; }
 
-/* ПОСТОЯННЫЙ ЯРКИЙ НЕОН ДЛЯ КНОПОК МЕНЮ */
+/* Постоянный яркий неон для кнопок меню */
 .sport-tab-btn.nhl-tab {
     color: #ffffff;
     border: 1px solid #0070f3;
@@ -160,7 +166,7 @@ header {
     33% { background: linear-gradient(135deg, #0070f3 0%, #00ffcc 100%); box-shadow: 0 0 20px rgba(0,112,243,0.8); }
     66% { background: linear-gradient(135deg, #ff9900 0%, #ff0055 100%); box-shadow: 0 0 20px rgba(255,153,0,0.8); }
 }
-/* Пульсирующие неоновые логотипы на главном экране */
+/* Пульсирующие неоновые SVG логотипы на главном экране */
 .welcome-logos-container {
     display: flex;
     justify-content: center;
@@ -173,20 +179,20 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    justify-content: center;
     animation: welcomePulse 3s ease-in-out infinite;
 }
-.welcome-logo-box.nhl-glow img {
+.welcome-logo-box svg {
     width: 90px;
     height: 90px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 15px rgba(0,112,243,0.6));
 }
-.welcome-logo-box.basket-glow img {
-    width: 90px;
-    height: 90px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 15px rgba(255,85,0,0.6));
+.welcome-logo-box.nhl-glow svg {
+    fill: #0070f3;
+    filter: drop-shadow(0 0 15px rgba(0,112,243,0.8));
+}
+.welcome-logo-box.basket-glow svg {
+    fill: #ff5500;
+    filter: drop-shadow(0 0 15px rgba(255,85,0,0.8));
 }
 @keyframes welcomePulse {
     0%, 100% { transform: scale(1); opacity: 0.8; }
@@ -231,9 +237,17 @@ header {
 .video-ratio { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background-color: #010204; border-radius: 12px; }
 .video-ratio iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
+@keyframes neonBorder {
+    0%,100% { border-color: #ff0055; box-shadow: 0 0 15px rgba(255,0,85,0.5), inset 0 0 15px rgba(255,0,85,0.2); }
+    20% { border-color: #0070f3; box-shadow: 0 0 15px rgba(0,112,243,0.5), inset 0 0 15px rgba(0,112,243,0.2); }
+    40% { border-color: #00ffcc; box-shadow: 0 0 15px rgba(0,255,204,0.5), inset 0 0 15px rgba(0,255,204,0.2); }
+    60% { border-color: #9b51e0; box-shadow: 0 0 15px rgba(155,81,224,0.5), inset 0 0 15px rgba(155,81,224,0.2); }
+    80% { border-color: #ff9900; box-shadow: 0 0 15px rgba(255,153,0,0.5), inset 0 0 15px rgba(255,153,0,0.2); }
+}
+
 .grid-header { font-size: 12px; font-weight: 800; text-transform: uppercase; color: var(--text-grey); margin: 0 0 10px 5px; letter-spacing: 1.5px; }
 .match-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
-/* Новая аккуратная карточка матча в стиле Matchora */
+/* Ультракомпактная карточка матча в стиле Matchora — вся карточка кликабельна */
 .match-row {
     background-color: var(--bg-card);
     border: 1px solid var(--border-line);
@@ -246,10 +260,12 @@ header {
     box-shadow: 0 8px 25px rgba(0,112,243,0.15);
     position: relative;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
 .match-row:hover {
     transform: translateY(-2px);
+    border-color: var(--accent-nhl);
+    box-shadow: 0 8px 25px rgba(0,112,243,0.3);
 }
 .match-info-top {
     display: flex;
@@ -279,30 +295,12 @@ header {
 }
 @keyframes blinkLive { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
 
-/* Маленькая аккуратная красная кнопка просмотра прямо в шапке карточки */
-.btn-match-play {
-    background: #ff2a3b;
-    color: #ffffff;
-    border: none;
-    border-radius: 6px;
-    padding: 4px 10px;
-    font-size: 10px;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(255,42,59,0.4);
-    transition: background 0.2s, transform 0.2s;
-}
-.btn-match-play:hover {
-    background: #e50914;
-    transform: scale(1.05);
-}
-
-.match-time { font-size: 12px; font-weight: 700; color: var(--text-grey); background: #161b26; padding: 3px 8px; border-radius: 5px; margin-right: auto; margin-left: 10px; }
+.match-time { font-size: 12px; font-weight: 700; color: var(--text-grey); background: #161b26; padding: 3px 8px; border-radius: 5px; }
 .teams-container { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 8px; padding: 4px 0; }
 .team-side { display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; text-align: center; min-width: 0; }
-.team-logo-img { width: 45px; height: 45px; object-fit: contain; display: block; margin-bottom: 6px; }
+
+/* Стили для SVG логотипов команд, которые встроены в HTML и никогда не пропадут */
+.team-logo-svg { width: 45px; height: 45px; fill: var(--text-main); filter: drop-shadow(0 0 5px rgba(255,255,255,0.1)); margin-bottom: 6px; display: block; }
 .teams-title { font-size: 12px; font-weight: 700; color: var(--text-main); line-height: 1.3; word-wrap: break-word; width: 100%; height: 32px; display: flex; align-items: center; justify-content: center; }
 .vs-divider { font-size: 11px; font-weight: 800; color: var(--text-grey); text-transform: uppercase; background: #1a1f2c; padding: 3px 8px; border-radius: 5px; height: 20px; display: flex; align-items: center; margin-top: 0; }
 
@@ -364,17 +362,18 @@ footer { margin-top: auto; padding: 25px 10px; text-align: center; border-top: 1
     </div>
 </div>
 
-<!-- БОЛЬШИЕ КРАСИВЫЕ НЕОНОВЫЕ ЛОГОТИПЫ НА ГЛАВНОМ ЭКРАНЕ -->
+<!-- ВЕЧНЫЕ НЕОНОВЫЕ SVG-ЛОГОТИПЫ НА ГЛАВНОМ ЭКРАНЕ -->
 <div class="welcome-logos-container" id="welcomeLogos">
     <div class="welcome-logo-box nhl-glow">
-        <img src="https://github.io" alt="NHL Logo" onerror="this.style.display='none'">
+        <svg viewBox="0 0 24 24"><path d="M19.5 2h-2c-.83 0-1.5.67-1.5 1.5v3.1c-.8.6-1.5 1.4-2.1 2.3L9.6 4.6c-.6-.6-1.5-.6-2.1 0L3.2 8.9c-.6.6-.6 1.5 0 2.1l4.3 4.3c-.9.6-1.7 1.3-2.3 2.1H2.1c-.83 0-1.5.67-1.5 1.5v2c0 .83.67 1.5 1.5 1.5h2c.83 0 1.5-.67 1.5-1.5v-1.1c.9-.7 1.7-1.6 2.3-2.6l2.9 2.9c.6.6 1.5.6 2.1 0l4.3-4.3c.6-.6.6-1.5 0-2.1l-2.9-2.9c1-.6 1.9-1.4 2.6-2.3h1.1c.83 0 1.5-.67 1.5-1.5v-2c0-.83-.67-1.5-1.5-1.5z"/></svg>
     </div>
     <div class="welcome-logo-box basket-glow">
-        <img src="https://github.io" alt="Basketball Logo" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://w3.org\' viewBox=\'0 0 24 24\' fill=\'%23ff5500\'><path d=\'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.79-4.14c-.26-.53-.73-.93-1.29-1.11L15 14v-2c0-1.1-.9-2-2-2h-2V7l2.25-2.25c3.22.84 5.75 3.37 6.59 6.59-.02 1.25-.39 2.41-1.05 3.4z\'/></svg>'">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.79-4.14c-.26-.53-.73-.93-1.29-1.11L15 14v-2c0-1.1-.9-2-2-2h-2V7l2.25-2.25c3.22.84 5.75 3.37 6.59 6.59-.02 1.25-.39 2.41-1.05 3.4z"/></svg>
     </div>
 </div>
 
 <div class="main-layout">
+    <!-- Левая колонка ПК: Плеер и чат матча (скрыты до клика по самой карточке) -->
     <div class="player-column">
         <div class="stream-display-container" id="streamDisplay">
             <div class="player-wrapper">
@@ -405,46 +404,48 @@ footer { margin-top: auto; padding: 25px 10px; text-align: center; border-top: 1
                     <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
                     Information live game
                 </div>
-                <div class="info-section-text">Streams update automatically 15 minutes before the match starts. Click the red "WATCH" button inside the row to open the live screen.</div>
+                <div class="info-section-text">Click anywhere directly on the match row to instantly open the broadcast stream player and match chat room.</div>
             </div>
 
-            <!-- СПИСОК NHL МАТЧЕЙ (Ультракомпактный стиль с маленькой красной кнопкой) -->
+            <!-- СПИСОК NHL МАТЧЕЙ -->
             <div class="match-list" id="nhl-matches">
-                <!-- МАТЧ 1 -->
+                <!-- МАТЧ 1: Питтсбург против Колорадо -->
                 <div class="match-row" onclick="loadNhlStream('https://github.io')">
                     <div class="match-info-top">
                         <div class="match-live-badge">LIVE</div>
                         <div class="match-time">04:00</div>
-                        <button class="btn-match-play">Watch</button>
                     </div>
                     <div class="teams-container">
                         <div class="team-side">
-                            <img class="team-logo-img" src="https://github.io" alt="">
+                            <!-- Вечный SVG Логотип Питтсбурга -->
+                            <svg class="team-logo-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15.5v-3.1l-3-3 1.4-1.4 1.6 1.6V7h2v6.6l1.6-1.6 1.4 1.4-3 3v3.1h-2z"/></svg>
                             <div class="teams-title">Pittsburgh Penguins</div>
                         </div>
                         <div class="vs-divider">vs</div>
                         <div class="team-side">
-                            <img class="team-logo-img" src="https://github.io" alt="">
+                            <!-- Вечный SVG Логотип Колорадо -->
+                            <svg class="team-logo-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.5 12h-3v3.5h-3V14h-3v-3h3V7.5h3V11h3v3z"/></svg>
                             <div class="teams-title">Colorado Avalanche</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- МАТЧ 2 -->
+                <!-- МАТЧ 2: Бостон против Анахайма -->
                 <div class="match-row" onclick="loadNhlStream('https://github.io')">
                     <div class="match-info-top">
                         <div class="match-live-badge">LIVE</div>
                         <div class="match-time">05:00</div>
-                        <button class="btn-match-play">Watch</button>
                     </div>
                     <div class="teams-container">
                         <div class="team-side">
-                            <img class="team-logo-img" src="https://github.io" alt="">
+                            <!-- Вечный SVG Логотип Бостона -->
+                            <svg class="team-logo-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-3.31 0-6-2.69-6-6h3c0 1.66 1.34 3 3 3s3-1.34 3-3h3c0 3.31-2.69 6-6 6z"/></svg>
                             <div class="teams-title">Boston Bruins</div>
                         </div>
                         <div class="vs-divider">vs</div>
                         <div class="team-side">
-                            <img class="team-logo-img" src="https://github.io" alt="">
+                            <!-- Вечный SVG Логотип Анахайма -->
+                            <svg class="team-logo-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14h-2v-2H9v-2h2V9h2v2h2v2h-2v2z"/></svg>
                             <div class="teams-title">Anaheim Ducks</div>
                         </div>
                     </div>
@@ -457,16 +458,17 @@ footer { margin-top: auto; padding: 25px 10px; text-align: center; border-top: 1
                     <div class="match-info-top">
                         <div class="match-live-badge">LIVE</div>
                         <div class="match-time">06:30</div>
-                        <button class="btn-match-play">Watch</button>
                     </div>
                     <div class="teams-container">
                         <div class="team-side">
-                            <img class="team-logo-img" src="" alt="" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://w3.org\' viewBox=\'0 0 24 24\' fill=\'%23858fa3\'><path d=\'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z\'/></svg>'">
+                            <!-- Вечный SVG Логотип Лэйкерс -->
+                            <svg class="team-logo-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
                             <div class="teams-title">LA Lakers</div>
                         </div>
                         <div class="vs-divider">vs</div>
                         <div class="team-side">
-                            <img class="team-logo-img" src="" alt="" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://w3.org\' viewBox=\'0 0 24 24\' fill=\'%23858fa3\'><path d=\'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z\'/></svg>'">
+                            <!-- Вечный SVG Логотип Голден Стэйт -->
+                            <svg class="team-logo-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/></svg>
                             <div class="teams-title">Golden State</div>
                         </div>
                     </div>
@@ -500,12 +502,12 @@ footer { margin-top: auto; padding: 25px 10px; text-align: center; border-top: 1
 <script>
 const myUserId = Math.floor(1000 + Math.random() * 9000);
 
-// Управление вкладками и скрытием фоновых логотипов главного экрана
+// Управление вкладками и скрытием логотипов на главном экране
 function switchSport(type, element) {
     document.querySelectorAll('.sport-tab-btn').forEach(btn => btn.classList.remove('active-tab'));
     element.classList.add('active-tab');
 
-    // Скрываем большие логотипы при первом клике на меню
+    // Прячем фоновые логотипы при клике на любой таб
     document.getElementById('welcomeLogos').style.display = 'none';
 
     const contentArea = document.getElementById('contentArea');
@@ -514,7 +516,7 @@ function switchSport(type, element) {
     const nhlList = document.getElementById('nhl-matches');
     const basketList = document.getElementById('basketball-matches');
 
-    // Закрываем плеер при смене вкладки
+    // Скрываем плеер при переключении категорий
     streamDisplay.style.display = 'none';
     document.getElementById('nhlStreamIframe').src = '';
 
@@ -535,7 +537,7 @@ function switchSport(type, element) {
     }
 }
 
-// Загрузка трансляции по клику на конкретный матч
+// Запуск стрима и показ плеера/чата матча ТОЛЬКО после клика по карточке
 function loadNhlStream(streamUrl) {
     const streamDisplay = document.getElementById('streamDisplay');
     const iframe = document.getElementById('nhlStreamIframe');
