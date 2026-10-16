@@ -35,20 +35,25 @@ header {
 .grid-header {font-size:12px;font-weight:800;text-transform:uppercase;color:var(--text-grey);margin:0 0 10px 5px;letter-spacing:1.5px;}
 .match-list {display:flex;flex-direction:column;gap:16px;margin-bottom:20px;}
 
+/* Карточка матча */
 .match-row {
     background-color:var(--bg-card);border:1px solid var(--border-line);border-bottom:3px solid var(--accent-nhl);border-radius:16px;
-    padding:20px;display:flex;flex-direction:column;gap:15px;box-shadow:0 8px 25px rgba(0,112,243,0.15);position:relative;
+    padding:20px;display:flex;flex-direction:column;gap:12px;box-shadow:0 8px 25px rgba(0,112,243,0.15);position:relative;
 }
 .match-info-top {display:flex;justify-content:space-between;align-items:center;width:100%;}
-.match-status {font-size:12px;color:var(--text-grey);display:flex;align-items:center;gap:6px;font-weight:500;}
+.match-status {font-size:12px;color:var(--text-grey);display:flex;align-items:center;gap:6px;font-weight:700;}
 .match-time {font-size:13px;font-weight:700;color:var(--text-grey);background:#161b26;padding:4px 10px;border-radius:6px;}
 
-/* Выравнивание логотипов строго по центру без названий */
-.teams-container {display:flex;align-items:center;justify-content:center;width:100%;gap:40px;padding:10px 0;}
-.team-side {display:flex;justify-content:center;align-items:center;}
-.team-logo-img {width:70px;height:70px;object-fit:contain;display:block;}
-.vs-divider {font-size:14px;font-weight:800;color:var(--text-grey);text-transform:uppercase;background:#1a1f2c;padding:5px 12px;border-radius:6px;}
+/* Контейнер для идеального центрирования команд */
+.teams-container {display:flex;align-items:flex-start;justify-content:space-between;width:100%;gap:5px;padding:5px 0;}
+.team-side {display:flex;flex-direction:column;align-items:center;gap:12px;flex:1;text-align:center;min-width: 0;}
+.team-logo-img {width:64px;height:64px;object-fit:contain;display:block;}
 
+/* Названия строго внизу под логотипами, как на макете */
+.teams-title {font-size:14px;font-weight:700;color:var(--text-main);line-height:1.3;word-wrap:break-word;width:100%;min-height:36px;}
+.vs-divider {font-size:13px;font-weight:800;color:var(--text-grey);text-transform:uppercase;background:#1a1f2c;padding:4px 10px;border-radius:6px;margin-top:20px;}
+
+/* Кнопка */
 .btn-stream {
     background:linear-gradient(135deg,var(--accent-live) 0%,#b8070f 100%);color:var(--text-main);border:none;padding:12px 0;width:100%;
     border-radius:10px;font-size:11px;font-weight:800;text-transform:uppercase;cursor:pointer;letter-spacing:1px;
@@ -121,10 +126,12 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
         <div class="teams-container">
             <div class="team-side">
                 <img class="team-logo-img" src="https://gstatic.com" alt="Pittsburgh Penguins">
+                <div class="teams-title">Pittsburgh Penguins</div>
             </div>
             <div class="vs-divider">vs</div>
             <div class="team-side">
                 <img class="team-logo-img" src="https://gstatic.com" alt="Colorado Avalanche">
+                <div class="teams-title">Colorado Avalanche</div>
             </div>
         </div>
         <button class="btn-stream" onclick="loadNhlStream('ССЫЛКА_НА_ВАШ_СТРИМ_1')">Watch Live</button>
@@ -139,10 +146,12 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
         <div class="teams-container">
             <div class="team-side">
                 <img class="team-logo-img" src="https://gstatic.com" alt="Boston Bruins">
+                <div class="teams-title">Boston Bruins</div>
             </div>
             <div class="vs-divider">vs</div>
             <div class="team-side">
                 <img class="team-logo-img" src="https://gstatic.com" alt="Anaheim Ducks">
+                <div class="teams-title">Anaheim Ducks</div>
             </div>
         </div>
         <button class="btn-stream" onclick="loadNhlStream('ССЫЛКА_НА_ВАШ_СТРИМ_2')">Watch Live</button>
