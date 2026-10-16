@@ -37,7 +37,6 @@ body {
     display: flex;
     flex-direction: column;
 }
-/* Шапка с неоновой пульсирующей рамкой */
 header {
     background-color: var(--bg-card);
     border: 2px solid #0070f3;
@@ -54,7 +53,6 @@ header {
     0%, 100% { border-color: #0070f3; box-shadow: 0 0 15px rgba(0,112,243,0.4); }
     50% { border-color: #45f3ff; box-shadow: 0 0 25px rgba(69,243,255,0.6); }
 }
-
 .brand {
     font-size: 20px;
     font-weight: 900;
@@ -81,7 +79,6 @@ header {
 .social-icon { display: flex; align-items: center; justify-content: center; text-decoration: none; transition: transform 0.2s; }
 .social-icon:hover { transform: scale(1.15); }
 .social-icon svg { width: 24px; height: 24px; display: block; }
-
 .sports-nav-wrapper {
     background-color: var(--bg-card);
     border: 1px solid var(--border-line);
@@ -120,7 +117,6 @@ header {
 }
 .sport-tab-btn svg { width: 18px; height: 18px; fill: currentColor; }
 
-/* Постоянный яркий неон для кнопок меню */
 .sport-tab-btn.nhl-tab {
     color: #ffffff;
     border: 1px solid #0070f3;
@@ -166,7 +162,6 @@ header {
     33% { background: linear-gradient(135deg, #0070f3 0%, #00ffcc 100%); box-shadow: 0 0 20px rgba(0,112,243,0.8); }
     66% { background: linear-gradient(135deg, #ff9900 0%, #ff0055 100%); box-shadow: 0 0 20px rgba(255,153,0,0.8); }
 }
-/* Большие неоновые логотипы на главном экране */
 .welcome-logos-container {
     display: flex;
     justify-content: center;
@@ -198,7 +193,6 @@ header {
     50% { transform: scale(1.05); opacity: 1; }
 }
 
-/* Стили основных контейнеров страниц */
 .main-content-area { display: none; width: 100%; flex-direction: column; }
 .global-chat-area { display: none; width: 100%; flex-direction: column; }
 .stream-display-container { display: none; width: 100%; flex-direction: column; margin-bottom: 20px; }
@@ -246,7 +240,7 @@ header {
 
 .grid-header { font-size: 12px; font-weight: 800; text-transform: uppercase; color: var(--text-grey); margin: 0 0 10px 5px; letter-spacing: 1.5px; }
 .match-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
-/* Компактная карточка матча — вся строка кликабельна */
+
 .match-row {
     background-color: var(--bg-card);
     border: 1px solid var(--border-line);
@@ -265,6 +259,13 @@ header {
     transform: translateY(-2px);
     border-color: var(--accent-nhl);
     box-shadow: 0 8px 25px rgba(0,112,243,0.3);
+}
+.match-list#basketball-matches .match-row {
+    border-bottom: 3px solid #ff5500;
+}
+.match-list#basketball-matches .match-row:hover {
+    border-color: #ff5500;
+    box-shadow: 0 8px 25px rgba(255,85,0,0.3);
 }
 .match-info-top { display: flex; justify-content: space-between; align-items: center; width: 100%; }
 .match-live-badge {
@@ -304,7 +305,6 @@ header {
 .btn-send { background: var(--accent-nhl); color: #fff; border: none; padding: 0 16px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 700; transition: background 0.2s; }
 .btn-send:hover { background: #0056c6; }
 
-/* Стильный неоновый блок для часов Латвии над футером */
 .latvia-clock-wrapper {
     width: 100%;
     max-width: 650px;
@@ -356,7 +356,6 @@ footer { margin-top: auto; padding: 25px 10px; text-align: center; border-top: 1
 <a href="https://youtube.com" class="social-icon yt" target="_blank"><svg viewBox="0 0 24 24"><path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.516 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.872.507 9.388.507 9.388.507s7.517 0 9.389-.507a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837z" fill="#FF0000"/><polygon points="9.545,15.568 15.818,12 9.545,8.432" fill="#FFFFFF"/></svg></a>
 </div>
 </header>
-
 <div class="sports-nav-wrapper">
     <div class="sports-main-title">LIVE SPORTS</div>
     <div class="sports-options">
@@ -403,10 +402,8 @@ footer { margin-top: auto; padding: 25px 10px; text-align: center; border-top: 1
             </div>
         </div>
     </div>
-    <!-- Правая колонка ПК: Списки матчей и Глобальный чат -->
+
     <div class="right-sidebar">
-        
-        <!-- ОБЛАСТЬ СПОРТИВНОГО КОНТЕНТА -->
         <div class="main-content-area" id="contentArea">
             <div class="grid-header">TODAY'S SCHEDULE</div>
             
@@ -418,67 +415,173 @@ footer { margin-top: auto; padding: 25px 10px; text-align: center; border-top: 1
                 <div class="info-section-text">Click anywhere directly on the match row to instantly open the broadcast stream player and match chat room.</div>
             </div>
 
-            <!-- СПИСОК NHL МАТЧЕЙ -->
             <div class="match-list" id="nhl-matches">
-                <div class="match-row" onclick="loadNhlStream('https://github.io')">
-                    <div class="match-info-top">
-                        <div class="match-live-badge">LIVE</div>
-                        <div class="match-time">04:00</div>
-                    </div>
+                <div class="match-row" onclick="loadNhlStream('https://example.com')">
+                    <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">02:00</div></div>
                     <div class="teams-container">
-                        <div class="team-side">
-                            <img class="team-logo-img" src="https://matchora.to" alt="">
-                            <div class="teams-title">Pittsburgh Penguins</div>
-                        </div>
+                        <div class="team-side"><div class="teams-title">Pittsburgh Penguins</div></div>
                         <div class="vs-divider">vs</div>
-                        <div class="team-side">
-                            <img class="team-logo-img" src="https://matchora.to" alt="">
-                            <div class="teams-title">Colorado Avalanche</div>
-                        </div>
+                        <div class="team-side"><div class="teams-title">Colorado Avalanche</div></div>
                     </div>
                 </div>
-
-                <div class="match-row" onclick="loadNhlStream('https://github.io')">
-                    <div class="match-info-top">
-                        <div class="match-live-badge">LIVE</div>
-                        <div class="match-time">05:00</div>
-                    </div>
+                <div class="match-row" onclick="loadNhlStream('https://example.com')">
+                    <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">02:00</div></div>
                     <div class="teams-container">
-                        <div class="team-side">
-                            <img class="team-logo-img" src="https://matchora.to" alt="">
-                            <div class="teams-title">Boston Bruins</div>
-                        </div>
+                        <div class="team-side"><div class="teams-title">Boston Bruins</div></div>
                         <div class="vs-divider">vs</div>
-                        <div class="team-side">
-                            <img class="team-logo-img" src="https://matchora.to" alt="">
-                            <div class="teams-title">Anaheim Ducks</div>
-                        </div>
+                        <div class="team-side"><div class="teams-title">Anaheim Ducks</div></div>
+                    </div>
+                </div>
+                <div class="match-row" onclick="loadNhlStream('https://example.com')">
+                    <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">02:30</div></div>
+                    <div class="teams-container">
+                        <div class="team-side"><div class="teams-title">Toronto Maple Leafs</div></div>
+                        <div class="vs-divider">vs</div>
+                        <div class="team-side"><div class="teams-title">Detroit Red Wings</div></div>
+                    </div>
+                </div>
+                <div class="match-row" onclick="loadNhlStream('https://example.com')">
+                    <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">03:00</div></div>
+                    <div class="teams-container">
+                        <div class="team-side"><div class="teams-title">New York Rangers</div></div>
+                        <div class="vs-divider">vs</div>
+                        <div class="team-side"><div class="teams-title">New Jersey Devils</div></div>
+                    </div>
+                </div>
+                <div class="match-row" onclick="loadNhlStream('https://example.com')">
+                    <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">03:00</div></div>
+                    <div class="teams-container">
+                        <div class="team-side"><div class="teams-title">Tampa Bay Lightning</div></div>
+                        <div class="vs-divider">vs</div>
+                        <div class="team-side"><div class="teams-title">Florida Panthers</div></div>
+                    </div>
+                </div>
+                <div class="match-row" onclick="loadNhlStream('https://example.com')">
+                    <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">03:30</div></div>
+                    <div class="teams-container">
+                        <div class="team-side"><div class="teams-title">Chicago Blackhawks</div></div>
+                        <div class="vs-divider">vs</div>
+                        <div class="team-side"><div class="teams-title">Dallas Stars</div></div>
+                    </div>
+                </div>
+                <div class="match-row" onclick="loadNhlStream('https://example.com')">
+                    <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">04:00</div></div>
+                    <div class="teams-container">
+                        <div class="team-side"><div class="teams-title">Vegas Golden Knights</div></div>
+                        <div class="vs-divider">vs</div>
+                        <div class="team-side"><div class="teams-title">Edmonton Oilers</div></div>
+                    </div>
+                </div>
+                <div class="match-row" onclick="loadNhlStream('https://example.com')">
+                    <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">05:00</div></div>
+                    <div class="teams-container">
+                        <div class="team-side"><div class="teams-title">Vancouver Canucks</div></div>
+                        <div class="vs-divider">vs</div>
+                        <div class="team-side"><div class="teams-title">Calgary Flames</div></div>
+                    </div>
+                </div>
+                <div class="match-row" onclick="loadNhlStream('https://example.com')">
+                    <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">05:30</div></div>
+                    <div class="teams-container">
+                        <div class="team-side"><div class="teams-title">Los Angeles Kings</div></div>
+                        <div class="vs-divider">vs</div>
+                        <div class="team-side"><div class="teams-title">San Jose Sharks</div></div>
+                    </div>
+                </div>
+                <div class="match-row" onclick="loadNhlStream('https://example.com')">
+                    <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">06:00</div></div>
+                    <div class="teams-container">
+                        <div class="team-side"><div class="teams-title">Seattle Kraken</div></div>
+                        <div class="vs-divider">vs</div>
+                        <div class="team-side"><div class="teams-title">Minnesota Wild</div></div>
                     </div>
                 </div>
             </div>
 
             <!-- СПИСОК БАСКЕТБОЛЬНЫХ МАТЧЕЙ -->
             <div class="match-list" id="basketball-matches" style="display: none;">
-                <div class="match-row" onclick="loadNhlStream('https://github.io')">
-                    <div class="match-info-top">
-                        <div class="match-live-badge">LIVE</div>
-                        <div class="match-time">06:30</div>
-                    </div>
+                <div class="match-row" onclick="loadNhlStream('https://example.com')">
+                    <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">02:00</div></div>
                     <div class="teams-container">
-                        <div class="team-side">
-                            <img class="team-logo-img" src="https://flashscore.com" alt="">
-                            <div class="teams-title">LA Lakers</div>
-                        </div>
+                        <div class="team-side"><div class="teams-title">Boston Celtics</div></div>
                         <div class="vs-divider">vs</div>
-                        <div class="team-side">
-                            <img class="team-logo-img" src="https://flashscore.com" alt="">
-                            <div class="teams-title">Golden State</div>
-                        </div>
+                        <div class="team-side"><div class="teams-title">Miami Heat</div></div>
+                    </div>
+                </div>
+                <div class="match-row" onclick="loadNhlStream('https://example.com')">
+                    <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">02:30</div></div>
+                    <div class="teams-container">
+                        <div class="team-side"><div class="teams-title">New York Knicks</div></div>
+                        <div class="vs-divider">vs</div>
+                        <div class="team-side"><div class="teams-title">Brooklyn Nets</div></div>
+                    </div>
+                </div>
+                <div class="match-row" onclick="loadNhlStream('https://example.com')">
+                    <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">03:00</div></div>
+                    <div class="teams-container">
+                        <div class="team-side"><div class="teams-title">Milwaukee Bucks</div></div>
+                        <div class="vs-divider">vs</div>
+                        <div class="team-side"><div class="teams-title">Philadelphia 76ers</div></div>
+                    </div>
+                </div>
+                <div class="match-row" onclick="loadNhlStream('https://example.com')">
+                    <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">03:00</div></div>
+                    <div class="teams-container">
+                        <div class="team-side"><div class="teams-title">Cleveland Cavaliers</div></div>
+                        <div class="vs-divider">vs</div>
+                        <div class="team-side"><div class="teams-title">Indiana Pacers</div></div>
+                    </div>
+                </div>
+                <div class="match-row" onclick="loadNhlStream('https://example.com')">
+                    <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">03:30</div></div>
+                    <div class="teams-container">
+                        <div class="team-side"><div class="teams-title">Chicago Bulls</div></div>
+                        <div class="vs-divider">vs</div>
+                        <div class="team-side"><div class="teams-title">Detroit Pistons</div></div>
+                    </div>
+                </div>
+                <div class="match-row" onclick="loadNhlStream('https://example.com')">
+                    <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">04:00</div></div>
+                    <div class="teams-container">
+                        <div class="team-side"><div class="teams-title">Houston Rockets</div></div>
+                        <div class="vs-divider">vs</div>
+                        <div class="team-side"><div class="teams-title">Dallas Mavericks</div></div>
+                    </div>
+                </div>
+                <div class="match-row" onclick="loadNhlStream('https://example.com')">
+                    <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">04:30</div></div>
+                    <div class="teams-container">
+                        <div class="team-side"><div class="teams-title">Denver Nuggets</div></div>
+                        <div class="vs-divider">vs</div>
+                        <div class="team-side"><div class="teams-title">Phoenix Suns</div></div>
+                    </div>
+                </div>
+                <div class="match-row" onclick="loadNhlStream('https://example.com')">
+                    <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">05:00</div></div>
+                    <div class="teams-container">
+                        <div class="team-side"><div class="teams-title">Utah Jazz</div></div>
+                        <div class="vs-divider">vs</div>
+                        <div class="team-side"><div class="teams-title">Oklahoma City Thunder</div></div>
+                    </div>
+                </div>
+                <div class="match-row" onclick="loadNhlStream('https://example.com')">
+                    <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">05:30</div></div>
+                    <div class="teams-container">
+                        <div class="team-side"><div class="teams-title">LA Lakers</div></div>
+                        <div class="vs-divider">vs</div>
+                        <div class="team-side"><div class="teams-title">Golden State Warriors</div></div>
+                    </div>
+                </div>
+                <div class="match-row" onclick="loadNhlStream('https://example.com0')">
+                    <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">06:00</div></div>
+                    <div class="teams-container">
+                        <div class="team-side"><div class="teams-title">Sacramento Kings</div></div>
+                        <div class="vs-divider">vs</div>
+                        <div class="team-side"><div class="teams-title">LA Clippers</div></div>
                     </div>
                 </div>
             </div>
         </div>
-
         <!-- ОБЛАСТЬ ГЛОБАЛЬНОГО ЧАТА -->
         <div class="global-chat-area" id="globalChatArea">
             <div class="grid-header">LIVE SPORTS CHAT</div>
@@ -492,9 +595,8 @@ footer { margin-top: auto; padding: 25px 10px; text-align: center; border-top: 1
         </div>
 
     </div>
-</div> <!-- Конец main-layout -->
+</div>
 
-<!-- БЛОК ВРЕМЕНИ ЛАТВИИ НАД ЛИНИЕЙ ФУТЕРА -->
 <div class="latvia-clock-wrapper">
     Локация: Латвия <span id="latviaTimer">00:00:00</span>
 </div>
@@ -505,12 +607,11 @@ footer { margin-top: auto; padding: 25px 10px; text-align: center; border-top: 1
 <span class="neon-blue">The best website</span> <span class="neon-red">for watching NHL live streams</span>
 </div>
 </footer>
-</div> <!-- Конец container -->
+</div>
 
 <script>
 const myUserId = Math.floor(1000 + Math.random() * 9000);
 
-// Скрипт живых Латвийских часов (всегда точное время Европы/Риги)
 function updateLatviaClock() {
     const clockElement = document.getElementById('latviaTimer');
     if (clockElement) {
@@ -520,7 +621,7 @@ function updateLatviaClock() {
     }
 }
 setInterval(updateLatviaClock, 1000);
-updateLatviaClock(); // Запуск при загрузке
+updateLatviaClock();
 
 function switchSport(type, element) {
     document.querySelectorAll('.sport-tab-btn').forEach(btn => btn.classList.remove('active-tab'));
@@ -568,26 +669,26 @@ function loadNhlStream(streamUrl) {
     }
 }
 
-function sendMessage() {
+function sendMatchMessage() {
     const input = document.getElementById('matchChatInput');
-    const window = document.getElementById('matchChatWindow');
+    const windowChat = document.getElementById('matchChatWindow');
     if (input.value.trim() !== "") {
-        window.innerHTML += `<div class="msg-box"><div class="msg-user">User_${myUserId}</div><div class="msg-text">${input.value}</div></div>`;
+        windowChat.innerHTML += `<div class="msg-box"><div class="msg-user">User_${myUserId}</div><div class="msg-text">${input.value}</div></div>`;
         input.value = "";
-        window.scrollTop = window.scrollHeight;
+        windowChat.scrollTop = windowChat.scrollHeight;
     }
 }
 function handleMatchChatKeyPress(event) {
-    if (event.key === 'Enter') { sendMessage(); }
+    if (event.key === 'Enter') { sendMatchMessage(); }
 }
 
 function sendGlobalMessage() {
     const input = document.getElementById('globalChatInput');
-    const window = document.getElementById('globalChatWindow');
+    const windowChat = document.getElementById('globalChatWindow');
     if (input.value.trim() !== "") {
-        window.innerHTML += `<div class="msg-box" style="border-left-color: #45f3ff;"><div class="msg-user" style="color: #ff2a3b;">User_${myUserId}</div><div class="msg-text">${input.value}</div></div>`;
+        windowChat.innerHTML += `<div class="msg-box" style="border-left-color: #45f3ff;"><div class="msg-user" style="color: #ff2a3b;">User_${myUserId}</div><div class="msg-text">${input.value}</div></div>`;
         input.value = "";
-        window.scrollTop = window.scrollHeight;
+        windowChat.scrollTop = windowChat.scrollHeight;
     }
 }
 function handleGlobalKeyPress(event) {
