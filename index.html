@@ -40,9 +40,8 @@ header {
 }
 .teams-block {display:flex;flex-direction:column;gap:8px;}
 .team-item {display:flex;align-items:center;gap:10px;}
-/* Стили для новых картинок-логотипов */
-.team-logo-img {width:28px;height:28px;object-fit:contain;display:block;}
-.teams-title {font-size:16px;font-weight:700;color:var(--text-main);letter-spacing:0.3px;}
+.team-logo-img {width:26px;height:26px;object-fit:contain;display:block;}
+.teams-title {font-size:15px;font-weight:700;color:var(--text-main);letter-spacing:0.3px;}
 .match-status {font-size:12px;color:var(--text-grey);display:flex;align-items:center;gap:6px;margin-top:2px;font-weight:500;}
 .match-status .live-dot {color:var(--accent-live);font-weight:900;animation:blinker 1.5s linear infinite;}
 @keyframes blinker {50% {opacity:0;}}
@@ -108,25 +107,22 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
 
 <div class="grid-header">TODAY'S SCHEDULE</div>
 <div class="match-list">
-    <!-- МАТЧ 1: Florida Panthers vs Vancouver Canucks -->
     <div class="match-row">
         <div class="teams-block">
             <div class="team-item">
-                <img class="team-logo-img" src="https://nhle.com" alt="Florida Panthers">
-                <img class="team-logo-img" src="https://nhle.com" alt="Vancouver Canucks" style="margin-left:-5px;">
+                <img class="team-logo-img" src="https://wikimedia.org" alt="Florida Panthers">
+                <img class="team-logo-img" src="https://wikimedia.org" alt="Vancouver Canucks">
                 <div class="teams-title">Florida Panthers — Vancouver Canucks</div>
             </div>
             <div class="match-status"><span class="live-dot">●</span> LIVE NOW · NHL Regular Season</div>
         </div>
         <button class="btn-stream" onclick="loadNhlStream('ССЫЛКА_НА_ВАШ_СТРИМ_1')">Watch Live</button>
     </div>
-
-    <!-- МАТЧ 2: Tampa Bay Lightning vs Toronto Maple Leafs -->
     <div class="match-row">
         <div class="teams-block">
             <div class="team-item">
-                <img class="team-logo-img" src="https://nhle.com" alt="Tampa Bay Lightning">
-                <img class="team-logo-img" src="https://nhle.com" alt="Toronto Maple Leafs" style="margin-left:-5px;">
+                <img class="team-logo-img" src="https://wikimedia.org" alt="Tampa Bay Lightning">
+                <img class="team-logo-img" src="https://wikimedia.org" alt="Toronto Maple Leafs">
                 <div class="teams-title">Tampa Bay Lightning — Toronto Maple Leafs</div>
             </div>
             <div class="match-status">02:30 AM · NHL Regular Season</div>
@@ -134,12 +130,11 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
         <button class="btn-stream" onclick="loadNhlStream('ССЫЛКА_НА_ВАШ_СТРИМ_2')">Watch Live</button>
     </div>
 
-    <!-- МАТЧ 3: New Jersey Devils vs New York Rangers -->
     <div class="match-row">
         <div class="teams-block">
             <div class="team-item">
-                <img class="team-logo-img" src="https://nhle.com" alt="New Jersey Devils">
-                <img class="team-logo-img" src="https://nhle.com" alt="New York Rangers" style="margin-left:-5px;">
+                <img class="team-logo-img" src="https://wikimedia.org" alt="New Jersey Devils">
+                <img class="team-logo-img" src="https://wikimedia.org" alt="New York Rangers">
                 <div class="teams-title">New Jersey Devils — New York Rangers</div>
             </div>
             <div class="match-status">03:00 AM · NHL Regular Season</div>
