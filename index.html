@@ -45,22 +45,27 @@ header {background-color:var(--bg-card);border:1px solid var(--border-line);bord
     80% {border-color:#ff9900;box-shadow:0 0 15px rgba(255,153,0,0.5),inset 0 0 15px rgba(255,153,0,0.2);}
 }
 .grid-header {font-size:12px;font-weight:800;text-transform:uppercase;color:var(--text-grey);margin:0 0 10px 5px;letter-spacing:1.5px;}
-.match-list {display:flex;flex-direction:column;gap:16px;margin-bottom:20px;}
-.match-row {background-color:var(--bg-card);border:1px solid var(--border-line);border-bottom:3px solid var(--accent-nhl);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px;box-shadow:0 8px 25px rgba(0,112,243,0.15);position:relative;}
+.match-list {display:flex;flex-direction:column;gap:12px;margin-bottom:20px;}
+
+/* Уменьшенная аккуратная карточка матча в стиле Matchora */
+.match-row {background-color:var(--bg-card);border:1px solid var(--border-line);border-bottom:3px solid var(--accent-nhl);border-radius:14px;padding:12px 16px;display:flex;flex-direction:column;gap:8px;box-shadow:0 8px 25px rgba(0,112,243,0.15);position:relative;}
 .match-info-top {display:flex;justify-content:space-between;align-items:center;width:100%;}
 
-/* Моргающий красный LIVE индикатор */
+/* Моргающий красный LIVE индикатор без лишнего текста */
 .match-live-badge {font-size:11px;color:#ff2a3b;font-weight:900;letter-spacing:1px;text-transform:uppercase;display:flex;align-items:center;gap:5px;animation:blinkLive 1.5s infinite ease-in-out;}
-.match-live-badge::before {content:'';display:inline-block;width:6px;height:6px;background-color:#ff2a3b;border-radius:50%;box-shadow:0 0 8px #ff2a3b;}
-@keyframes blinkLive {0%,100% {opacity:0.3;} 50% {opacity:1;}}
+.match-live-badge::before {content:'';display:inline-block;width:7px;height:7px;background-color:#ff2a3b;border-radius:50%;box-shadow:0 0 8px #ff2a3b;}
+@keyframes blinkLive {0%,100% {opacity:0.4;} 50% {opacity:1;}}
 
-.match-time {font-size:13px;font-weight:700;color:var(--text-grey);background:#161b26;padding:4px 10px;border-radius:6px;}
-.teams-container {display:flex;align-items:stretch;justify-content:space-between;width:100%;gap:10px;padding:10px 0;}
-.team-side {display:flex;flex-direction:column;align-items:center;justify-content:flex-start;flex:1;text-align:center;min-width:0;}
-.team-logo-img {width:65px;height:65px;object-fit:contain;display:block;margin-bottom:12px;}
-.teams-title {font-size:13px;font-weight:700;color:var(--text-main);line-height:1.4;word-wrap:break-word;width:100%;height:38px;display:flex;align-items:center;justify-content:center;}
-.vs-divider {font-size:13px;font-weight:800;color:var(--text-grey);text-transform:uppercase;background:#1a1f2c;padding:4px 10px;border-radius:6px;height:24px;display:flex;align-items:center;margin-top:20px;}
-.btn-stream {background:linear-gradient(135deg,var(--accent-live) 0%,#b8070f 100%);color:var(--text-main);border:none;padding:12px 0;width:100%;border-radius:10px;font-size:11px;font-weight:800;text-transform:uppercase;cursor:pointer;letter-spacing:1px;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 15px rgba(229,9,20,0.4);text-align:center;}
+.match-time {font-size:12px;font-weight:700;color:var(--text-grey);background:#161b26;padding:3px 8px;border-radius:5px;}
+.teams-container {display:flex;align-items:center;justify-content:space-between;width:100%;gap:8px;padding:4px 0;}
+.team-side {display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;text-align:center;min-width:0;}
+
+/* Уменьшенные логотипы команд как на Matchora */
+.team-logo-img {width:45px;height:45px;object-fit:contain;display:block;margin-bottom:6px;}
+.teams-title {font-size:12px;font-weight:700;color:var(--text-main);line-height:1.3;word-wrap:break-word;width:100%;height:32px;display:flex;align-items:center;justify-content:center;}
+.vs-divider {font-size:11px;font-weight:800;color:var(--text-grey);text-transform:uppercase;background:#1a1f2c;padding:3px 8px;border-radius:5px;height:20px;display:flex;align-items:center;margin-top:0;}
+
+.btn-stream {background:linear-gradient(135deg,var(--accent-live) 0%,#b8070f 100%);color:var(--text-main);border:none;padding:10px 0;width:100%;border-radius:8px;font-size:11px;font-weight:800;text-transform:uppercase;cursor:pointer;letter-spacing:1px;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 15px rgba(229,9,20,0.4);text-align:center;}
 .btn-stream:hover {transform:translateY(-1px);box-shadow:0 6px 20px rgba(229,9,20,0.6);}
 .chat-container {background-color:var(--bg-card);border:1px solid var(--border-line);border-top:2px solid var(--accent-nhl);border-radius:16px;padding:15px;display:flex;flex-direction:column;gap:12px;margin-bottom:25px;box-shadow:0 10px 30px rgba(0,0,0,0.5);}
 .chat-messages {height:180px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding-right:5px;scroll-behavior:smooth;}
@@ -124,10 +129,10 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
 </div>
 </header>
 
-<!-- Невидимый контейнер-сетка для ПК версии -->
+<!-- Двухколоночная сетка для ПК версий сайта -->
 <div class="main-layout">
     
-    <!-- Левая колонка: Видеоплеер -->
+    <!-- Левая колонка: Ваш видеоплеер -->
     <div class="player-column">
         <div class="player-wrapper">
         <div class="video-ratio">
@@ -140,11 +145,12 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
         </div>
     </div>
 
-    <!-- Правая колонка: Список матчей и Чат -->
+    <!-- Правая колонка: Расписание матчей и чат -->
     <div class="right-sidebar">
         <div class="grid-header">TODAY'S SCHEDULE</div>
         <div class="match-list">
-            <!-- МАТЧ 1: Pittsburgh Penguins vs Colorado Avalanche -->
+            
+            <!-- МАТЧ 1: Pittsburgh Penguins vs Colorado Avalanche (Убран текст "16 ch") -->
             <div class="match-row">
                 <div class="match-info-top">
                     <div class="match-live-badge">LIVE</div>
@@ -152,19 +158,19 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
                 </div>
                 <div class="teams-container">
                     <div class="team-side">
-                        <img class="team-logo-img" src="https://matchora.to" alt="">
+                        <img class="team-logo-img" src="https://github.io" alt="Pittsburgh Penguins Logo">
                         <div class="teams-title">Pittsburgh Penguins</div>
                     </div>
                     <div class="vs-divider">vs</div>
                     <div class="team-side">
-                        <img class="team-logo-img" src="https://matchora.to" alt="">
+                        <img class="team-logo-img" src="https://github.io" alt="Colorado Avalanche Logo">
                         <div class="teams-title">Colorado Avalanche</div>
                     </div>
                 </div>
-                <button class="btn-stream" onclick="loadNhlStream('https://matchora.to')">Watch Live</button>
+                <button class="btn-stream" onclick="loadNhlStream('https://github.io')">Watch Live</button>
             </div>
 
-            <!-- МАТЧ 2: Boston Bruins vs Anaheim Ducks -->
+            <!-- МАТЧ 2: Boston Bruins vs Anaheim Ducks (Убран текст "13 ch") -->
             <div class="match-row">
                 <div class="match-info-top">
                     <div class="match-live-badge">LIVE</div>
@@ -172,16 +178,16 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
                 </div>
                 <div class="teams-container">
                     <div class="team-side">
-                        <img class="team-logo-img" src="https://matchora.to" alt="">
+                        <img class="team-logo-img" src="https://github.io" alt="Boston Bruins Logo">
                         <div class="teams-title">Boston Bruins</div>
                     </div>
                     <div class="vs-divider">vs</div>
                     <div class="team-side">
-                        <img class="team-logo-img" src="https://matchora.to" alt="">
+                        <img class="team-logo-img" src="https://github.io" alt="Anaheim Ducks Logo">
                         <div class="teams-title">Anaheim Ducks</div>
                     </div>
                 </div>
-                <button class="btn-stream" onclick="loadNhlStream('https://matchora.to')">Watch Live</button>
+                <button class="btn-stream" onclick="loadNhlStream('https://github.io')">Watch Live</button>
             </div>
         </div>
 
