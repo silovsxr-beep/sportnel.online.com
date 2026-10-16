@@ -286,10 +286,10 @@ header {
 
 .match-time { font-size: 12px; font-weight: 700; color: var(--text-grey); background: #161b26; padding: 3px 8px; border-radius: 5px; }
 .teams-container { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 8px; padding: 4px 0; }
-.team-side { display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; text-align: center; min-width: 0; }
-.team-logo-img { width: 45px; height: 45px; object-fit: contain; display: block; margin-bottom: 6px; }
-.teams-title { font-size: 12px; font-weight: 700; color: var(--text-main); line-height: 1.3; word-wrap: break-word; width: 100%; height: 32px; display: flex; align-items: center; justify-content: center; }
-.vs-divider { font-size: 11px; font-weight: 800; color: var(--text-grey); text-transform: uppercase; background: #1a1f2c; padding: 3px 8px; border-radius: 5px; height: 20px; display: flex; align-items: center; margin-top: 0; }
+.team-side { display: flex; flex-direction: row; align-items: center; justify-content: center; flex: 1; text-align: left; gap: 8px; min-width: 0; }
+.team-logo-img { width: 30px; height: 30px; object-fit: contain; flex-shrink: 0; display: block; }
+.teams-title { font-size: 13px; font-weight: 700; color: var(--text-main); line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vs-divider { font-size: 11px; font-weight: 800; color: var(--text-grey); text-transform: uppercase; background: #1a1f2c; padding: 3px 8px; border-radius: 5px; height: 20px; display: flex; align-items: center; margin-top: 0; flex-shrink: 0; }
 
 .chat-container { background-color: var(--bg-card); border: 1px solid var(--border-line); border-top: 2px solid var(--accent-nhl); border-radius: 16px; padding: 15px; display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 .chat-messages { height: 180px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding-right: 5px; scroll-behavior: smooth; }
@@ -304,38 +304,6 @@ header {
 .chat-input:focus { border-color: var(--accent-nhl); }
 .btn-send { background: var(--accent-nhl); color: #fff; border: none; padding: 0 16px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 700; transition: background 0.2s; }
 .btn-send:hover { background: #0056c6; }
-
-.latvia-clock-wrapper {
-    width: 100%;
-    max-width: 650px;
-    padding: 10px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: #45f3ff;
-    text-shadow: 0 0 8px rgba(69,243,255,0.6);
-    margin-top: 15px;
-}
-.latvia-clock-wrapper span {
-    color: #ffffff;
-    background: #161b26;
-    padding: 3px 8px;
-    border-radius: 5px;
-    margin-left: 6px;
-    border: 1px solid rgba(69,243,255,0.3);
-    box-shadow: 0 0 10px rgba(69,243,255,0.2);
-}
-
-footer { margin-top: auto; padding: 25px 10px; text-align: center; border-top: 1px solid var(--border-line); width: 100%; max-width: 650px; }
-.footer-text { font-size: 12px; letter-spacing: 1px; font-weight: 700; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 8px; }
-.footer-text svg { width: 16px; height: 16px; fill: #45f3ff; filter: drop-shadow(0 0 8px rgba(69,243,255,0.8)); animation: spinPuck 4s linear infinite; }
-.neon-blue { color: #45f3ff; text-shadow: 0 0 10px rgba(69,243,255,0.4); }
-.neon-red { color: #ff2a3b; text-shadow: 0 0 10px rgba(255,42,59,0.4); }
-@keyframes spinPuck { 100% { transform: rotate(360deg); } }
 
 @media (min-width: 992px) {
     .container { max-width: 1280px !important; }
@@ -376,10 +344,10 @@ footer { margin-top: auto; padding: 25px 10px; text-align: center; border-top: 1
 
 <div class="welcome-logos-container" id="welcomeLogos">
     <div class="welcome-logo-box nhl-glow">
-        <img src="https://matchora.to" alt="NHL Logo">
+        <img src="https://nhle.com" alt="NHL Logo">
     </div>
     <div class="welcome-logo-box basket-glow">
-        <img src="https://flashscore.com" alt="NBA Logo">
+        <img src="https://logocdn.com" alt="NBA Logo">
     </div>
 </div>
 
@@ -415,169 +383,289 @@ footer { margin-top: auto; padding: 25px 10px; text-align: center; border-top: 1
                 <div class="info-section-text">Click anywhere directly on the match row to instantly open the broadcast stream player and match chat room.</div>
             </div>
 
+            <!-- СПИСОК NHL МАТЧЕЙ -->
             <div class="match-list" id="nhl-matches">
                 <div class="match-row" onclick="loadNhlStream('https://example.com')">
                     <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">02:00</div></div>
                     <div class="teams-container">
-                        <div class="team-side"><div class="teams-title">Pittsburgh Penguins</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://nhle.com" alt="PIT">
+                            <div class="teams-title">Pittsburgh Penguins</div>
+                        </div>
                         <div class="vs-divider">vs</div>
-                        <div class="team-side"><div class="teams-title">Colorado Avalanche</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://nhle.com" alt="COL">
+                            <div class="teams-title">Colorado Avalanche</div>
+                        </div>
                     </div>
                 </div>
                 <div class="match-row" onclick="loadNhlStream('https://example.com')">
                     <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">02:00</div></div>
                     <div class="teams-container">
-                        <div class="team-side"><div class="teams-title">Boston Bruins</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://nhle.com" alt="BOS">
+                            <div class="teams-title">Boston Bruins</div>
+                        </div>
                         <div class="vs-divider">vs</div>
-                        <div class="team-side"><div class="teams-title">Anaheim Ducks</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://nhle.com" alt="ANA">
+                            <div class="teams-title">Anaheim Ducks</div>
+                        </div>
                     </div>
                 </div>
                 <div class="match-row" onclick="loadNhlStream('https://example.com')">
                     <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">02:30</div></div>
                     <div class="teams-container">
-                        <div class="team-side"><div class="teams-title">Toronto Maple Leafs</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://nhle.com" alt="TOR">
+                            <div class="teams-title">Toronto Maple Leafs</div>
+                        </div>
                         <div class="vs-divider">vs</div>
-                        <div class="team-side"><div class="teams-title">Detroit Red Wings</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://nhle.com" alt="DET">
+                            <div class="teams-title">Detroit Red Wings</div>
+                        </div>
                     </div>
                 </div>
                 <div class="match-row" onclick="loadNhlStream('https://example.com')">
                     <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">03:00</div></div>
                     <div class="teams-container">
-                        <div class="team-side"><div class="teams-title">New York Rangers</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://nhle.com" alt="NYR">
+                            <div class="teams-title">New York Rangers</div>
+                        </div>
                         <div class="vs-divider">vs</div>
-                        <div class="team-side"><div class="teams-title">New Jersey Devils</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://nhle.com" alt="NJD">
+                            <div class="teams-title">New Jersey Devils</div>
+                        </div>
                     </div>
                 </div>
                 <div class="match-row" onclick="loadNhlStream('https://example.com')">
                     <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">03:00</div></div>
                     <div class="teams-container">
-                        <div class="team-side"><div class="teams-title">Tampa Bay Lightning</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://nhle.com" alt="TBL">
+                            <div class="teams-title">Tampa Bay Lightning</div>
+                        </div>
                         <div class="vs-divider">vs</div>
-                        <div class="team-side"><div class="teams-title">Florida Panthers</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://nhle.com" alt="FLA">
+                            <div class="teams-title">Florida Panthers</div>
+                        </div>
                     </div>
                 </div>
                 <div class="match-row" onclick="loadNhlStream('https://example.com')">
                     <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">03:30</div></div>
                     <div class="teams-container">
-                        <div class="team-side"><div class="teams-title">Chicago Blackhawks</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://nhle.com" alt="CHI">
+                            <div class="teams-title">Chicago Blackhawks</div>
+                        </div>
                         <div class="vs-divider">vs</div>
-                        <div class="team-side"><div class="teams-title">Dallas Stars</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://nhle.com" alt="DAL">
+                            <div class="teams-title">Dallas Stars</div>
+                        </div>
                     </div>
                 </div>
                 <div class="match-row" onclick="loadNhlStream('https://example.com')">
                     <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">04:00</div></div>
                     <div class="teams-container">
-                        <div class="team-side"><div class="teams-title">Vegas Golden Knights</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://nhle.com" alt="VGK">
+                            <div class="teams-title">Vegas Golden Knights</div>
+                        </div>
                         <div class="vs-divider">vs</div>
-                        <div class="team-side"><div class="teams-title">Edmonton Oilers</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://nhle.com" alt="EDM">
+                            <div class="teams-title">Edmonton Oilers</div>
+                        </div>
                     </div>
                 </div>
                 <div class="match-row" onclick="loadNhlStream('https://example.com')">
                     <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">05:00</div></div>
                     <div class="teams-container">
-                        <div class="team-side"><div class="teams-title">Vancouver Canucks</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://nhle.com" alt="VAN">
+                            <div class="teams-title">Vancouver Canucks</div>
+                        </div>
                         <div class="vs-divider">vs</div>
-                        <div class="team-side"><div class="teams-title">Calgary Flames</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://nhle.com" alt="CGY">
+                            <div class="teams-title">Calgary Flames</div>
+                        </div>
                     </div>
                 </div>
                 <div class="match-row" onclick="loadNhlStream('https://example.com')">
                     <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">05:30</div></div>
                     <div class="teams-container">
-                        <div class="team-side"><div class="teams-title">Los Angeles Kings</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://nhle.com" alt="LAK">
+                            <div class="teams-title">Los Angeles Kings</div>
+                        </div>
                         <div class="vs-divider">vs</div>
-                        <div class="team-side"><div class="teams-title">San Jose Sharks</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://nhle.com" alt="SJS">
+                            <div class="teams-title">San Jose Sharks</div>
+                        </div>
                     </div>
                 </div>
                 <div class="match-row" onclick="loadNhlStream('https://example.com')">
                     <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">06:00</div></div>
                     <div class="teams-container">
-                        <div class="team-side"><div class="teams-title">Seattle Kraken</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://nhle.com" alt="SEA">
+                            <div class="teams-title">Seattle Kraken</div>
+                        </div>
                         <div class="vs-divider">vs</div>
-                        <div class="team-side"><div class="teams-title">Minnesota Wild</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://nhle.com" alt="MIN">
+                            <div class="teams-title">Minnesota Wild</div>
+                        </div>
                     </div>
                 </div>
             </div>
-
             <!-- СПИСОК БАСКЕТБОЛЬНЫХ МАТЧЕЙ -->
             <div class="match-list" id="basketball-matches" style="display: none;">
                 <div class="match-row" onclick="loadNhlStream('https://example.com')">
                     <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">02:00</div></div>
                     <div class="teams-container">
-                        <div class="team-side"><div class="teams-title">Boston Celtics</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://logocdn.com" alt="BOS">
+                            <div class="teams-title">Boston Celtics</div>
+                        </div>
                         <div class="vs-divider">vs</div>
-                        <div class="team-side"><div class="teams-title">Miami Heat</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://logocdn.com" alt="MIA">
+                            <div class="teams-title">Miami Heat</div>
+                        </div>
                     </div>
                 </div>
                 <div class="match-row" onclick="loadNhlStream('https://example.com')">
                     <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">02:30</div></div>
                     <div class="teams-container">
-                        <div class="team-side"><div class="teams-title">New York Knicks</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://logocdn.com" alt="NYK">
+                            <div class="teams-title">New York Knicks</div>
+                        </div>
                         <div class="vs-divider">vs</div>
-                        <div class="team-side"><div class="teams-title">Brooklyn Nets</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://logocdn.com" alt="BKN">
+                            <div class="teams-title">Brooklyn Nets</div>
+                        </div>
                     </div>
                 </div>
                 <div class="match-row" onclick="loadNhlStream('https://example.com')">
                     <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">03:00</div></div>
                     <div class="teams-container">
-                        <div class="team-side"><div class="teams-title">Milwaukee Bucks</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://logocdn.com" alt="MIL">
+                            <div class="teams-title">Milwaukee Bucks</div>
+                        </div>
                         <div class="vs-divider">vs</div>
-                        <div class="team-side"><div class="teams-title">Philadelphia 76ers</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://logocdn.com" alt="PHI">
+                            <div class="teams-title">Philadelphia 76ers</div>
+                        </div>
                     </div>
                 </div>
                 <div class="match-row" onclick="loadNhlStream('https://example.com')">
                     <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">03:00</div></div>
                     <div class="teams-container">
-                        <div class="team-side"><div class="teams-title">Cleveland Cavaliers</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://logocdn.com" alt="CLE">
+                            <div class="teams-title">Cleveland Cavaliers</div>
+                        </div>
                         <div class="vs-divider">vs</div>
-                        <div class="team-side"><div class="teams-title">Indiana Pacers</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://logocdn.com" alt="IND">
+                            <div class="teams-title">Indiana Pacers</div>
+                        </div>
                     </div>
                 </div>
                 <div class="match-row" onclick="loadNhlStream('https://example.com')">
                     <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">03:30</div></div>
                     <div class="teams-container">
-                        <div class="team-side"><div class="teams-title">Chicago Bulls</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://logocdn.com" alt="CHI">
+                            <div class="teams-title">Chicago Bulls</div>
+                        </div>
                         <div class="vs-divider">vs</div>
-                        <div class="team-side"><div class="teams-title">Detroit Pistons</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://logocdn.com" alt="DET">
+                            <div class="teams-title">Detroit Pistons</div>
+                        </div>
                     </div>
                 </div>
                 <div class="match-row" onclick="loadNhlStream('https://example.com')">
                     <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">04:00</div></div>
                     <div class="teams-container">
-                        <div class="team-side"><div class="teams-title">Houston Rockets</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://logocdn.com" alt="HOU">
+                            <div class="teams-title">Houston Rockets</div>
+                        </div>
                         <div class="vs-divider">vs</div>
-                        <div class="team-side"><div class="teams-title">Dallas Mavericks</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://logocdn.com" alt="DAL">
+                            <div class="teams-title">Dallas Mavericks</div>
+                        </div>
                     </div>
                 </div>
                 <div class="match-row" onclick="loadNhlStream('https://example.com')">
                     <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">04:30</div></div>
                     <div class="teams-container">
-                        <div class="team-side"><div class="teams-title">Denver Nuggets</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://logocdn.com" alt="DEN">
+                            <div class="teams-title">Denver Nuggets</div>
+                        </div>
                         <div class="vs-divider">vs</div>
-                        <div class="team-side"><div class="teams-title">Phoenix Suns</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://logocdn.com" alt="PHX">
+                            <div class="teams-title">Phoenix Suns</div>
+                        </div>
                     </div>
                 </div>
                 <div class="match-row" onclick="loadNhlStream('https://example.com')">
                     <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">05:00</div></div>
                     <div class="teams-container">
-                        <div class="team-side"><div class="teams-title">Utah Jazz</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://logocdn.com" alt="UTA">
+                            <div class="teams-title">Utah Jazz</div>
+                        </div>
                         <div class="vs-divider">vs</div>
-                        <div class="team-side"><div class="teams-title">Oklahoma City Thunder</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://logocdn.com" alt="OKC">
+                            <div class="teams-title">Oklahoma City Thunder</div>
+                        </div>
                     </div>
                 </div>
                 <div class="match-row" onclick="loadNhlStream('https://example.com')">
                     <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">05:30</div></div>
                     <div class="teams-container">
-                        <div class="team-side"><div class="teams-title">LA Lakers</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://logocdn.com" alt="LAL">
+                            <div class="teams-title">LA Lakers</div>
+                        </div>
                         <div class="vs-divider">vs</div>
-                        <div class="team-side"><div class="teams-title">Golden State Warriors</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://logocdn.com" alt="GSW">
+                            <div class="teams-title">Golden State Warriors</div>
+                        </div>
                     </div>
                 </div>
                 <div class="match-row" onclick="loadNhlStream('https://example.com0')">
                     <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">06:00</div></div>
                     <div class="teams-container">
-                        <div class="team-side"><div class="teams-title">Sacramento Kings</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://logocdn.com" alt="SAC">
+                            <div class="teams-title">Sacramento Kings</div>
+                        </div>
                         <div class="vs-divider">vs</div>
-                        <div class="team-side"><div class="teams-title">LA Clippers</div></div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://logocdn.com" alt="LAC">
+                            <div class="teams-title">LA Clippers</div>
+                        </div>
                     </div>
                 </div>
             </div>
