@@ -39,8 +39,9 @@ header {
     padding:18px 20px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 8px 25px rgba(0,112,243,0.15);
 }
 .teams-block {display:flex;flex-direction:column;gap:8px;}
-.team-item {display:flex;align-items:center;gap:12px;}
-.team-logo-svg {width:24px;height:24px;display:block;}
+.team-item {display:flex;align-items:center;gap:10px;}
+/* Стили для новых картинок-логотипов */
+.team-logo-img {width:28px;height:28px;object-fit:contain;display:block;}
 .teams-title {font-size:16px;font-weight:700;color:var(--text-main);letter-spacing:0.3px;}
 .match-status {font-size:12px;color:var(--text-grey);display:flex;align-items:center;gap:6px;margin-top:2px;font-weight:500;}
 .match-status .live-dot {color:var(--accent-live);font-weight:900;animation:blinker 1.5s linear infinite;}
@@ -107,25 +108,25 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
 
 <div class="grid-header">TODAY'S SCHEDULE</div>
 <div class="match-list">
-    <!-- МАТЧ 1: Полностью оригинальное название и статус -->
+    <!-- МАТЧ 1: Florida Panthers vs Vancouver Canucks -->
     <div class="match-row">
         <div class="teams-block">
             <div class="team-item">
-                <svg class="team-logo-svg" viewBox="0 0 24 24" style="margin-right:-6px;"><circle cx="12" cy="12" r="10" fill="none" stroke="#e50914" stroke-width="2.5"/><path d="M7 12h10M9 9l3 3-3 3M15 9l-3 3 3 3" stroke="#e50914" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                <svg class="team-logo-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="#0070f3" stroke-width="2.5"/><path d="M7 12h10M9 9l3 3-3 3M15 9l-3 3 3 3" stroke="#0070f3" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <img class="team-logo-img" src="https://nhle.com" alt="Florida Panthers">
+                <img class="team-logo-img" src="https://nhle.com" alt="Vancouver Canucks" style="margin-left:-5px;">
                 <div class="teams-title">Florida Panthers — Vancouver Canucks</div>
             </div>
             <div class="match-status"><span class="live-dot">●</span> LIVE NOW · NHL Regular Season</div>
         </div>
-        <button class="btn-stream" onclick="loadNhlStream('https://matchora.to/embed/match/2540106')">Watch Live</button>
+        <button class="btn-stream" onclick="loadNhlStream('ССЫЛКА_НА_ВАШ_СТРИМ_1')">Watch Live</button>
     </div>
 
-    <!-- МАТЧ 2: Полностью оригинальное название и статус -->
+    <!-- МАТЧ 2: Tampa Bay Lightning vs Toronto Maple Leafs -->
     <div class="match-row">
         <div class="teams-block">
             <div class="team-item">
-                <svg class="team-logo-svg" viewBox="0 0 24 24" style="margin-right:-6px;"><circle cx="12" cy="12" r="10" fill="none" stroke="#0070f3" stroke-width="2.5"/></svg>
-                <svg class="team-logo-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="#ffffff" stroke-width="2.5"/></svg>
+                <img class="team-logo-img" src="https://nhle.com" alt="Tampa Bay Lightning">
+                <img class="team-logo-img" src="https://nhle.com" alt="Toronto Maple Leafs" style="margin-left:-5px;">
                 <div class="teams-title">Tampa Bay Lightning — Toronto Maple Leafs</div>
             </div>
             <div class="match-status">02:30 AM · NHL Regular Season</div>
@@ -133,12 +134,12 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
         <button class="btn-stream" onclick="loadNhlStream('ССЫЛКА_НА_ВАШ_СТРИМ_2')">Watch Live</button>
     </div>
 
-    <!-- МАТЧ 3: Полностью оригинальное название и статус -->
+    <!-- МАТЧ 3: New Jersey Devils vs New York Rangers -->
     <div class="match-row">
         <div class="teams-block">
             <div class="team-item">
-                <svg class="team-logo-svg" viewBox="0 0 24 24" style="margin-right:-6px;"><circle cx="12" cy="12" r="10" fill="none" stroke="#e50914" stroke-width="2.5"/></svg>
-                <svg class="team-logo-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="#0070f3" stroke-width="2.5"/></svg>
+                <img class="team-logo-img" src="https://nhle.com" alt="New Jersey Devils">
+                <img class="team-logo-img" src="https://nhle.com" alt="New York Rangers" style="margin-left:-5px;">
                 <div class="teams-title">New Jersey Devils — New York Rangers</div>
             </div>
             <div class="match-status">03:00 AM · NHL Regular Season</div>
