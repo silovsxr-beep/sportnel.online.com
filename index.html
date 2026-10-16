@@ -112,7 +112,6 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
 
 <div class="grid-header">TODAY'S SCHEDULE</div>
 <div class="match-list">
-    <!-- МАТЧ 1: Флорида — Ванкувер -->
     <div class="match-row">
         <div class="teams-block">
             <div class="team-item">
@@ -122,10 +121,9 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
             </div>
             <div class="match-status"><span class="live-dot">●</span> LIVE NOW · NHL Regular Season</div>
         </div>
-        <button class="btn-stream" onclick="loadNhlStream('https://matchora.to/match/florida-panthers-vs-vancouver-canucks-2591596')">Watch Live</button>
+        <button class="btn-stream" onclick="loadNhlStream('https://matchora.to')">Watch Live</button>
     </div>
 
-    <!-- МАТЧ 2: Тампа — Торонто (Для примера) -->
     <div class="match-row">
         <div class="teams-block">
             <div class="team-item">
@@ -138,7 +136,6 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
         <button class="btn-stream" onclick="loadNhlStream('https://matchora.to')">Watch Live</button>
     </div>
 
-    <!-- МАТЧ 3: Нью-Джерси — Рейнджерс (Для примера) -->
     <div class="match-row">
         <div class="teams-block">
             <div class="team-item">
@@ -182,7 +179,6 @@ function loadNhlStream(streamUrl) {
         iframe.src = streamUrl;
 
         setTimeout(() => {
-            // 1. Автоматический запуск полноэкранного режима (Fullscreen)
             if (iframe.requestFullscreen) {
                 iframe.requestFullscreen();
             } else if (iframe.webkitRequestFullscreen) {
@@ -192,34 +188,23 @@ function loadNhlStream(streamUrl) {
             } else if (iframe.msRequestFullscreen) {
                 iframe.msRequestFullscreen();
             }
-
-            // 2. Умный поворот экрана: заваливает телефон горизонтально (набок), на ПК этот код просто игнорируется
-            if (screen.orientation && screen.orientation.lock) {
-                screen.orientation.lock('landscape').catch(function(error) {
-                    console.log("Экран заблокирован от поворота пользователем или устройством.");
-                });
-            }
-        }, 150); 
+        }, 500);
     }
 }
 
 function sendMessage() {
     const input = document.getElementById('chatInput');
-    const text = input.value.trim();
-    if(text === '') return;
-    const chatWindow = document.getElementById('chatWindow');
-    const msgBox = document.createElement('div');
-    msgBox.className = 'msg-box';
-    msgBox.innerHTML = '<div class="msg-user">User #' + myUserId + '</div><div class="msg-text">' + escapeHTML(text) + '</div>';
-    chatWindow.appendChild(msgBox);
-    input.value = '';
-    chatWindow.scrollTop = chatWindow.scrollHeight;
+    const window = document.getElementById('chatWindow');
+    if(input.value.trim() !== "") {
+        window.innerHTML += `<div class="msg-box"><div class="msg-user">User_${myUserId}</div><div class="msg-text">${input.value}</div></div>`;
+        input.value = "";
+        window.scrollTop = window.scrollHeight;
+    }
 }
-function handleKeyPress(e) {
-    if(e.key === 'Enter') sendMessage();
-}
-function escapeHTML(str) {
-    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "'");
+function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+        sendMessage();
+    }
 }
 </script>
 </body>
