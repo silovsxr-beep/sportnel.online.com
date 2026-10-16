@@ -286,9 +286,11 @@ header {
 
 .match-time { font-size: 12px; font-weight: 700; color: var(--text-grey); background: #161b26; padding: 3px 8px; border-radius: 5px; }
 .teams-container { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 8px; padding: 4px 0; }
-.team-side { display: flex; flex-direction: row; align-items: center; justify-content: center; flex: 1; text-align: left; gap: 8px; min-width: 0; }
-.team-logo-img { width: 30px; height: 30px; object-fit: contain; flex-shrink: 0; display: block; }
-.teams-title { font-size: 13px; font-weight: 700; color: var(--text-main); line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Стиль для вертикального отображения: логотип строго НАД текстом */
+.team-side { display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; text-align: center; min-width: 0; }
+.team-logo-img { width: 45px; height: 45px; object-fit: contain; display: block; margin-bottom: 6px; flex-shrink: 0; }
+.teams-title { font-size: 12px; font-weight: 700; color: var(--text-main); line-height: 1.3; word-wrap: break-word; width: 100%; height: 32px; display: flex; align-items: center; justify-content: center; }
 .vs-divider { font-size: 11px; font-weight: 800; color: var(--text-grey); text-transform: uppercase; background: #1a1f2c; padding: 3px 8px; border-radius: 5px; height: 20px; display: flex; align-items: center; margin-top: 0; flex-shrink: 0; }
 
 .chat-container { background-color: var(--bg-card); border: 1px solid var(--border-line); border-top: 2px solid var(--accent-nhl); border-radius: 16px; padding: 15px; display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
@@ -344,7 +346,7 @@ header {
 
 <div class="welcome-logos-container" id="welcomeLogos">
     <div class="welcome-logo-box nhl-glow">
-        <img src="https://nhle.com" alt="NHL Logo">
+        <img src="https://nhl.com" alt="NHL Logo">
     </div>
     <div class="welcome-logo-box basket-glow">
         <img src="https://logocdn.com" alt="NBA Logo">
@@ -389,7 +391,7 @@ header {
                     <div class="match-info-top"><div class="match-live-badge">LIVE</div><div class="match-time">02:00</div></div>
                     <div class="teams-container">
                         <div class="team-side">
-                            <img class="team-logo-img" src="https://matchora.to/img?k=HdE5NHsl4MxzKVPP_Nitr-PIbIG9P5UX3lJF5JTWuCFH1ccbavEGy9qFDMMMPFjmXyqzHPi1CJ7AlbLNWLvL-wZUrrJj1gHbAyQ-S01Nt2lA6HpmfQqIsHSIrxzi3BsvFF5n" alt="">
+                            <img class="team-logo-img" src="https://nhle.com" alt="PIT">
                             <div class="teams-title">Pittsburgh Penguins</div>
                         </div>
                         <div class="vs-divider">vs</div>
@@ -685,8 +687,9 @@ header {
     </div>
 </div>
 
-<div class="latvia-clock-wrapper">
-    Локация: Латвия <span id="latviaTimer">00:00:00</span>
+<!-- ОБНОВЛЕННЫЙ БЛОК ЧАСОВ С НЕОНОВЫМ СВЕЧЕНИЕМ НА АНГЛИЙСКОМ -->
+<div class="latvia-clock-wrapper" style="text-shadow: 0 0 12px rgba(69,243,255,0.8), 0 0 25px rgba(69,243,255,0.4); justify-content: center; font-size: 13px; margin: 25px 0 15px 0;">
+    Location: Latvia <span id="latviaTimer" style="border-color: #45f3ff; box-shadow: 0 0 15px rgba(69,243,255,0.5); font-weight: 900;">00:00:00</span>
 </div>
 
 <footer>
@@ -703,9 +706,14 @@ const myUserId = Math.floor(1000 + Math.random() * 9000);
 function updateLatviaClock() {
     const clockElement = document.getElementById('latviaTimer');
     if (clockElement) {
-        const options = { timeZone: 'Europe/Riga', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-        const latviaTime = new Intl.DateTimeFormat('en-US', options).format(new Date());
-        clockElement.textContent = latviaTime;
+        const options = { 
+            timeZone: 'Europe/Riga', 
+            hour: '2-digit', 
+            minute: '2-digit', 
+            second: '2-digit', 
+            hour12: false 
+        };
+        clockElement.textContent = new Intl.DateTimeFormat('en-US', options).format(new Date());
     }
 }
 setInterval(updateLatviaClock, 1000);
