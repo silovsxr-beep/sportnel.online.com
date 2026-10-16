@@ -95,7 +95,6 @@ header {
     margin-bottom: 16px;
 }
 .sports-options { display: flex; flex-direction: column; gap: 12px; }
-@media (min-width: 480px) { .sports-options { flex-direction: row; } }
 
 .sport-tab-btn {
     flex: 1;
@@ -134,17 +133,32 @@ header {
 }
 .sport-tab-btn.active-tab.basket-tab svg { filter: drop-shadow(0 0 5px #ffaa00); }
 
-/* Стили главного контейнера плеера и расписания, который изначально скрыт */
-.main-content-area { display: none; width: 100%; flex-direction: column; }
-
-@media (min-width: 992px) {
-    .container { max-width: 1280px !important; }
-    footer { max-width: 100% !important; }
-    .main-layout { display: grid; grid-template-columns: 1.8fr 1.2fr; gap: 24px; width: 100%; align-items: start; }
-    .player-column { position: sticky; top: 15px; }
-    .player-wrapper { margin-bottom: 0 !important; }
-    .right-sidebar { display: flex; flex-direction: column; gap: 8px; }
+/* Анимированный разноцветный неон для вкладки LIVE SPORTS CHAT */
+.sport-tab-btn.chat-tab {
+    animation: neonChatBtnBorder 8s linear infinite;
 }
+.sport-tab-btn.active-tab.chat-tab {
+    color: #ffffff;
+    border-color: transparent;
+    animation: neonChatBtnActive 8s linear infinite;
+}
+@keyframes neonChatBtnBorder {
+    0%,100% { border-color: #ff0055; }
+    33% { border-color: #0070f3; }
+    66% { border-color: #ff9900; }
+}
+@keyframes neonChatBtnActive {
+    0%,100% { background: linear-gradient(135deg, #ff0055 0%, #9b51e0 100%); box-shadow: 0 0 15px rgba(255,0,85,0.6); }
+    33% { background: linear-gradient(135deg, #0070f3 0%, #00ffcc 100%); box-shadow: 0 0 15px rgba(0,112,243,0.6); }
+    66% { background: linear-gradient(135deg, #ff9900 0%, #ff0055 100%); box-shadow: 0 0 15px rgba(255,153,0,0.6); }
+}
+/* Контейнеры областей: изначально скрыты, переключаются через JS */
+.main-content-area { display: none; width: 100%; flex-direction: column; }
+.global-chat-area { display: none; width: 100%; flex-direction: column; }
+
+/* Область трансляции: видео и чат матча появляются только после клика "Watch Live" */
+.stream-display-container { display: none; width: 100%; flex-direction: column; margin-bottom: 20px; }
+
 .info-section {
     background-color: var(--bg-card);
     border: 1px solid var(--border-line);
@@ -166,28 +180,19 @@ header {
     gap: 6px;
 }
 .info-section-text { font-size: 12px; color: var(--text-grey); line-height: 1.45; }
+
 .player-wrapper {
     background-color: var(--bg-card);
     border: 2px solid transparent;
     border-radius: 18px;
     padding: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
     position: relative;
     animation: neonBorder 8s linear infinite;
 }
 .video-ratio { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background-color: #010204; border-radius: 12px; }
 .video-ratio iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-.player-cover {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column;
-    justify-content: center; align-items: center; color: var(--text-grey); gap: 12px; font-size: 13px;
-    background: linear-gradient(135deg,#0b0e1a 0%,#030408 100%); z-index: 10; text-align: center; padding: 20px;
-}
-.player-cover svg { width: 55px; height: 55px; fill: var(--accent-nhl); margin-bottom: 5px; animation: pulsePlay 2s ease-in-out infinite; }
-@keyframes pulsePlay {
-    0% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(0,112,243,0.3)); }
-    50% { transform: scale(1.06); filter: drop-shadow(0 0 15px rgba(0,112,243,0.7)); }
-    100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(0,112,243,0.3)); }
-}
+
 @keyframes neonBorder {
     0%,100% { border-color: #ff0055; box-shadow: 0 0 15px rgba(255,0,85,0.5), inset 0 0 15px rgba(255,0,85,0.2); }
     20% { border-color: #0070f3; box-shadow: 0 0 15px rgba(0,112,243,0.5), inset 0 0 15px rgba(0,112,243,0.2); }
@@ -195,10 +200,12 @@ header {
     60% { border-color: #9b51e0; box-shadow: 0 0 15px rgba(155,81,224,0.5), inset 0 0 15px rgba(155,81,224,0.2); }
     80% { border-color: #ff9900; box-shadow: 0 0 15px rgba(255,153,0,0.5), inset 0 0 15px rgba(255,153,0,0.2); }
 }
+
 .grid-header { font-size: 12px; font-weight: 800; text-transform: uppercase; color: var(--text-grey); margin: 0 0 10px 5px; letter-spacing: 1.5px; }
 .match-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
 .match-row { background-color: var(--bg-card); border: 1px solid var(--border-line); border-bottom: 3px solid var(--accent-nhl); border-radius: 14px; padding: 12px 16px; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 8px 25px rgba(0,112,243,0.15); position: relative; }
 .match-info-top { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+
 .match-live-badge { font-size: 11px; color: #ff2a3b; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; display: flex; align-items: center; gap: 5px; animation: blinkLive 1.5s infinite ease-in-out; }
 .match-live-badge::before { content: ''; display: inline-block; width: 7px; height: 7px; background-color: #ff2a3b; border-radius: 50%; box-shadow: 0 0 8px #ff2a3b; }
 @keyframes blinkLive { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
@@ -210,6 +217,7 @@ header {
 .vs-divider { font-size: 11px; font-weight: 800; color: var(--text-grey); text-transform: uppercase; background: #1a1f2c; padding: 3px 8px; border-radius: 5px; height: 20px; display: flex; align-items: center; margin-top: 0; }
 .btn-stream { background: linear-gradient(135deg,var(--accent-live) 0%,#b8070f 100%); color: var(--text-main); border: none; padding: 10px 0; width: 100%; border-radius: 8px; font-size: 11px; font-weight: 800; text-transform: uppercase; cursor: pointer; letter-spacing: 1px; transition: transform 0.2s,box-shadow 0.2s; box-shadow: 0 4px 15px rgba(229,9,20,0.4); text-align: center; }
 .btn-stream:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(229,9,20,0.6); }
+
 .chat-container { background-color: var(--bg-card); border: 1px solid var(--border-line); border-top: 2px solid var(--accent-nhl); border-radius: 16px; padding: 15px; display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 .chat-messages { height: 180px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding-right: 5px; scroll-behavior: smooth; }
 .chat-messages::-webkit-scrollbar { width: 4px; }
@@ -223,12 +231,21 @@ header {
 .chat-input:focus { border-color: var(--accent-nhl); }
 .btn-send { background: var(--accent-nhl); color: #fff; border: none; padding: 0 16px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 700; transition: background 0.2s; }
 .btn-send:hover { background: #0056c6; }
+
 footer { margin-top: auto; padding: 25px 10px; text-align: center; border-top: 1px solid var(--border-line); width: 100%; max-width: 650px; }
 .footer-text { font-size: 12px; letter-spacing: 1px; font-weight: 700; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .footer-text svg { width: 16px; height: 16px; fill: #45f3ff; filter: drop-shadow(0 0 8px rgba(69,243,255,0.8)); animation: spinPuck 4s linear infinite; }
 .neon-blue { color: #45f3ff; text-shadow: 0 0 10px rgba(69,243,255,0.4); }
 .neon-red { color: #ff2a3b; text-shadow: 0 0 10px rgba(255,42,59,0.4); }
 @keyframes spinPuck { 100% { transform: rotate(360deg); } }
+
+@media (min-width: 992px) {
+    .container { max-width: 1280px !important; }
+    footer { max-width: 100% !important; }
+    .main-layout { display: grid; grid-template-columns: 1.8fr 1.2fr; gap: 24px; width: 100%; align-items: start; }
+    .player-column { position: sticky; top: 15px; }
+    .right-sidebar { display: flex; flex-direction: column; gap: 8px; }
+}
 </style>
 </head>
 <body>
@@ -241,6 +258,7 @@ footer { margin-top: auto; padding: 25px 10px; text-align: center; border-top: 1
 </div>
 </header>
 
+<!-- Трехкнопочная панель LIVE SPORTS -->
 <div class="sports-nav-wrapper">
     <div class="sports-main-title">LIVE SPORTS</div>
     <div class="sports-options">
@@ -252,23 +270,39 @@ footer { margin-top: auto; padding: 25px 10px; text-align: center; border-top: 1
             <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.79-4.14c-.26-.53-.73-.93-1.29-1.11L15 14v-2c0-1.1-.9-2-2-2h-2V7l2.25-2.25c3.22.84 5.75 3.37 6.59 6.59-.02 1.25-.39 2.41-1.05 3.4z"/></svg>
             LIVE BASKETBALL MATCH
         </button>
+        <!-- Новая вкладка общего чата с переливающимся разноцветным неоном -->
+        <button class="sport-tab-btn chat-tab" onclick="switchSport('global-chat', this)">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+            LIVE SPORTS CHAT
+        </button>
     </div>
 </div>
 
-<div class="main-content-area" id="contentArea">
-    <div class="main-layout">
-        <div class="player-column">
+<div class="main-layout">
+    <!-- Левая колонка ПК: Плеер и чат матча (скрыты до клика по матчу) -->
+    <div class="player-column">
+        <div class="stream-display-container" id="streamDisplay">
             <div class="player-wrapper">
-            <div class="video-ratio">
-                <div class="player-cover" id="screenCover">
-                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
-                    <p>Select the active match from the schedule below</p>
+                <div class="video-ratio">
+                    <iframe id="nhlStreamIframe" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
                 </div>
-                <iframe id="nhlStreamIframe" src="" allow="autoplay; fullscreen" allowfullscreen style="display:none; width: 100%; height: 100%; border: none;"></iframe>
             </div>
+            
+            <div class="grid-header" style="margin-top: 15px;">MATCH CHAT</div>
+            <div class="chat-container">
+                <div class="chat-messages" id="matchChatWindow"></div>
+                <div class="chat-input-block">
+                    <input type="text" class="chat-input" id="matchChatInput" placeholder="Write a message..." onkeypress="handleMatchChatKeyPress(event)">
+                    <button class="btn-send" onclick="sendMatchMessage()">Send</button>
+                </div>
             </div>
         </div>
-        <div class="right-sidebar">
+    </div>
+    <!-- Правая колонка ПК: Списки матчей и Общий чат сайта -->
+    <div class="right-sidebar">
+        
+        <!-- ОБЛАСТЬ СПОРТИВНОГО КОНТЕНТА -->
+        <div class="main-content-area" id="contentArea">
             <div class="grid-header">TODAY'S SCHEDULE</div>
             
             <div class="info-section">
@@ -276,7 +310,7 @@ footer { margin-top: auto; padding: 25px 10px; text-align: center; border-top: 1
                     <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
                     Information live game
                 </div>
-                <div class="info-section-text">Streams update automatically 15 minutes before the match starts. Click "Watch Live" to load the broadcast into the player.</div>
+                <div class="info-section-text">Streams update automatically 15 minutes before the match starts. Click "Watch Live" to open the broadcast player and chat.</div>
             </div>
 
             <!-- СПИСОК NHL МАТЧЕЙ -->
@@ -340,18 +374,22 @@ footer { margin-top: auto; padding: 25px 10px; text-align: center; border-top: 1
                     <button class="btn-stream" onclick="loadNhlStream('https://github.io')">Watch Live</button>
                 </div>
             </div>
-            <!-- ЧАТ -->
-            <div class="grid-header">LIVE CHAT</div>
+        </div>
+
+        <!-- ОБЛАСТЬ ГЛОБАЛЬНОГО ЧАТА САЙТА -->
+        <div class="global-chat-area" id="globalChatArea">
+            <div class="grid-header">LIVE SPORTS CHAT</div>
             <div class="chat-container">
-                <div class="chat-messages" id="chatWindow"></div>
+                <div class="chat-messages" id="globalChatWindow"></div>
                 <div class="chat-input-block">
-                    <input type="text" class="chat-input" id="chatInput" placeholder="Write a message..." onkeypress="handleKeyPress(event)">
-                    <button class="btn-send" onclick="sendMessage()">Send</button>
+                    <input type="text" class="chat-input" id="globalChatInput" placeholder="Write a message to global chat..." onkeypress="handleGlobalKeyPress(event)">
+                    <button class="btn-send" onclick="sendGlobalMessage()">Send</button>
                 </div>
             </div>
         </div>
+
     </div>
-</div> <!-- Конец main-content-area -->
+</div> <!-- Конец main-layout -->
 
 <footer>
 <div class="footer-text">
@@ -364,52 +402,80 @@ footer { margin-top: auto; padding: 25px 10px; text-align: center; border-top: 1
 <script>
 const myUserId = Math.floor(1000 + Math.random() * 9000);
 
-// Логика переключения: при первом клике делает контентную область видимой
-function switchSport(sportType, element) {
+// Переключение разделов главного меню
+function switchSport(type, element) {
     document.querySelectorAll('.sport-tab-btn').forEach(btn => btn.classList.remove('active-tab'));
     element.classList.add('active-tab');
-    
-    // Делаем область с плеером и матчами видимой при нажатии на спорт
-    document.getElementById('contentArea').style.display = 'flex';
-    
+
+    const contentArea = document.getElementById('contentArea');
+    const globalChatArea = document.getElementById('globalChatArea');
+    const streamDisplay = document.getElementById('streamDisplay');
     const nhlList = document.getElementById('nhl-matches');
     const basketList = document.getElementById('basketball-matches');
-    
-    // Сбрасываем плеер, чтобы старый стрим не играл при переключении спорта
-    document.getElementById('screenCover').style.display = 'flex';
-    document.getElementById('nhlStreamIframe').style.display = 'none';
+
+    // Всегда скрываем плеер при смене вкладки меню
+    streamDisplay.style.display = 'none';
     document.getElementById('nhlStreamIframe').src = '';
 
-    if(sportType === 'nhl') {
-        nhlList.style.display = 'flex';
-        basketList.style.display = 'none';
+    if (type === 'global-chat') {
+        contentArea.style.display = 'none';
+        globalChatArea.style.display = 'flex';
     } else {
-        nhlList.style.display = 'none';
-        basketList.style.display = 'flex';
+        globalChatArea.style.display = 'none';
+        contentArea.style.display = 'flex';
+
+        if (type === 'nhl') {
+            nhlList.style.display = 'flex';
+            basketList.style.display = 'none';
+        } else if (type === 'basketball') {
+            nhlList.style.display = 'none';
+            basketList.style.display = 'flex';
+        }
     }
 }
 
+// Запуск стрима: открывает видеоплеер и чат матча ТОЛЬКО при нажатии на конкретный матч
 function loadNhlStream(streamUrl) {
-    const cover = document.getElementById('screenCover');
+    const streamDisplay = document.getElementById('streamDisplay');
     const iframe = document.getElementById('nhlStreamIframe');
-    if(streamUrl && streamUrl !== '') {
-        cover.style.display = 'none';
-        iframe.style.display = 'block';
+    
+    if (streamUrl && streamUrl !== '') {
+        streamDisplay.style.display = 'flex';
         iframe.src = streamUrl;
+        
+        // Автоматическая прокрутка к плееру на мобильных устройствах
+        if (window.innerWidth < 992) {
+            streamDisplay.scrollIntoView({ behavior: 'smooth' });
+        }
     }
 }
 
-function sendMessage() {
-    const input = document.getElementById('chatInput');
-    const window = document.getElementById('chatWindow');
-    if(input.value.trim() !== "") {
+// Логика МАТЧ-ЧАТА (Слева)
+function sendMatchMessage() {
+    const input = document.getElementById('matchChatInput');
+    const window = document.getElementById('matchChatWindow');
+    if (input.value.trim() !== "") {
         window.innerHTML += `<div class="msg-box"><div class="msg-user">User_${myUserId}</div><div class="msg-text">${input.value}</div></div>`;
         input.value = "";
         window.scrollTop = window.scrollHeight;
     }
 }
-function handleKeyPress(event) {
-    if (event.key === 'Enter') { sendMessage(); }
+function handleMatchChatKeyPress(event) {
+    if (event.key === 'Enter') { sendMatchMessage(); }
+}
+
+// Логика ОБЩЕГО ГЛОБАЛЬНОГО ЧАТА (Справа)
+function sendGlobalMessage() {
+    const input = document.getElementById('globalChatInput');
+    const window = document.getElementById('globalChatWindow');
+    if (input.value.trim() !== "") {
+        window.innerHTML += `<div class="msg-box" style="border-left-color: #45f3ff;"><div class="msg-user" style="color: #ff2a3b;">User_${myUserId}</div><div class="msg-text">${input.value}</div></div>`;
+        input.value = "";
+        window.scrollTop = window.scrollHeight;
+    }
+}
+function handleGlobalKeyPress(event) {
+    if (event.key === 'Enter') { sendGlobalMessage(); }
 }
 </script>
 </body>
