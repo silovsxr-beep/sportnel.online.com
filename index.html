@@ -3,119 +3,467 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SPORTNEL — NHL Live Streams</title>
+<title>SPORTNEL — Live Streams</title>
 <style>
-:root {--bg-body:#05070c;--bg-card:#0e111a;--accent-nhl:#0070f3;--accent-live:#e50914;--text-main:#ffffff;--text-grey:#858fa3;--border-line:#1a1f2c;}
-* {box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-tap-highlight-color:transparent;}
-body {background-color:var(--bg-body);color:var(--text-main);padding:15px;display:flex;flex-direction:column;align-items:center;min-height:100vh;}
-.container {width:100%;max-width:650px;flex-grow:1;display:flex;flex-direction:column;}
-header {background-color:var(--bg-card);border:1px solid var(--border-line);border-bottom:2px solid var(--accent-nhl);padding:16px 20px;border-radius:14px;display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;box-shadow:0 4px 25px rgba(0,112,243,0.25);}
-
-/* Неоновый логотип SPORTNEL: Синий -> Красный -> Белый */
-.brand {font-size:20px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-main);animation:neonBrand 6s infinite ease-in-out;}
-.brand span {color:var(--accent-nhl);animation:neonBrandSpan 6s infinite ease-in-out;}
-@keyframes neonBrand {
-    0%,100% {text-shadow:0 0 10px rgba(0,112,243,0.6),0 0 20px rgba(0,112,243,0.4);}
-    33% {text-shadow:0 0 10px rgba(229,9,20,0.6),0 0 20px rgba(229,9,20,0.4);}
-    66% {text-shadow:0 0 10px rgba(255,255,255,0.6),0 0 20px rgba(255,255,255,0.4);}
+:root {
+    --bg-body: #05070c;
+    --bg-card: #0e111a;
+    --accent-nhl: #0070f3;
+    --accent-live: #e50914;
+    --text-main: #ffffff;
+    --text-grey: #858fa3;
+    --border-line: #1a1f2c;
 }
-@keyframes neonBrandSpan {0%,100% {color:#0070f3;} 33% {color:#e50914;} 66% {color:#ffffff;}}
-.social-links {display:flex;align-items:center;gap:18px;}
-.social-icon {display:flex;align-items:center;justify-content:center;text-decoration:none;transition:transform 0.2s;}
-.social-icon:hover {transform:scale(1.15);}
-.social-icon svg {width:24px;height:24px;display:block;}
-
-/* Измененный блок плеера с поддержкой динамической RGB рамки */
-.player-wrapper {background-color:var(--bg-card);border:2px solid transparent;border-radius:18px;padding:12px;margin-bottom:20px;position:relative;animation:neonBorder 8s linear infinite;}
-.video-ratio {position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background-color:#010204;border-radius:12px;}
-.video-ratio iframe {position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
-.player-cover {position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;color:var(--text-grey);gap:12px;font-size:13px;background:linear-gradient(135deg,#0b0e1a 0%,#030408 100%);z-index:10;text-align:center;padding:20px;}
-.player-cover svg {width:55px;height:55px;fill:var(--accent-nhl);margin-bottom:5px;animation:pulsePlay 2s ease-in-out infinite;}
-
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+.container {
+    width: 100%;
+    max-width: 650px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+header {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-line);
+    border-bottom: 2px solid var(--accent-nhl);
+    padding: 16px 20px;
+    border-radius: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 25px rgba(0,112,243,0.25);
+}
+.brand {
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-main);
+    animation: neonBrand 6s infinite ease-in-out;
+}
+.brand span {
+    color: var(--accent-nhl);
+    animation: neonBrandSpan 6s infinite ease-in-out;
+}
+@keyframes neonBrand {
+    0%,100% { text-shadow: 0 0 10px rgba(0,112,243,0.6), 0 0 20px rgba(0,112,243,0.4); }
+    33% { text-shadow: 0 0 10px rgba(229,9,20,0.6), 0 0 20px rgba(229,9,20,0.4); }
+    66% { text-shadow: 0 0 10px rgba(255,255,255,0.6), 0 0 20px rgba(255,255,255,0.4); }
+}
+@keyframes neonBrandSpan {
+    0%,100% { color: #0070f3; }
+    33% { color: #e50914; }
+    66% { color: #ffffff; }
+}
+.social-links {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: transform 0.2s;
+}
+.social-icon:hover {
+    transform: scale(1.15);
+}
+.social-icon svg {
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+.sports-nav-wrapper {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-line);
+    border-radius: 14px;
+    padding: 15px;
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: center;
+}
+.sports-main-title {
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #45f3ff;
+    text-shadow: 0 0 10px rgba(69,243,255,0.6);
+    margin-bottom: 12px;
+}
+.sports-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+@media (min-width: 480px) {
+    .sports-options { flex-direction: row; }
+}
+.sport-tab-btn {
+    flex: 1;
+    background: #151926;
+    border: 1px solid var(--border-line);
+    border-radius: 10px;
+    padding: 12px;
+    color: var(--text-grey);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.sport-tab-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+    transition: filter 0.3s ease;
+}
+.sport-tab-btn:hover {
+    color: var(--text-main);
+    border-color: var(--border-line);
+}
+.sport-tab-btn.active-tab.nhl-tab {
+    background: linear-gradient(135deg, #0070f3 0%, #00449e 100%);
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 0 15px rgba(0,112,243,0.6);
+    text-shadow: 0 0 5px rgba(255,255,255,0.5);
+}
+.sport-tab-btn.active-tab.nhl-tab svg {
+    filter: drop-shadow(0 0 5px #45f3ff);
+}
+.sport-tab-btn.active-tab.basket-tab {
+    background: linear-gradient(135deg, #ff5500 0%, #b32400 100%);
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 0 15px rgba(255,85,0,0.6);
+    text-shadow: 0 0 5px rgba(255,255,255,0.5);
+}
+.sport-tab-btn.active-tab.basket-tab svg {
+    filter: drop-shadow(0 0 5px #ffaa00);
+}
+.info-section {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-line);
+    border-left: 3px solid #45f3ff;
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+.info-section-title {
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #45f3ff;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.info-section-text {
+    font-size: 12px;
+    color: var(--text-grey);
+    line-height: 1.45;
+}
+.player-wrapper {
+    background-color: var(--bg-card);
+    border: 2px solid transparent;
+    border-radius: 18px;
+    padding: 12px;
+    margin-bottom: 20px;
+    position: relative;
+    animation: neonBorder 8s linear infinite;
+}
+.video-ratio {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    background-color: #010204;
+    border-radius: 12px;
+}
+.video-ratio iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+.player-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-grey);
+    gap: 12px;
+    font-size: 13px;
+    background: linear-gradient(135deg,#0b0e1a 0%,#030408 100%);
+    z-index: 10;
+    text-align: center;
+    padding: 20px;
+}
+.player-cover svg {
+    width: 55px;
+    height: 55px;
+    fill: var(--accent-nhl);
+    margin-bottom: 5px;
+    animation: pulsePlay 2s ease-in-out infinite;
+}
 @keyframes pulsePlay {
-    0% {transform:scale(1);filter:drop-shadow(0 0 5px rgba(0,112,243,0.3));}
-    50% {transform:scale(1.06);filter:drop-shadow(0 0 15px rgba(0,112,243,0.7));}
-    100% {transform:scale(1);filter:drop-shadow(0 0 5px rgba(0,112,243,0.3));}
+    0% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(0,112,243,0.3)); }
+    50% { transform: scale(1.06); filter: drop-shadow(0 0 15px rgba(0,112,243,0.7)); }
+    100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(0,112,243,0.3)); }
 }
 @keyframes neonBorder {
-    0%,100% {border-color:#ff0055;box-shadow:0 0 15px rgba(255,0,85,0.5),inset 0 0 15px rgba(255,0,85,0.2);}
-    20% {border-color:#0070f3;box-shadow:0 0 15px rgba(0,112,243,0.5),inset 0 0 15px rgba(0,112,243,0.2);}
-    40% {border-color:#00ffcc;box-shadow:0 0 15px rgba(0,255,204,0.5),inset 0 0 15px rgba(0,255,204,0.2);}
-    60% {border-color:#9b51e0;box-shadow:0 0 15px rgba(155,81,224,0.5),inset 0 0 15px rgba(155,81,224,0.2);}
-    80% {border-color:#ff9900;box-shadow:0 0 15px rgba(255,153,0,0.5),inset 0 0 15px rgba(255,153,0,0.2);}
+    0%,100% { border-color: #ff0055; box-shadow: 0 0 15px rgba(255,0,85,0.5), inset 0 0 15px rgba(255,0,85,0.2); }
+    20% { border-color: #0070f3; box-shadow: 0 0 15px rgba(0,112,243,0.5), inset 0 0 15px rgba(0,112,243,0.2); }
+    40% { border-color: #00ffcc; box-shadow: 0 0 15px rgba(0,255,204,0.5), inset 0 0 15px rgba(0,255,204,0.2); }
+    60% { border-color: #9b51e0; box-shadow: 0 0 15px rgba(155,81,224,0.5), inset 0 0 15px rgba(155,81,224,0.2); }
+    80% { border-color: #ff9900; box-shadow: 0 0 15px rgba(255,153,0,0.5), inset 0 0 15px rgba(255,153,0,0.2); }
 }
-.grid-header {font-size:12px;font-weight:800;text-transform:uppercase;color:var(--text-grey);margin:0 0 10px 5px;letter-spacing:1.5px;}
-.match-list {display:flex;flex-direction:column;gap:12px;margin-bottom:20px;}
+.grid-header {
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--text-grey);
+    margin: 0 0 10px 5px;
+    letter-spacing: 1.5px;
+}
+.match-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+.match-row {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-line);
+    border-bottom: 3px solid var(--accent-nhl);
+    border-radius: 14px;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 0 8px 25px rgba(0,112,243,0.15);
+    position: relative;
+}
+.match-info-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.match-live-badge {
+    font-size: 11px;
+    color: #ff2a3b;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    animation: blinkLive 1.5s infinite ease-in-out;
+}
+.match-live-badge::before {
+    content: '';
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    background-color: #ff2a3b;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #ff2a3b;
+}
+@keyframes blinkLive {
+    0%,100% { opacity: 0.4; }
+    50% { opacity: 1; }
+}
+.match-time {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-grey);
+    background: #161b26;
+    padding: 3px 8px;
+    border-radius: 5px;
+}
+.teams-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 8px;
+    padding: 4px 0;
+}
+.team-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    text-align: center;
+    min-width: 0;
+}
+.team-logo-img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    display: block;
+    margin-bottom: 6px;
+}
+.teams-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-main);
+    line-height: 1.3;
+    word-wrap: break-word;
+    width: 100%;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.vs-divider {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--text-grey);
+    text-transform: uppercase;
+    background: #1a1f2c;
+    padding: 3px 8px;
+    border-radius: 5px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+}
+.btn-stream {
+    background: linear-gradient(135deg,var(--accent-live) 0%,#b8070f 100%);
+    color: var(--text-main);
+    border: none;
+    padding: 10px 0;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: transform 0.2s,box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(229,9,20,0.4);
+    text-align: center;
+}
+.btn-stream:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(229,9,20,0.6);
+}
+.chat-container {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-line);
+    border-top: 2px solid var(--accent-nhl);
+    border-radius: 16px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.chat-messages {
+    height: 180px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-right: 5px;
+    scroll-behavior: smooth;
+}
+.chat-messages::-webkit-scrollbar { width: 4px; }
+.chat-messages::-webkit-scrollbar-thumb { background: var(--border-line); border-radius: 10px; }
+.msg-box {
+    background: #151926;
+    padding: 8px 12px;
+    border-radius: 10px;
+    border-left: 3px solid var(--accent-nhl);
+    animation: fadeMsg 0.3s ease-in-out;
+}
+@keyframes fadeMsg { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+.msg-user {
+    font-size: 11px;
+    font-weight: 800;
+    color: #45f3ff;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.msg-text { font-size: 13px; color: var(--text-main); line-height: 1.4; word-break: break-word; }
+.chat-input-block { display: flex; gap: 10px; }
+.chat-input {
+    flex-grow: 1;
+    background: #05070c;
+    border: 1px solid var(--border-line);
+    border-radius: 10px;
+    padding: 12px;
+    color: var(--text-main);
+    font-size: 13px;
+    outline: none;
+    transition: border 0.2s;
+}
+.chat-input:focus { border-color: var(--accent-nhl); }
+.btn-send {
+    background: var(--accent-nhl);
+    color: #fff;
+    border: none;
+    padding: 0 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    transition: background 0.2s;
+}
+.btn-send:hover { background: #0056c6; }
+footer { margin-top: auto; padding: 25px 10px; text-align: center; border-top: 1px solid var(--border-line); width: 100%; max-width: 650px; }
+.footer-text { font-size: 12px; letter-spacing: 1px; font-weight: 700; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.footer-text svg { width: 16px; height: 16px; fill: #45f3ff; filter: drop-shadow(0 0 8px rgba(69,243,255,0.8)); animation: spinPuck 4s linear infinite; }
+.neon-blue { color: #45f3ff; text-shadow: 0 0 10px rgba(69,243,255,0.4); }
+.neon-red { color: #ff2a3b; text-shadow: 0 0 10px rgba(255,42,59,0.4); }
+@keyframes spinPuck { 100% { transform: rotate(360deg); } }
 
-/* Уменьшенная аккуратная карточка матча в стиле Matchora */
-.match-row {background-color:var(--bg-card);border:1px solid var(--border-line);border-bottom:3px solid var(--accent-nhl);border-radius:14px;padding:12px 16px;display:flex;flex-direction:column;gap:8px;box-shadow:0 8px 25px rgba(0,112,243,0.15);position:relative;}
-.match-info-top {display:flex;justify-content:space-between;align-items:center;width:100%;}
-
-/* Моргающий красный LIVE индикатор без лишнего текста */
-.match-live-badge {font-size:11px;color:#ff2a3b;font-weight:900;letter-spacing:1px;text-transform:uppercase;display:flex;align-items:center;gap:5px;animation:blinkLive 1.5s infinite ease-in-out;}
-.match-live-badge::before {content:'';display:inline-block;width:7px;height:7px;background-color:#ff2a3b;border-radius:50%;box-shadow:0 0 8px #ff2a3b;}
-@keyframes blinkLive {0%,100% {opacity:0.4;} 50% {opacity:1;}}
-
-.match-time {font-size:12px;font-weight:700;color:var(--text-grey);background:#161b26;padding:3px 8px;border-radius:5px;}
-.teams-container {display:flex;align-items:center;justify-content:space-between;width:100%;gap:8px;padding:4px 0;}
-.team-side {display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;text-align:center;min-width:0;}
-
-/* Уменьшенные логотипы команд как на Matchora */
-.team-logo-img {width:45px;height:45px;object-fit:contain;display:block;margin-bottom:6px;}
-.teams-title {font-size:12px;font-weight:700;color:var(--text-main);line-height:1.3;word-wrap:break-word;width:100%;height:32px;display:flex;align-items:center;justify-content:center;}
-.vs-divider {font-size:11px;font-weight:800;color:var(--text-grey);text-transform:uppercase;background:#1a1f2c;padding:3px 8px;border-radius:5px;height:20px;display:flex;align-items:center;margin-top:0;}
-
-.btn-stream {background:linear-gradient(135deg,var(--accent-live) 0%,#b8070f 100%);color:var(--text-main);border:none;padding:10px 0;width:100%;border-radius:8px;font-size:11px;font-weight:800;text-transform:uppercase;cursor:pointer;letter-spacing:1px;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 15px rgba(229,9,20,0.4);text-align:center;}
-.btn-stream:hover {transform:translateY(-1px);box-shadow:0 6px 20px rgba(229,9,20,0.6);}
-.chat-container {background-color:var(--bg-card);border:1px solid var(--border-line);border-top:2px solid var(--accent-nhl);border-radius:16px;padding:15px;display:flex;flex-direction:column;gap:12px;margin-bottom:25px;box-shadow:0 10px 30px rgba(0,0,0,0.5);}
-.chat-messages {height:180px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding-right:5px;scroll-behavior:smooth;}
-.chat-messages::-webkit-scrollbar {width:4px;}
-.chat-messages::-webkit-scrollbar-thumb {background:var(--border-line);border-radius:10px;}
-.msg-box {background:#151926;padding:8px 12px;border-radius:10px;border-left:3px solid var(--accent-nhl);animation:fadeMsg 0.3s ease-in-out;}
-@keyframes fadeMsg {from {opacity:0;transform:translateY(5px);} to {opacity:1;transform:translateY(0);}}
-.msg-user {font-size:11px;font-weight:800;color:#45f3ff;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px;}
-.msg-text {font-size:13px;color:var(--text-main);line-height:1.4;word-break:break-word;}
-.chat-input-block {display:flex;gap:10px;}
-.chat-input {flex-grow:1;background:#05070c;border:1px solid var(--border-line);border-radius:10px;padding:12px;color:var(--text-main);font-size:13px;outline:none;transition:border 0.2s;}
-.chat-input:focus {border-color:var(--accent-nhl);}
-.btn-send {background:var(--accent-nhl);color:#fff;border:none;padding:0 16px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:700;transition:background 0.2s;}
-.btn-send:hover {background:#0056c6;}
-footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid var(--border-line);width:100%;max-width:650px;}
-.footer-text {font-size:12px;letter-spacing:1px;font-weight:700;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:8px;}
-.footer-text svg {width:16px;height:16px;fill:#45f3ff;filter:drop-shadow(0 0 8px rgba(69,243,255,0.8));animation:spinPuck 4s linear infinite;}
-.neon-blue {color:#45f3ff;text-shadow:0 0 10px rgba(69,243,255,0.4);}
-.neon-red {color:#ff2a3b;text-shadow:0 0 10px rgba(255,42,59,0.4);}
-@keyframes spinPuck {100% {transform:rotate(360deg);}}
-
-/* ==============================================================
-   ДОБАВЛЕННЫЕ СТИЛИ ДЛЯ АДАПТАЦИИ ПОД ЭКРАНЫ ПК (НИЧЕГО НЕ ЛОМАЮТ)
-   ============================================================== */
 @media (min-width: 992px) {
-    .container {
-        max-width: 1280px !important;
-    }
-    footer {
-        max-width: 100% !important;
-    }
-    .main-layout {
-        display: grid;
-        grid-template-columns: 1.8fr 1.2fr;
-        gap: 24px;
-        width: 100%;
-        align-items: start;
-    }
-    .player-column {
-        position: sticky;
-        top: 15px;
-    }
-    .player-wrapper {
-        margin-bottom: 0 !important;
-    }
-    .right-sidebar {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
+    .container { max-width: 1280px !important; }
+    footer { max-width: 100% !important; }
+    .main-layout { display: grid; grid-template-columns: 1.8fr 1.2fr; gap: 24px; width: 100%; align-items: start; }
+    .player-column { position: sticky; top: 15px; }
+    .player-wrapper { margin-bottom: 0 !important; }
+    .right-sidebar { display: flex; flex-direction: column; gap: 8px; }
 }
 </style>
 </head>
@@ -129,10 +477,21 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
 </div>
 </header>
 
-<!-- Двухколоночная сетка для ПК версий сайта -->
+<div class="sports-nav-wrapper">
+    <div class="sports-main-title">LIVE SPORTS</div>
+    <div class="sports-options">
+        <button class="sport-tab-btn active-tab nhl-tab" onclick="switchSport('nhl', this)">
+            <svg viewBox="0 0 24 24"><path d="M19.5 2h-2c-.83 0-1.5.67-1.5 1.5v3.1c-.8.6-1.5 1.4-2.1 2.3L9.6 4.6c-.6-.6-1.5-.6-2.1 0L3.2 8.9c-.6.6-.6 1.5 0 2.1l4.3 4.3c-.9.6-1.7 1.3-2.3 2.1H2.1c-.83 0-1.5.67-1.5 1.5v2c0 .83.67 1.5 1.5 1.5h2c.83 0 1.5-.67 1.5-1.5v-1.1c.9-.7 1.7-1.6 2.3-2.6l2.9 2.9c.6.6 1.5.6 2.1 0l4.3-4.3c.6-.6.6-1.5 0-2.1l-2.9-2.9c1-.6 1.9-1.4 2.6-2.3h1.1c.83 0 1.5-.67 1.5-1.5v-2c0-.83-.67-1.5-1.5-1.5z"/></svg>
+            LIVE NHL MATCH
+        </button>
+        <button class="sport-tab-btn basket-tab" onclick="switchSport('basketball', this)">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.79-4.14c-.26-.53-.73-.93-1.29-1.11L15 14v-2c0-1.1-.9-2-2-2h-2V7l2.25-2.25c3.22.84 5.75 3.37 6.59 6.59-.02 1.25-.39 2.41-1.05 3.4z"/></svg>
+            LIVE BASKETBALL MATCH
+        </button>
+    </div>
+</div>
+
 <div class="main-layout">
-    
-    <!-- Левая колонка: Ваш видеоплеер -->
     <div class="player-column">
         <div class="player-wrapper">
         <div class="video-ratio">
@@ -144,13 +503,22 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
         </div>
         </div>
     </div>
-
-    <!-- Правая колонка: Расписание матчей и чат -->
+    <!-- Правая колонка ПК: Списки матчей и чат -->
     <div class="right-sidebar">
         <div class="grid-header">TODAY'S SCHEDULE</div>
-        <div class="match-list">
-            
-            <!-- МАТЧ 1: Pittsburgh Penguins vs Colorado Avalanche (Убран текст "16 ch") -->
+        
+        <!-- Блок информации под заголовком -->
+        <div class="info-section">
+            <div class="info-section-title">
+                <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                Information live game
+            </div>
+            <div class="info-section-text">Streams update automatically 15 minutes before the match starts. Click "Watch Live" to load the broadcast into the player.</div>
+        </div>
+
+        <!-- СПИСОК NHL МАТЧЕЙ (Компактный стиль Matchora, ссылки xr-beep) -->
+        <div class="match-list" id="nhl-matches">
+            <!-- МАТЧ 1 -->
             <div class="match-row">
                 <div class="match-info-top">
                     <div class="match-live-badge">LIVE</div>
@@ -158,19 +526,19 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
                 </div>
                 <div class="teams-container">
                     <div class="team-side">
-                        <img class="team-logo-img" src="https://github.io" alt="Pittsburgh Penguins Logo">
+                        <img class="team-logo-img" src="https://github.io" alt="">
                         <div class="teams-title">Pittsburgh Penguins</div>
                     </div>
                     <div class="vs-divider">vs</div>
                     <div class="team-side">
-                        <img class="team-logo-img" src="https://github.io" alt="Colorado Avalanche Logo">
+                        <img class="team-logo-img" src="https://github.io" alt="">
                         <div class="teams-title">Colorado Avalanche</div>
                     </div>
                 </div>
                 <button class="btn-stream" onclick="loadNhlStream('https://github.io')">Watch Live</button>
             </div>
 
-            <!-- МАТЧ 2: Boston Bruins vs Anaheim Ducks (Убран текст "13 ch") -->
+            <!-- МАТЧ 2 -->
             <div class="match-row">
                 <div class="match-info-top">
                     <div class="match-live-badge">LIVE</div>
@@ -178,12 +546,12 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
                 </div>
                 <div class="teams-container">
                     <div class="team-side">
-                        <img class="team-logo-img" src="https://github.io" alt="Boston Bruins Logo">
+                        <img class="team-logo-img" src="https://github.io" alt="">
                         <div class="teams-title">Boston Bruins</div>
                     </div>
                     <div class="vs-divider">vs</div>
                     <div class="team-side">
-                        <img class="team-logo-img" src="https://github.io" alt="Anaheim Ducks Logo">
+                        <img class="team-logo-img" src="https://github.io" alt="">
                         <div class="teams-title">Anaheim Ducks</div>
                     </div>
                 </div>
@@ -191,6 +559,29 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
             </div>
         </div>
 
+        <!-- СПИСОК БАСКЕТБОЛЬНЫХ МАТЧЕЙ (Скрыт по умолчанию) -->
+        <div class="match-list" id="basketball-matches" style="display: none;">
+            <div class="match-row">
+                <div class="match-info-top">
+                    <div class="match-live-badge">LIVE</div>
+                    <div class="match-time">06:30</div>
+                </div>
+                <div class="teams-container">
+                    <div class="team-side">
+                        <img class="team-logo-img" src="https://github.io" alt="" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://w3.org\' viewBox=\'0 0 24 24\' fill=\'%23858fa3\'><path d=\'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z\'/></svg>'">
+                        <div class="teams-title">LA Lakers</div>
+                    </div>
+                    <div class="vs-divider">vs</div>
+                    <div class="team-side">
+                        <img class="team-logo-img" src="https://github.io" alt="" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://w3.org\' viewBox=\'0 0 24 24\' fill=\'%23858fa3\'><path d=\'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z\'/></svg>'">
+                        <div class="teams-title">Golden State</div>
+                    </div>
+                </div>
+                <button class="btn-stream" onclick="loadNhlStream('https://github.io')">Watch Live</button>
+            </div>
+        </div>
+
+        <!-- ЧАТ -->
         <div class="grid-header">LIVE CHAT</div>
         <div class="chat-container">
             <div class="chat-messages" id="chatWindow"></div>
@@ -200,7 +591,6 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
             </div>
         </div>
     </div>
-
 </div> <!-- Конец main-layout -->
 
 <footer>
@@ -214,6 +604,24 @@ footer {margin-top:auto;padding:25px 10px;text-align:center;border-top:1px solid
 <script>
 const myUserId = Math.floor(1000 + Math.random() * 9000);
 
+// Переключение вкладок видов спорта с сохранением неоновой подсветки
+function switchSport(sportType, element) {
+    document.querySelectorAll('.sport-tab-btn').forEach(btn => btn.classList.remove('active-tab'));
+    element.classList.add('active-tab');
+    
+    const nhlList = document.getElementById('nhl-matches');
+    const basketList = document.getElementById('basketball-matches');
+    
+    if(sportType === 'nhl') {
+        nhlList.style.display = 'flex';
+        basketList.style.display = 'none';
+    } else {
+        nhlList.style.display = 'none';
+        basketList.style.display = 'flex';
+    }
+}
+
+// Загрузка трансляции
 function loadNhlStream(streamUrl) {
     const cover = document.getElementById('screenCover');
     const iframe = document.getElementById('nhlStreamIframe');
@@ -224,6 +632,7 @@ function loadNhlStream(streamUrl) {
     }
 }
 
+// Отправка сообщений
 function sendMessage() {
     const input = document.getElementById('chatInput');
     const window = document.getElementById('chatWindow');
