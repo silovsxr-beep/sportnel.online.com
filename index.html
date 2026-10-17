@@ -21,10 +21,7 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     -webkit-tap-highlight-color: transparent;
 }
-
-/* КРАСИВЫЙ АНИМИРОВАННЫЙ СПОРТИВНЫЙ ФОН КАК У SPORTCAST */
 body {
-    position: relative;
     background-color: var(--bg-body);
     color: var(--text-main);
     padding: 15px;
@@ -33,44 +30,9 @@ body {
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-    overflow-x: hidden;
 }
 
-/* Слой для бесконечного движения спортивного паттерна */
-body::before {
-    content: "";
-    position: fixed;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    z-index: -1;
-    background-image: url('https://postimg.cc'); 
-    background-repeat: repeat;
-    background-size: 500px auto;
-    opacity: 0.04; /* Едва заметный стильный фон */
-    animation: diagonalMove 45s linear infinite;
-    pointer-events: none;
-}
-
-/* Радиальное затемнение по краям экрана */
-body::after {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background: radial-gradient(circle, rgba(5,7,12,0) 40%, rgba(5,7,12,0.85) 100%);
-    pointer-events: none;
-}
-
-@keyframes diagonalMove {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(500px, 500px); }
-}
-/* --- ЗАКРЕПЛЕННЫЙ ЗАГОЛОВОК (ШАПКА) ПОД СТИЛЬ SPORTCAST --- */
+/* --- ЗАКРЕПЛЕННЫЙ ЗАГОЛОВОК (ШАПКА) ПОД СТИЛЬ ВТОРОГО ФОТО --- */
 .fixed-header-wrapper {
     position: fixed;
     top: 0;
@@ -125,7 +87,6 @@ header {
     object-fit: contain; 
 }
 /* ----------------------------------------------------------- */
-
 .container {
     width: 100%;
     max-width: 650px;
@@ -170,7 +131,7 @@ header {
     gap: 10px;
 }
 
-/* Стили для картинок-логотипов внутри самих кнопок переключения */
+/* Стили для img-логотипов внутри кнопок переключения */
 .sport-tab-btn img {
     width: 22px;
     height: 22px;
@@ -221,68 +182,24 @@ header {
     66% { background: linear-gradient(135deg, #ff9900 0%, #ff0055 100%); box-shadow: 0 0 20px rgba(255,153,0,0.8); }
 }
 
-/* ИСПРАВЛЕННАЯ СЕТКА СТАТИСТИКИ (ИЗНАЧАЛЬНО СКРЫТА ДЛЯ КРАСОТЫ) */
-.stats-grid-container {
-    display: none; /* Скрыто по умолчанию, управляется через JavaScript кнопки */
-    flex-direction: column;
-    gap: 25px;
-    width: 100%;
-    max-width: 650px;
-    margin: 30px auto;
-    padding: 0 10px;
-    box-sizing: border-box;
-}
-.stats-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 100%;
-    gap: 10px;
-}
-.stats-item-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    flex: 1;
-    min-width: 0;
-    text-align: center;
-}
-.stats-item-box img {
-    width: 45px;
-    height: 45px;
-    object-fit: contain;
-    display: block;
-    margin-bottom: 6px;
-    filter: drop-shadow(0 0 8px rgba(69,243,255,0.4));
-}
-.stats-item-label {
-    font-size: 11px;
-    font-weight: bold;
-    color: #ffffff;
-    margin-bottom: 6px;
-    text-transform: uppercase;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: 100%;
-}
+/* Блок статистики (Полоска с G 0 | A 0 | P 0) — исправленный ультра-компактный */
 .stats-badge-line {
-    font-size: 7.5px; /* Компактный шрифт, чтобы все влезло */
+    font-size: 7.5px; /* Немного уменьшили шрифт, чтобы всё влезло в одну строку */
     font-weight: 800;
-    font-family: -apple-system, BlinkMacSystemFont, monospace;
+    font-family: -apple-system, BlinkMacSystemFont, monospace; /* Компактный системный шрифт */
     color: #45f3ff;
     background: #11141d;
     border: 1px solid #1a2233;
-    padding: 3px 2px;
+    padding: 3px 2px; /* Уменьшили боковые отступы до минимума, сужая рамку */
     border-radius: 5px;
-    letter-spacing: -0.2px;
+    letter-spacing: -0.2px; /* Слегка сжали буквы, чтобы текст не разваливался */
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    width: 100%;
+    width: 100%; 
     box-sizing: border-box;
     text-align: center;
-    white-space: nowrap; /* Полный запрет переноса текста P 0 */
+    white-space: nowrap; /* Жесткий запрет переноса текста на новую строку */
 }
+
 
 .main-content-area { display: none; width: 100%; flex-direction: column; }
 .global-chat-area { display: none; width: 100%; flex-direction: column; }
@@ -290,7 +207,7 @@ header {
 .info-section {
     background-color: var(--bg-card);
     border: 1px solid var(--border-line);
-    border-left: 3px solid #b0b5c0;
+    border-left: 3px solid #45f3ff;
     border-radius: 12px;
     padding: 12px 16px;
     margin-top: 15px;
@@ -409,10 +326,10 @@ header {
         <div class="brand">SPORTNEL</div>
         <div class="social-links">
             <a href="https://t.me" class="social-icon tg" target="_blank">
-                <img src="https://icons8.com" alt="Telegram">
+                <img src="telegram-icon.png" alt="Telegram">
             </a>
             <a href="https://vk.com" class="social-icon vk" target="_blank">
-                <img src="https://icons8.com" alt="ВКонтакте">
+                <img src="vk-icon.png" alt="ВКонтакте">
             </a>
         </div>
     </header>
@@ -444,22 +361,22 @@ header {
             <div class="stats-item-box">
                 <img src="https://matchora.to" alt="NHL">
                 <div class="stats-item-label">NHL</div>
-                <div class="stats-badge-line">G 0 | A 0 | P 0</div>
+                <div class="stats-badge-line" style="white-space: nowrap;">G 0 | A 0 | P 0</div>
             </div>
             <div class="stats-item-box">
                 <img src="https://matchora.to" alt="NHL">
                 <div class="stats-item-label">NHL</div>
-                <div class="stats-badge-line">G 0 | A 0 | P 0</div>
+                <div class="stats-badge-line" style="white-space: nowrap;">G 0 | A 0 | P 0</div>
             </div>
             <div class="stats-item-box">
                 <img src="https://matchora.to" alt="NBA">
                 <div class="stats-item-label">NBA</div>
-                <div class="stats-badge-line">G 0 | A 0 | P 0</div>
+                <div class="stats-badge-line" style="white-space: nowrap;">G 0 | A 0 | P 0</div>
             </div>
             <div class="stats-item-box">
                 <img src="https://matchora.to" alt="NBA">
                 <div class="stats-item-label">NBA</div>
-                <div class="stats-badge-line">G 0 | A 0 | P 0</div>
+                <div class="stats-badge-line" style="white-space: nowrap;">G 0 | A 0 | P 0</div>
             </div>
         </div>
 
@@ -468,20 +385,22 @@ header {
             <div class="stats-item-box">
                 <img src="https://matchora.to" alt="NHL">
                 <div class="stats-item-label">NHL</div>
-                <div class="stats-badge-line">G 0 | A 0 | P 0</div>
+                <div class="stats-badge-line" style="white-space: nowrap;">G 0 | A 0 | P 0</div>
             </div>
             <div class="stats-item-box">
                 <img src="https://matchora.to" alt="NBA">
                 <div class="stats-item-label">NBA</div>
-                <div class="stats-badge-line">G 0 | A 0 | P 0</div>
+                <div class="stats-badge-line" style="white-space: nowrap;">G 0 | A 0 | P 0</div>
             </div>
             <div class="stats-item-box">
                 <img src="https://matchora.to" alt="NHL">
                 <div class="stats-item-label">NHL</div>
-                <div class="stats-badge-line">G 0 | A 0 | P 0</div>
+                <div class="stats-badge-line" style="white-space: nowrap;">G 0 | A 0 | P 0</div>
             </div>
         </div>
     </div>
+
+
 
     <div class="main-layout">
         <div class="player-column">
@@ -502,57 +421,6 @@ header {
                 </div>
             </div>
         </div>
-        <div class="right-sidebar">
-            <div class="main-content-area" id="contentArea">
-                <div class="grid-header">TODAY'S SCHEDULE</div>
-                
-                <!-- ОБНОВЛЕННЫЙ ТЕМНО-БЕЛЫЙ ИНФО-БЛОК СО СВЕЧЕНИЕМ -->
-                <div class="info-section" style="margin-bottom: 25px; border-left-color: #b0b5c0; box-shadow: 0 0 15px rgba(176, 181, 192, 0.2);">
-                    <div class="info-section-title" style="color: #d1d5db; text-shadow: 0 0 8px rgba(209, 213, 219, 0.5);">
-                        <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-                        Information live game
-                    </div>
-                    <div class="info-section-text" style="color: #9ca3af;">Stream NBA and NHL for free every day.</div>
-                </div>
-
-                <!-- СПИСОК NHL МАТЧЕЙ -->
-                <div class="match-list" id="nhl-matches">
-                    <div class="match-row" onclick="loadNhlStream('https://matchora.to')">
-                        <div class="match-info-top">
-                            <div class="match-live-badge">LIVE</div>
-                            <div class="match-time">04:00</div>
-                        </div>
-                        <div class="teams-container">
-                            <div class="team-side">
-                                <img class="team-logo-img" src="https://matchora.to" alt="">
-                                <div class="teams-title">Pittsburgh Penguins</div>
-                            </div>
-                            <div class="vs-divider">vs</div>
-                            <div class="team-side">
-                                <img class="team-logo-img" src="https://matchora.to" alt="">
-                                <div class="teams-title">Colorado Avalanche</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="match-row" onclick="loadNhlStream('https://matchora.to')">
-                        <div class="match-info-top">
-                            <div class="match-live-badge">LIVE</div>
-                            <div class="match-time">05:00</div>
-                        </div>
-                        <div class="teams-container">
-                            <div class="team-side">
-                                <img class="team-logo-img" src="https://matchora.to" alt="">
-                                <div class="teams-title">Boston Bruins</div>
-                            </div>
-                            <div class="vs-divider">vs</div>
-                            <div class="team-side">
-                                <img class="team-logo-img" src="https://matchora.to" alt="">
-                                <div class="teams-title">Anaheim Ducks</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
         <div class="right-sidebar">
             <div class="main-content-area" id="contentArea">
                 <div class="grid-header">TODAY'S SCHEDULE</div>
@@ -736,13 +604,34 @@ header {
             margin-bottom: 25px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.4);
         ">
-            <span style="color: #555555; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700;">Latvia</span>
+            <span style="
+                color: #555555; 
+                font-size: 11px; 
+                letter-spacing: 1.5px; 
+                text-transform: uppercase; 
+                font-weight: 700;
+            ">Latvia</span>
             <span style="color: #333333; font-size: 12px;">|</span>
-            <span id="latviaTimer" style="color: #45f3ff; font-family: 'Courier New', Courier, monospace; font-size: 16px; font-weight: bold; letter-spacing: 0.5px; text-shadow: 0 0 8px rgba(69,243,255,0.3);">00:00:00</span>
+            <span id="latviaTimer" style="
+                color: #45f3ff; 
+                font-family: 'Courier New', Courier, monospace; 
+                font-size: 16px; 
+                font-weight: bold;
+                letter-spacing: 0.5px;
+                text-shadow: 0 0 8px rgba(69,243,255,0.3);
+            ">00:00:00</span>
         </div>
 
-        <!-- ТЕКСТ НА АНГЛИЙСКОМ С СЫЛКАМИ -->
-        <div class="footer-description" style="color: #999999; font-size: 13.5px; margin-bottom: 20px; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.5;">
+        <!-- ТЕКСТ НА АНГЛИЙСКОМ С ОФИЦИАЛЬНЫМИ ССЫЛКАМИ -->
+        <div class="footer-description" style="
+            color: #999999; 
+            font-size: 13.5px; 
+            margin-bottom: 20px; 
+            max-width: 500px; 
+            margin-left: auto; 
+            margin-right: auto;
+            line-height: 1.5;
+        ">
             Here you can watch NHL and NBA live streams for free every day. 
             Official resources: <a href="https://nhl.com" target="_blank" style="color: #0070f3; text-decoration: none; font-weight: 600;">NHL.com</a> and 
             <a href="https://nba.com" target="_blank" style="color: #ff5500; text-decoration: none; font-weight: 600;">NBA.com</a>. 
@@ -755,10 +644,22 @@ header {
         
         <hr style="border: 0; border-top: 1px solid #1f1f1f; margin: 20px 0;">
         
-        <div class="footer-bottom" style="display: flex; justify-content: space-between; align-items: center; color: #444444; font-size: 12px; letter-spacing: 0.5px;">
-            <div class="copyright">© 2026 Sportnel. All rights reserved.</div>
-            <div class="site-type" style="text-transform: uppercase; font-size: 11px; font-weight: 700; color: #555555;">Live Streams</div>
+        <div class="footer-bottom" style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #444444;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        ">
+            <div class="copyright">
+                © 2026 Sportnel. All rights reserved.
+            </div>
+            <div class="site-type" style="text-transform: uppercase; font-size: 11px; font-weight: 700; color: #555555;">
+                Live Streams
+            </div>
         </div>
+        
     </div>
 </footer>
 
@@ -782,12 +683,10 @@ function updateLatviaClock() {
 setInterval(updateLatviaClock, 1000);
 updateLatviaClock();
 
-// ИСПРАВЛЕННАЯ ФУНКЦИЯ: СКРЫВАЕТ СТАТИСТИКУ ПРИ НАЖАТИИ НА КНОПКИ МАТЧЕЙ ИЛИ ЧАТА
 function switchSport(type, element) {
     document.querySelectorAll('.sport-tab-btn').forEach(btn => btn.classList.remove('active-tab'));
     element.classList.add('active-tab');
 
-    // Прячем статистику welcomeLogos при переключении
     document.getElementById('welcomeLogos').style.display = 'none';
 
     const contentArea = document.getElementById('contentArea');
