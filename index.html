@@ -40,16 +40,17 @@ body {
     display: flex;
     flex-direction: column;
 }
-/* Обновленная свободная шапка с защитой от обрезания заголовка */
+/* ИСПРАВЛЕННАЯ РАМКА: Сдвинута вниз от края экрана и закруглена со всех сторон */
 header {
     position: sticky;
-    top: 0;
+    top: 10px; /* Сделали небольшой отступ сверху при скролле */
+    margin-top: 12px; /* Опустили шапку вниз, чтобы она не упиралась в верхнюю панель */
     z-index: 1000;
     width: 100%;
     background-color: #090d1a;
     border: 1px solid var(--border-line);
-    padding: 16px 20px; /* Увеличили отступы, чтобы рамка выглядела просторно */
-    border-radius: 0 0 14px 14px;
+    padding: 16px 20px;
+    border-radius: 14px; /* Красивое круговое закругление всей рамки */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -58,12 +59,12 @@ header {
 }
 .brand {
     font-family: 'Impact', 'Arial Black', sans-serif;
-    font-size: 24px; /* Оптимальный размер, чтобы SPORTNEL сидел идеально */
+    font-size: 24px;
     font-weight: 900;
     letter-spacing: 1.5px;
     text-transform: uppercase;
     color: #ffffff;
-    flex: 1; /* Позволяет заголовку занимать всё свободное место слева */
+    flex: 1;
     min-width: 0;
     white-space: nowrap;
     overflow: hidden;
@@ -73,14 +74,13 @@ header {
     display: flex; 
     align-items: center; 
     gap: 16px; 
-    flex-shrink: 0; /* Не даёт иконкам сжимать заголовок */
+    flex-shrink: 0;
 }
-/* Стили для твоих новых картинок вместо старых значков */
 .social-icon-img {
     width: 24px;
     height: 24px;
     object-fit: contain;
-    border-radius: 4px; /* Легкое скругление для красоты, если загрузишь квадратное фото */
+    border-radius: 4px;
     transition: transform 0.2s ease;
 }
 .social-icon-link:hover .social-icon-img {
@@ -130,7 +130,6 @@ header {
 }
 .sport-btn-left { display: flex; align-items: center; gap: 12px; }
 
-/* Теги img для логотипов в кнопках — меняй ссылки src когда захочешь */
 .sport-tab-btn img {
     width: 24px;
     height: 24px;
@@ -138,7 +137,6 @@ header {
 }
 .sport-tab-btn .badge-live-text { font-size: 11px; font-weight: 800; color: var(--text-grey); opacity: 0.6; }
 
-/* Ховеры и активные состояния */
 .sport-tab-btn.nhl-tab:hover { border-color: var(--accent-nhl); background: #16223d; }
 .sport-tab-btn.basket-tab:hover { border-color: var(--accent-nba); background: #2b1c15; }
 .sport-tab-btn.chat-tab:hover { border-color: var(--accent-chat); background: #221635; }
@@ -147,7 +145,6 @@ header {
 .sport-tab-btn.active-tab.basket-tab { background: var(--accent-nba); border-color: transparent; box-shadow: 0 0 15px rgba(255,85,0,0.3); }
 .sport-tab-btn.active-tab.chat-tab { background: var(--accent-chat); border-color: transparent; box-shadow: 0 0 15px rgba(121,40,202,0.3); }
 
-/* Приветственные плитки лиг по центру */
 .welcome-logos-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -319,7 +316,7 @@ header {
 @media (min-width: 992px) {
     .container { max-width: 1280px !important; }
     .main-layout { display: grid; grid-template-columns: 1.4fr 1.1fr; gap: 24px; width: 100%; align-items: start; }
-    .player-column { position: sticky; top: 70px; }
+    .player-column { position: sticky; top: 85px; }
     .right-sidebar { display: flex; flex-direction: column; gap: 8px; }
 }
 </style>
@@ -327,18 +324,15 @@ header {
 <body>
 <div class="container">
 <header>
-<!-- Заголовок SPORTNEL, который теперь гарантированно влезает целиком -->
 <div class="brand">SPORTNEL</div>
 <div class="social-links">
-    <!-- Telegram через тег img — можешь менять ссылку в src на любую картинку -->
+    <!-- Ссылки-картинки, которые ты сможешь настроить сам -->
     <a href="https://t.me" class="social-icon-link" target="_blank">
         <img class="social-icon-img" src="https://icons8.com" alt="Telegram">
     </a>
-    <!-- TikTok через тег img — можешь менять ссылку в src на любую картинку -->
     <a href="https://tiktok.com" class="social-icon-link" target="_blank">
         <img class="social-icon-img" src="https://icons8.com" alt="TikTok">
     </a>
-    <!-- Меню-бургер -->
     <button class="menu-burger-btn">
         <svg style="width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:2.5; stroke-linecap:round;" viewBox="0 0 24 24">
             <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -352,7 +346,6 @@ header {
 <div class="sports-nav-wrapper">
     <div class="sports-main-title">LIVE SPORTS</div>
     <div class="sports-options">
-        <!-- Кнопка NHL с надписью и картинкой -->
         <button class="sport-tab-btn nhl-tab" onclick="switchSport('nhl', this)">
             <div class="sport-btn-left">
                 <img src="https://matchora.to" alt="NHL Logo">
@@ -360,7 +353,6 @@ header {
             </div>
             <span class="badge-live-text">NHL LIVE</span>
         </button>
-        <!-- Кнопка NBA с надписью и картинкой -->
         <button class="sport-tab-btn basket-tab" onclick="switchSport('basketball', this)">
             <div class="sport-btn-left">
                 <img src="https://matchora.to" alt="NBA Logo">
@@ -368,7 +360,6 @@ header {
             </div>
             <span class="badge-live-text">NBA LIVE</span>
         </button>
-        <!-- Кнопка ЧАТА -->
         <button class="sport-tab-btn chat-tab" onclick="switchSport('global-chat', this)">
             <div class="sport-btn-left">
                 <img src="https://icons8.com" alt="Chat Logo">
@@ -380,7 +371,6 @@ header {
 </div>
 
 <div class="welcome-logos-container" id="welcomeLogos">
-    <!-- Центральные плитки со стандартными тегами img (ссылки в src легко заменяются на твои) -->
     <div class="welcome-logo-box nhl-glow" onclick="switchSport('nhl', document.querySelector('.nhl-tab'))">
         <img src="https://matchora.to" alt="NHL Large">
         <span>NHL LIVE</span>
@@ -619,11 +609,11 @@ header {
 const myUserId = Math.floor(1000 + Math.random() * 9000);
 
 function switchSport(type, element) {
-    // Сбрасываем активные классы со всех горизонтальных вкладок-кнопок
+    // Снимаем класс активности со всех горизонтальных кнопок-вкладок
     document.querySelectorAll('.sport-tab-btn').forEach(btn => btn.classList.remove('active-tab'));
     if (element) element.classList.add('active-tab');
 
-    // Прячем центральные приветственные блоки с логотипами
+    // Скрываем стартовые логотипы лиг по центру
     document.getElementById('welcomeLogos').style.display = 'none';
 
     const contentArea = document.getElementById('contentArea');
@@ -634,7 +624,7 @@ function switchSport(type, element) {
     const infoSectionNHL = document.getElementById('infoSectionNHL');
     const infoSectionNBA = document.getElementById('infoSectionNBA');
 
-    // Отключаем воспроизведение стрима при переключении категорий
+    // Гасим плеер и сбрасываем ссылку на стрим для остановки фонового трафика
     streamDisplay.style.display = 'none';
     document.getElementById('nhlStreamIframe').src = '';
 
@@ -667,7 +657,7 @@ function loadNhlStream(streamUrl) {
         streamDisplay.style.display = 'flex';
         iframe.src = streamUrl;
         
-        // Автоматический плавный скролл к плееру на мобилках
+        // Плавный автоматический скролл к плееру на мобильных устройствах
         if (window.innerWidth < 992) {
             streamDisplay.scrollIntoView({ behavior: 'smooth' });
         }
