@@ -491,43 +491,232 @@ header {
                 </div>
 
                 <!-- СПИСОК NHL МАТЧЕЙ -->
-                <div class="match-list" id="nhl-matches">
-                    <div class="match-row" onclick="loadNhlStream('https://matchora.to')">
-                        <div class="match-info-top">
-                            <div class="match-live-badge">LIVE</div>
-                            <div class="match-time">04:00</div>
-                        </div>
-                        <div class="teams-container">
-                            <div class="team-side">
-                                <img class="team-logo-img" src="https://matchora.to" alt="">
-                                <div class="teams-title">Pittsburgh Penguins</div>
-                            </div>
-                            <div class="vs-divider">vs</div>
-                            <div class="team-side">
-                                <img class="team-logo-img" src="https://matchora.to" alt="">
-                                <div class="teams-title">Colorado Avalanche</div>
-                            </div>
-                        </div>
-                    </div>
+<div class="match-list" id="nhl-matches">
+    
+    <!-- МАТЧИ В ПРЯМОМ ЭФИРЕ (LIVE) -->
+    <div class="match-row" onclick="loadNhlStream('https://matchora.to')">
+        <div class="match-info-top">
+            <div class="match-live-badge">LIVE</div>
+            <div class="match-time">LIVE</div>
+        </div>
+        <div class="teams-container">
+            <div class="team-side">
+                <img class="team-logo-img" src="https://matchora.to" alt="Winnipeg Jets">
+                <div class="teams-title">Winnipeg Jets</div>
+            </div>
+            <div class="vs-divider">vs</div>
+            <div class="team-side">
+                <img class="team-logo-img" src="https://matchora.to" alt="Carolina Hurricanes">
+                <div class="teams-title">Carolina Hurricanes</div>
+            </div>
+        </div>
+    </div>
 
-                    <div class="match-row" onclick="loadNhlStream('https://matchora.to')">
-                        <div class="match-info-top">
-                            <div class="match-live-badge">LIVE</div>
-                            <div class="match-time">05:00</div>
-                        </div>
-                        <div class="teams-container">
-                            <div class="team-side">
-                                <img class="team-logo-img" src="https://matchora.to" alt="">
-                                <div class="teams-title">Boston Bruins</div>
-                            </div>
-                            <div class="vs-divider">vs</div>
-                            <div class="team-side">
-                                <img class="team-logo-img" src="https://matchora.to" alt="">
-                                <div class="teams-title">Anaheim Ducks</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="match-row" onclick="loadNhlStream('https://matchora.to')">
+        <div class="match-info-top">
+            <div class="match-live-badge">LIVE</div>
+            <div class="match-time">LIVE</div>
+        </div>
+        <div class="teams-container">
+            <div class="team-side">
+                <img class="team-logo-img" src="https://matchora.to" alt="Tampa Bay Lightning">
+                <div class="teams-title">Tampa Bay Lightning</div>
+            </div>
+            <div class="vs-divider">vs</div>
+            <div class="team-side">
+                <img class="team-logo-img" src="https://matchora.to" alt="Vancouver Canucks">
+                <div class="teams-title">Vancouver Canucks</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- МАТЧИ ЗАВТРА (ПО ПОРЯДКУ ВРЕМЕНИ) -->
+    <div class="match-row" onclick="loadNhlStream('https://matchora.to')">
+        <div class="match-info-top">
+            <div class="match-time">01:00</div>
+        </div>
+        <div class="teams-container">
+            <div class="team-side">
+                <img class="team-logo-img" src="https://matchora.to" alt="Florida Panthers">
+                <div class="teams-title">Florida Panthers</div>
+            </div>
+            <div class="vs-divider">vs</div>
+            <div class="team-side">
+                <img class="team-logo-img" src="https://matchora.to" alt="Seattle Kraken">
+                <div class="teams-title">Seattle Kraken</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="match-row" onclick="loadNhlStream('https://matchora.to')">
+        <div class="match-info-top">
+            <div class="match-time">02:00</div>
+        </div>
+        <div class="teams-container">
+            <div class="team-side">
+                <img class="team-logo-img" src="https://matchora.to" alt="Chicago Blackhawks">
+                <div class="teams-title">Chicago Blackhawks</div>
+            </div>
+            <div class="vs-divider">vs</div>
+            <div class="team-side">
+                <img class="team-logo-img" src="https://matchora.to" alt="Dallas Stars">
+                <div class="teams-title">Dallas Stars</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="match-row" onclick="loadNhlStream('https://matchora.to')">
+        <div class="match-info-top">
+            <div class="match-time">02:00</div>
+        </div>
+        <div class="teams-container">
+            <div class="team-side">
+                <img class="team-logo-img" src="https://matchora.to" alt="Columbus Blue Jackets">
+                <div class="teams-title">Columbus Blue Jackets</div>
+            </div>
+            <div class="vs-divider">vs</div>
+            <div class="team-side">
+                <img class="team-logo-img" src="https://matchora.to" alt="New York Rangers">
+                <div class="teams-title">New York Rangers</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="match-row" onclick="loadNhlStream('https://matchora.to')">
+        <div class="match-info-top">
+            <div class="match-time">02:00</div>
+        </div>
+        <div class="teams-container">
+            <div class="team-side">
+                <img class="team-logo-img" src="https://matchora.to" alt="Detroit Red Wings">
+                <div class="teams-title">Detroit Red Wings</div>
+            </div>
+            <div class="vs-divider">vs</div>
+            <div class="team-side">
+                <img class="team-logo-img" src="https://matchora.to" alt="San Jose Sharks">
+                <div class="teams-title">San Jose Sharks</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="match-row" onclick="loadNhlStream('https://matchora.to')">
+        <div class="match-info-top">
+            <div class="match-time">02:00</div>
+        </div>
+        <div class="teams-container">
+            <div class="team-side">
+                <img class="team-logo-img" src="https://matchora.to" alt="Montreal Canadiens">
+                <div class="teams-title">Montreal Canadiens</div>
+            </div>
+            <div class="vs-divider">vs</div>
+            <div class="team-side">
+                <img class="team-logo-img" src="https://matchora.to" alt="Buffalo Sabres">
+                <div class="teams-title">Buffalo Sabres</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="match-row" onclick="loadNhlStream('https://matchora.to')">
+        <div class="match-info-top">
+            <div class="match-time">02:00</div>
+        </div>
+        <div class="teams-container">
+            <div class="team-side">
+                <img class="team-logo-img" src="https://matchora.to" alt="Philadelphia Flyers">
+                <div class="teams-title">Philadelphia Flyers</div>
+            </div>
+            <div class="vs-divider">vs</div>
+            <div class="team-side">
+                <img class="team-logo-img" src="https://matchora.to" alt="Ottawa Senators">
+                <div class="teams-title">Ottawa Senators</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="match-row" onclick="loadNhlStream('https://matchora.to')">
+        <div class="match-info-top">
+            <div class="match-time">02:00</div>
+        </div>
+        <div class="teams-container">
+            <div class="team-side">
+                <img class="team-logo-img" src="https://matchora.to" alt="Toronto Maple Leafs">
+                <div class="teams-title">Toronto Maple Leafs</div>
+            </div>
+            <div class="vs-divider">vs</div>
+            <div class="team-side">
+                <img class="team-logo-img" src="https://matchora.to" alt="New York Islanders">
+                <div class="teams-title">New York Islanders</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="match-row" onclick="loadNhlStream('https://matchora.to')">
+        <div class="match-info-top">
+            <div class="match-time">03:00</div>
+        </div>
+        <div class="teams-container">
+            <div class="team-side">
+                <img class="team-logo-img" src="https://matchora.to" alt="Nashville Predators">
+                <div class="teams-title">Nashville Predators</div>
+            </div>
+            <div class="vs-divider">vs</div>
+            <div class="team-side">
+                <img class="team-logo-img" src="https://matchora.to" alt="St. Louis Blues">
+                <div class="teams-title">St. Louis Blues</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="match-row" onclick="loadNhlStream('https://matchora.to')">
+        <div class="match-info-top">
+            <div class="match-time">04:00</div>
+        </div>
+        <div class="teams-container">
+            <div class="team-side">
+                <img class="team-logo-img" src="https://matchora.to" alt="Los Angeles Kings">
+                <div class="teams-title">Los Angeles Kings</div>
+            </div>
+            <div class="vs-divider">vs</div>
+            <div class="team-side">
+                <img class="team-logo-img" src="https://matchora.to" alt="Boston Bruins">
+                <div class="teams-title">Boston Bruins</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="match-row" onclick="loadNhlStream('https://matchora.to')">
+        <div class="match-info-top">
+            <div class="match-time">05:00</div>
+        </div>
+        <div class="teams-container">
+            <div class="team-side">
+                <img class="team-logo-img" src="https://matchora.to" alt="Utah Mammoth">
+                <div class="teams-title">Utah Mammoth</div>
+            </div>
+            <div class="vs-divider">vs</div>
+            <div class="team-side">
+                <img class="team-logo-img" src="https://matchora.to" alt="Edmonton Oilers">
+                <div class="teams-title">Edmonton Oilers</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="match-row" onclick="loadNhlStream('https://matchora.to')">
+        <div class="match-info-top">
+            <div class="match-time">05:00</div>
+        </div>
+        <div class="teams-container">
+            <div class="team-side">
+                <img class="team-logo-img" src="https://matchora.to" alt="Vegas Golden Knights">
+                <div class="teams-title">Vegas Golden Knights</div>
+            </div>
+            <div class="vs-divider">vs</div>
+            <div class="team-side">
+                <img class="team-logo-img" src="https://matchora.to" alt="Pittsburgh Penguins">
+                <div class="teams-title">Pittsburgh Penguins</div>
+            </div>
+        </div>
+
                 <!-- СПИСОК БАСКЕТБОЛЬНЫХ МАТЧЕЙ -->
                 <div class="match-list" id="basketball-matches">
                     <div class="match-row" onclick="loadNhlStream('https://matchora.to')">
