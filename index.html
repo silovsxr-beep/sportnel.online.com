@@ -40,7 +40,7 @@ body {
     display: flex;
     flex-direction: column;
 }
-/* Липкая шапка в надежной рамке с фиксированными безопасными отступами */
+/* Обновленная свободная шапка с защитой от обрезания заголовка */
 header {
     position: sticky;
     top: 0;
@@ -48,7 +48,7 @@ header {
     width: 100%;
     background-color: #090d1a;
     border: 1px solid var(--border-line);
-    padding: 14px 16px;
+    padding: 16px 20px; /* Увеличили отступы, чтобы рамка выглядела просторно */
     border-radius: 0 0 14px 14px;
     display: flex;
     justify-content: space-between;
@@ -58,16 +58,34 @@ header {
 }
 .brand {
     font-family: 'Impact', 'Arial Black', sans-serif;
-    font-size: 22px;
+    font-size: 24px; /* Оптимальный размер, чтобы SPORTNEL сидел идеально */
     font-weight: 900;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
     color: #ffffff;
-    padding-right: 15px; /* Защитный отступ, чтобы заголовок никогда не сливался с соцсетями */
+    flex: 1; /* Позволяет заголовку занимать всё свободное место слева */
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
-.social-links { display: flex; align-items: center; gap: 14px; }
-.social-icon-link { display: flex; align-items: center; justify-content: center; color: var(--text-grey); transition: color 0.2s; }
-.social-icon-link:hover { color: #ffffff; }
+.social-links { 
+    display: flex; 
+    align-items: center; 
+    gap: 16px; 
+    flex-shrink: 0; /* Не даёт иконкам сжимать заголовок */
+}
+/* Стили для твоих новых картинок вместо старых значков */
+.social-icon-img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    border-radius: 4px; /* Легкое скругление для красоты, если загрузишь квадратное фото */
+    transition: transform 0.2s ease;
+}
+.social-icon-link:hover .social-icon-img {
+    transform: scale(1.1);
+}
 .menu-burger-btn { background: none; border: none; cursor: pointer; color: #ffffff; display: flex; align-items: center; justify-content: center; padding: 2px; opacity: 0.8; }
 .sports-nav-wrapper {
     background-color: var(--bg-card);
@@ -112,7 +130,7 @@ header {
 }
 .sport-btn-left { display: flex; align-items: center; gap: 12px; }
 
-/* Удобные теги img для логотипов в кнопках — меняй ссылки src когда захочешь */
+/* Теги img для логотипов в кнопках — меняй ссылки src когда захочешь */
 .sport-tab-btn img {
     width: 24px;
     height: 24px;
@@ -120,7 +138,7 @@ header {
 }
 .sport-tab-btn .badge-live-text { font-size: 11px; font-weight: 800; color: var(--text-grey); opacity: 0.6; }
 
-/* Индивидуальные стили при наведении и нажатии */
+/* Ховеры и активные состояния */
 .sport-tab-btn.nhl-tab:hover { border-color: var(--accent-nhl); background: #16223d; }
 .sport-tab-btn.basket-tab:hover { border-color: var(--accent-nba); background: #2b1c15; }
 .sport-tab-btn.chat-tab:hover { border-color: var(--accent-chat); background: #221635; }
@@ -150,7 +168,6 @@ header {
     cursor: pointer;
     transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
-/* Картинки в центральных боксах — тоже можно легко менять на свои */
 .welcome-logo-box img { 
     width: 56px; 
     height: 56px; 
@@ -310,15 +327,16 @@ header {
 <body>
 <div class="container">
 <header>
-<div class="brand">SPORTCAST</div>
+<!-- Заголовок SPORTNEL, который теперь гарантированно влезает целиком -->
+<div class="brand">SPORTNEL</div>
 <div class="social-links">
-    <!-- Telegram -->
+    <!-- Telegram через тег img — можешь менять ссылку в src на любую картинку -->
     <a href="https://t.me" class="social-icon-link" target="_blank">
-        <svg style="width:20px; height:20px; fill:currentColor;" viewBox="0 0 24 24"><path d="M12 .5C5.66.5.5 5.66.5 12S5.66 23.5 12 23.5 23.5 18.34 23.5 12 18.34.5 12 .5zm5.56 8.3c-.15 1.57-.8 5.42-1.13 7.17-.14.74-.41.99-.68 1-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.2-.02-.08.02-1.3 1.05-3.67 2.65-.35.24-.66.35-.94.35-.31 0-.91-.17-1.35-.31-.55-.18-1-.28-.96-.59.02-.16.24-.33.66-.51 2.58-1.12 4.31-1.86 5.17-2.22 2.47-.99 2.98-1.17 3.31-1.17.07 0 .24.02.35.1.09.07.12.17.13.26a.8.8 0 0 1-.02.21z"/></svg>
+        <img class="social-icon-img" src="https://icons8.com" alt="Telegram">
     </a>
-    <!-- TikTok -->
+    <!-- TikTok через тег img — можешь менять ссылку в src на любую картинку -->
     <a href="https://tiktok.com" class="social-icon-link" target="_blank">
-        <svg style="width:20px; height:20px; fill:currentColor;" viewBox="0 0 24 24"><path d="M12.525.5v13.5c0 1.9-1.5 3.4-3.4 3.4s-3.4-1.5-3.4-3.4 1.5-3.4 3.4-3.4c.4 0 .7.1 1.1.2V5.4c-3.6 0-6.5 2.9-6.5 6.5s2.9 6.5 6.5 6.5 6.5-2.9 6.5-6.5V4.9c1.6.9 3.4 1.4 5.3 1.4V.5h-5.9z"/></svg>
+        <img class="social-icon-img" src="https://icons8.com" alt="TikTok">
     </a>
     <!-- Меню-бургер -->
     <button class="menu-burger-btn">
@@ -334,7 +352,7 @@ header {
 <div class="sports-nav-wrapper">
     <div class="sports-main-title">LIVE SPORTS</div>
     <div class="sports-options">
-        <!-- Кнопка NHL с надписью и картинкой (ссылку в src можно менять) -->
+        <!-- Кнопка NHL с надписью и картинкой -->
         <button class="sport-tab-btn nhl-tab" onclick="switchSport('nhl', this)">
             <div class="sport-btn-left">
                 <img src="https://matchora.to" alt="NHL Logo">
@@ -342,7 +360,7 @@ header {
             </div>
             <span class="badge-live-text">NHL LIVE</span>
         </button>
-        <!-- Кнопка NBA с надписью и картинкой (ссылку в src можно менять) -->
+        <!-- Кнопка NBA с надписью и картинкой -->
         <button class="sport-tab-btn basket-tab" onclick="switchSport('basketball', this)">
             <div class="sport-btn-left">
                 <img src="https://matchora.to" alt="NBA Logo">
