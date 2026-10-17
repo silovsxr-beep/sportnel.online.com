@@ -40,20 +40,22 @@ body {
     display: flex;
     flex-direction: column;
 }
-/* ИСПРАВЛЕННАЯ РАМКА: Сдвинута вниз от края экрана и закруглена со всех сторон */
+/* Адаптивная липкая шапка с защитой от сжатия текста на мелких экранах */
 header {
     position: sticky;
-    top: 10px; /* Сделали небольшой отступ сверху при скролле */
-    margin-top: 12px; /* Опустили шапку вниз, чтобы она не упиралась в верхнюю панель */
+    top: 10px;
+    margin-top: 12px;
     z-index: 1000;
     width: 100%;
     background-color: #090d1a;
     border: 1px solid var(--border-line);
     padding: 16px 20px;
-    border-radius: 14px; /* Красивое круговое закругление всей рамки */
+    border-radius: 14px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap; /* Позволяет элементам переноситься, если экран слишком узкий */
+    gap: 10px;
     margin-bottom: 20px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
@@ -64,11 +66,7 @@ header {
     letter-spacing: 1.5px;
     text-transform: uppercase;
     color: #ffffff;
-    flex: 1;
-    min-width: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    min-width: 120px;
 }
 .social-links { 
     display: flex; 
@@ -312,6 +310,7 @@ header {
 .footer-info-section a.email-link { color: #7b7b7b; text-decoration: underline; }
 .footer-info-section a.email-link:hover { color: var(--text-main); }
 .footer-bottom { display: flex; justify-content: space-between; align-items: center; color: #555555; font-size: 13px; }
+.footer-description-text { margin-top: 8px; font-size: 13px; color: #666666; line-height: 1.4; text-align: left; }
 
 @media (min-width: 992px) {
     .container { max-width: 1280px !important; }
@@ -326,7 +325,6 @@ header {
 <header>
 <div class="brand">SPORTNEL</div>
 <div class="social-links">
-    <!-- Ссылки-картинки, которые ты сможешь настроить сам -->
     <a href="https://t.me" class="social-icon-link" target="_blank">
         <img class="social-icon-img" src="https://icons8.com" alt="Telegram">
     </a>
@@ -602,6 +600,10 @@ header {
             <div class="copyright">&copy; 2026 Sportnel. All rights reserved.</div>
             <div class="site-type">Live Streams</div>
         </div>
+        <!-- Новое описание платформы строго по вашему тексту на английском -->
+        <div class="footer-description-text">
+            This is a platform for hockey. There will be NHL and NBA broadcasts here. Watch NHL and NBA matches for free every day.
+        </div>
     </div>
 </footer>
 </div> <!-- Конец .container -->
@@ -609,7 +611,7 @@ header {
 const myUserId = Math.floor(1000 + Math.random() * 9000);
 
 function switchSport(type, element) {
-    // Снимаем класс активности со всех горизонтальных кнопок-вкладок
+    // Снимаем класс активности со всех горизонтальных вкладок-кнопок
     document.querySelectorAll('.sport-tab-btn').forEach(btn => btn.classList.remove('active-tab'));
     if (element) element.classList.add('active-tab');
 
@@ -624,7 +626,7 @@ function switchSport(type, element) {
     const infoSectionNHL = document.getElementById('infoSectionNHL');
     const infoSectionNBA = document.getElementById('infoSectionNBA');
 
-    // Гасим плеер и сбрасываем ссылку на стрим для остановки фонового трафика
+    // Отключаем воспроизведение стрима при переключении категорий
     streamDisplay.style.display = 'none';
     document.getElementById('nhlStreamIframe').src = '';
 
@@ -657,7 +659,7 @@ function loadNhlStream(streamUrl) {
         streamDisplay.style.display = 'flex';
         iframe.src = streamUrl;
         
-        // Плавный автоматический скролл к плееру на мобильных устройствах
+        // Автоматический плавный скролл к плееру на мобилках
         if (window.innerWidth < 992) {
             streamDisplay.scrollIntoView({ behavior: 'smooth' });
         }
