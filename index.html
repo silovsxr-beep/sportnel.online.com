@@ -237,22 +237,24 @@ header {
     width: 100%;
 }
 
-/* Блок статистики (Полоска с G 0 | A 0 | P 0) */
+/* Блок статистики (Полоска с G 0 | A 0 | P 0) — исправленный ультра-компактный */
 .stats-badge-line {
-    font-size: 8px; /* Чуть уменьшили размер, чтобы гарантированно влезало на маленьких смартфонах */
+    font-size: 7.5px; /* Немного уменьшили шрифт, чтобы всё влезло в одну строку */
     font-weight: 800;
-    font-family: monospace;
+    font-family: -apple-system, BlinkMacSystemFont, monospace; /* Компактный системный шрифт */
     color: #45f3ff;
     background: #11141d;
     border: 1px solid #1a2233;
-    padding: 4px 5px;
-    border-radius: 6px;
-    letter-spacing: 0.2px;
+    padding: 3px 2px; /* Уменьшили боковые отступы до минимума, сужая рамку */
+    border-radius: 5px;
+    letter-spacing: -0.2px; /* Слегка сжали буквы, чтобы текст не разваливался */
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    width: 100%; /* Растягивается строго по ширине своей карточки */
+    width: 100%; 
     box-sizing: border-box;
     text-align: center;
+    white-space: nowrap; /* Жесткий запрет переноса текста на новую строку */
 }
+
 
 .main-content-area { display: none; width: 100%; flex-direction: column; }
 .global-chat-area { display: none; width: 100%; flex-direction: column; }
