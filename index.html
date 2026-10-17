@@ -6,13 +6,16 @@
 <title>SPORTNEL — Live Streams</title>
 <style>
 :root {
-    --bg-body: #05070c;
-    --bg-card: #0e111a;
+    --bg-body: #060913;
+    --bg-card: #0f1322;
+    --bg-input: #0a0d18;
     --accent-nhl: #0070f3;
-    --accent-live: #e50914;
+    --accent-nba: #ff5500;
+    --accent-chat: #7928ca;
+    --accent-live: #ff2a3b;
     --text-main: #ffffff;
-    --text-grey: #858fa3;
-    --border-line: #1a1f2c;
+    --text-grey: #707e94;
+    --border-line: #1e2640;
 }
 * {
     box-sizing: border-box;
@@ -39,45 +42,25 @@ body {
 }
 header {
     background-color: var(--bg-card);
-    border: 2px solid #0070f3;
+    border: 1px solid var(--border-line);
     padding: 16px 20px;
     border-radius: 14px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    box-shadow: 0 0 15px rgba(0,112,243,0.4), inset 0 0 10px rgba(0,112,243,0.1);
-    animation: headerNeonPulse 4s ease-in-out infinite;
-}
-@keyframes headerNeonPulse {
-    0%, 100% { border-color: #0070f3; box-shadow: 0 0 15px rgba(0,112,243,0.4); }
-    50% { border-color: #45f3ff; box-shadow: 0 0 25px rgba(69,243,255,0.6); }
 }
 .brand {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 900;
-    letter-spacing: 1.5px;
+    letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--text-main);
-    animation: neonBrand 6s infinite ease-in-out;
 }
-.brand span {
-    color: var(--accent-nhl);
-    animation: neonBrandSpan 6s infinite ease-in-out;
-}
-@keyframes neonBrand {
-    0%,100% { text-shadow: 0 0 10px rgba(0,112,243,0.6), 0 0 20px rgba(0,112,243,0.4); }
-    33% { text-shadow: 0 0 10px rgba(229,9,20,0.6), 0 0 20px rgba(229,9,20,0.4); }
-    66% { text-shadow: 0 0 10px rgba(255,255,255,0.6), 0 0 20px rgba(255,255,255,0.4); }
-}
-@keyframes neonBrandSpan {
-    0%,100% { color: #0070f3; }
-    33% { color: #e50914; }
-    66% { color: #ffffff; }
-}
-.social-links { display: flex; align-items: center; gap: 18px; }
-.social-icon { display: flex; align-items: center; justify-content: center; text-decoration: none; transition: transform 0.2s; }
-.social-icon:hover { transform: scale(1.15); }
+.brand span { color: var(--accent-nhl); }
+.social-links { display: flex; align-items: center; gap: 16px; }
+.social-icon { display: flex; align-items: center; justify-content: center; text-decoration: none; transition: transform 0.2s, opacity 0.2s; opacity: 0.8; }
+.social-icon:hover { transform: scale(1.1); opacity: 1; }
 .social-icon svg { width: 24px; height: 24px; display: block; }
 .sports-nav-wrapper {
     background-color: var(--bg-card);
@@ -86,232 +69,220 @@ header {
     padding: 20px;
     margin-bottom: 20px;
     width: 100%;
-    text-align: center;
 }
 .sports-main-title {
-    font-size: 14px;
-    font-weight: 900;
-    letter-spacing: 2px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: #45f3ff;
-    text-shadow: 0 0 10px rgba(69,243,255,0.6);
+    color: var(--text-grey);
     margin-bottom: 16px;
+    text-align: center;
 }
 .sports-options { display: flex; flex-direction: column; gap: 12px; }
 
 .sport-tab-btn {
-    flex: 1;
-    background: #151926;
-    border-radius: 10px;
-    padding: 14px;
-    font-size: 11px;
-    font-weight: 800;
+    width: 100%;
+    background: #141a2e;
+    border: 1px solid var(--border-line);
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 13px;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
+    color: var(--text-main);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
+    justify-content: space-between;
+    gap: 12px;
 }
-.sport-tab-btn svg { width: 18px; height: 18px; fill: currentColor; }
+.sport-btn-left { display: flex; align-items: center; gap: 12px; }
+.sport-tab-btn svg { width: 20px; height: 20px; fill: var(--text-grey); transition: fill 0.2s; }
+.sport-tab-btn .badge-live-text { font-size: 11px; font-weight: 800; color: var(--text-grey); opacity: 0.6; }
 
-.sport-tab-btn.nhl-tab {
-    color: #ffffff;
-    border: 1px solid #0070f3;
-    box-shadow: 0 0 10px rgba(0,112,243,0.4);
-}
-.sport-tab-btn.nhl-tab svg { fill: #0070f3; filter: drop-shadow(0 0 3px #0070f3); }
-.sport-tab-btn.active-tab.nhl-tab {
-    background: linear-gradient(135deg, #0070f3 0%, #00449e 100%);
-    box-shadow: 0 0 20px rgba(0,112,243,0.8);
-    border-color: transparent;
-}
-.sport-tab-btn.active-tab.nhl-tab svg { fill: #ffffff; filter: drop-shadow(0 0 5px #ffffff); }
+.sport-tab-btn.nhl-tab:hover { border-color: var(--accent-nhl); background: #16223d; }
+.sport-tab-btn.nhl-tab:hover svg { fill: var(--accent-nhl); }
+.sport-tab-btn.basket-tab:hover { border-color: var(--accent-nba); background: #2b1c15; }
+.sport-tab-btn.basket-tab:hover svg { fill: var(--accent-nba); }
+.sport-tab-btn.chat-tab:hover { border-color: var(--accent-chat); background: #221635; }
+.sport-tab-btn.chat-tab:hover svg { fill: var(--accent-chat); }
 
-.sport-tab-btn.basket-tab {
-    color: #ffffff;
-    border: 1px solid #ff5500;
-    box-shadow: 0 0 10px rgba(255,85,0,0.4);
-}
-.sport-tab-btn.basket-tab svg { fill: #ff5500; filter: drop-shadow(0 0 3px #ff5500); }
-.sport-tab-btn.active-tab.basket-tab {
-    background: linear-gradient(135deg, #ff5500 0%, #b32400 100%);
-    box-shadow: 0 0 20px rgba(255,85,0,0.8);
-    border-color: transparent;
-}
-.sport-tab-btn.active-tab.basket-tab svg { fill: #ffffff; filter: drop-shadow(0 0 5px #ffffff); }
+.sport-tab-btn.active-tab.nhl-tab { background: var(--accent-nhl); border-color: transparent; }
+.sport-tab-btn.active-tab.nhl-tab svg { fill: #fff; }
+.sport-tab-btn.active-tab.basket-tab { background: var(--accent-nba); border-color: transparent; }
+.sport-tab-btn.active-tab.basket-tab svg { fill: #fff; }
+.sport-tab-btn.active-tab.chat-tab { background: var(--accent-chat); border-color: transparent; }
+.sport-tab-btn.active-tab.chat-tab svg { fill: #fff; }
 
-.sport-tab-btn.chat-tab {
-    color: #ffffff;
-    border: 1px solid var(--border-line);
-    animation: neonChatBtnBorder 8s linear infinite;
-}
-.sport-tab-btn.active-tab.chat-tab {
-    border-color: transparent;
-    animation: neonChatBtnActive 8s linear infinite;
-}
-@keyframes neonChatBtnBorder {
-    0%,100% { border-color: #ff0055; box-shadow: 0 0 10px rgba(255,0,85,0.4); }
-    33% { border-color: #0070f3; box-shadow: 0 0 10px rgba(0,112,243,0.4); }
-    66% { border-color: #ff9900; box-shadow: 0 0 10px rgba(255,153,0,0.4); }
-}
-@keyframes neonChatBtnActive {
-    0%,100% { background: linear-gradient(135deg, #ff0055 0%, #9b51e0 100%); box-shadow: 0 0 20px rgba(255,0,85,0.8); }
-    33% { background: linear-gradient(135deg, #0070f3 0%, #00ffcc 100%); box-shadow: 0 0 20px rgba(0,112,243,0.8); }
-    66% { background: linear-gradient(135deg, #ff9900 0%, #ff0055 100%); box-shadow: 0 0 20px rgba(255,153,0,0.8); }
-}
 .welcome-logos-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
-    margin: 30px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 10px 0 25px 0;
     width: 100%;
 }
 .welcome-logo-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-line);
+    border-radius: 14px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    animation: welcomePulse 3s ease-in-out infinite;
+    gap: 12px;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
-.welcome-logo-box img {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-}
-.welcome-logo-box.nhl-glow img {
-    filter: drop-shadow(0 0 15px rgba(0,112,243,0.8));
-}
-.welcome-logo-box.basket-glow img {
-    filter: drop-shadow(0 0 15px rgba(255,85,0,0.8));
-}
-@keyframes welcomePulse {
-    0%, 100% { transform: scale(1); opacity: 0.8; }
-    50% { transform: scale(1.05); opacity: 1; }
-}
+.welcome-logo-box img { width: 60px; height: 60px; object-fit: contain; }
+.welcome-logo-box span { font-size: 12px; font-weight: 800; letter-spacing: 1px; color: var(--text-grey); text-transform: uppercase; }
+.welcome-logo-box:hover { transform: translateY(-2px); }
+.welcome-logo-box.nhl-glow:hover { border-color: var(--accent-nhl); box-shadow: 0 8px 20px rgba(0,112,243,0.15); }
+.welcome-logo-box.nhl-glow:hover span { color: var(--accent-nhl); }
+.welcome-logo-box.basket-glow:hover { border-color: var(--accent-nba); box-shadow: 0 8px 20px rgba(255,85,0,0.15); }
+.welcome-logo-box.basket-glow:hover span { color: var(--accent-nba); }
 
-.main-content-area { display: none; width: 100%; flex-direction: column; }
-.global-chat-area { display: none; width: 100%; flex-direction: column; }
-.stream-display-container { display: none; width: 100%; flex-direction: column; margin-bottom: 20px; }
+.main-layout { display: flex; flex-direction: column; width: 100%; gap: 20px; }
+.main-content-area, .global-chat-area, .stream-display-container { display: none; width: 100%; flex-direction: column; }
+.match-list { display: none; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+.player-wrapper {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-line);
+    border-radius: 16px;
+    padding: 8px;
+    position: relative;
+    margin-bottom: 10px;
+}
+.video-ratio { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background-color: #000; border-radius: 10px; }
+.video-ratio iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
 .info-section {
     background-color: var(--bg-card);
     border: 1px solid var(--border-line);
-    border-left: 3px solid #45f3ff;
+    border-left: 4px solid var(--accent-nhl);
     border-radius: 12px;
-    padding: 12px 16px;
-    margin-top: 15px;
-    margin-bottom: 5px;
+    padding: 14px 16px;
+    margin-top: 5px;
+    margin-bottom: 15px;
 }
+.info-section.nba-info { border-left-color: var(--accent-nba); }
 .info-section-title {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 800;
     text-transform: uppercase;
-    color: #45f3ff;
-    letter-spacing: 1px;
-    margin-bottom: 5px;
+    color: var(--text-main);
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
     display: flex;
     align-items: center;
     gap: 6px;
 }
-.info-section-text { font-size: 12px; color: var(--text-grey); line-height: 1.45; }
+.info-section-text { font-size: 13px; color: var(--text-grey); line-height: 1.5; }
 
-.player-wrapper {
-    background-color: var(--bg-card);
-    border: 2px solid transparent;
-    border-radius: 18px;
-    padding: 12px;
-    position: relative;
-    animation: neonBorder 8s linear infinite;
-}
-.video-ratio { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background-color: #010204; border-radius: 12px; }
-.video-ratio iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-
-@keyframes neonBorder {
-    0%,100% { border-color: #ff0055; box-shadow: 0 0 15px rgba(255,0,85,0.5), inset 0 0 15px rgba(255,0,85,0.2); }
-    20% { border-color: #0070f3; box-shadow: 0 0 15px rgba(0,112,243,0.5), inset 0 0 15px rgba(0,112,243,0.2); }
-    40% { border-color: #00ffcc; box-shadow: 0 0 15px rgba(0,255,204,0.5), inset 0 0 15px rgba(0,255,204,0.2); }
-    60% { border-color: #9b51e0; box-shadow: 0 0 15px rgba(155,81,224,0.5), inset 0 0 15px rgba(155,81,224,0.2); }
-    80% { border-color: #ff9900; box-shadow: 0 0 15px rgba(255,153,0,0.5), inset 0 0 15px rgba(255,153,0,0.2); }
-}
-
-.grid-header { font-size: 12px; font-weight: 800; text-transform: uppercase; color: var(--text-grey); margin: 0 0 10px 5px; letter-spacing: 1.5px; }
-.match-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+.grid-header { font-size: 12px; font-weight: 800; text-transform: uppercase; color: var(--text-grey); margin: 0 0 12px 4px; letter-spacing: 1px; }
 
 .match-row {
     background-color: var(--bg-card);
     border: 1px solid var(--border-line);
-    border-bottom: 3px solid var(--accent-nhl);
     border-radius: 14px;
-    padding: 12px 16px;
+    padding: 16px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    box-shadow: 0 8px 25px rgba(0,112,243,0.15);
+    gap: 12px;
     position: relative;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 .match-row:hover {
     transform: translateY(-2px);
     border-color: var(--accent-nhl);
-    box-shadow: 0 8px 25px rgba(0,112,243,0.3);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
 }
-.match-list#basketball-matches .match-row {
-    border-bottom: 3px solid #ff5500;
-}
-.match-list#basketball-matches .match-row:hover {
-    border-color: #ff5500;
-    box-shadow: 0 8px 25px rgba(255,85,0,0.3);
-}
+#basketball-matches .match-row:hover { border-color: var(--accent-nba); }
+
 .match-info-top { display: flex; justify-content: space-between; align-items: center; width: 100%; }
 .match-live-badge {
     font-size: 11px;
-    color: #ff2a3b;
-    font-weight: 900;
-    letter-spacing: 1px;
+    color: var(--accent-live);
+    font-weight: 800;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
     display: flex;
     align-items: center;
-    gap: 5px;
-    animation: blinkLive 1.5s infinite ease-in-out;
+    gap: 6px;
 }
-.match-live-badge::before {
-    content: ''; display: inline-block; width: 7px; height: 7px; background-color: #ff2a3b; border-radius: 50%; box-shadow: 0 0 8px #ff2a3b;
-}
-@keyframes blinkLive { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+.match-live-badge::before { content: ''; display: inline-block; width: 6px; height: 6px; background-color: var(--accent-live); border-radius: 50%; }
+.match-time { font-size: 11px; font-weight: 700; color: var(--text-grey); background: #151a2e; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border-line); }
+.teams-container { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 12px; }
+.team-side { display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; text-align: center; }
+.team-logo-img { width: 40px; height: 40px; object-fit: contain; display: block; margin-bottom: 8px; }
+.teams-title { font-size: 13px; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+.vs-divider { font-size: 11px; font-weight: 800; color: var(--text-grey); background: #151a2e; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border-line); }
 
-.match-time { font-size: 12px; font-weight: 700; color: var(--text-grey); background: #161b26; padding: 3px 8px; border-radius: 5px; }
-.teams-container { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 8px; padding: 4px 0; }
-
-/* Стиль для вертикального отображения: логотип строго НАД текстом */
-.team-side { display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; text-align: center; min-width: 0; }
-.team-logo-img { width: 45px; height: 45px; object-fit: contain; display: block; margin-bottom: 6px; flex-shrink: 0; }
-.teams-title { font-size: 12px; font-weight: 700; color: var(--text-main); line-height: 1.3; word-wrap: break-word; width: 100%; height: 32px; display: flex; align-items: center; justify-content: center; }
-.vs-divider { font-size: 11px; font-weight: 800; color: var(--text-grey); text-transform: uppercase; background: #1a1f2c; padding: 3px 8px; border-radius: 5px; height: 20px; display: flex; align-items: center; margin-top: 0; flex-shrink: 0; }
-
-.chat-container { background-color: var(--bg-card); border: 1px solid var(--border-line); border-top: 2px solid var(--accent-nhl); border-radius: 16px; padding: 15px; display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-.chat-messages { height: 180px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding-right: 5px; scroll-behavior: smooth; }
+.chat-container { background-color: var(--bg-card); border: 1px solid var(--border-line); border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
+.chat-messages { height: 220px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding-right: 4px; }
 .chat-messages::-webkit-scrollbar { width: 4px; }
-.chat-messages::-webkit-scrollbar-thumb { background: var(--border-line); border-radius: 10px; }
-.msg-box { background: #151926; padding: 8px 12px; border-radius: 10px; border-left: 3px solid var(--accent-nhl); animation: fadeMsg 0.3s ease-in-out; }
-@keyframes fadeMsg { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-.msg-user { font-size: 11px; font-weight: 800; color: #45f3ff; margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.5px; }
-.msg-text { font-size: 13px; color: var(--text-main); line-height: 1.4; word-break: break-word; }
+.chat-messages::-webkit-scrollbar-thumb { background: var(--border-line); border-radius: 4px; }
+.msg-box { background: var(--bg-input); padding: 10px 14px; border-radius: 10px; border-left: 3px solid var(--accent-nhl); margin-bottom: 5px; }
+.msg-user { font-size: 11px; font-weight: 800; color: #00f2fe; margin-bottom: 4px; text-transform: uppercase; }
+.msg-text { font-size: 13px; color: var(--text-main); line-height: 1.4; }
 .chat-input-block { display: flex; gap: 10px; }
-.chat-input { flex-grow: 1; background: #05070c; border: 1px solid var(--border-line); border-radius: 10px; padding: 12px; color: var(--text-main); font-size: 13px; outline: none; transition: border 0.2s; }
+.chat-input { flex-grow: 1; background: var(--bg-input); border: 1px solid var(--border-line); border-radius: 10px; padding: 12px 16px; color: var(--text-main); font-size: 13px; outline: none; transition: border-color 0.2s; }
 .chat-input:focus { border-color: var(--accent-nhl); }
-.btn-send { background: var(--accent-nhl); color: #fff; border: none; padding: 0 16px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 700; transition: background 0.2s; }
+.btn-send { background: var(--accent-nhl); color: #fff; border: none; padding: 0 20px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 700; transition: background 0.2s; }
 .btn-send:hover { background: #0056c6; }
+
+.site-footer {
+    background-color: #0b0b0b;
+    color: #7b7b7b;
+    font-family: Arial, sans-serif;
+    padding: 30px 20px 20px 20px;
+    font-size: 14px;
+    line-height: 1.6;
+    border-top: 1px solid #1a1a1a;
+    width: 100%;
+    border-radius: 14px;
+    margin-top: auto;
+    margin-bottom: 10px;
+}
+.footer-container { max-width: 800px; margin: 0 auto; }
+.location-timer-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-bottom: 25px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+.footer-links-row { display: flex; justify-content: flex-start; gap: 40px; margin-bottom: 5px; }
+.footer-col h3 {
+    color: #a5a5a5;
+    font-size: 15px;
+    letter-spacing: 2px;
+    margin: 0 0 10px 0;
+    font-weight: normal;
+    font-family: 'Courier New', Courier, monospace;
+    text-transform: uppercase;
+}
+.footer-col ul { list-style: none; padding: 0; margin: 0; }
+.footer-col ul li a { color: #007bff; text-decoration: none; font-size: 16px; transition: color 0.2s; }
+.footer-col ul li a:hover { color: #0056b3; text-decoration: underline; }
+.footer-hr { border: 0; border-top: 1px solid #1f1f1f; margin: 25px 0; }
+.footer-info-section { font-size: 13px; color: #7b7b7b; }
+.footer-info-section p.brand-title { margin: 4px 0; font-weight: bold; color: #a5a5a5; }
+.footer-info-section a.email-link { color: #7b7b7b; text-decoration: underline; }
+.footer-info-section a.email-link:hover { color: var(--text-main); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; color: #555555; font-size: 13px; }
 
 @media (min-width: 992px) {
     .container { max-width: 1280px !important; }
-    footer { max-width: 100% !important; }
-    .latvia-clock-wrapper { max-width: 100% !important; padding-right: 20px; }
-    .main-layout { display: grid; grid-template-columns: 1.8fr 1.2fr; gap: 24px; width: 100%; align-items: start; }
+    .main-layout { display: grid; grid-template-columns: 1.4fr 1.1fr; gap: 24px; width: 100%; align-items: start; }
     .player-column { position: sticky; top: 15px; }
     .right-sidebar { display: flex; flex-direction: column; gap: 8px; }
 }
@@ -326,353 +297,275 @@ header {
 <a href="https://youtube.com" class="social-icon yt" target="_blank"><svg viewBox="0 0 24 24"><path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.516 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.872.507 9.388.507 9.388.507s7.517 0 9.389-.507a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837z" fill="#FF0000"/><polygon points="9.545,15.568 15.818,12 9.545,8.432" fill="#FFFFFF"/></svg></a>
 </div>
 </header>
+
 <div class="sports-nav-wrapper">
     <div class="sports-main-title">LIVE SPORTS</div>
     <div class="sports-options">
         <button class="sport-tab-btn nhl-tab" onclick="switchSport('nhl', this)">
-            <svg viewBox="0 0 24 24"><path d="M19.5 2h-2c-.83 0-1.5.67-1.5 1.5v3.1c-.8.6-1.5 1.4-2.1 2.3L9.6 4.6c-.6-.6-1.5-.6-2.1 0L3.2 8.9c-.6.6-.6 1.5 0 2.1l4.3 4.3c-.9.6-1.7 1.3-2.3 2.1H2.1c-.83 0-1.5.67-1.5 1.5v2c0 .83.67 1.5 1.5 1.5h2c.83 0 1.5-.67 1.5-1.5v-1.1c.9-.7 1.7-1.6 2.3-2.6l2.9 2.9c.6.6 1.5.6 2.1 0l4.3-4.3c.6-.6.6-1.5 0-2.1l-2.9-2.9c1-.6 1.9-1.4 2.6-2.3h1.1c.83 0 1.5-.67 1.5-1.5v-2c0-.83-.67-1.5-1.5-1.5z"/></svg>
-            LIVE NHL MATCH
+            <div class="sport-btn-left">
+                <svg viewBox="0 0 24 24"><path d="M19.5 2h-2c-.83 0-1.5.67-1.5 1.5v3.1c-.8.6-1.5 1.4-2.1 2.3L9.6 4.6c-.6-.6-1.5-.6-2.1 0L3.2 8.9c-.6.6-.6 1.5 0 2.1l4.3 4.3c-.9.6-1.7 1.3-2.3 2.1H2.1c-.83 0-1.5.67-1.5 1.5v2c0 .83.67 1.5 1.5 1.5h2c.83 0 1.5-.67 1.5-1.5v-1.1c.9-.7 1.7-1.6 2.3-2.6l2.9 2.9c.6.6 1.5.6 2.1 0l4.3-4.3c.6-.6.6-1.5 0-2.1l-2.9-2.9c1-.6 1.9-1.4 2.6-2.3h1.1c.83 0 1.5-.67 1.5-1.5v-2c0-.83-.67-1.5-1.5-1.5z"/></svg>
+                <span>NHL MATCH</span>
+            </div>
+            <span class="badge-live-text">NHL LIVE</span>
         </button>
         <button class="sport-tab-btn basket-tab" onclick="switchSport('basketball', this)">
-            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.79-4.14c-.26-.53-.73-.93-1.29-1.11L15 14v-2c0-1.1-.9-2-2-2h-2V7l2.25-2.25c3.22.84 5.75 3.37 6.59 6.59-.02 1.25-.39 2.41-1.05 3.4z"/></svg>
-            LIVE BASKETBALL MATCH
+            <div class="sport-btn-left">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.79-4.14c-.26-.53-.73-.93-1.29-1.11L15 14v-2c0-1.1-.9-2-2-2h-2V7l2.25-2.25c3.22.84 5.75 3.37 6.59 6.59-.02 1.25-.39 2.41-1.05 3.4z"/></svg>
+                <span>BASKETBALL MATCH</span>
+            </div>
+            <span class="badge-live-text">NBA LIVE</span>
         </button>
         <button class="sport-tab-btn chat-tab" onclick="switchSport('global-chat', this)">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
-            LIVE SPORTS CHAT
+            <div class="sport-btn-left">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+                <span>SPORTS CHAT</span>
+            </div>
+            <span class="badge-live-text">ONLINE CHAT</span>
         </button>
     </div>
 </div>
 
 <div class="welcome-logos-container" id="welcomeLogos">
-    <div class="welcome-logo-box nhl-glow">
-        <img src="https://matchora.to/img?k=2s1q7zn-H63GfxQYo0BcvOvp4DB4zk9Gsb7tOI8sBdbjI2QHdjPsYxW2VQEnR9j1Ue0bUq_XvR8G61be7GWkxlZq2RMjw1KI2IKpZnR4zWQBDkP3QWddSu-q5MBLVCe4ojCSCc0&n=NHL&v=2" alt="NHL">
+    <div class="welcome-logo-box nhl-glow" onclick="switchSport('nhl', document.querySelector('.nhl-tab'))">
+        <img src="https://matchora.to" alt="NHL">
+        <span>NHL LIVE</span>
     </div>
-    <div class="welcome-logo-box basket-glow">
-        <img src="https://matchora.to/img?k=8eFulxIvmPFXk03AK2HtKWvQxQA6FIX3uhsdTWF6dw-pybKkL_tMILSlvPAocjOPHQPP7Yi_7RtdgQt-PW0DagHdiw4PJvO04O38YvU3wP74THm1Lsv_X-E2KR2K68vU4xZkNgc&n=NBA&v=2" alt="NBA">
+    <div class="welcome-logo-box basket-glow" onclick="switchSport('basketball', document.querySelector('.basket-tab'))">
+        <img src="https://matchora.to" alt="NBA">
+        <span>NBA LIVE</span>
     </div>
 </div>
 
 <div class="main-layout">
-    <div class="player-column">
-        <div class="stream-display-container" id="streamDisplay">
+    <div class="player-column" id="streamDisplay" style="display: none;">
+        <div class="stream-display-container" style="display: flex;">
             <div class="player-wrapper">
                 <div class="video-ratio">
-                    <iframe id="nhlStreamIframe" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
-                </div>
-            </div>
-            
-            <div class="grid-header" style="margin-top: 15px;">MATCH CHAT</div>
-            <div class="chat-container">
-                <div class="chat-messages" id="matchChatWindow"></div>
-                <div class="chat-input-block">
-                    <input type="text" class="chat-input" id="matchChatInput" placeholder="Write a message..." onkeypress="handleMatchChatKeyPress(event)">
-                    <button class="btn-send" onclick="sendMatchMessage()">Send</button>
+                    <iframe id="nhlStreamIframe" src="" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
+        
+        <div class="chat-container" style="margin-top: 10px;">
+            <div class="grid-header" style="margin: 0 0 5px 0;">MATCH CHAT</div>
+            <div class="chat-messages" id="matchChatWindow">
+                <div class="msg-box" style="border-left-color: var(--accent-nhl);">
+                    <div class="msg-user">System</div>
+                    <div class="msg-text">You are now watching the live broadcast. Discussion is open!</div>
+                </div>
+            </div>
+            <div class="chat-input-block">
+                <input type="text" class="chat-input" id="matchChatInput" onkeypress="handleMatchChatKeyPress(event)" placeholder="Discuss this match...">
+                <button class="btn-send" onclick="sendMatchMessage()">Send</button>
+            </div>
+        </div>
     </div>
-
     <div class="right-sidebar">
         <div class="main-content-area" id="contentArea">
             <div class="grid-header">TODAY'S SCHEDULE</div>
             
-            <div class="info-section">
+            <div id="infoSectionNHL" class="info-section">
                 <div class="info-section-title">
                     <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
                     Information live game
                 </div>
-                <div class="info-section-text">Stream NBA and NHL for free every day.</div>
+                <div class="info-section-text">Stream NHL for free every day.</div>
             </div>
-<!-- СПИСОК NHL МАТЧЕЙ -->
-<div class="match-list" id="nhl-matches">
-    <!-- МАТЧ 1 -->
-    <div class="match-row" onclick="loadNhlStream('https://matchora.to/embed/match/2591603')">
-        <div class="match-info-top">
-            <div class="match-live-badge">LIVE</div>
-            <div class="match-time">04:00</div>
-        </div>
-        <div class="teams-container">
-            <div class="team-side">
-                <img class="team-logo-img" src="https://matchora.to/img?k=HdE5NHsl4MxzKVPP_Nitr-PIbIG9P5UX3lJF5JTWuCFH1ccbavEGy9qFDMMMPFjmXyqzHPi1CJ7AlbLNWLvL-wZUrrJj1gHbAyQ-S01Nt2lA6HpmfQqIsHSIrxzi3BsvFF5n" alt="">
-                <div class="teams-title">Pittsburgh Penguins</div>
-            </div>
-            <div class="vs-divider">vs</div>
-            <div class="team-side">
-                <img class="team-logo-img" src="https://matchora.to/img?k=rpdmEgXTocO6pd1HIUBuh0x8vBJcfPRqYU3xVjq4Ys2-VTApHXYZqGPf9NJE_TYb0oaxts9OWykBGtho6orAx2pcgEleUVNj_1zqfxM0b6CaMbf5o_lbzofZf_d0YrtNc1Ec" alt="">
-                <div class="teams-title">Colorado Avalanche</div>
-            </div>
-        </div>
-    </div>
 
-    <!-- МАТЧ 2 -->
-    <div class="match-row" onclick="loadNhlStream('https://matchora.to/embed/match/2591604')">
-        <div class="match-info-top">
-            <div class="match-live-badge">LIVE</div>
-            <div class="match-time">05:00</div>
-        </div>
-        <div class="teams-container">
-            <div class="team-side">
-                <img class="team-logo-img" src="https://matchora.to/img?k=Tklne-Fmk7SqaUoBDLmkFvQNPRh7HgHWGyD37WINnjQ5GmUxiIMBGZaMNPIrLzu9RjkGrfZkI6qj-N5JHuuggtLzHtBXYCdcNMdbrt_BatgW3wPZ0X_hHifsumr6RJH311zb" alt="">
-                <div class="teams-title">Boston Bruins</div>
+            <div id="infoSectionNBA" class="info-section nba-info" style="display: none;">
+                <div class="info-section-title">
+                    <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                    Information live game
+                </div>
+                <div class="info-section-text">Stream NBA for free every day.</div>
             </div>
-            <div class="vs-divider">vs</div>
-            <div class="team-side">
-                <img class="team-logo-img" src="https://matchora.to/img?k=qHNi2S_3B6LNJoeb5X5TLKAfpLvr_TI7yFcqXfK0ta17302aFck6m44qA8xbMbM-zZX0Y2lh3CigwmXCJkliC_f1UC9oYa3GLSKSo3cmrFXHIHW5VlRtFou40ruFT2V1uNya" alt="">
-                <div class="teams-title">Anaheim Ducks</div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- СПИСОК БАСКЕТБОЛЬНЫХ МАТЧЕЙ (5 БЛИЖАЙШИХ) -->
-<div class="match-list" id="basketball-matches">
-    <!-- МАТЧ 1 -->
-    <div class="match-row" onclick="loadNhlStream('https://matchora.to/embed/match/2548863')">
-        <div class="match-info-top">
-            <div class="match-live-badge">LIVE</div>
-            <div class="match-time">02:00</div>
-        </div>
-        <div class="teams-container">
-            <div class="team-side">
-                <img class="team-logo-img" src="https://matchora.to/img?k=MX7MJPaUL9AzbCawHKIStiPMBi-U7zfdNAIMUgNPfvxGZmgfhNyqlhI3xOca7nVMRAcsi_exnd8UgDydZsqhxmq9kFuCyGp6HidrUHQtPdWc_-Q_ahpf-v81XDT6glRH8BF4" alt="">
-                <div class="teams-title">Boston Celtics</div>
-            </div>
-            <div class="vs-divider">vs</div>
-            <div class="team-side">
-                <img class="team-logo-img" src="https://matchora.to/img?k=GjVdCCUdFTxs3ZiNqyvlj1gSseNHkPt5esiu_sEfVAAGkdkM6hvbqz_NaAqwZZtVgyaJOyUPJPvuJfbIGRWmgkgHECzN1kZx_IAoXJki4QiiILJNBUYqa2ozIApnG1HRkcEl" alt="">
-                <div class="teams-title">Philadelphia 76ers</div>
-            </div>
-        </div>
-    </div>
 
-    <!-- МАТЧ 2 -->
-    <div class="match-row" onclick="loadNhlStream('https://matchora.to/embed/match/2548865')">
-        <div class="match-info-top">
-            <div class="match-live-badge">LIVE</div>
-            <div class="match-time">05:00</div>
-        </div>
-        <div class="teams-container">
-            <div class="team-side">
-                <img class="team-logo-img" src="https://matchora.to/img?k=c8ZBq8AgPs2DT9lEmrWA3UYsduOhYt8M_5nfJEuv7NqEp_gQ10S7YItMj-KeemjFjjtKbsiQjk5nzyjEVHWhBGGxM1gudGJjGAv9ihdgPIbAckTi6e1vcsuK7vKSAa7GY81x" alt="">
-                <div class="teams-title">Golden State Warriors</div>
-            </div>
-            <div class="vs-divider">vs</div>
-            <div class="team-side">
-                <img class="team-logo-img" src="https://matchora.to/img?k=rgvo2igwJh2p2QL43_mxJsEGOYIn8hO8HgA-_AE8CEssUuP0JmYz-WOM78VW26x61bSEVxrZ_VpED0FRrowpS_6s5ezjOsrF61EvzzfAkQRnaviF0wpe3X5sT__zc_XBNwIv" alt="">
-                <div class="teams-title">Portland Trail Blazers</div>
-            </div>
-        </div>
-    </div>
+            <div class="match-list" id="nhl-matches">
+                <div class="match-row" onclick="loadNhlStream('https://matchora.to')">
+                    <div class="match-info-top">
+                        <div class="match-live-badge">LIVE</div>
+                        <div class="match-time">04:00</div>
+                    </div>
+                    <div class="teams-container">
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://matchora.to" alt="Pittsburgh Penguins">
+                            <div class="teams-title">Pittsburgh Penguins</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://matchora.to" alt="Colorado Avalanche">
+                            <div class="teams-title">Colorado Avalanche</div>
+                        </div>
+                    </div>
+                </div>
 
-    <!-- МАТЧ 3 -->
-    <div class="match-row" onclick="loadNhlStream('https://matchora.to/embed/match/2601657')">
-        <div class="match-info-top">
-            <div class="match-live-badge">LIVE</div>
-            <div class="match-time">02:00</div>
-        </div>
-        <div class="teams-container">
-            <div class="team-side">
-                <img class="team-logo-img" src="https://matchora.to/img?k=N3jtK7NhteXgbEM0RI36dFhpDDg2-cJcuxRTk36w_ix72tNT992V0KVnDGsHGNToW5_W-4CF9l_ynwZV64gzPIOwfNeRDs6U_buO5fE_nWcRVNKg5eY7HmDk3maKCv5rfm6P" alt="">
-                <div class="teams-title">Milwaukee Bucks</div>
+                <div class="match-row" onclick="loadNhlStream('https://matchora.to')">
+                    <div class="match-info-top">
+                        <div class="match-live-badge">LIVE</div>
+                        <div class="match-time">05:00</div>
+                    </div>
+                    <div class="teams-container">
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://matchora.to" alt="Boston Bruins">
+                            <div class="teams-title">Boston Bruins</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://matchora.to" alt="Anaheim Ducks">
+                            <div class="teams-title">Anaheim Ducks</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="vs-divider">vs</div>
-            <div class="team-side">
-                <img class="team-logo-img" src="https://matchora.to/img?k=jg5CLOSlu7kC1H__7WvtnoFkkTVfeJHXAZYiX75oKtTGfvIu58V6GGrVe99CkluibOfNIfvckKAxeYscHZu_jpFEDLjHyDNn60_9CaxnRm07B0GaXUJ8pd7U8zzuwdsnMw3y" alt="">
-                <div class="teams-title">Indiana Pacers</div>
-            </div>
-        </div>
-    </div>
+            <div class="match-list" id="basketball-matches">
+                <div class="match-row" onclick="loadNhlStream('https://matchora.to')">
+                    <div class="match-info-top">
+                        <div class="match-live-badge">LIVE</div>
+                        <div class="match-time">02:00</div>
+                    </div>
+                    <div class="teams-container">
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://matchora.to" alt="Boston Celtics">
+                            <div class="teams-title">Boston Celtics</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://matchora.to" alt="Philadelphia 76ers">
+                            <div class="teams-title">Philadelphia 76ers</div>
+                        </div>
+                    </div>
+                </div>
 
-    <!-- МАТЧ 4 -->
-    <div class="match-row" onclick="loadNhlStream('https://matchora.to/embed/match/2601664')">
-        <div class="match-info-top">
-            <div class="match-live-badge">LIVE</div>
-            <div class="match-time">05:30</div>
-        </div>
-        <div class="teams-container">
-            <div class="team-side">
-                <img class="team-logo-img" src="https://matchora.to/img?k=tbe4uX0R-J4btYvj9eIzofCb-s7qcFnyJAlxbIhrVgNSbSFocU1Y5ZbCJYjzLR7taSNdUOrhQHOeiArBwapLKqWJSuaNDwvzn4RB868S3XD3PBMKFrdJwl19-h6ilMTzkOIU" alt="">
-                <div class="teams-title">Los Angeles Lakers</div>
-            </div>
-            <div class="vs-divider">vs</div>
-            <div class="team-side">
-                <img class="team-logo-img" src="https://matchora.to/img?k=ML2ZPQiAesvsmGlMa-a-1bQK-gEvPbnWNrWftW5Qo2jt6kBRfDCpMuJ0qE-hX1WnjMIhMAZLkWQUAbWfV_cEFcsBreuvG1nPxwAhcMXoJUkq_W9qFtSNm3MBj-JLtrfdoKRm" alt="">
-                <div class="teams-title">Denver Nuggets</div>
-            </div>
-        </div>
-    </div>
+                <div class="match-row" onclick="loadNhlStream('https://matchora.to')">
+                    <div class="match-info-top">
+                        <div class="match-live-badge">LIVE</div>
+                        <div class="match-time">05:00</div>
+                    </div>
+                    <div class="teams-container">
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://matchora.to" alt="Golden State Warriors">
+                            <div class="teams-title">Golden State Warriors</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://matchora.to" alt="Portland Trail Blazers">
+                            <div class="teams-title">Portland Trail Blazers</div>
+                        </div>
+                    </div>
+                </div>
 
-    <!-- МАТЧ 5 -->
-    <div class="match-row" onclick="loadNhlStream('https://matchora.to/embed/match/2601659')">
-        <div class="match-info-top">
-            <div class="match-live-badge">LIVE</div>
-            <div class="match-time">03:00</div>
-        </div>
-        <div class="teams-container">
-            <div class="team-side">
-                <img class="team-logo-img" src="https://matchora.to/img?k=i2cZ8cxD_2-SoaCHRmVOcRwz6LNXawBPf18dQdpnJmubTH1n1nJXvK3HOvuM_doyOD0DpKcMvurqqH-z5TUaxi4fZClcl2RMDqWG1X6EEzFXbG9M6tb1-tGHgHqS3tXv24tx" alt="">
-                <div class="teams-title">Chicago Bulls</div>
-            </div>
-            <div class="vs-divider">vs</div>
-            <div class="team-side">
-                <img class="team-logo-img" src="https://matchora.to/img?k=1dCs0i8Q0YIkwrwl6rpOu8FdX9oCFMhaQeKLv3B7bHvyzqLFeFdwaALs3V74huyPIYS49BHDNd9lW7n3Q7F_8uWGrLPJyyUeVzJ3DDaXi-wcFbCi0pR1MQnL0bg0MGhbvlAa" alt="">
-                <div class="teams-title">Minnesota Timberwolves</div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- ОБЛАСТЬ ГЛОБАЛЬНОГО ЧАТА -->
-        <div class="global-chat-area" id="globalChatArea">
-            <div class="grid-header">LIVE SPORTS CHAT</div>
-            <div class="chat-container">
-                <div class="chat-messages" id="globalChatWindow"></div>
-                <div class="chat-input-block">
-                    <input type="text" class="chat-input" id="globalChatInput" placeholder="Write a message to global chat..." onkeypress="handleGlobalKeyPress(event)">
-                    <button class="btn-send" onclick="sendGlobalMessage()">Send</button>
+                <div class="match-row" onclick="loadNhlStream('https://matchora.to')">
+                    <div class="match-info-top">
+                        <div class="match-live-badge">LIVE</div>
+                        <div class="match-time">02:00</div>
+                    </div>
+                    <div class="teams-container">
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://matchora.to" alt="Milwaukee Bucks">
+                            <div class="teams-title">Milwaukee Bucks</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://matchora.to" alt="Indiana Pacers">
+                            <div class="teams-title">Indiana Pacers</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="match-row" onclick="loadNhlStream('https://matchora.to')">
+                    <div class="match-info-top">
+                        <div class="match-live-badge">LIVE</div>
+                        <div class="match-time">05:30</div>
+                    </div>
+                    <div class="teams-container">
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://matchora.to" alt="Los Angeles Lakers">
+                            <div class="teams-title">Los Angeles Lakers</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://matchora.to" alt="Denver Nuggets">
+                            <div class="teams-title">Denver Nuggets</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="match-row" onclick="loadNhlStream('https://matchora.to')">
+                    <div class="match-info-top">
+                        <div class="match-live-badge">LIVE</div>
+                        <div class="match-time">03:00</div>
+                    </div>
+                    <div class="teams-container">
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://matchora.to" alt="Chicago Bulls">
+                            <div class="teams-title">Chicago Bulls</div>
+                        </div>
+                        <div class="vs-divider">vs</div>
+                        <div class="team-side">
+                            <img class="team-logo-img" src="https://matchora.to" alt="Minnesota Timberwolves">
+                            <div class="teams-title">Minnesota Timberwolves</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
+        <div class="global-chat-area" id="globalChatArea">
+            <div class="chat-container">
+                <div class="grid-header" style="margin: 0 0 5px 0;">GLOBAL SPORTS CHAT</div>
+                <div class="chat-messages" id="globalChatWindow">
+                    <div class="msg-box">
+                        <div class="msg-user">System</div>
+                        <div class="msg-text">Welcome to Sportnel Global Chat! Keep it friendly.</div>
+                    </div>
+                </div>
+                <div class="chat-input-block">
+                    <input type="text" class="chat-input" id="globalChatInput" onkeypress="handleGlobalKeyPress(event)" placeholder="Write a message to everyone...">
+                    <button class="btn-send" onclick="sendGlobalMessage()">Send</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<!-- START OF THE UPDATED FOOTER WITH COMPACT TIMER -->
-<footer class="site-footer" style="
-    background-color: #0b0b0b;
-    color: #7b7b7b;
-    font-family: Arial, sans-serif;
-    padding: 30px 20px 20px 20px;
-    font-size: 14px;
-    line-height: 1.6;
-    border-top: 1px solid #1a1a1a;
-">
-    <div class="footer-container" style="max-width: 800px; margin: 0 auto;">
-        
-        <!-- Clean and tiny Latvia timer -->
-        <div class="location-timer-row" style="
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            gap: 10px;
-            margin-bottom: 25px;
-            font-size: 13px;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            font-family: 'Segoe UI', Roboto, sans-serif;
-        ">
+
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="location-timer-row">
             <span style="color: #555555;">Location: <strong style="color: #999999; font-weight: 600;">Latvia</strong></span>
             <span style="color: #333333;">•</span>
-            <span id="latviaTimer" style="
-                color: #45f3ff; 
-                font-family: monospace; 
-                font-size: 14px; 
-                font-weight: bold;
-            ">00:00:00</span>
+            <span id="latviaTimer">00:00:00</span>
         </div>
-
-        <!-- ДВЕ КОЛОНКИ: CONTACTS И SOCIALS РЯДОМ, С СЫЛКАМИ СТРОГО ПОД НИМИ -->
-        <div class="footer-links-row" style="
-            display: flex;
-            justify-content: flex-start;
-            gap: 40px; /* Расстояние между колонкой контактов и соцсетей */
-            margin-bottom: 5px;
-        ">
-            <!-- Левая колонка: CONTACTS -->
+        <div class="footer-links-row">
             <div class="footer-col">
-                <h3 style="
-                    color: #a5a5a5;
-                    font-size: 15px;
-                    letter-spacing: 2px;
-                    margin: 0 0 10px 0;
-                    font-weight: normal;
-                    font-family: 'Courier New', Courier, monospace;
-                    text-transform: uppercase;
-                ">CONTACTS</h3>
-                <ul style="list-style: none; padding: 0; margin: 0;">
-                    <li>
-                        <a href="#" target="_blank" style="color: #007bff; text-decoration: none; font-size: 16px;">Telegram</a>
-                    </li>
+                <h3>CONTACTS</h3>
+                <ul>
+                    <li><a href="https://t.me" target="_blank">Telegram</a></li>
                 </ul>
             </div>
-
-            <!-- Правая колонка: SOCIALS -->
             <div class="footer-col">
-                <h3 style="
-                    color: #a5a5a5;
-                    font-size: 15px;
-                    letter-spacing: 2px;
-                    margin: 0 0 10px 0;
-                    font-weight: normal;
-                    font-family: 'Courier New', Courier, monospace;
-                    text-transform: uppercase;
-                ">SOCIALS</h3>
-                <ul style="list-style: none; padding: 0; margin: 0;">
-                    <li>
-                        <a href="#" target="_blank" style="color: #007bff; text-decoration: none; font-size: 16px;">TikTok</a>
-                    </li>
+                <h3>SOCIALS</h3>
+                <ul>
+                    <li><a href="https://tiktok.com" target="_blank">TikTok</a></li>
                 </ul>
             </div>
         </div>
-        
-        <!-- Divider line -->
-        <hr style="border: 0; border-top: 1px solid #1f1f1f; margin: 25px 0;">
-        
-        <!-- Info section (Sportnel and email back together) -->
-        <div class="footer-section info-section" style="font-size: 13px; color: #7b7b7b;">
-            <p style="margin: 4px 0; font-weight: bold; color: #a5a5a5;">SPORTNEL</p>
-            <p style="margin: 4px 0;">
-                <a href="mailto:sportneltv@gmail.com" style="color: #7b7b7b; text-decoration: underline;">sportneltv@gmail.com</a>
-            </p>
+        <div class="footer-info-section">
+            <p class="brand-title">SPORTNEL</p>
+            <p><a href="mailto:sportneltv@gmail.com" class="email-link">sportneltv@gmail.com</a></p>
         </div>
-        
-        <!-- Divider line -->
-        <hr style="border: 0; border-top: 1px solid #1f1f1f; margin: 25px 0;">
-        
-        <!-- Bottom area: copyright and site type -->
-        <div class="footer-bottom" style="
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #555555;
-            font-size: 13px;
-        ">
-            <div class="copyright">
-                © 2026 Sportnel. All rights reserved.
-            </div>
-            <div class="site-type">
-                Live Streams
-            </div>
+        <div class="footer-bottom">
+            <div class="copyright">&copy; 2026 Sportnel. All rights reserved.</div>
+            <div class="site-type">Live Streams</div>
         </div>
-        
     </div>
 </footer>
-<!-- END OF FOOTER -->
-
-</div> <!-- Closing container tag -->
-
+</div> <!-- Конец .container -->
 <script>
 const myUserId = Math.floor(1000 + Math.random() * 9000);
 
-// FIXED LATVIA CLOCK FUNCTION
-function updateLatviaClock() {
-    const clockElement = document.getElementById('latviaTimer');
-    if (clockElement) {
-        const options = { 
-            timeZone: 'Europe/Riga', 
-            hour: '2-digit', 
-            minute: '2-digit', 
-            second: '2-digit', 
-            hour12: false 
-        };
-        const timeString = new Intl.DateTimeFormat('en-US', options).format(new Date());
-        clockElement.textContent = timeString;
-    }
-}
-setInterval(updateLatviaClock, 1000);
-updateLatviaClock();
-
 function switchSport(type, element) {
     document.querySelectorAll('.sport-tab-btn').forEach(btn => btn.classList.remove('active-tab'));
-    element.classList.add('active-tab');
+    if (element) element.classList.add('active-tab');
 
     document.getElementById('welcomeLogos').style.display = 'none';
 
@@ -681,7 +574,10 @@ function switchSport(type, element) {
     const streamDisplay = document.getElementById('streamDisplay');
     const nhlList = document.getElementById('nhl-matches');
     const basketList = document.getElementById('basketball-matches');
+    const infoSectionNHL = document.getElementById('infoSectionNHL');
+    const infoSectionNBA = document.getElementById('infoSectionNBA');
 
+    // Прячем плеер и обнуляем стрим при переключении разделов
     streamDisplay.style.display = 'none';
     document.getElementById('nhlStreamIframe').src = '';
 
@@ -695,9 +591,13 @@ function switchSport(type, element) {
         if (type === 'nhl') {
             nhlList.style.display = 'flex';
             basketList.style.display = 'none';
+            infoSectionNHL.style.display = 'block';
+            infoSectionNBA.style.display = 'none';
         } else if (type === 'basketball') {
             nhlList.style.display = 'none';
             basketList.style.display = 'flex';
+            infoSectionNHL.style.display = 'none';
+            infoSectionNBA.style.display = 'block';
         }
     }
 }
@@ -719,8 +619,9 @@ function loadNhlStream(streamUrl) {
 function sendMatchMessage() {
     const input = document.getElementById('matchChatInput');
     const windowChat = document.getElementById('matchChatWindow');
-    if (input.value.trim() !== "") {
-        windowChat.innerHTML += `<div class="msg-box"><div class="msg-user">User_${myUserId}</div><div class="msg-text">${input.value}</div></div>`;
+    const msgText = input.value.trim();
+    if (msgText !== "") {
+        windowChat.innerHTML += `<div class="msg-box" style="border-left-color: var(--accent-nhl);"><div class="msg-user">User_${myUserId}</div><div class="msg-text">${msgText}</div></div>`;
         input.value = "";
         windowChat.scrollTop = windowChat.scrollHeight;
     }
@@ -732,8 +633,9 @@ function handleMatchChatKeyPress(event) {
 function sendGlobalMessage() {
     const input = document.getElementById('globalChatInput');
     const windowChat = document.getElementById('globalChatWindow');
-    if (input.value.trim() !== "") {
-        windowChat.innerHTML += `<div class="msg-box" style="border-left-color: #45f3ff;"><div class="msg-user" style="color: #ff2a3b;">User_${myUserId}</div><div class="msg-text">${input.value}</div></div>`;
+    const msgText = input.value.trim();
+    if (msgText !== "") {
+        windowChat.innerHTML += `<div class="msg-box" style="border-left-color: var(--accent-chat);"><div class="msg-user" style="color: #45f3ff;">User_${myUserId}</div><div class="msg-text">${msgText}</div></div>`;
         input.value = "";
         windowChat.scrollTop = windowChat.scrollHeight;
     }
@@ -741,6 +643,22 @@ function sendGlobalMessage() {
 function handleGlobalKeyPress(event) {
     if (event.key === 'Enter') { sendGlobalMessage(); }
 }
+
+function updateLatviaClock() {
+    const clockElement = document.getElementById('latviaTimer');
+    if (clockElement) {
+        const options = { 
+            timeZone: 'Europe/Riga', 
+            hour: '2-digit', 
+            minute: '2-digit', 
+            second: '2-digit', 
+            hour12: false 
+        };
+        clockElement.textContent = new Intl.DateTimeFormat('en-US', options).format(new Date());
+    }
+}
+setInterval(updateLatviaClock, 1000);
+updateLatviaClock();
 </script>
 </body>
 </html>
