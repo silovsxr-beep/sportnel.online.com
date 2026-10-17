@@ -87,7 +87,6 @@ header {
     object-fit: contain; 
 }
 /* ----------------------------------------------------------- */
-
 .container {
     width: 100%;
     max-width: 650px;
@@ -132,7 +131,7 @@ header {
     gap: 10px;
 }
 
-/* Новые стили для img-логотипов внутри кнопок */
+/* Стили для img-логотипов внутри кнопок переключения */
 .sport-tab-btn img {
     width: 22px;
     height: 22px;
@@ -152,6 +151,7 @@ header {
     box-shadow: 0 0 20px rgba(0,112,243,0.8);
     border-color: transparent;
 }
+
 .sport-tab-btn.basket-tab {
     color: #ffffff;
     border: 1px solid #ff5500;
@@ -162,7 +162,6 @@ header {
     box-shadow: 0 0 20px rgba(255,85,0,0.8);
     border-color: transparent;
 }
-
 .sport-tab-btn.chat-tab {
     color: #ffffff;
     border: 1px solid var(--border-line);
@@ -182,41 +181,63 @@ header {
     33% { background: linear-gradient(135deg, #0070f3 0%, #00ffcc 100%); box-shadow: 0 0 20px rgba(0,112,243,0.8); }
     66% { background: linear-gradient(135deg, #ff9900 0%, #ff0055 100%); box-shadow: 0 0 20px rgba(255,153,0,0.8); }
 }
-.welcome-logos-container {
+
+/* НОВЫЕ СТИЛИ СЕТКИ СТАТИСТИКИ (ИЗ ЗАРИСОВКИ) */
+.stats-grid-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    margin: 30px 0;
+}
+.stats-row {
     display: flex;
     justify-content: center;
-    align-items: center;
-    gap: 40px;
-    margin: 30px 0;
+    align-items: flex-start;
+    gap: 15px;
     width: 100%;
 }
-.welcome-logo-box {
+.stats-item-box {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    animation: welcomePulse 3s ease-in-out infinite;
+    flex: 1;
+    max-width: 80px;
+    text-align: center;
 }
-.welcome-logo-box img {
-    width: 100px;
-    height: 100px;
+.stats-item-box img {
+    width: 45px;
+    height: 45px;
     object-fit: contain;
+    display: block;
+    margin-bottom: 6px;
+    filter: drop-shadow(0 0 8px rgba(69,243,255,0.4));
 }
-.welcome-logo-box.nhl-glow img {
-    filter: drop-shadow(0 0 15px rgba(0,112,243,0.8));
+.stats-item-label {
+    font-size: 11px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 4px;
+    text-transform: uppercase;
 }
-.welcome-logo-box.basket-glow img {
-    filter: drop-shadow(0 0 15px rgba(255,85,0,0.8));
-}
-@keyframes welcomePulse {
-    0%, 100% { transform: scale(1); opacity: 0.8; }
-    50% { transform: scale(1.05); opacity: 1; }
+.stats-badge-line {
+    font-size: 9px;
+    font-weight: 800;
+    font-family: monospace;
+    color: #45f3ff;
+    background: #11141d;
+    border: 1px solid #1a2233;
+    padding: 3px 6px;
+    border-radius: 6px;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
 .main-content-area { display: none; width: 100%; flex-direction: column; }
 .global-chat-area { display: none; width: 100%; flex-direction: column; }
 .stream-display-container { display: none; width: 100%; flex-direction: column; margin-bottom: 20px; }
-
 .info-section {
     background-color: var(--bg-card);
     border: 1px solid var(--border-line);
@@ -260,6 +281,7 @@ header {
 
 .grid-header { font-size: 12px; font-weight: 800; text-transform: uppercase; color: var(--text-grey); margin: 0 0 10px 5px; letter-spacing: 1.5px; }
 .match-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+
 .match-row {
     background-color: var(--bg-card);
     border: 1px solid var(--border-line);
@@ -279,13 +301,9 @@ header {
     border-color: var(--accent-nhl);
     box-shadow: 0 8px 25px rgba(0,112,243,0.3);
 }
-.match-list#basketball-matches .match-row {
-    border-bottom: 3px solid #ff5500;
-}
-.match-list#basketball-matches .match-row:hover {
-    border-color: #ff5500;
-    box-shadow: 0 8px 25px rgba(255,85,0,0.3);
-}
+.match-list#basketball-matches .match-row { border-bottom: 3px solid #ff5500; }
+.match-list#basketball-matches .match-row:hover { border-color: #ff5500; box-shadow: 0 8px 25px rgba(255,85,0,0.3); }
+
 .match-info-top { display: flex; justify-content: space-between; align-items: center; width: 100%; }
 .match-live-badge {
     font-size: 11px;
@@ -322,68 +340,10 @@ header {
 .chat-input-block { display: flex; gap: 10px; }
 .chat-input { flex-grow: 1; background: #05070c; border: 1px solid var(--border-line); border-radius: 10px; padding: 12px; color: var(--text-main); font-size: 13px; outline: none; transition: border 0.2s; }
 .chat-input:focus { border-color: var(--accent-nhl); }
-    .btn-send { background: var(--accent-nhl); color: #fff; border: none; padding: 0 16px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 700; transition: background 0.2s; }
-     .btn-send:hover { background: #0056c6; }
- 
-    /* Контейнер-сетка для новой статистики */
-     .stats-grid-container {
-        display: flex;
-         flex-direction: column;
-        gap: 20px;
-         width: 100%;
-        margin: 30px 0;
-    }
-     /* Ряды сетки (верхний и нижний) */
-     .stats-row {
-        display: flex;
-        justify-content: center;
-         align-items: flex-start;
-         gap: 15px;
-         width: 100%;
-     }
-     /* Карточка элемента (иконка + текст) */
-    .stats-item-box {
-         display: flex;
-        flex-direction: column;
-         align-items: center;
-        justify-content: center;
-         flex: 1;
-         max-width: 80px;
-         text-align: center;
-     }
-     /* Оформление картинок-кружков */
-    .stats-item-box img {
-        width: 45px;
-         height: 45px;
-         object-fit: contain;
-         display: block;
-        margin-bottom: 6px;
-         filter: drop-shadow(0 0 8px rgba(69,243,255,0.4));
-     }
-     /* Подпись под картинкой (NHL, NBA и т.д.) */
-     .stats-item-label {
-         font-size: 11px;
-        font-weight: bold;
-        color: #ffffff;
-        margin-bottom: 4px;
-         text-transform: uppercase;
-     }
-     /* Блок статистики (Полоска с G 0 | A 0 | P 0) */
-     .stats-badge-line {
-        font-size: 9px;
-        font-weight: 800;
-        font-family: monospace;
-         color: #45f3ff;
-         background: #11141d;
-         border: 1px solid #1a2233;
-        padding: 3px 6px;
-        border-radius: 6px;
-         white-space: nowrap;
-         letter-spacing: 0.5px;
-         box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    }      @media (min-width: 992px) {
-        .container { max-width: 1280px !important; }
+.btn-send { background: var(--accent-nhl); color: #fff; border: none; padding: 0 16px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 700; transition: background 0.2s; }
+.btn-send:hover { background: #0056c6; }
 
+@media (min-width: 992px) {
     .container { max-width: 1280px !important; }
     header { max-width: 1280px !important; }
     footer { max-width: 100% !important; }
@@ -399,88 +359,80 @@ header {
     <header>
         <div class="brand">SPORTNEL</div>
         <div class="social-links">
-            <a href="https://www.tiktok.com/@sportnel.tv?_r=1&_t=ZN-9Ad7HcAWer0" class="social-icon tg" target="_blank">
-                <img src="https://store-images.s-microsoft.com/image/apps.47495.13634052595610511.c45457c9-b4af-46b0-8e61-8d7c0aec3f56.a8b71481-8a43-465d-88d6-e63add92c112" alt="">
+            <a href="https://t.me" class="social-icon tg" target="_blank">
+                <img src="telegram-icon.png" alt="Telegram">
             </a>
-            <a href="https://youtube.com/@sportnell?si=1rtITFAMFiyMQtQW" class="social-icon vk" target="_blank">
-                <img src="https://logos-world.net/wp-content/uploads/2021/04/YouTube-TV-Emblem.png" alt="">
+            <a href="https://vk.com" class="social-icon vk" target="_blank">
+                <img src="vk-icon.png" alt="ВКонтакте">
             </a>
         </div>
     </header>
 </div>
-
 <div class="container">
     <div class="sports-nav-wrapper">
-        <!-- Обновленный заголовок с тёмно-белым неоновым свечением -->
         <div class="sports-main-title" style="color: #d1d5db; text-shadow: 0 0 10px rgba(209, 213, 219, 0.6); letter-spacing: 2px;">LIVE SPORTS</div>
         <div class="sports-options">
             <button class="sport-tab-btn nhl-tab" onclick="switchSport('nhl', this)">
-
-                <img src="https://matchora.to/img?k=2s1q7zn-H63GfxQYo0BcvOvp4DB4zk9Gsb7tOI8sBdbjI2QHdjPsYxW2VQEnR9j1Ue0bUq_XvR8G61be7GWkxlZq2RMjw1KI2IKpZnR4zWQBDkP3QWddSu-q5MBLVCe4ojCSCc0&n=NHL&v=2" alt="">
-                NHL          LIVE
+                <img src="https://matchora.to" alt="NHL">
+                LIVE NHL MATCH
             </button>
             <button class="sport-tab-btn basket-tab" onclick="switchSport('basketball', this)">
-                <img src="https://a4.espncdn.com/combiner/i?img=%2Fi%2Fespn%2Fmisc_logos%2F500%2Fnba.png" alt="">
-                NBA          LIVE
+                <img src="https://matchora.to" alt="NBA">
+                LIVE BASKETBALL MATCH
             </button>
             <button class="sport-tab-btn chat-tab" onclick="switchSport('global-chat', this)">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
-                LIVE         CHAT
+                <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+                LIVE SPORTS CHAT
             </button>
-        </div>
-    </div>
-    <div class="stats-grid-container" id="welcomeLogos">
-    
-    <!-- ВЕРХНИЙ РЯД: 4 КАРТИНКИ -->
-    <div class="stats-row">
-        <!-- 1 элемент -->
-        <div class="stats-item-box">
-            <img src="https://matchora.to" alt="NHL">
-            <div class="stats-item-label">NHL</div>
-            <div class="stats-badge-line">G 0 | A 0 | P 0</div>
-        </div>
-        <!-- 2 элемент -->
-        <div class="stats-item-box">
-            <img src="https://matchora.to" alt="Player 2">
-            <div class="stats-item-label">NHL</div>
-            <div class="stats-badge-line">G 0 | A 0 | P 0</div>
-        </div>
-        <!-- 3 элемент -->
-        <div class="stats-item-box">
-            <img src="https://matchora.to" alt="NBA">
-            <div class="stats-item-label">NBA</div>
-            <div class="stats-badge-line">G 0 | A 0 | P 0</div>
-        </div>
-        <!-- 4 элемент -->
-        <div class="stats-item-box">
-            <img src="https://matchora.to" alt="Player 4">
-            <div class="stats-item-label">NBA</div>
-            <div class="stats-badge-line">G 0 | A 0 | P 0</div>
         </div>
     </div>
 
-    <!-- НИЖНИЙ РЯД: 3 КАРТИНКИ -->
-    <div class="stats-row">
-        <!-- 5 элемент -->
-        <div class="stats-item-box">
-            <img src="https://matchora.to" alt="Player 5">
-            <div class="stats-item-label">NHL</div>
-            <div class="stats-badge-line">G 0 | A 0 | P 0</div>
+    <!-- СЕТКА СТАТИСТИКИ С ЛОГОТИПАМИ PNG И БЛОКАМИ G 0 | A 0 | P 0 СНИЗУ -->
+    <div class="stats-grid-container" id="welcomeLogos">
+        
+        <!-- ВЕРХНИЙ РЯД: 4 КАРТИНКИ -->
+        <div class="stats-row">
+            <div class="stats-item-box">
+                <img src="https://matchora.to" alt="NHL Logo">
+                <div class="stats-item-label">NHL</div>
+                <div class="stats-badge-line">G 0 | A 0 | P 0</div>
+            </div>
+            <div class="stats-item-box">
+                <img src="https://matchora.to" alt="NHL Player">
+                <div class="stats-item-label">NHL</div>
+                <div class="stats-badge-line">G 0 | A 0 | P 0</div>
+            </div>
+            <div class="stats-item-box">
+                <img src="https://matchora.to" alt="NBA Logo">
+                <div class="stats-item-label">NBA</div>
+                <div class="stats-badge-line">G 0 | A 0 | P 0</div>
+            </div>
+            <div class="stats-item-box">
+                <img src="https://matchora.to" alt="NBA Player">
+                <div class="stats-item-label">NBA</div>
+                <div class="stats-badge-line">G 0 | A 0 | P 0</div>
+            </div>
         </div>
-        <!-- 6 элемент -->
-        <div class="stats-item-box">
-            <img src="https://matchora.to" alt="Player 6">
-            <div class="stats-item-label">NBA</div>
-            <div class="stats-badge-line">G 0 | A 0 | P 0</div>
-        </div>
-        <!-- 7 элемент -->
-        <div class="stats-item-box">
-            <img src="https://matchora.to" alt="Player 7">
-            <div class="stats-item-label">NHL</div>
-            <div class="stats-badge-line">G 0 | A 0 | P 0</div>
+
+        <!-- НИЖНИЙ РЯД: 3 КАРТИНКИ -->
+        <div class="stats-row">
+            <div class="stats-item-box">
+                <img src="https://matchora.to" alt="NHL Player">
+                <div class="stats-item-label">NHL</div>
+                <div class="stats-badge-line">G 0 | A 0 | P 0</div>
+            </div>
+            <div class="stats-item-box">
+                <img src="https://matchora.to" alt="NBA Player">
+                <div class="stats-item-label">NBA</div>
+                <div class="stats-badge-line">G 0 | A 0 | P 0</div>
+            </div>
+            <div class="stats-item-box">
+                <img src="https://matchora.to" alt="NHL Player">
+                <div class="stats-item-label">NHL</div>
+                <div class="stats-badge-line">G 0 | A 0 | P 0</div>
+            </div>
         </div>
     </div>
-</div>
 
     <div class="main-layout">
         <div class="player-column">
@@ -501,20 +453,20 @@ header {
                 </div>
             </div>
         </div>
-
         <div class="right-sidebar">
             <div class="main-content-area" id="contentArea">
                 <div class="grid-header">TODAY'S SCHEDULE</div>
                 
-     <div class="info-section" style="margin-bottom: 25px; border-left-color: #b0b5c0; box-shadow: 0 0 15px rgba(176, 181, 192, 0.2);">
-    <div class="info-section-title" style="color: #d1d5db; text-shadow: 0 0 8px rgba(209, 213, 219, 0.5);">
-        <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-        Information live game
-    </div>
-    <div class="info-section-text" style="color: #9ca3af;">Stream NBA and NHL for free every day.</div>
-</div>
+                <!-- ОБНОВЛЕННЫЙ ТЕМНО-БЕЛЫЙ ИНФО-БЛОК СО СВЕЧЕНИЕМ -->
+                <div class="info-section" style="margin-bottom: 25px; border-left-color: #b0b5c0; box-shadow: 0 0 15px rgba(176, 181, 192, 0.2);">
+                    <div class="info-section-title" style="color: #d1d5db; text-shadow: 0 0 8px rgba(209, 213, 219, 0.5);">
+                        <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                        Information live game
+                    </div>
+                    <div class="info-section-text" style="color: #9ca3af;">Stream NBA and NHL for free every day.</div>
+                </div>
 
-<!-- СПИСОК NHL МАТЧЕЙ -->
+                <!-- СПИСОК NHL МАТЧЕЙ -->
                 <div class="match-list" id="nhl-matches">
                     <div class="match-row" onclick="loadNhlStream('https://matchora.to')">
                         <div class="match-info-top">
@@ -552,7 +504,6 @@ header {
                         </div>
                     </div>
                 </div>
-
                 <!-- СПИСОК БАСКЕТБОЛЬНЫХ МАТЧЕЙ -->
                 <div class="match-list" id="basketball-matches">
                     <div class="match-row" onclick="loadNhlStream('https://matchora.to')">
@@ -572,6 +523,7 @@ header {
                             </div>
                         </div>
                     </div>
+
                     <div class="match-row" onclick="loadNhlStream('https://matchora.to')">
                         <div class="match-info-top">
                             <div class="match-live-badge">LIVE</div>
@@ -645,6 +597,7 @@ header {
                     </div>
                 </div>
             </div>
+
             <div class="global-chat-area" id="globalChatArea">
                 <div class="grid-header">LIVE SPORTS CHAT</div>
                 <div class="chat-container">
@@ -671,7 +624,7 @@ header {
 ">
     <div class="footer-container" style="max-width: 650px; margin: 0 auto; text-align: center;">
         
-        <!-- СТИЛЬНЫЙ СОВРЕМЕННЫЙ ТАЙМЕР ВМЕСТО СТАРОГО -->
+        <!-- СТИЛЬНЫЙ СОВРЕМЕННЫЙ ТАЙМЕР -->
         <div class="modern-timer-box" style="
             display: inline-flex;
             align-items: center;
@@ -692,7 +645,7 @@ header {
             ">Latvia</span>
             <span style="color: #333333; font-size: 12px;">|</span>
             <span id="latviaTimer" style="
-                color: #d1d5db; 
+                color: #45f3ff; 
                 font-family: 'Courier New', Courier, monospace; 
                 font-size: 16px; 
                 font-weight: bold;
@@ -701,7 +654,7 @@ header {
             ">00:00:00</span>
         </div>
 
-        <!-- НОВЫЙ ТЕКСТ НА АНГЛИЙСКОМ С СЫЛКАМИ -->
+        <!-- ТЕКСТ НА АНГЛИЙСКОМ С ОФИЦИАЛЬНЫМИ ССЫЛКАМИ -->
         <div class="footer-description" style="
             color: #999999; 
             font-size: 13.5px; 
@@ -712,19 +665,17 @@ header {
             line-height: 1.5;
         ">
             Here you can watch NHL and NBA live streams for free every day. 
-            Official resources: <a href="https://nhl.com" target="_blank" style="color: #999999; text-decoration: none; font-weight: 600;">NHL.com</a> and 
-            <a href="https://nba.com" target="_blank" style="color: #999999; text-decoration: none; font-weight: 600;">NBA.com</a>. 
-            Follow us on TikTok <a href="https://tiktok.com" target="_blank" style="color: #999999; text-decoration: none;">@sportnel.tv</a> 
-            and YouTube <a href="https://youtube.com" target="_blank" style="color: #999999; text-decoration: none;">@sportnel.tv</a>. 
-            <div style="margin-top: 8px; color: #ffffff; font-weight: bold; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">
+            Official resources: <a href="https://nhl.com" target="_blank" style="color: #0070f3; text-decoration: none; font-weight: 600;">NHL.com</a> and 
+            <a href="https://nba.com" target="_blank" style="color: #ff5500; text-decoration: none; font-weight: 600;">NBA.com</a>. 
+            Follow us on TikTok <a href="https://tiktok.com" target="_blank" style="color: #45f3ff; text-decoration: none;">@sportnel.tv</a> 
+            and YouTube <a href="https://youtube.com" target="_blank" style="color: #ff0000; text-decoration: none;">@sportnel.tv</a>. 
+            <div style="margin-top: 8px; color: #45f3ff; font-weight: bold; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">
                 The best platform for sports streaming
             </div>
         </div>
         
-        <!-- Тонкая разделительная линия -->
         <hr style="border: 0; border-top: 1px solid #1f1f1f; margin: 20px 0;">
         
-        <!-- СТРОКА С АВТОРСКИМИ ПРАВАМИ -->
         <div class="footer-bottom" style="
             display: flex;
             justify-content: space-between;
@@ -743,11 +694,10 @@ header {
         
     </div>
 </footer>
-<!-- END OF FOOTER -->
+
 <script>
 const myUserId = Math.floor(1000 + Math.random() * 9000);
 
-// ЧАСЫ ЛАТВИИ
 function updateLatviaClock() {
     const clockElement = document.getElementById('latviaTimer');
     if (clockElement) {
@@ -765,7 +715,6 @@ function updateLatviaClock() {
 setInterval(updateLatviaClock, 1000);
 updateLatviaClock();
 
-// ЛОГИКА ПЕРЕКЛЮЧЕНИЯ ВКЛАДОК
 function switchSport(type, element) {
     document.querySelectorAll('.sport-tab-btn').forEach(btn => btn.classList.remove('active-tab'));
     element.classList.add('active-tab');
@@ -798,7 +747,6 @@ function switchSport(type, element) {
     }
 }
 
-// ЗАГРУЗКА ПОТОКА В ПЛЕЕР
 function loadNhlStream(streamUrl) {
     const streamDisplay = document.getElementById('streamDisplay');
     const iframe = document.getElementById('nhlStreamIframe');
@@ -813,7 +761,6 @@ function loadNhlStream(streamUrl) {
     }
 }
 
-// ОТПРАВКА СООБЩЕНИЙ В ЧАТ МАТЧА
 function sendMatchMessage() {
     const input = document.getElementById('matchChatInput');
     const windowChat = document.getElementById('matchChatWindow');
@@ -827,7 +774,6 @@ function handleMatchChatKeyPress(event) {
     if (event.key === 'Enter') { sendMatchMessage(); }
 }
 
-// ОТПРАВКА СООБЩЕНИЙ В ГЛОБАЛЬНЫЙ ЧАТ
 function sendGlobalMessage() {
     const input = document.getElementById('globalChatInput');
     const windowChat = document.getElementById('globalChatWindow');
