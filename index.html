@@ -182,30 +182,39 @@ header {
     66% { background: linear-gradient(135deg, #ff9900 0%, #ff0055 100%); box-shadow: 0 0 20px rgba(255,153,0,0.8); }
 }
 
-/* НОВЫЕ СТИЛИ СЕТКИ СТАТИСТИКИ (ИЗ ЗАРИСОВКИ) */
+/* Контейнер-сетка для новой статистики */
 .stats-grid-container {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 25px;
     width: 100%;
-    margin: 30px 0;
+    max-width: 650px;
+    margin: 30px auto;
+    padding: 0 10px;
+    box-sizing: border-box;
 }
+
+/* Ряды сетки (верхний и нижний) */
 .stats-row {
     display: flex;
-    justify-content: center;
+    justify-content: space-between; /* Распределяет элементы равномерно */
     align-items: flex-start;
-    gap: 15px;
     width: 100%;
+    gap: 10px;
 }
+
+/* Карточка элемента (иконка + текст) */
 .stats-item-box {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     flex: 1;
-    max-width: 80px;
+    min-width: 0; /* Защита от выталкивания текста флексом */
     text-align: center;
 }
+
+/* Оформление картинок-кружков */
 .stats-item-box img {
     width: 45px;
     height: 45px;
@@ -214,25 +223,35 @@ header {
     margin-bottom: 6px;
     filter: drop-shadow(0 0 8px rgba(69,243,255,0.4));
 }
+
+/* Подпись под картинкой (NHL, NBA и т.д.) */
 .stats-item-label {
     font-size: 11px;
     font-weight: bold;
     color: #ffffff;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
     text-transform: uppercase;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
 }
+
+/* Блок статистики (Полоска с G 0 | A 0 | P 0) */
 .stats-badge-line {
-    font-size: 9px;
+    font-size: 8px; /* Чуть уменьшили размер, чтобы гарантированно влезало на маленьких смартфонах */
     font-weight: 800;
     font-family: monospace;
     color: #45f3ff;
     background: #11141d;
     border: 1px solid #1a2233;
-    padding: 3px 6px;
+    padding: 4px 5px;
     border-radius: 6px;
-    white-space: nowrap;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.2px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    width: 100%; /* Растягивается строго по ширине своей карточки */
+    box-sizing: border-box;
+    text-align: center;
 }
 
 .main-content-area { display: none; width: 100%; flex-direction: column; }
@@ -387,54 +406,54 @@ header {
         </div>
     </div>
 
-    <!-- СЕТКА СТАТИСТИКИ С ЛОГОТИПАМИ PNG И БЛОКАМИ G 0 | A 0 | P 0 СНИЗУ -->
+        <!-- СЕТКА СТАТИСТИКИ С ИСПРАВЛЕННЫМ ВЫРАВНИВАНИЕМ -->
     <div class="stats-grid-container" id="welcomeLogos">
         
         <!-- ВЕРХНИЙ РЯД: 4 КАРТИНКИ -->
         <div class="stats-row">
             <div class="stats-item-box">
-                <img src="https://matchora.to" alt="NHL Logo">
+                <img src="https://matchora.to" alt="NHL">
                 <div class="stats-item-label">NHL</div>
                 <div class="stats-badge-line">G 0 | A 0 | P 0</div>
             </div>
             <div class="stats-item-box">
-                <img src="https://matchora.to" alt="NHL Player">
+                <img src="https://matchora.to" alt="NHL">
                 <div class="stats-item-label">NHL</div>
                 <div class="stats-badge-line">G 0 | A 0 | P 0</div>
             </div>
             <div class="stats-item-box">
-                <img src="https://matchora.to" alt="NBA Logo">
+                <img src="https://matchora.to" alt="NBA">
                 <div class="stats-item-label">NBA</div>
                 <div class="stats-badge-line">G 0 | A 0 | P 0</div>
             </div>
             <div class="stats-item-box">
-                <img src="https://matchora.to" alt="NBA Player">
+                <img src="https://matchora.to" alt="NBA">
                 <div class="stats-item-label">NBA</div>
                 <div class="stats-badge-line">G 0 | A 0 | P 0</div>
             </div>
         </div>
 
         <!-- НИЖНИЙ РЯД: 3 КАРТИНКИ -->
-        <div class="stats-row">
+        <div class="stats-row" style="max-width: 80%; margin: 0 auto;">
             <div class="stats-item-box">
-                <img src="https://matchora.to" alt="NHL Player">
+                <img src="https://matchora.to" alt="NHL">
                 <div class="stats-item-label">NHL</div>
                 <div class="stats-badge-line">G 0 | A 0 | P 0</div>
             </div>
             <div class="stats-item-box">
-                <img src="https://matchora.to" alt="NBA Player">
+                <img src="https://matchora.to" alt="NBA">
                 <div class="stats-item-label">NBA</div>
                 <div class="stats-badge-line">G 0 | A 0 | P 0</div>
             </div>
             <div class="stats-item-box">
-                <img src="https://matchora.to" alt="NHL Player">
+                <img src="https://matchora.to" alt="NHL">
                 <div class="stats-item-label">NHL</div>
                 <div class="stats-badge-line">G 0 | A 0 | P 0</div>
             </div>
         </div>
     </div>
 
-    <div class="main-layout">
+ <div class="main-layout">
         <div class="player-column">
             <div class="stream-display-container" id="streamDisplay">
                 <div class="player-wrapper">
