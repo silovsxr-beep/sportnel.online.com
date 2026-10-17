@@ -182,6 +182,61 @@ header {
     66% { background: linear-gradient(135deg, #ff9900 0%, #ff0055 100%); box-shadow: 0 0 20px rgba(255,153,0,0.8); }
 }
 
+/* Контейнер-сетка для новой статистики */
+.stats-grid-container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+    max-width: 650px;
+    margin: 30px auto;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+/* Ряды сетки (верхний и нижний) */
+.stats-row {
+    display: flex;
+    justify-content: space-between; /* Распределяет элементы равномерно */
+    align-items: flex-start;
+    width: 100%;
+    gap: 10px;
+}
+
+/* Карточка элемента (иконка + текст) */
+.stats-item-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    min-width: 0; /* Защита от выталкивания текста флексом */
+    text-align: center;
+}
+
+/* Оформление картинок-кружков */
+.stats-item-box img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    display: block;
+    margin-bottom: 6px;
+    filter: drop-shadow(0 0 8px rgba(69,243,255,0.4));
+}
+
+/* Подпись под картинкой (NHL, NBA и т.д.) */
+.stats-item-label {
+    font-size: 11px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+
 /* Блок статистики (Полоска с G 0 | A 0 | P 0) — исправленный ультра-компактный */
 .stats-badge-line {
     font-size: 7.5px; /* Немного уменьшили шрифт, чтобы всё влезло в одну строку */
@@ -199,6 +254,7 @@ header {
     text-align: center;
     white-space: nowrap; /* Жесткий запрет переноса текста на новую строку */
 }
+
 
 
 .main-content-area { display: none; width: 100%; flex-direction: column; }
