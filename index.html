@@ -483,6 +483,35 @@ h1{font-size:clamp(33px,5vw,56px);line-height:1.02;letter-spacing:-2px;margin:14
   .player-stats small{font-size:6px}
 }
 
+
+/* White/blue neon glow for player cards and stat tiles; keep player photo circles unlit */
+.player-page-card{
+  border:1px solid rgba(225,239,255,.88);
+  background:radial-gradient(ellipse at 50% 0%,rgba(58,112,190,.20),transparent 58%),linear-gradient(155deg,#121d30,#0b111c 78%);
+  box-shadow:0 0 5px rgba(255,255,255,.48),0 0 14px rgba(255,255,255,.18),0 0 26px rgba(55,133,255,.24),inset 0 0 12px rgba(255,255,255,.035);
+}
+.player-page-card:hover{
+  border-color:rgba(255,255,255,.98);
+  box-shadow:0 0 7px rgba(255,255,255,.65),0 0 20px rgba(255,255,255,.28),0 0 34px rgba(55,133,255,.34),inset 0 0 14px rgba(255,255,255,.045);
+}
+.player-photo-wrap{
+  border:1px solid #2c3a4f!important;
+  background:#121923!important;
+  box-shadow:0 8px 22px #0008,inset 0 0 0 8px #0e141e!important;
+}
+.player-photo-wrap img{filter:none!important;}
+.player-page-card hr,.player-stats-divider{
+  border:0;
+  height:1px;
+  background:rgba(255,255,255,.88);
+  box-shadow:0 0 4px rgba(255,255,255,.65),0 0 12px rgba(72,145,255,.7);
+}
+.player-stat,.player-stat-box,.player-stats div{
+  border:1px solid rgba(80,153,255,.7);
+  background:linear-gradient(145deg,#172b49,#101b2d);
+  box-shadow:0 0 5px rgba(75,145,255,.3),inset 0 0 9px rgba(75,145,255,.08);
+}
+
 </style>
 </head>
 <body>
@@ -494,8 +523,8 @@ h1{font-size:clamp(33px,5vw,56px);line-height:1.02;letter-spacing:-2px;margin:14
 </header>
 <main class="shell">
   <section class="hero">
-    <div><div class="eyebrow">LIVE SPORTS CENTER</div><h1>Sports. No Noise.</h1><p>NHL and NBA in one place. Schedules use Riga time, with statuses that update automatically based on scheduled start times.</p></div>
-    <div class="hero-card"><div class="hero-card-top"><span class="stats-kicker">LATVIAN PLAYERS</span><span class="stats-live-label"><i class="live-dot"></i> NHL STATS</span></div><strong class="stats-feature-title">Latvian NHL Players</strong><small class="stats-feature-copy">Player profiles and season stats, all in one place.</small>
+    <div><div class="eyebrow">LIVE SPORTS CENTER</div><h1>NHL - NBA</h1></div>
+    <div class="hero-card"><div class="hero-card-top"><span class="stats-kicker">LATVIAN PLAYERS</span><span class="stats-live-label"><i class="live-dot"></i> NHL STATS</span></div><small class="stats-feature-copy">Player profiles and season stats, all in one place.</small>
       <button class="stats-view-btn" id="viewLatviaStats" type="button">View Player Stats <span aria-hidden="true">↗</span></button>
       </div>
   </section>
@@ -592,12 +621,12 @@ h1{font-size:clamp(33px,5vw,56px);line-height:1.02;letter-spacing:-2px;margin:14
       </article>
       <article class="player-page-card">
         <div class="player-photo-wrap"><img src="https://assets.nhle.com/mugs/nhl/20262027/PIT/8481668.png" alt="A.Silovs" loading="lazy"></div>
-        <strong>A.Silovs</strong><div class="player-team">Pittsburgh Penguins · Goalie</div>
+        <strong>A.Silovs</strong><div class="player-team">Pittsburgh Penguins</div>
         <div class="player-stats goalie-stats"><span><b>3</b><small>WINS</small></span><span><b>2</b><small>LOSSES</small></span><span><b>.870</b><small>SV%</small></span></div>
       </article>
       <article class="player-page-card">
         <div class="player-photo-wrap"><img src="https://assets.nhle.com/mugs/nhl/20262027/TOR/8478007.png" alt="E.Merzlikins" loading="lazy"></div>
-        <strong>E.Merzlikins</strong><div class="player-team">NHL Goalie</div>
+        <strong>E.Merzlikins</strong><div class="player-team">Toronto Maple Leafs</div>
         <div class="player-injured">Currently injured</div>
       </article>
     </div>
@@ -679,8 +708,8 @@ function renderGames() {
   const e = document.createElement("div");
   e.className = "empty";
   const strong = document.createElement("strong");
-  strong.textContent = "NBA schedule is not connected yet";
-  e.append(strong,document.createTextNode("No made-up games here. Connect a live schedule feed for current fixtures and official statuses."));
+  strong.textContent = "No NBA games yet";
+  e.append(strong);
   $("games").append(e);
   return;
  }
