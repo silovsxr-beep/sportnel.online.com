@@ -539,6 +539,11 @@ h1{font-size:clamp(33px,5vw,56px);line-height:1.02;letter-spacing:-2px;margin:14
 }
 @media(prefers-reduced-motion:reduce){.hero-card .stats-view-btn{animation:none}}
 
+
+/* Tiny live viewer counter */
+.viewer-count{display:inline-flex;align-items:center;gap:4px;margin-left:7px;color:#a9bdd8;font-size:10px;font-weight:800;white-space:nowrap;font-variant-numeric:tabular-nums}
+.viewer-count svg{width:12px;height:12px;display:block;opacity:.9}
+.viewer-count .viewer-number{min-width:8px}
 </style>
 </head>
 <body>
@@ -670,6 +675,7 @@ h1{font-size:clamp(33px,5vw,56px);line-height:1.02;letter-spacing:-2px;margin:14
     <div class="chat-main" id="chatMain"><div class="messages" id="messages" aria-live="polite"></div><div class="chat-compose"><input class="chat-input" id="chatInput" maxlength="500" placeholder="Write a message…" aria-label="Message"><button class="send" id="sendMessage">Send</button></div><div class="chat-status" id="chatStatus"></div></div>
   </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const NHL_MATCHES = [
  {id:"cbj-vs-min-2026-10-18",url:"https://matchora.to/embed/match/2591619",home:"Minnesota Wild",away:"Columbus Blue Jackets",homeLogo:"https://assets.nhle.com/logos/nhl/svg/MIN_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/CBJ_light.svg",time:"01:00"},
@@ -678,6 +684,60 @@ const NHL_MATCHES = [
 const state = {sport:"nhl",search:""};
 const $ = id => document.getElementById(id);
 const TZ = "Europe/Riga";
+
+// Supabase Realtime viewer counter. Publishable keys are safe for browser use.
+const SUPABASE_URL = "https://uixmmxwrymktlnuggrdi.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_WgQGqXsW3vTyAE0OjI2IWA_QDL-feSN";
+const supabaseClient = window.supabase?.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+const viewerCounts = Object.create(null);
+const viewerChannels = new Map();
+let currentViewerMatchId = null;
+const viewerSessionId = (crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`);
+
+function viewerChannelFor(match) {
+ if(!supabaseClient) return null;
+ if(viewerChannels.has(match.id)) return viewerChannels.get(match.id);
+ const channel = supabaseClient.channel(`sportnel-viewers-${match.id}`, {
+  config: { presence: { key: viewerSessionId } }
+ });
+ channel.on('presence', { event: 'sync' }, () => {
+  const presence = channel.presenceState();
+  viewerCounts[match.id] = Object.values(presence).reduce((total, sessions) => total + sessions.length, 0);
+  document.querySelectorAll(`[data-viewers-for="${match.id}"] .viewer-number`).forEach(el => {
+   el.textContent = String(viewerCounts[match.id] || 0);
+  });
+ });
+ channel.subscribe(status => {
+  if(status === 'SUBSCRIBED' && currentViewerMatchId === match.id) {
+   channel.track({ session: viewerSessionId, joined_at: new Date().toISOString() }).catch(err => console.warn('Viewer counter could not connect:', err));
+  }
+ });
+ viewerChannels.set(match.id, channel);
+ return channel;
+}
+function initializeViewerCounters() {
+ [...NHL_MATCHES, ...NBA_MATCHES].forEach(m => {
+  viewerCounts[m.id] = 0;
+  viewerChannelFor(m);
+ });
+}
+async function setViewerMatch(matchId) {
+ if(currentViewerMatchId === matchId) return;
+ const previous = currentViewerMatchId;
+ currentViewerMatchId = matchId || null;
+ if(previous && viewerChannels.has(previous)) {
+  try { await viewerChannels.get(previous).untrack(); } catch {}
+ }
+ if(matchId) {
+  const match = [...NHL_MATCHES, ...NBA_MATCHES].find(m => m.id === matchId);
+  const channel = match && viewerChannelFor(match);
+  // The channel's SUBSCRIBED callback starts tracking once the connection is ready.
+  if(channel && channel.state === 'joined') {
+   try { await channel.track({ session: viewerSessionId, joined_at: new Date().toISOString() }); } catch (err) { console.warn('Viewer counter could not connect:', err); }
+  }
+ }
+}
+
 
 function rigaParts(date = new Date()) {
  const p = new Intl.DateTimeFormat("en-GB",{timeZone:TZ,year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit",hourCycle:"h23"}).formatToParts(date);
@@ -717,6 +777,7 @@ const NBA_MATCHES = [
 ];
 const schedule = NHL_MATCHES.map(m=>({...m,start:nextStart(m.time)}));
 const nbaSchedule = NBA_MATCHES.map(m=>({...m,start:localRigaToDate(m.date,...m.time.split(":").map(Number))}));
+initializeViewerCounters();
 
 function getStatus(match) {
  const now = Date.now(),start = match.start.getTime(),end = start + 3*60*60*1000;
@@ -768,7 +829,17 @@ function renderGames() {
   const badge = document.createElement("span");
   badge.className = `status ${status.key}`;
   badge.textContent = status.label;
-  top.append(league,badge);
+  const viewers = document.createElement("span");
+  viewers.className = "viewer-count";
+  viewers.dataset.viewersFor = m.id;
+  viewers.setAttribute("aria-label", "Current viewers");
+  viewers.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21a8 8 0 0 0-16 0"></path><circle cx="12" cy="8" r="4"></circle></svg><span class="viewer-number">' + String(viewerCounts[m.id] || 0) + '</span>';
+  const statusGroup = document.createElement("div");
+  statusGroup.style.display = "inline-flex";
+  statusGroup.style.alignItems = "center";
+  statusGroup.style.gap = "2px";
+  statusGroup.append(badge, viewers);
+  top.append(league,statusGroup);
 
   const teams = document.createElement("div");
   teams.className = "teams";
@@ -807,12 +878,14 @@ function makeTeam(name,logo) {
  return box;
 }
 function openStream(m) {
+ setViewerMatch(m.id);
  $("playerTitle").textContent = `${m.home} vs ${m.away}`;
  $("streamFrame").src = m.url;
  $("player").classList.add("show");
  $("player").scrollIntoView({behavior:"smooth",block:"start"});
 }
 function closeStream() {
+ setViewerMatch(null);
  $("streamFrame").src = "";
  $("player").classList.remove("show");
 }
