@@ -708,9 +708,9 @@ function localRigaToDate(dateText,h,m) {
  return guess;
 }
 const NBA_MATCHES = [
- {id:"bos-vs-det-2026-10-20",url:"https://www.sky.de/bilder/blt754ed34c32d35bcd/6a747277f9a79d5ffa61f705/sky_wettbewerbe_nba.png",home:"Boston Celtics",away:"Detroit Pistons",homeLogo:"https://cdn.nba.com/logos/nba/1610612738/primary/L/logo.svg",awayLogo:"https://cdn.nba.com/logos/nba/1610612765/primary/L/logo.svg",time:"22:00",date:"2026-10-20"},
- {id:"nyk-vs-phi-2026-10-21",url:"https://www.sky.de/bilder/blt754ed34c32d35bcd/6a747277f9a79d5ffa61f705/sky_wettbewerbe_nba.png",home:"New York Knicks",away:"Philadelphia 76ers",homeLogo:"https://cdn.nba.com/logos/nba/1610612752/primary/L/logo.svg",awayLogo:"https://cdn.nba.com/logos/nba/1610612755/primary/L/logo.svg",time:"02:00",date:"2026-10-21"},
- {id:"sas-vs-okc-2026-10-21",url:"https://www.sky.de/bilder/blt754ed34c32d35bcd/6a747277f9a79d5ffa61f705/sky_wettbewerbe_nba.png",home:"San Antonio Spurs",away:"Oklahoma City Thunder",homeLogo:"https://cdn.nba.com/logos/nba/1610612759/primary/L/logo.svg",awayLogo:"https://cdn.nba.com/logos/nba/1610612760/primary/L/logo.svg",time:"04:30",date:"2026-10-21"}
+ {id:"bos-vs-det-2026-10-20",url:"https://photobooth.cdn.sports.ru/preset/message/2/74/30ec197bc48c8b7a08360758975e6.png?f=webp&q=90&s=2x&w=730",home:"Boston Celtics",away:"Detroit Pistons",homeLogo:"https://cdn.nba.com/logos/nba/1610612738/primary/L/logo.svg",awayLogo:"https://cdn.nba.com/logos/nba/1610612765/primary/L/logo.svg",time:"22:00",date:"2026-10-20"},
+ {id:"nyk-vs-phi-2026-10-21",url:"https://photobooth.cdn.sports.ru/preset/message/2/74/30ec197bc48c8b7a08360758975e6.png?f=webp&q=90&s=2x&w=730",home:"New York Knicks",away:"Philadelphia 76ers",homeLogo:"https://cdn.nba.com/logos/nba/1610612752/primary/L/logo.svg",awayLogo:"https://cdn.nba.com/logos/nba/1610612755/primary/L/logo.svg",time:"02:00",date:"2026-10-21"},
+ {id:"sas-vs-okc-2026-10-21",url:"https://photobooth.cdn.sports.ru/preset/message/2/74/30ec197bc48c8b7a08360758975e6.png?f=webp&q=90&s=2x&w=730",home:"San Antonio Spurs",away:"Oklahoma City Thunder",homeLogo:"https://cdn.nba.com/logos/nba/1610612759/primary/L/logo.svg",awayLogo:"https://cdn.nba.com/logos/nba/1610612760/primary/L/logo.svg",time:"04:30",date:"2026-10-21"}
 ];
 const schedule = NHL_MATCHES.map(m=>({...m,start:nextStart(m.time)}));
 const nbaSchedule = NBA_MATCHES.map(m=>({...m,start:localRigaToDate(m.date,...m.time.split(":").map(Number))}));
