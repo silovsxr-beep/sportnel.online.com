@@ -73,7 +73,10 @@ h1{font-size:clamp(33px,5vw,56px);line-height:1.02;letter-spacing:-2px;margin:14
 .player-head{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--line);gap:12px}
 .player-head strong{font-size:13px}
 .close-player{border:1px solid var(--line);background:#192230;color:var(--text);border-radius:8px;padding:7px 10px}
+.player-video{position:relative;width:100%;background:#05070b;line-height:0}
 .player iframe{display:block;width:100%;aspect-ratio:16/9;border:0;background:#05070b}
+.player-brand-overlay{position:absolute;top:14px;left:14px;z-index:5;display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid #329cff;border-radius:11px;background:rgba(5,12,24,.94);color:#f3f8ff;font-size:clamp(11px,2.5vw,16px);font-weight:900;letter-spacing:.16em;line-height:1;box-shadow:0 0 14px #168bff55;pointer-events:none}
+.player-brand-overlay .brand-dot{width:9px;height:9px;flex:0 0 9px;border-radius:50%;background:#28a8ff;box-shadow:0 0 8px #28a8ff}
 .note{font-size:12px;color:var(--muted);line-height:1.65;margin:18px 0 38px}
 .footer{border-top:1px solid #202838;padding:22px 0 30px;color:#738096;font-size:11px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
 .chat-panel{display:none;position:fixed;inset:0;z-index:50;background:#03060bd9;backdrop-filter:blur(9px);padding:20px;align-items:center;justify-content:center}
@@ -582,7 +585,7 @@ h1{font-size:clamp(33px,5vw,56px);line-height:1.02;letter-spacing:-2px;margin:14
   <section id="scheduleSection" style="display:none">
     <div class="section-head"><div><h2 id="scheduleTitle">NHL Schedule</h2><p id="scheduleSub">Columbus Blue Jackets vs Minnesota Wild · Oct 19, 01:00 Riga time | Carolina Hurricanes vs Calgary Flames · Oct 19, 03:00 Riga time</p></div></div>
     <div class="games" id="games"></div>
-    <div class="player" id="player"><div class="player-head"><strong id="playerTitle">Stream</strong><button class="close-player" id="closePlayer">Close ✕</button></div><iframe id="streamFrame" title="Game player" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+    <div class="player" id="player"><div class="player-head"><strong id="playerTitle">Stream</strong><button class="close-player" id="closePlayer">Close ✕</button></div><div class="player-video"><iframe id="streamFrame" title="Game player" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><div class="player-brand-overlay" aria-label="SPORTNEL"><span class="brand-dot"></span><span>SPORTNEL</span></div></div></div>
     <div class="stats-source-note info-support"><strong>Info</strong><p><b>UPCOMING</b> — the match has not started yet.</p><p><b>LIVE</b> — the match is currently in progress.</p><p><b>Technical support:</b> <a href="mailto:sportneltv@gmail.com">sportneltv@gmail.com</a></p></div>
   </section>
 </main>
