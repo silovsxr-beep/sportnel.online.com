@@ -1,210 +1,662 @@
-
-<!DOCTYPE html>
-<html lang="ru">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Мой сайт</title>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: white;
-      line-height: 1.6;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 22px 8%;
-      background: #111c33;
-    }
-
-    .logo {
-      font-size: 25px;
-      font-weight: bold;
-      color: #38bdf8;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 20px;
-    }
-
-    nav a:hover {
-      color: #38bdf8;
-    }
-
-    .hero {
-      min-height: 75vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 40px 20px;
-    }
-
-    .hero h1 {
-      font-size: clamp(36px, 7vw, 64px);
-      margin-bottom: 20px;
-    }
-
-    .hero h1 span {
-      color: #38bdf8;
-    }
-
-    .hero p {
-      color: #cbd5e1;
-      font-size: 18px;
-      max-width: 600px;
-      margin-bottom: 30px;
-    }
-
-    .button {
-      display: inline-block;
-      background: #0284c7;
-      color: white;
-      padding: 14px 28px;
-      border: none;
-      border-radius: 10px;
-      text-decoration: none;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .button:hover {
-      background: #0ea5e9;
-      transform: translateY(-3px);
-    }
-
-    .features {
-      padding: 60px 8%;
-      background: #17233b;
-      text-align: center;
-    }
-
-    .features h2 {
-      font-size: 32px;
-      margin-bottom: 35px;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      padding: 30px 20px;
-      border-radius: 15px;
-      background: #1e293b;
-      transition: 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      background: #26364f;
-    }
-
-    .card h3 {
-      color: #38bdf8;
-      margin-bottom: 12px;
-    }
-
-    footer {
-      padding: 25px;
-      text-align: center;
-      color: #94a3b8;
-    }
-
-    @media (max-width: 500px) {
-      header {
-        flex-direction: column;
-        gap: 12px;
-      }
-
-      nav a {
-        margin: 0 8px;
-      }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080b12">
+<title>SPORTNEL — Live Sports</title>
+<style>
+:root{color-scheme:dark;--bg:#080b12;--panel:#101621;--panel2:#151e2c;--line:#253044;--text:#f4f7fb;--muted:#94a1b5;--blue:#6aa9ff;--red:#ff5263;--green:#44d7a0}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(ellipse at 50% -15%,#17263d 0,transparent 42%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+button,input{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+.shell{max-width:1180px;margin:auto;padding:0 22px}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(8,11,18,.88);backdrop-filter:blur(18px);border-bottom:1px solid rgba(148,161,181,.14)}
+.topbar-inner{height:76px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:11px;border:0;background:none;color:var(--text);padding:0;font-size:23px;font-weight:950;letter-spacing:1.8px}
+.brand-mark{display:none}
+.brand-wordmark{color:#e8edf6;text-shadow:0 0 7px #dbe8ff88,0 0 18px #a8caff66,0 0 34px #6aa9ff35;letter-spacing:2.8px;font-weight:950}
+.brand:hover .brand-wordmark{text-shadow:0 0 8px #fff,0 0 24px #a8caffaa,0 0 40px #6aa9ff66}
+.top-actions{display:flex;align-items:center;gap:12px}
+.clock{color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums}
+.chat-open,.primary{border:0;border-radius:11px;padding:11px 15px;background:#eaf2ff;color:#101a2a;font-weight:800;transition:.18s}
+.chat-open:hover,.primary:hover{transform:translateY(-1px);background:white}
+.hero{padding:46px 0 26px;display:grid;grid-template-columns:1.3fr .7fr;align-items:center;gap:24px}
+.eyebrow{font-size:11px;font-weight:900;letter-spacing:2.4px;color:var(--blue);text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.eyebrow:before{content:"";width:18px;height:2px;background:var(--blue)}
+h1{font-size:clamp(33px,5vw,56px);line-height:1.02;letter-spacing:-2px;margin:14px 0 13px;font-weight:900}
+.hero p{color:var(--muted);max-width:590px;line-height:1.7;margin:0;font-size:15px}
+.hero-card{border:1px solid var(--line);background:linear-gradient(135deg,#151f30,#0e131d);border-radius:20px;padding:22px;min-height:130px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 20px 55px #0003}
+.hero-card-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--red);display:inline-block;margin-right:7px;box-shadow:0 0 0 4px #ff52631b}
+.hero-card strong{font-size:23px;letter-spacing:-.5px;margin-top:18px}
+.hero-card small{color:var(--muted);margin-top:5px}
+.sportbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:12px 0 18px;flex-wrap:wrap}
+.tabs{display:flex;padding:4px;background:#0e141f;border:1px solid var(--line);border-radius:13px;gap:4px}
+.tab{border:0;background:transparent;color:var(--muted);padding:10px 17px;border-radius:9px;font-size:13px;font-weight:800}
+.tab.active{background:#eaf2ff;color:#111a29}
+.tools{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.search{width:min(280px,60vw);border:1px solid var(--line);background:#0d131d;color:var(--text);border-radius:11px;padding:11px 13px;outline:none}
+.search:focus,.name-input:focus,.chat-input:focus{border-color:#6aa9ff;box-shadow:0 0 0 3px #6aa9ff1c}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:14px;margin:26px 0 13px}
+.section-head h2{font-size:18px;letter-spacing:-.3px;margin:0}
+.section-head p{font-size:12px;color:var(--muted);margin:6px 0 0}
+.timezone{font-size:11px;color:var(--muted);text-align:right}
+.games{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.game{border:1px solid var(--line);background:linear-gradient(145deg,#111925,#0d121b);border-radius:16px;padding:17px;transition:border-color .18s,transform .18s;min-width:0}
+.game:hover{border-color:#4d6b96;transform:translateY(-2px)}
+.game-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px}
+.league{color:var(--muted);font-size:10px;font-weight:900;letter-spacing:1.5px}
+.status{font-size:10px;font-weight:900;letter-spacing:1px;border-radius:6px;padding:6px 8px;background:#202b3b;color:#bac7d8;white-space:nowrap}
+.status.live{color:#ff7783;background:#ff526318}
+.status.live:before{content:"";display:inline-block;width:5px;height:5px;background:var(--red);border-radius:50%;margin:0 6px 1px 0;animation:pulse 1.5s infinite}
+.status.soon{color:#a8caff;background:#6aa9ff16}
+.status.done{color:#a5b0c0;background:#202631}
+@keyframes pulse{50%{opacity:.35}}
+.teams{display:grid;grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr);align-items:center;gap:8px}
+.team{min-width:0;display:flex;flex-direction:column;align-items:center;text-align:center;gap:9px}
+.team img{width:46px;height:46px;object-fit:contain;filter:drop-shadow(0 4px 8px #0006)}
+.team-name{font-size:12px;font-weight:750;line-height:1.35;min-height:32px;display:flex;align-items:center;justify-content:center}
+.versus{color:#66758b;font-size:11px;font-weight:900}
+.game-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #202b3b;margin-top:17px;padding-top:13px;gap:8px}
+.time-label{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.watch{border:1px solid #34455f;background:#19263a;color:#eaf2ff;border-radius:9px;padding:8px 11px;font-size:11px;font-weight:850}
+.watch:hover{background:#263b59}
+.watch:disabled{opacity:.45;cursor:not-allowed}
+.empty{grid-column:1/-1;text-align:center;border:1px dashed #2b3749;color:var(--muted);padding:34px 16px;border-radius:15px;line-height:1.6}
+.empty strong{display:block;color:var(--text);margin-bottom:6px}
+.player{display:none;margin-top:18px;border:1px solid var(--line);background:#0e141f;border-radius:17px;overflow:hidden}
+.player.show{display:block}
+.player-head{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--line);gap:12px}
+.player-head strong{font-size:13px}
+.close-player{border:1px solid var(--line);background:#192230;color:var(--text);border-radius:8px;padding:7px 10px}
+.player iframe{display:block;width:100%;aspect-ratio:16/9;border:0;background:#05070b}
+.note{font-size:12px;color:var(--muted);line-height:1.65;margin:18px 0 38px}
+.footer{border-top:1px solid #202838;padding:22px 0 30px;color:#738096;font-size:11px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.chat-panel{display:none;position:fixed;inset:0;z-index:50;background:#03060bd9;backdrop-filter:blur(9px);padding:20px;align-items:center;justify-content:center}
+.chat-panel.open{display:flex}
+.chat-box{width:min(400px,92%);max-height:min(500px,74vh);display:flex;flex-direction:column;border:1px solid #2b3749;background:#0d131d;border-radius:17px;overflow:hidden;box-shadow:0 25px 90px #0009}
+.chat-header{padding:11px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px}
+.chat-header h2{font-size:17px;margin:0}
+.chat-header p{font-size:11px;color:var(--muted);margin:5px 0 0}
+.close-chat{border:1px solid var(--line);background:#172131;color:white;border-radius:9px;padding:8px 11px}
+.chat-setup{padding:13px;display:flex;flex-direction:column;gap:8px}
+.chat-setup label{font-size:12px;color:#b8c4d6;font-weight:800}
+.name-input,.chat-input{background:#080d15;border:1px solid #2b3749;color:var(--text);border-radius:11px;padding:12px 13px;outline:none;width:100%}
+.hint{font-size:11px;color:var(--muted);line-height:1.5}
+.chat-main{display:none;min-height:210px;max-height:42vh;flex-direction:column}
+.messages{padding:11px;overflow:auto;display:flex;flex-direction:column;gap:7px;flex:1}
+.message{background:#151e2b;border:1px solid #253044;border-radius:12px;padding:10px 12px;max-width:90%;align-self:flex-start;overflow-wrap:anywhere}
+.message.mine{align-self:flex-end;background:#162c46;border-color:#2c4f78}
+.message-meta{font-size:10px;color:#9eb5d3;font-weight:850;margin-bottom:5px}
+.message-text{font-size:13px;line-height:1.5;white-space:pre-wrap}
+.chat-compose{display:flex;gap:8px;padding:13px;border-top:1px solid var(--line)}
+.chat-compose .chat-input{flex:1;min-width:0}
+.send{border:0;background:#dceaff;color:#0b1628;border-radius:10px;padding:0 15px;font-weight:900}
+.chat-status{font-size:10px;color:var(--muted);padding:0 17px 12px}
+.landing{padding:36px 0 30px;text-align:center}
+.landing-kicker{display:flex;align-items:center;justify-content:center;gap:11px;color:#9dbef3;font-size:10px;letter-spacing:3px;font-weight:900}
+.kicker-line{height:1px;width:25px;background:#5279b7}
+.landing-title{font-size:clamp(42px,7vw,76px);line-height:.99;letter-spacing:-3px;font-weight:950;margin:24px 0 15px}
+.landing-title span{background:linear-gradient(90deg,#8ebdff,#d8e7ff 55%,#8eabff);background-clip:text;-webkit-background-clip:text;color:transparent}
+.landing-copy{max-width:540px;margin:0 auto;color:var(--muted);font-size:15px;line-height:1.75}
+.league-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:34px auto 22px;text-align:left}
+.league-choice{position:relative;min-width:0;overflow:hidden;min-height:285px;padding:22px;border:1px solid #2b3b54;border-radius:22px;text-align:left;color:white;background:radial-gradient(ellipse at 75% 42%,#24416c88,transparent 55%),linear-gradient(145deg,#152338,#0c121d 75%);transition:transform .2s,border-color .2s,box-shadow .2s}
+.nba-choice{background:radial-gradient(ellipse at 75% 42%,#67432280,transparent 55%),linear-gradient(145deg,#282016,#0c121d 75%)}
+.league-choice:hover{transform:translateY(-4px);border-color:#719bd7;box-shadow:0 18px 55px #0005}
+.choice-top,.choice-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.choice-tag{font-size:10px;font-weight:900;letter-spacing:2px;color:#9bb8e6}
+.choice-arrow{font-size:21px;color:#b4c9e9}
+.league-logo-wrap{height:138px;display:grid;place-items:center;padding:18px 0;position:relative;text-align:center}
+.league-logo-wrap img{max-width:100%;width:165px;height:112px;object-fit:contain;filter:drop-shadow(0 8px 18px #0008)}
+.nhl-choice .league-logo-wrap img{width:148px;height:98px;filter:drop-shadow(0 0 12px #dbe8ff22);object-position:center;justify-self:center;align-self:center}
+.nba-choice .league-logo-wrap img{width:120px}
+.logo-fallback{place-items:center;width:115px;height:90px;border:2px solid #d7e5ff;border-radius:15px;color:white;font-size:27px;font-weight:950;font-style:italic;letter-spacing:2px}
+.nhl-fallback{clip-path:polygon(10% 0,90% 0,100% 18%,88% 82%,50% 100%,12% 82%,0 18%);background:linear-gradient(135deg,#f5f7fa 0 30%,#182b4c 30% 70%,#e9edf5 70%);color:#0a1321;border:0}
+.choice-bottom h2{font-size:32px;line-height:1;margin:0 0 7px;letter-spacing:1px}
+.choice-bottom p{font-size:12px;color:#a9b7cb;margin:0}
+.choice-enter{display:flex;align-items:center;gap:9px;font-size:9px;letter-spacing:1px;color:#b8cdec;font-weight:900;white-space:nowrap}
+.choice-enter b{font-size:17px}
+.landing-features{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;text-align:left;margin-top:20px}
+.feature{display:flex;align-items:center;gap:10px;padding:14px;border:1px solid #202c3f;border-radius:13px;background:#0d131e}
+.feature-icon{display:grid;place-items:center;flex:0 0 34px;height:34px;border-radius:10px;background:#1a2a42;color:#a8caff;font-size:18px}
+.feature strong,.feature small{display:block}
+.feature strong{font-size:11px}
+.feature small{font-size:10px;color:var(--muted);margin-top:4px}
+.section-back-row{display:flex;justify-content:space-between;align-items:center;margin:28px 0 4px}
+.back-home{border:1px solid var(--line);background:#121b29;color:#dce8fa;border-radius:10px;padding:9px 13px;font-weight:800;font-size:12px}
+.section-back-row span{font-size:10px;letter-spacing:2px;color:var(--muted);font-weight:900}
+@media(max-width:600px){
+ .landing{padding-top:30px}
+ .landing-title{letter-spacing:-2px}
+ .league-choices{grid-template-columns:1fr;gap:12px;margin-top:27px}
+ .league-choice{min-height:235px;padding:18px}
+ .league-logo-wrap{height:100px}
+ .league-logo-wrap img{height:85px}
+ .choice-bottom h2{font-size:29px}
+ .landing-features{grid-template-columns:1fr;gap:8px}
+ .feature{padding:11px}
+ .feature-icon{width:32px;height:32px}
+ .landing-copy{font-size:14px}
+ .choice-enter{font-size:9px}
+}
+@media(max-width:760px){
+ .chat-box{width:min(360px,90%);max-height:70vh}
+ .chat-main{min-height:190px;max-height:40vh}
+ .chat-header{padding:10px 12px}
+ .chat-setup{padding:12px}
+ .shell{padding:0 14px}
+ .topbar-inner{height:66px}
+ .brand{font-size:20px}
+ .clock{display:none}
+ .hero{padding:34px 0 18px;grid-template-columns:1fr}
+ .hero-card{min-height:110px}
+ .games{grid-template-columns:1fr}
+ .game{padding:15px}
+ .team img{width:42px;height:42px}
+ .team-name{font-size:12px}
+ .sportbar{align-items:stretch}
+ .tabs{width:100%;justify-content:space-between}
+ .tab{flex:1;padding:10px 8px}
+ .tools{width:100%}
+ .search{width:100%;flex:1}
+ .section-head{align-items:start}
+ .timezone{max-width:130px;line-height:1.4}
+ .footer{flex-direction:column}
+ .chat-panel{padding:10px}
+ .chat-box{max-height:96vh}
+ .chat-main{max-height:60vh}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+@media (min-width:1000px){
+ body{font-size:16px}
+ .shell{width:min(1440px,calc(100% - 80px));margin-inline:auto}
+ .topbar{padding:22px 0}
+ .brand-wordmark{font-size:31px;letter-spacing:4px}
+ .chat-open,.open-chat,#openChat{min-height:0;padding:8px 11px;font-size:12px;line-height:1.2;border-radius:9px}
+ .landing{padding:62px 0 46px}
+ .landing-kicker{font-size:12px;letter-spacing:4px}
+ .landing-title{font-size:clamp(68px,6.5vw,100px);letter-spacing:-4px;margin:30px 0 22px}
+ .landing-copy{max-width:760px;font-size:19px;line-height:1.8}
+ .league-choices{max-width:1180px;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px;margin:48px auto 30px}
+ .league-choice{min-height:380px;padding:30px 34px;border-radius:28px}
+ .choice-tag{font-size:12px;letter-spacing:2.5px}
+ .choice-arrow{font-size:26px}
+ .league-logo-wrap{height:190px;padding:24px 0}
+ .league-logo-wrap img{width:210px;height:150px}
+ .nhl-choice .league-logo-wrap img{width:160px;height:120px}
+ .nba-choice .league-logo-wrap img{width:145px;height:140px}
+ .choice-bottom h2{font-size:42px}
+ .choice-bottom p{font-size:15px}
+ .choice-enter{font-size:11px}
+ .landing-features{max-width:1180px;margin:30px auto 0;gap:16px}
+ .feature{padding:20px;border-radius:16px;gap:14px}
+ .feature-icon{flex-basis:44px;height:44px;font-size:22px}
+ .feature strong{font-size:14px}
+ .feature small{font-size:12px}
+ .section-back-row{margin-top:38px}
+ .sportbar{max-width:1180px;margin-inline:auto}
+ #scheduleSection{max-width:1180px;margin-inline:auto}
+ .section-head h2{font-size:32px}
+ .games-grid,#nhl-matches,#basketball-matches{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+ .game-card{min-height:310px;padding:26px;border-radius:22px}
+ .chat-box{width:min(520px,90vw);max-height:76vh}
+ .chat-main{min-height:300px;max-height:48vh}
+}
+@media (min-width:1500px){
+ .shell{width:min(1500px,calc(100% - 120px))}
+ .landing{padding-top:76px}
+ .league-choice{min-height:420px}
+ .league-logo-wrap{height:220px}
+ .nhl-choice .league-logo-wrap img{width:175px;height:132px}
+ .nba-choice .league-logo-wrap img{width:155px;height:150px}
+}
+.nhl-league-label{display:inline-flex;align-items:center;gap:8px}
+.nhl-league-label img{width:22px;height:22px;object-fit:contain;flex:0 0 22px;filter:drop-shadow(0 1px 3px #0008)}
+.nhl-league-label .mini-nhl-fallback{display:none;width:22px;height:22px;align-items:center;justify-content:center;border:1px solid #aabbd6;border-radius:4px;color:#eaf1ff;font-size:7px;font-weight:900;line-height:1}
+.nhl-league-label{display:inline-flex;align-items:center;gap:8px}
+.nhl-league-label img{width:22px;height:22px;object-fit:contain;flex:0 0 22px;filter:drop-shadow(0 1px 3px #0008)}
+.hero-card .stats-feature-title{display:block;font-size:clamp(21px,2.6vw,28px);line-height:1.2;margin:18px 0 8px;color:#f3f6ff}
+.hero-card .stats-feature-copy{display:block;color:#9aa8bd;font-size:14px;line-height:1.6}
+.stats-view-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;margin-top:17px;padding:12px 18px;border:1px solid #78aaff;border-radius:12px;background:linear-gradient(135deg,#78b1ff,#477cf5);color:#071225;font-size:14px;font-weight:850;text-decoration:none;cursor:pointer;box-shadow:0 8px 25px #477cf533;transition:transform .18s ease,filter .18s ease}
+.stats-view-btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.latvia-stats-grid{display:none;position:fixed;z-index:45;inset:150px 0 0;overflow-y:auto;overscroll-behavior:contain;grid-template-columns:repeat(4,minmax(0,1fr));align-content:start;gap:14px;margin:0;padding:24px max(22px,calc((100vw - 1100px)/2)) 34px;background:#171a20;border-top:1px solid #303640;box-shadow:0 -15px 50px #0007}
+.latvia-stats-grid.open{display:grid}
+.latvia-stat-card{min-width:0;padding:20px 12px;text-align:center;border:1px solid #353c47;border-radius:16px;background:linear-gradient(160deg,#242932,#1a1e25)}
+.latvia-stat-card img{display:block;width:72px;height:72px;max-width:100%;object-fit:contain;margin:0 auto 10px;border-radius:50%;background:#1b2028}
+.latvia-stat-card strong{display:block;color:#eef4ff;font-size:14px;overflow-wrap:anywhere}
+.latvia-stat-card .stat-value{display:inline-block;margin-top:8px;padding:5px 8px;border-radius:8px;background:#303b4b;color:#c1d7f8;font-size:12px;font-weight:800}
+.stats-source-note{margin-top:14px;color:#7f8da3;font-size:11px;line-height:1.5}
+@media(max-width:560px){
+ .latvia-stats-grid{grid-template-columns:repeat(2,minmax(0,1fr));inset:150px 0 0;padding:18px 16px 28px;gap:12px}
+ .latvia-stat-card{padding:17px 9px}
+ .latvia-stat-card img{width:64px;height:64px}
+ .stats-view-btn.stats-open{position:fixed;z-index:48;top:88px;left:16px;width:calc(100% - 32px);margin:0;padding:15px 12px;border-radius:16px}
+}
+.stats-view-btn.stats-open{position:fixed;z-index:48;top:88px;left:max(22px,calc((100vw - 1100px)/2));width:min(420px,calc(100vw - 44px));margin:0;padding:15px 18px}
+/* Compact white-neon Open Chat button */
+.top-actions .chat-open,#openChat{
+ padding:6px 9px!important;
+ min-height:0!important;
+ font-size:11px!important;
+ line-height:1.15!important;
+ border-radius:8px!important;
+ color:#fff!important;
+ background:rgba(255,255,255,.035)!important;
+ border:1px solid rgba(255,255,255,.72)!important;
+ box-shadow:0 0 5px rgba(255,255,255,.42),inset 0 0 5px rgba(255,255,255,.08),0 0 13px rgba(255,255,255,.22)!important;
+ text-shadow:0 0 6px rgba(255,255,255,.85)!important;
+}
+.top-actions .chat-open:hover,#openChat:hover{
+ background:rgba(255,255,255,.11)!important;
+ box-shadow:0 0 7px rgba(255,255,255,.7),0 0 19px rgba(255,255,255,.35)!important;
+}
+/* Cleaner Latvian players feature card */
+.hero-card{gap:12px;padding:22px 24px 20px;background:linear-gradient(145deg,#171f2d,#10151f 78%);border-color:#2b374a;box-shadow:0 16px 42px #0003}
+.hero-card-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:10px;letter-spacing:1.1px;font-weight:800}
+.stats-kicker{color:#aabbd4}
+.stats-live-label{display:inline-flex;align-items:center;white-space:nowrap;color:#aabbd4}
+.hero-card .stats-feature-title{font-size:clamp(22px,2.5vw,27px);line-height:1.15;letter-spacing:-.6px;margin:7px 0 0}
+.hero-card .stats-feature-copy{font-size:14px;line-height:1.55;margin-top:0;max-width:360px}
+.stats-view-btn{width:100%;margin-top:4px;padding:12px 16px;border-radius:11px;box-shadow:0 5px 18px #477cf526}
+.stats-source-note{display:flex;align-items:flex-start;gap:7px;margin:0;font-size:10px;line-height:1.45;color:#7f8da3}
+.stats-source-note span{color:#9eb9e4;flex:0 0 auto}
+@media(max-width:700px){
+ .hero{grid-template-columns:1fr;gap:18px}
+ .hero-card{padding:20px}
+ .hero-card-top{font-size:9px}
+ .hero-card .stats-feature-title{margin-top:5px}
+ .stats-view-btn{margin-top:5px}
+}
+.stats-source-note{margin-top:14px;padding:13px 15px;border:1px solid #29364a;border-radius:12px;background:#111925;color:#aab6c8;font-size:13px;line-height:1.55}
+.stats-source-note strong{display:block;color:#f1f5fb;font-size:14px;margin-bottom:5px}
+.stats-source-note p{margin:3px 0}
+.stats-source-note b{color:#dce7f8}
+.stats-source-note a{color:#b8d4ff;text-decoration:none}
+.stats-source-note a:hover{text-decoration:underline}
+.info-support{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;align-items:start;padding:16px 18px}
+.info-support>strong{grid-column:1/-1;margin:0 0 2px}
+.info-support p{margin:0;min-width:0;overflow-wrap:anywhere}
+.info-support p:last-child{grid-column:1/-1;padding-top:8px;border-top:1px solid #29364a;margin-top:3px}
+.info-support a{overflow-wrap:anywhere}
+@media(max-width:520px){
+ .info-support{grid-template-columns:1fr 1fr;gap:10px 12px;padding:15px}
+ .info-support p{font-size:12px;line-height:1.5}
+ .info-support p:last-child{grid-column:1/-1}
+}
+</style>
 </head>
-
 <body>
-  <header>
-    <div class="logo">MyWebsite</div>
-
-    <nav>
-      <a href="#home">Главная</a>
-      <a href="#about">О нас</a>
-      <a href="#contacts">Контакты</a>
-    </nav>
-  </header>
-
-  <main>
-    <section class="hero" id="home">
-      <h1>Создавай своё <span>будущее</span></h1>
-
-      <p>
-        Добро пожаловать на мой сайт!
-        Здесь начинаются новые идеи,
-        интересные проекты и большие возможности.
-      </p>
-
-      <a href="#about" class="button">Узнать больше</a>
-    </section>
-
-    <section class="features" id="about">
-      <h2>Почему мы?</h2>
-
-      <div class="cards">
-        <div class="card">
-          <h3>🚀 Скорость</h3>
-          <p>Быстрый и удобный сайт для всех устройств.</p>
-        </div>
-
-        <div class="card">
-          <h3>🎨 Дизайн</h3>
-          <p>Современный стиль и приятные цвета.</p>
-        </div>
-
-        <div class="card">
-          <h3>💡 Идеи</h3>
-          <p>Всё необходимое для твоего проекта.</p>
-        </div>
+<header class="topbar">
+  <div class="shell topbar-inner">
+    <button class="brand" id="homeButton" aria-label="SPORTNEL home"><span class="brand-wordmark">SPORTNEL</span></button>
+    <div class="top-actions"><span class="clock" id="clock">Riga · --:--:--</span><button class="chat-open" id="openChat">Open Chat ↗</button></div>
+  </div>
+</header>
+<main class="shell">
+  <section class="hero">
+    <div><div class="eyebrow">LIVE SPORTS CENTER</div><h1>Sports. No Noise.</h1><p>NHL and NBA in one place. Schedules use Riga time, with statuses that update automatically based on scheduled start times.</p></div>
+    <div class="hero-card"><div class="hero-card-top"><span class="stats-kicker">LATVIAN PLAYERS</span><span class="stats-live-label"><i class="live-dot"></i> NHL STATS</span></div><strong class="stats-feature-title">Latvian NHL Players</strong><small class="stats-feature-copy">Player profiles and season stats, all in one place.</small>
+      <button class="stats-view-btn" id="viewLatviaStats" type="button">View Player Stats <span aria-hidden="true">↗</span></button>
+      <div class="latvia-stats-grid" id="latviaStatsGrid" aria-live="polite"><article class="latvia-stat-card"><img src="https://assets.nhle.com/mugs/nhl/20262027/TBL/8476878.png" alt="Z.Girgensons portrait" loading="lazy"><strong>Z.Girgensons</strong><span class="stat-value">G 1 | A 1 | P 2</span></article>
+      <article class="latvia-stat-card"><img src="https://assets.nhle.com/mugs/nhl/20262027/FLA/8483771.png" alt="S.Vilmanis portrait" loading="lazy"><strong>S.Vilmanis</strong><span class="stat-value">G 0 | A 1 | P 1</span></article>
+      <article class="latvia-stat-card"><img src="https://assets.nhle.com/mugs/nhl/20262027/TOR/8476927.png" alt="T.Blueger portrait" loading="lazy"><strong>T.Blueger</strong><span class="stat-value">G 0 | A 0 | P 0</span></article>
+      <article class="latvia-stat-card"><img src="https://assets.nhle.com/mugs/nhl/20262027/NYR/8485957.png" alt="A.Smits portrait" loading="lazy"><strong>A.Smits</strong><span class="stat-value">G 0 | A 0 | P 0</span></article>
+      <article class="latvia-stat-card"><img src="https://assets.nhle.com/mugs/nhl/20262027/FLA/8484304.png" alt="U.Balinskis portrait" loading="lazy"><strong>U.Balinskis</strong><span class="stat-value">G 0 | A 1 | P 1</span></article>
+      <article class="latvia-stat-card"><img src="https://assets.nhle.com/mugs/nhl/20262027/PIT/8481668.png" alt="A.Silovs portrait" loading="lazy"><strong>A.Silovs</strong><span class="stat-value">GOALIE | W 3 | L 2 | SO 1 | SV% .870</span></article>
+      <article class="latvia-stat-card"><img src="https://assets.nhle.com/mugs/nhl/20262027/TOR/8478007.png" alt="E.Merzlikins portrait" loading="lazy"><strong>E.Merzlikins</strong><span class="stat-value">He is injured</span></article></div>
       </div>
-    </section>
-  </main>
+  </section>
 
-  <footer id="contacts">
-    <p>© 2026 MyWebsite. Все права защищены.</p>
-    <p>Связь: hello@example.com</p>
-  </footer>
+  <section class="landing" id="landing">
+    <div class="landing-kicker"><span class="kicker-line"></span> WELCOME TO SPORTNEL <span class="kicker-line"></span></div>
+    <h1 class="landing-title">Your Game.<br><span>Your Moment.</span></h1>
+    <p class="landing-copy">Hockey and basketball, all in one place. Choose your league and get into the game.</p>
+    <div class="league-choices">
+      <button class="league-choice nhl-choice" data-choose="nhl" aria-label="Open NHL section">
+        <div class="choice-top"><span class="choice-tag">ICE HOCKEY</span><span class="choice-arrow">↗</span></div>
+        <div class="league-logo-wrap"><img src="https://assets.nhle.com/logos/nhl/svg/NHL_dark.svg" alt="NHL logo" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="logo-fallback nhl-fallback" style="display:none">NHL</span></div>
+        <div class="choice-bottom"><div><h2>NHL</h2><p>Speed. Power. Hockey.</p></div><span class="choice-enter">EXPLORE LEAGUE <b>→</b></span></div>
+      </button>
+      <button class="league-choice nba-choice" data-choose="nba" aria-label="Open NBA section">
+        <div class="choice-top"><span class="choice-tag">BASKETBALL</span><span class="choice-arrow">↗</span></div>
+        <div class="league-logo-wrap"><img src="https://upload.wikimedia.org/wikipedia/en/0/03/National_Basketball_Association_logo.svg" alt="NBA logo" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="logo-fallback" style="display:none">NBA</span></div>
+        <div class="choice-bottom"><div><h2>NBA</h2><p>Energy. Drive. Basketball.</p></div><span class="choice-enter">EXPLORE LEAGUE <b>→</b></span></div>
+      </button>
+    </div>
+    <div class="landing-features">
+      <div class="feature"><span class="feature-icon">◷</span><div><strong>Riga Time</strong><small>Your local game time</small></div></div>
+      <div class="feature"><span class="feature-icon">⌕</span><div><strong>Quick Search</strong><small>Find your team</small></div></div>
+      <div class="feature"><span class="feature-icon">✦</span><div><strong>One Sports Hub</strong><small>NHL and NBA together</small></div></div>
+    </div>
+  </section>
+  <div class="section-back-row" id="sectionBackRow" style="display:none"><button class="back-home" id="backHome">← All Leagues</button><span id="sectionBadge">NHL</span></div>
 
-  <script>
-    console.log("Сайт успешно загружен!");
+  <div class="sportbar" id="sportbar" style="display:none">
+    <nav class="tabs" aria-label="Choose a league"><button class="tab active" data-sport="nhl">NHL · Hockey</button><button class="tab" data-sport="nba">NBA · Basketball</button></nav>
+    <div class="tools"><input class="search" id="search" type="search" placeholder="Search teams…" aria-label="Search teams"></div>
+  </div>
+  <section id="scheduleSection" style="display:none">
+    <div class="section-head"><div><h2 id="scheduleTitle">NHL Schedule</h2><p id="scheduleSub">Columbus Blue Jackets vs Minnesota Wild · Oct 19, 01:00 Riga time | Carolina Hurricanes vs Calgary Flames · Oct 19, 03:00 Riga time</p></div><div class="timezone">Times & statuses<br>Europe/Riga · Latvia</div></div>
+    <div class="games" id="games"></div>
+    <div class="player" id="player"><div class="player-head"><strong id="playerTitle">Stream</strong><button class="close-player" id="closePlayer">Close ✕</button></div><iframe id="streamFrame" title="Game player" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+    <div class="stats-source-note info-support"><strong>Info</strong><p><b>UPCOMING</b> — the match has not started yet.</p><p><b>LIVE</b> — the match is currently in progress.</p><p><b>Technical support:</b> <a href="mailto:sportneltv@gmail.com">sportneltv@gmail.com</a></p></div>
+  </section>
+</main>
+<footer class="shell footer" style="display:block;text-align:center;padding:30px 18px 36px;line-height:1.8">
+  <div style="color:#f1f5ff;font-size:18px;font-weight:800;margin-bottom:8px">SPORTNEL — Your Home for NHL &amp; NBA</div>
+  <p style="max-width:720px;margin:0 auto 16px;color:#9aa8bd;font-size:14px">SPORTNEL helps you follow NHL and NBA games every day. Explore the schedule and find available streams in one place.</p>
+  <div style="color:#dce7fa;font-size:13px;font-weight:700">Follow us</div>
+  <div style="display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:5px;color:#9fc2ff;font-size:13px">
+    <span>YouTube: <strong>SPORTNEL.TV</strong></span>
+    <span>TikTok: <strong>SPORTNEL.TV</strong></span>
+  </div>
+  <div style="margin-top:16px;color:#66758c;font-size:11px">© 2026 SPORTNEL</div>
+</footer>
 
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-      link.addEventListener("click", function(event) {
-        const target = document.querySelector(this.getAttribute("href"));
+<div class="chat-panel" id="chatPanel" role="dialog" aria-modal="true" aria-labelledby="chatTitle">
+  <div class="chat-box">
+    <div class="chat-header"><div><h2 id="chatTitle">SPORTNEL Chat</h2><p>Choose a name before joining the conversation</p></div><button class="close-chat" id="closeChat">Close ✕</button></div>
+    <div class="chat-setup" id="chatSetup"><label for="username">What name should people see?</label><input class="name-input" id="username" maxlength="24" autocomplete="nickname" placeholder="e.g. Alex"><button class="primary" id="joinChat">Join Chat</button><div class="hint">Your name is saved on this device and can be changed later.</div></div>
+    <div class="chat-main" id="chatMain"><div class="messages" id="messages" aria-live="polite"></div><div class="chat-compose"><input class="chat-input" id="chatInput" maxlength="500" placeholder="Write a message…" aria-label="Message"><button class="send" id="sendMessage">Send</button></div><div class="chat-status" id="chatStatus"></div></div>
+  </div>
+</div>
+<script>
+const NHL_MATCHES = [
+ {id:"cbj-vs-min-2026-10-18",url:"https://www.nhl.com/schedule/2026-10-18",home:"Minnesota Wild",away:"Columbus Blue Jackets",homeLogo:"https://assets.nhle.com/logos/nhl/svg/MIN_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/CBJ_light.svg",time:"01:00"},
+ {id:"car-vs-cgy-2026-10-18",url:"https://www.nhl.com/schedule/2026-10-18",home:"Calgary Flames",away:"Carolina Hurricanes",homeLogo:"https://assets.nhle.com/logos/nhl/svg/CGY_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/CAR_light.svg",time:"03:00"}
+];
+const state = {sport:"nhl",search:""};
+const $ = id => document.getElementById(id);
+const TZ = "Europe/Riga";
 
-        if (target) {
-          event.preventDefault();
-          target.scrollIntoView({ behavior: "smooth" });
-        }
-      });
-    });
-  </script>
+function rigaParts(date = new Date()) {
+ const p = new Intl.DateTimeFormat("en-GB",{timeZone:TZ,year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit",hourCycle:"h23"}).formatToParts(date);
+ return Object.fromEntries(p.map(x=>[x.type,x.value]));
+}
+function rigaNowText() {
+ return new Intl.DateTimeFormat("en-GB",{timeZone:TZ,hour:"2-digit",minute:"2-digit",second:"2-digit",hourCycle:"h23"}).format(new Date());
+}
+function nextStart(time) {
+ const [h,m] = time.split(":").map(Number);
+ const p = rigaParts();
+ const now = new Date();
+ const dateText = `${p.year}-${p.month}-${p.day}`;
+ let candidate = localRigaToDate(dateText,h,m);
+ if (candidate.getTime() < now.getTime() - 3*60*60*1000) {
+  const tomorrow = new Date(Date.UTC(Number(p.year),Number(p.month)-1,Number(p.day)+1));
+  const d = `${tomorrow.getUTCFullYear()}-${String(tomorrow.getUTCMonth()+1).padStart(2,"0")}-${String(tomorrow.getUTCDate()).padStart(2,"0")}`;
+  candidate = localRigaToDate(d,h,m);
+ }
+ return candidate;
+}
+function localRigaToDate(dateText,h,m) {
+ const [y,mo,d] = dateText.split("-").map(Number);
+ let guess = new Date(Date.UTC(y,mo-1,d,h,m,0));
+ for(let i=0;i<3;i++){
+  const p = rigaParts(guess);
+  const represented = Date.UTC(Number(p.year),Number(p.month)-1,Number(p.day),Number(p.hour),Number(p.minute),Number(p.second));
+  const target = Date.UTC(y,mo-1,d,h,m,0);
+  guess = new Date(guess.getTime() + (target-represented));
+ }
+ return guess;
+}
+const schedule = NHL_MATCHES.map(m=>({...m,start:nextStart(m.time)}));
+
+function getStatus(match) {
+ const now = Date.now(),start = match.start.getTime(),end = start + 3*60*60*1000;
+ if(now < start) return {key:"soon",label:"UPCOMING"};
+ if(now < end) return {key:"live",label:"LIVE"};
+ return {key:"done",label:"FINAL"};
+}
+function displayTime(date) {
+ return new Intl.DateTimeFormat("en-GB",{timeZone:TZ,hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).format(date);
+}
+function renderGames() {
+ const q = state.search.trim().toLowerCase();
+ const title = state.sport === "nhl" ? "NHL Schedule" : "NBA Schedule";
+ $("scheduleTitle").textContent = title;
+ $("scheduleSub").textContent = state.sport === "nhl"
+  ? "Columbus Blue Jackets vs Minnesota Wild · Oct 19, 01:00 Riga time | Carolina Hurricanes vs Calgary Flames · Oct 19, 03:00 Riga time"
+  : "NBA schedule integration is ready to be connected";
+ $("games").replaceChildren();
+
+ if(state.sport === "nba") {
+  const e = document.createElement("div");
+  e.className = "empty";
+  const strong = document.createElement("strong");
+  strong.textContent = "NBA schedule is not connected yet";
+  e.append(strong,document.createTextNode("No made-up games here. Connect a live schedule feed for current fixtures and official statuses."));
+  $("games").append(e);
+  return;
+ }
+
+ const filtered = schedule.filter(m=>`${m.home} ${m.away}`.toLowerCase().includes(q)).sort((a,b)=>a.start-b.start);
+ if(!filtered.length) {
+  const e = document.createElement("div");
+  e.className = "empty";
+  const strong = document.createElement("strong");
+  strong.textContent = "No results found";
+  e.append(strong,document.createTextNode("Try another team name."));
+  $("games").append(e);
+  return;
+ }
+
+ for(const m of filtered) {
+  const status = getStatus(m),card = document.createElement("article");
+  card.className = "game";
+  const top = document.createElement("div");
+  top.className = "game-top";
+  const league = document.createElement("span");
+  league.className = "league nhl-league-label";
+  const leagueLogo = document.createElement("img");
+  leagueLogo.src = "https://assets.nhle.com/logos/nhl/svg/NHL_dark.svg";
+  leagueLogo.alt = "NHL";
+  leagueLogo.loading = "lazy";
+  leagueLogo.onerror = () => {leagueLogo.style.display="none";};
+  const leagueName = document.createElement("span");
+  leagueName.textContent = "NATIONAL HOCKEY LEAGUE";
+  league.append(leagueLogo,leagueName);
+  const badge = document.createElement("span");
+  badge.className = `status ${status.key}`;
+  badge.textContent = status.label;
+  top.append(league,badge);
+
+  const teams = document.createElement("div");
+  teams.className = "teams";
+  teams.append(
+   makeTeam(m.home,m.homeLogo),
+   Object.assign(document.createElement("div"),{className:"versus",textContent:"VS"}),
+   makeTeam(m.away,m.awayLogo)
+  );
+
+  const bottom = document.createElement("div");
+  bottom.className = "game-bottom";
+  const tm = document.createElement("span");
+  tm.className = "time-label";
+  tm.textContent = `${status.key==="done"?"Scheduled":"Starts"} · ${displayTime(m.start)} · Riga`;
+  const btn = document.createElement("button");
+  btn.className = "watch";
+  btn.textContent = status.key==="live" ? "Watch Game ↗" : "GO LIVE ↗";
+  btn.addEventListener("click",()=>openStream(m));
+  bottom.append(tm,btn);
+  card.append(top,teams,bottom);
+  $("games").append(card);
+ }
+}
+function makeTeam(name,logo) {
+ const box = document.createElement("div");
+ box.className = "team";
+ const img = document.createElement("img");
+ img.src = logo;
+ img.alt = "";
+ img.loading = "lazy";
+ img.onerror = () => {img.style.display="none";};
+ const title = document.createElement("div");
+ title.className = "team-name";
+ title.textContent = name;
+ box.append(img,title);
+ return box;
+}
+function openStream(m) {
+ $("playerTitle").textContent = `${m.home} vs ${m.away}`;
+ $("streamFrame").src = m.url;
+ $("player").classList.add("show");
+ $("player").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function closeStream() {
+ $("streamFrame").src = "";
+ $("player").classList.remove("show");
+}
+function showLanding() {
+ $("landing").style.display = "block";
+ $("sportbar").style.display = "none";
+ $("scheduleSection").style.display = "none";
+ $("sectionBackRow").style.display = "none";
+ state.sport = "nhl";
+ state.search = "";
+ $("search").value = "";
+ document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.sport==="nhl"));
+ closeStream();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function chooseLeague(sport) {
+ state.sport = sport;
+ $("landing").style.display = "none";
+ $("sportbar").style.display = "flex";
+ $("scheduleSection").style.display = "block";
+ $("sectionBackRow").style.display = "flex";
+ $("sectionBadge").textContent = sport==="nhl" ? "NHL · HOCKEY" : "NBA · BASKETBALL";
+ document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.sport===sport));
+ closeStream();
+ renderGames();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+document.querySelectorAll("[data-choose]").forEach(b=>b.addEventListener("click",()=>chooseLeague(b.dataset.choose)));
+$("backHome").addEventListener("click",showLanding);
+$("homeButton").addEventListener("click",showLanding);
+document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{
+ state.sport=t.dataset.sport;
+ $("sectionBadge").textContent=state.sport==="nhl" ? "NHL · HOCKEY" : "NBA · BASKETBALL";
+ document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===t));
+ closeStream();
+ renderGames();
+}));
+$("search").addEventListener("input",e=>{state.search=e.target.value;renderGames();});
+$("closePlayer").addEventListener("click",closeStream);
+function tick() {
+ $("clock").textContent = `Riga · ${rigaNowText()}`;
+ renderGames();
+}
+tick();
+setInterval(tick,15000);
+
+// Имя и история чата хранятся локально.
+// Для общего чата между разными устройствами нужен сервер.
+const CHAT_KEY = "sportnel_chat_messages_v1";
+const NAME_KEY = "sportnel_chat_name_v1";
+let username = localStorage.getItem(NAME_KEY) || "";
+let messages = [];
+try {
+ messages = JSON.parse(localStorage.getItem(CHAT_KEY) || "[]");
+ if(!Array.isArray(messages)) messages=[];
+} catch {messages=[];}
+
+function openChat() {
+ $("chatPanel").classList.add("open");
+ $("username").value=username;
+ if(username) showChat();
+ else {
+  $("chatSetup").style.display="flex";
+  $("chatMain").style.display="none";
+ }
+}
+function closeChat() {$("chatPanel").classList.remove("open");}
+function showChat() {
+ $("chatSetup").style.display="none";
+ $("chatMain").style.display="flex";
+ $("chatStatus").textContent=`You joined as ${username}. Chat history is only available in this browser.`;
+ renderMessages();
+ setTimeout(()=>$("chatInput").focus(),80);
+}
+function renderMessages() {
+ const box=$("messages");
+ box.replaceChildren();
+ if(!messages.length) {
+  const e=document.createElement("div");
+  e.className="hint";
+  e.textContent="It’s quiet here. Start the conversation 👋";
+  box.append(e);
+ }
+ for(const m of messages.slice(-150)) {
+  const item=document.createElement("div");
+  item.className="message"+(m.name===username?" mine":"");
+  const meta=document.createElement("div");
+  meta.className="message-meta";
+  meta.textContent=`${m.name} · ${m.time}`;
+  const text=document.createElement("div");
+  text.className="message-text";
+  text.textContent=m.text;
+  item.append(meta,text);
+  box.append(item);
+ }
+ box.scrollTop=box.scrollHeight;
+}
+function joinChat() {
+ const entered=$("username").value.trim().replace(/\s+/g," ").slice(0,24);
+ if(!entered) {
+  $("username").focus();
+  $("username").placeholder="Enter a name first";
+  return;
+ }
+ username=entered;
+ localStorage.setItem(NAME_KEY,username);
+ showChat();
+}
+function sendMessage() {
+ const input=$("chatInput"),text=input.value.trim();
+ if(!username) {
+  $("chatSetup").style.display="flex";
+  $("chatMain").style.display="none";
+  return;
+ }
+ if(!text) return;
+ const now=new Date();
+ messages.push({
+  name:username,
+  text,
+  time:new Intl.DateTimeFormat("en-GB",{timeZone:TZ,hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).format(now)
+ });
+ messages=messages.slice(-150);
+ try {localStorage.setItem(CHAT_KEY,JSON.stringify(messages));} catch {}
+ input.value="";
+ renderMessages();
+}
+$("openChat").addEventListener("click",openChat);
+$("closeChat").addEventListener("click",closeChat);
+$("chatPanel").addEventListener("click",e=>{if(e.target===$("chatPanel"))closeChat();});
+$("joinChat").addEventListener("click",joinChat);
+$("username").addEventListener("keydown",e=>{if(e.key==="Enter")joinChat();});
+$("sendMessage").addEventListener("click",sendMessage);
+$("chatInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendMessage();});
+
+const statsToggle = document.getElementById("viewLatviaStats");
+const statsGrid = document.getElementById("latviaStatsGrid");
+if(statsToggle && statsGrid) {
+ statsToggle.addEventListener("click",()=>{
+  const expanded=statsGrid.classList.toggle("open");
+  statsToggle.classList.toggle("stats-open",expanded);
+  document.body.style.overflow=expanded?"hidden":"";
+  statsToggle.innerHTML=expanded
+   ? 'Hide Player Stats <span aria-hidden="true">↑</span>'
+   : 'View Player Stats <span aria-hidden="true">↗</span>';
+  statsToggle.setAttribute("aria-expanded",String(expanded));
+  if(expanded) statsGrid.scrollTop=0;
+ });
+}
+</script>
 </body>
 </html>
