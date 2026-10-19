@@ -678,8 +678,10 @@ h1{font-size:clamp(33px,5vw,56px);line-height:1.02;letter-spacing:-2px;margin:14
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const NHL_MATCHES = [
- {id:"cbj-vs-min-2026-10-18",url:"https://matchora.to/embed/match/2591619",home:"Minnesota Wild",away:"Columbus Blue Jackets",homeLogo:"https://assets.nhle.com/logos/nhl/svg/MIN_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/CBJ_light.svg",time:"01:00"},
- {id:"car-vs-cgy-2026-10-18",url:"https://matchora.to/embed/match/2591620",home:"Calgary Flames",away:"Carolina Hurricanes",homeLogo:"https://assets.nhle.com/logos/nhl/svg/CGY_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/CAR_light.svg",time:"03:00"}
+ {id:"phi-vs-col-2026-10-20",homeCode:"PHI",awayCode:"COL",url:"",home:"Philadelphia Flyers",away:"Colorado Avalanche",homeLogo:"https://assets.nhle.com/logos/nhl/svg/PHI_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/COL_light.svg",time:"02:00",date:"2026-10-20"},
+ {id:"nyr-vs-ana-2026-10-20",homeCode:"NYR",awayCode:"ANA",url:"",home:"New York Rangers",away:"Anaheim Ducks",homeLogo:"https://assets.nhle.com/logos/nhl/svg/NYR_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/ANA_light.svg",time:"02:00",date:"2026-10-20"},
+ {id:"tor-vs-sjs-2026-10-20",homeCode:"TOR",awayCode:"SJS",url:"",home:"Toronto Maple Leafs",away:"San Jose Sharks",homeLogo:"https://assets.nhle.com/logos/nhl/svg/TOR_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/SJS_light.svg",time:"02:30",date:"2026-10-20"},
+ {id:"uta-vs-pit-2026-10-20",homeCode:"UTA",awayCode:"PIT",url:"",home:"Utah Mammoth",away:"Pittsburgh Penguins",homeLogo:"https://assets.nhle.com/logos/nhl/svg/UTA_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/PIT_light.svg",time:"04:00",date:"2026-10-20"}
 ];
 const state = {sport:"nhl",search:""};
 const $ = id => document.getElementById(id);
@@ -775,15 +777,61 @@ const NBA_MATCHES = [
  {id:"nyk-vs-phi-2026-10-21",url:"https://photobooth.cdn.sports.ru/preset/message/2/74/30ec197bc48c8b7a08360758975e6.png?f=webp&q=90&s=2x&w=730",home:"New York Knicks",away:"Philadelphia 76ers",homeLogo:"https://cdn.nba.com/logos/nba/1610612752/primary/L/logo.svg",awayLogo:"https://cdn.nba.com/logos/nba/1610612755/primary/L/logo.svg",time:"02:00",date:"2026-10-21"},
  {id:"sas-vs-okc-2026-10-21",url:"https://photobooth.cdn.sports.ru/preset/message/2/74/30ec197bc48c8b7a08360758975e6.png?f=webp&q=90&s=2x&w=730",home:"San Antonio Spurs",away:"Oklahoma City Thunder",homeLogo:"https://cdn.nba.com/logos/nba/1610612759/primary/L/logo.svg",awayLogo:"https://cdn.nba.com/logos/nba/1610612760/primary/L/logo.svg",time:"04:30",date:"2026-10-21"}
 ];
-const schedule = NHL_MATCHES.map(m=>({...m,start:nextStart(m.time)}));
+const schedule = NHL_MATCHES.map(m=>({...m,start:localRigaToDate(m.date,...m.time.split(":").map(Number))}));
 const nbaSchedule = NBA_MATCHES.map(m=>({...m,start:localRigaToDate(m.date,...m.time.split(":").map(Number))}));
 initializeViewerCounters();
 
 function getStatus(match) {
- const now = Date.now(),start = match.start.getTime(),end = start + 3*60*60*1000;
+ const now = Date.now(), start = match.start.getTime();
+ // NHL status comes from the live NHL scoreboard API when available.
+ if (NHL_MATCHES.includes(match) || NHL_MATCHES.some(x => x.id === match.id)) {
+  if (match.nhlApiStatus === "done") return {key:"done",label:"MATCH ENDED"};
+  if (match.nhlApiStatus === "live") return {key:"live",label:"LIVE"};
+  if (match.nhlApiStatus === "soon") return {key:"soon",label:"UPCOMING"};
+  // If the API is temporarily unavailable, never guess that a match has ended.
+  return now < start ? {key:"soon",label:"UPCOMING"} : {key:"live",label:"LIVE"};
+ }
+ // Preserve the existing NBA timer behavior.
+ const end = start + 3*60*60*1000;
  if(now < start) return {key:"soon",label:"UPCOMING"};
  if(now < end) return {key:"live",label:"LIVE"};
- return {key:"done",label:"FINAL"};
+ return {key:"done",label:"MATCH ENDED"};
+}
+
+function previousIsoDate(dateText) {
+ const d = new Date(`${dateText}T12:00:00Z`);
+ d.setUTCDate(d.getUTCDate()-1);
+ return d.toISOString().slice(0,10);
+}
+const NHL_STATE_MAP = {
+ LIVE:"live", CRIT:"live", FINAL:"done", OFF:"done", PRE:"soon", FUT:"soon"
+};
+async function refreshNhlStatuses() {
+ const dates = new Set();
+ NHL_MATCHES.forEach(m => { dates.add(m.date); dates.add(previousIsoDate(m.date)); });
+ const requests = [...dates].map(async date => {
+  try {
+   const response = await fetch(`https://api-web.nhle.com/v1/score/${date}`, {cache:"no-store"});
+   if (!response.ok) throw new Error(`NHL API returned ${response.status}`);
+   const data = await response.json();
+   const games = Array.isArray(data.games) ? data.games : [];
+   for (const game of games) {
+    const homeCode = game.homeTeam?.abbrev || game.homeTeam?.teamAbbrev?.default;
+    const awayCode = game.awayTeam?.abbrev || game.awayTeam?.teamAbbrev?.default;
+    if (!homeCode || !awayCode) continue;
+    const match = NHL_MATCHES.find(m => (m.homeCode === homeCode && m.awayCode === awayCode) || (m.homeCode === awayCode && m.awayCode === homeCode));
+    if (!match) continue;
+    const stateCode = String(game.gameState || game.gameStatus || "").toUpperCase();
+    const mapped = NHL_STATE_MAP[stateCode];
+    if (mapped) match.nhlApiStatus = mapped;
+   }
+  } catch (error) {
+   // Keep the safe fallback status; a failed API request must not mark games ended.
+   console.warn("Could not refresh NHL game statuses:", error);
+  }
+ });
+ await Promise.all(requests);
+ renderGames();
 }
 function displayTime(date) {
  return new Intl.DateTimeFormat("en-GB",{timeZone:TZ,hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).format(date);
@@ -793,7 +841,7 @@ function renderGames() {
  const title = state.sport === "nhl" ? "NHL Schedule" : "NBA Schedule";
  $("scheduleTitle").textContent = title;
  $("scheduleSub").textContent = state.sport === "nhl"
-  ? "Columbus Blue Jackets vs Minnesota Wild · Oct 19, 01:00 Riga time | Carolina Hurricanes vs Calgary Flames · Oct 19, 03:00 Riga time"
+  ? "Oct 20 · Philadelphia Flyers vs Colorado Avalanche · 02:00 | New York Rangers vs Anaheim Ducks · 02:00 | Toronto Maple Leafs vs San Jose Sharks · 02:30 | Utah Mammoth vs Pittsburgh Penguins · 04:00 · Riga time"
   : "Opening games · All times shown in Riga time";
  $("games").replaceChildren();
 
@@ -853,11 +901,12 @@ function renderGames() {
   bottom.className = "game-bottom";
   const tm = document.createElement("span");
   tm.className = "time-label";
-  tm.textContent = `${m.date ? new Intl.DateTimeFormat("en-GB",{timeZone:TZ,day:"2-digit",month:"long"}).format(m.start)+" · " : ""}${status.key==="done"?"Scheduled":status.key==="live"?"LIVE NOW":"Starts"} · ${displayTime(m.start)} · Riga`;
+  tm.textContent = `${m.date ? new Intl.DateTimeFormat("en-GB",{timeZone:TZ,day:"2-digit",month:"long"}).format(m.start)+" · " : ""}${status.key==="done"?"Match ended":status.key==="live"?"LIVE NOW":"Starts"} · ${displayTime(m.start)} · Riga`;
   const btn = document.createElement("button");
   btn.className = "watch";
-  btn.textContent = status.key==="live" ? "Watch Game ↗" : "GO LIVE ↗";
-  btn.addEventListener("click",()=>openStream(m));
+  btn.textContent = status.key==="done" ? "MATCH ENDED" : status.key==="live" ? "Watch Game ↗" : "GO LIVE ↗";
+  btn.disabled = status.key==="done";
+  if(status.key !== "done") btn.addEventListener("click",()=>openStream(m));
   bottom.append(tm,btn);
   card.append(top,teams,bottom);
   $("games").append(card);
@@ -930,7 +979,9 @@ function tick() {
  renderGames();
 }
 tick();
+refreshNhlStatuses();
 setInterval(tick,15000);
+setInterval(refreshNhlStatuses,60000);
 
 // Имя и история чата хранятся локально.
 // Для общего чата между разными устройствами нужен сервер.
