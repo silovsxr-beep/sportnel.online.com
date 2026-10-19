@@ -544,6 +544,106 @@ h1{font-size:clamp(33px,5vw,56px);line-height:1.02;letter-spacing:-2px;margin:14
 .viewer-count{display:inline-flex;align-items:center;gap:4px;margin-left:7px;color:#a9bdd8;font-size:10px;font-weight:800;white-space:nowrap;font-variant-numeric:tabular-nums}
 .viewer-count svg{width:12px;height:12px;display:block;opacity:.9}
 .viewer-count .viewer-number{min-width:8px}
+ 
+/* SPORTNEL refresh: remove stream watermark and keep chat beside the live video */
+.stream-brand{display:none!important}
+.top-actions .chat-open,#openChat{display:inline-flex!important}
+.chat-panel{
+  inset:auto 18px 88px auto;
+  z-index:50;
+  background:transparent;
+  backdrop-filter:none;
+  padding:0;
+  align-items:flex-end;
+  justify-content:flex-end;
+  pointer-events:none;
+}
+.chat-panel.open{display:flex}
+.chat-box{
+  pointer-events:auto;
+  width:min(370px,calc(100vw - 28px));
+  height:min(520px,calc(100dvh - 120px));
+  max-height:calc(100dvh - 120px);
+  border:1px solid rgba(143,184,255,.42);
+  border-radius:18px;
+  box-shadow:0 18px 70px #000b,0 0 24px #4f8fff20;
+}
+.chat-main{min-height:0;max-height:none;flex:1}
+.messages{min-height:0}
+@media(max-width:600px){
+  .chat-panel{right:10px;bottom:82px;left:10px;align-items:flex-end}
+  .chat-box{width:100%;height:min(68dvh,560px);max-height:calc(100dvh - 105px)}
+}
+
+
+/* Chat controls: top Open Chat + small icon beside Info; no bottom floating launcher */
+.info-heading-row{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;margin-bottom:2px}
+.info-heading-row strong{display:block;margin:0}
+.info-chat-trigger{
+  width:38px;height:34px;flex:none;display:inline-grid;place-items:center;
+  border:1px solid #33445f;border-radius:10px;background:#111b2a;color:#eaf2ff;
+  box-shadow:0 0 12px #4c94ff18;cursor:pointer;padding:0
+}
+.info-chat-trigger svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.info-chat-trigger:hover{border-color:#8ab8ff;background:#192943}
+
+
+/* Fixed bottom navigation styled to match the supplied SPORTNEL mockup */
+.mobile-bottom-nav{position:fixed;left:50%;bottom:calc(12px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:90;width:min(680px,calc(100vw - 36px));min-height:112px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:stretch;padding:8px 10px;border:1px solid rgba(180,139,159,.36);border-radius:34px;background:rgba(19,13,17,.96);box-shadow:0 8px 32px #0008,inset 0 0 0 1px #ffffff05;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.mobile-nav-item{min-width:0;border:0;border-radius:24px;background:transparent;color:#b6adb4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;font:700 13px/1.1 system-ui,-apple-system,sans-serif;letter-spacing:.2px;padding:9px 3px;cursor:pointer;transition:background .18s ease,color .18s ease}
+.mobile-nav-item.active{background:#32191f;color:#ff7187}
+.mobile-nav-icon{height:32px;min-width:32px;display:grid;place-items:center}
+.mobile-nav-icon svg{width:29px;height:29px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.mobile-nav-icon.emoji-icon{font-size:31px;line-height:1}
+.mobile-nav-item:focus-visible{outline:2px solid #ff7187;outline-offset:2px}
+body{padding-bottom:145px}
+@media(min-width:760px){.mobile-bottom-nav{width:min(600px,calc(100vw - 48px));min-height:86px;bottom:18px}.mobile-nav-item{flex-direction:row;gap:8px}body{padding-bottom:120px}}
+@media(max-width:380px){.mobile-bottom-nav{width:calc(100vw - 22px);min-height:96px;padding:6px;border-radius:28px;bottom:calc(7px + env(safe-area-inset-bottom))}.mobile-nav-item{font-size:11px;gap:5px}.mobile-nav-icon.emoji-icon{font-size:27px}.mobile-nav-icon svg{width:25px;height:25px}}
+
+
+/* Compact bottom navigation; use the site's existing official league logo assets */
+.mobile-bottom-nav{
+  width:min(620px,calc(100vw - 40px));
+  min-height:88px;
+  padding:6px 8px;
+  border-radius:28px;
+}
+.mobile-nav-item{
+  border-radius:21px;
+  gap:5px;
+  font-size:11px;
+  padding:6px 2px;
+}
+.mobile-nav-icon{height:27px;min-width:27px}
+.mobile-nav-icon svg{width:24px;height:24px}
+.mobile-nav-icon.emoji-icon{font-size:25px}
+.mobile-nav-icon.league-logo-icon img{
+  display:block;
+  width:29px;
+  height:29px;
+  object-fit:contain;
+}
+body{padding-bottom:112px}
+@media(min-width:760px){
+  .mobile-bottom-nav{min-height:72px}
+  .mobile-nav-item{gap:7px;font-size:12px}
+  body{padding-bottom:98px}
+}
+@media(max-width:380px){
+  .mobile-bottom-nav{
+    width:calc(100vw - 24px);
+    min-height:76px;
+    padding:5px;
+    border-radius:24px;
+    bottom:calc(6px + env(safe-area-inset-bottom))
+  }
+  .mobile-nav-item{font-size:10px;gap:4px;padding:5px 1px}
+  .mobile-nav-icon{height:24px;min-width:24px}
+  .mobile-nav-icon svg{width:22px;height:22px}
+  .mobile-nav-icon.league-logo-icon img{width:25px;height:25px}
+  body{padding-bottom:96px}
+}
+
 </style>
 </head>
 <body>
@@ -590,8 +690,8 @@ h1{font-size:clamp(33px,5vw,56px);line-height:1.02;letter-spacing:-2px;margin:14
   <section id="scheduleSection" style="display:none">
     <div class="section-head"><div><h2 id="scheduleTitle">NHL Schedule</h2><p id="scheduleSub">Columbus Blue Jackets vs Minnesota Wild · Oct 19, 01:00 Riga time | Carolina Hurricanes vs Calgary Flames · Oct 19, 03:00 Riga time</p></div></div>
     <div class="games" id="games"></div>
-    <div class="player" id="player"><div class="player-head"><strong id="playerTitle">Stream</strong><button class="close-player" id="closePlayer">Close ✕</button></div><div class="stream-wrap"><iframe id="streamFrame" title="Game player" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><div class="stream-brand" aria-label="SPORTNEL"><span class="stream-brand-dot"></span>SPORTNEL</div></div></div>
-    <div class="stats-source-note info-support"><strong>Info</strong><p><b>UPCOMING</b> — the match has not started yet.</p><p><b>LIVE</b> — the match is currently in progress.</p><p><b>Technical support:</b> <a href="mailto:sportneltv@gmail.com">sportneltv@gmail.com</a></p></div>
+    <div class="player" id="player"><div class="player-head"><strong id="playerTitle">Stream</strong><button class="close-player" id="closePlayer">Close ✕</button></div><div class="stream-wrap"><iframe id="streamFrame" title="Game player" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div></div>
+    <div class="stats-source-note info-support"><div class="info-heading-row"><strong>Info</strong><button class="info-chat-trigger" id="infoChatTrigger" type="button" aria-label="Open chat" title="Open chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H6l-3 2v-6.5A7.5 7.5 0 1 1 20 11.5Z"></path><path d="M7.5 11.5h.01M12 11.5h.01M16.5 11.5h.01"></path></svg></button></div><p><b>UPCOMING</b> — the match has not started yet.</p><p><b>LIVE</b> — the match is currently in progress.</p><p><b>Technical support:</b> <a href="mailto:sportneltv@gmail.com">sportneltv@gmail.com</a></p></div>
   </section>
 </main>
 <footer class="shell footer" style="display:block;text-align:center;padding:30px 18px 36px;line-height:1.8">
@@ -668,7 +768,7 @@ h1{font-size:clamp(33px,5vw,56px);line-height:1.02;letter-spacing:-2px;margin:14
   </div>
 </section>
 
-<div class="chat-panel" id="chatPanel" role="dialog" aria-modal="true" aria-labelledby="chatTitle">
+<div class="chat-panel" id="chatPanel" role="dialog" aria-modal="false" aria-labelledby="chatTitle">
   <div class="chat-box">
     <div class="chat-header"><div><h2 id="chatTitle">SPORTNEL Chat</h2><p>Choose a name before joining the conversation</p></div><button class="close-chat" id="closeChat">Close ✕</button></div>
     <div class="chat-setup" id="chatSetup"><label for="username">What name should people see?</label><input class="name-input" id="username" maxlength="24" autocomplete="nickname" placeholder="e.g. Alex"><button class="primary" id="joinChat">Join Chat</button><div class="hint">Your name is saved on this device and can be changed later.</div></div>
@@ -983,12 +1083,16 @@ refreshNhlStatuses();
 setInterval(tick,15000);
 setInterval(refreshNhlStatuses,60000);
 
-// Имя и история чата хранятся локально.
-// Для общего чата между разными устройствами нужен сервер.
+// Chat: shared in real time through Supabase Broadcast when connected.
+// Local storage remains a fallback for this browser if Realtime is unavailable.
 const CHAT_KEY = "sportnel_chat_messages_v1";
 const NAME_KEY = "sportnel_chat_name_v1";
 let username = localStorage.getItem(NAME_KEY) || "";
 let messages = [];
+let chatRealtimeChannel = null;
+let chatRealtimeReady = false;
+const seenMessageIds = new Set();
+
 try {
  messages = JSON.parse(localStorage.getItem(CHAT_KEY) || "[]");
  if(!Array.isArray(messages)) messages=[];
@@ -996,18 +1100,53 @@ try {
 
 function openChat() {
  $("chatPanel").classList.add("open");
- $("username").value=username;
+  $("username").value=username;
  if(username) showChat();
  else {
   $("chatSetup").style.display="flex";
   $("chatMain").style.display="none";
  }
 }
-function closeChat() {$("chatPanel").classList.remove("open");}
+function closeChat() {
+ $("chatPanel").classList.remove("open");
+}
+function setupRealtimeChat() {
+ if(!supabaseClient) {
+  $("chatStatus").textContent = "Offline chat mode: messages are saved only in this browser.";
+  return;
+ }
+ chatRealtimeChannel = supabaseClient.channel("sportnel-public-live-chat", {
+  config: { broadcast: { self: false } }
+ });
+ chatRealtimeChannel
+  .on("broadcast", {event:"chat-message"}, ({payload}) => {
+   if(!payload || !payload.id || !payload.text || !payload.name) return;
+   if(seenMessageIds.has(payload.id)) return;
+   seenMessageIds.add(payload.id);
+   messages.push({
+    id:payload.id, name:String(payload.name).slice(0,24),
+    text:String(payload.text).slice(0,500),
+    time:String(payload.time || ""), sender:payload.sender || ""
+   });
+   messages=messages.slice(-150);
+   try {localStorage.setItem(CHAT_KEY,JSON.stringify(messages));} catch {}
+   renderMessages();
+  })
+  .subscribe(status => {
+   chatRealtimeReady = status === "SUBSCRIBED";
+   if($("chatStatus")) {
+    $("chatStatus").textContent = chatRealtimeReady
+     ? "Live chat connected · messages are shared with other viewers"
+     : "Connecting to live chat…";
+   }
+  });
+}
 function showChat() {
  $("chatSetup").style.display="none";
  $("chatMain").style.display="flex";
- $("chatStatus").textContent=`You joined as ${username}. Chat history is only available in this browser.`;
+ $("chatStatus").textContent = chatRealtimeReady
+  ? "Live chat connected · messages are shared with other viewers"
+  : "Connecting to live chat…";
  renderMessages();
  setTimeout(()=>$("chatInput").focus(),80);
 }
@@ -1025,7 +1164,7 @@ function renderMessages() {
   item.className="message"+(m.name===username?" mine":"");
   const meta=document.createElement("div");
   meta.className="message-meta";
-  meta.textContent=`${m.name} · ${m.time}`;
+  meta.textContent=`${m.name} · ${m.time || ""}`;
   const text=document.createElement("div");
   text.className="message-text";
   text.textContent=m.text;
@@ -1045,7 +1184,7 @@ function joinChat() {
  localStorage.setItem(NAME_KEY,username);
  showChat();
 }
-function sendMessage() {
+async function sendMessage() {
  const input=$("chatInput"),text=input.value.trim();
  if(!username) {
   $("chatSetup").style.display="flex";
@@ -1054,23 +1193,37 @@ function sendMessage() {
  }
  if(!text) return;
  const now=new Date();
- messages.push({
+ const message = {
+  id: (crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`),
+  sender: viewerSessionId,
   name:username,
-  text,
+  text:text.slice(0,500),
   time:new Intl.DateTimeFormat("en-GB",{timeZone:TZ,hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).format(now)
- });
+ };
+ seenMessageIds.add(message.id);
+ messages.push(message);
  messages=messages.slice(-150);
  try {localStorage.setItem(CHAT_KEY,JSON.stringify(messages));} catch {}
  input.value="";
  renderMessages();
+ if(chatRealtimeChannel && chatRealtimeReady) {
+  const result = await chatRealtimeChannel.send({type:"broadcast",event:"chat-message",payload:message});
+  if(result !== "ok") $("chatStatus").textContent="Could not send to live chat. Check the connection.";
+ } else {
+  $("chatStatus").textContent="Message saved here, but live chat is not connected.";
+ }
 }
 $("openChat").addEventListener("click",openChat);
+$("infoChatTrigger").addEventListener("click",()=> {
+ if($("chatPanel").classList.contains("open")) closeChat();
+ else openChat();
+});
 $("closeChat").addEventListener("click",closeChat);
-$("chatPanel").addEventListener("click",e=>{if(e.target===$("chatPanel"))closeChat();});
 $("joinChat").addEventListener("click",joinChat);
 $("username").addEventListener("keydown",e=>{if(e.key==="Enter")joinChat();});
 $("sendMessage").addEventListener("click",sendMessage);
 $("chatInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendMessage();});
+setupRealtimeChat();
 
 const statsToggle = document.getElementById("viewLatviaStats");
 const playersPage = document.getElementById("playersPage");
@@ -1104,5 +1257,47 @@ window.addEventListener("popstate",()=>{
 
 if(location.hash === "#players") openPlayersPage();
 </script>
+
+<nav class="mobile-bottom-nav" id="mobileBottomNav" aria-label="Main navigation">
+  <button class="mobile-nav-item active" type="button" data-nav="home" aria-label="Home">
+    <span class="mobile-nav-icon home-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7"></path><path d="M5.5 9v12h13V9M9.5 21v-7h5v7"></path></svg></span><span>HOME</span>
+  </button>
+  <button class="mobile-nav-item" type="button" data-nav="nhl" aria-label="NHL"><span class="mobile-nav-icon league-logo-icon" aria-hidden="true"><img src="https://assets.nhle.com/logos/nhl/svg/NHL_dark.svg" alt="" onerror="this.style.display='none'"></span><span>NHL</span></button>
+  <button class="mobile-nav-item" type="button" data-nav="nba" aria-label="NBA"><span class="mobile-nav-icon league-logo-icon" aria-hidden="true"><img src="https://upload.wikimedia.org/wikipedia/en/0/03/National_Basketball_Association_logo.svg" alt="" onerror="this.style.display='none'"></span><span>NBA</span></button>
+  <button class="mobile-nav-item" type="button" data-nav="stats" aria-label="Stats"><span class="mobile-nav-icon stats-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 4h14M5 8h14M5 12h14M5 16h14M5 20h14"></path></svg></span><span>STATS</span></button>
+  <button class="mobile-nav-item" type="button" data-nav="chat" aria-label="Chat"><span class="mobile-nav-icon chat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H6l-3 2v-6.5A7.5 7.5 0 1 1 20 11.5Z"></path><path d="M7.5 11.5h.01M12 11.5h.01M16.5 11.5h.01"></path></svg></span><span>CHAT</span></button>
+</nav>
+
+
+<script>
+(function(){
+ const nav=document.getElementById("mobileBottomNav");
+ if(!nav)return;
+ const items=[...nav.querySelectorAll("[data-nav]")];
+ function setActive(key){items.forEach(item=>item.classList.toggle("active",item.dataset.nav===key));}
+ nav.addEventListener("click",function(event){
+  const button=event.target.closest("[data-nav]");
+  if(!button)return;
+  const key=button.dataset.nav;
+  if(key==="home"){showLanding();setActive("home");}
+  else if(key==="nhl"||key==="nba"){chooseLeague(key);setActive(key);}
+  else if(key==="stats"){openPlayersPage();setActive("stats");}
+  else if(key==="chat"){
+   const panel=document.getElementById("chatPanel");
+   if(panel&&panel.classList.contains("open")){closeChat();setActive("home");}
+   else{openChat();setActive("chat");}
+  }
+ });
+ document.getElementById("homeButton").addEventListener("click",()=>setActive("home"));
+ document.querySelectorAll("[data-choose]").forEach(button=>button.addEventListener("click",()=>setActive(button.dataset.choose)));
+ document.querySelectorAll(".tab").forEach(button=>button.addEventListener("click",()=>setActive(button.dataset.sport)));
+ document.getElementById("openChat").addEventListener("click",()=>setActive("chat"));
+ document.getElementById("infoChatTrigger").addEventListener("click",()=>setActive("chat"));
+ document.getElementById("closeChat").addEventListener("click",()=>setActive("home"));
+ document.getElementById("viewLatviaStats").addEventListener("click",()=>setActive("stats"));
+ document.getElementById("closePlayersPage").addEventListener("click",()=>setActive("home"));
+})();
+</script>
+
 </body>
 </html>
