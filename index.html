@@ -549,7 +549,7 @@ h1{font-size:clamp(33px,5vw,56px);line-height:1.02;letter-spacing:-2px;margin:14
 <body>
 <header class="topbar">
   <div class="shell topbar-inner">
-    <button class="brand" id="homeButton" aria-label="SPORTNEL home"><span class="brand-wordmark">SPORTNEL</span></button>
+    <button class="brand" id="homeButton" aria-label="SPORTNEL home"><span class="brand-wordmark">SportsNel+</span></button>
     <div class="top-actions"><span class="clock" id="clock">Riga · --:--:--</span><button class="chat-open" id="openChat">Open Chat ↗</button></div>
   </div>
 </header>
@@ -678,10 +678,10 @@ h1{font-size:clamp(33px,5vw,56px);line-height:1.02;letter-spacing:-2px;margin:14
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const NHL_MATCHES = [
- {id:"phi-vs-col-2026-10-20",homeCode:"PHI",awayCode:"COL",url:"",home:"Philadelphia Flyers",away:"Colorado Avalanche",homeLogo:"https://assets.nhle.com/logos/nhl/svg/PHI_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/COL_light.svg",time:"02:00",date:"2026-10-20"},
- {id:"nyr-vs-ana-2026-10-20",homeCode:"NYR",awayCode:"ANA",url:"",home:"New York Rangers",away:"Anaheim Ducks",homeLogo:"https://assets.nhle.com/logos/nhl/svg/NYR_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/ANA_light.svg",time:"02:00",date:"2026-10-20"},
- {id:"tor-vs-sjs-2026-10-20",homeCode:"TOR",awayCode:"SJS",url:"",home:"Toronto Maple Leafs",away:"San Jose Sharks",homeLogo:"https://assets.nhle.com/logos/nhl/svg/TOR_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/SJS_light.svg",time:"02:30",date:"2026-10-20"},
- {id:"uta-vs-pit-2026-10-20",homeCode:"UTA",awayCode:"PIT",url:"",home:"Utah Mammoth",away:"Pittsburgh Penguins",homeLogo:"https://assets.nhle.com/logos/nhl/svg/UTA_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/PIT_light.svg",time:"04:00",date:"2026-10-20"}
+ {id:"phi-vs-col-2026-10-20",homeCode:"PHI",awayCode:"COL",url:"https://matchora.to/embed/match/2591622",home:"Philadelphia Flyers",away:"Colorado Avalanche",homeLogo:"https://assets.nhle.com/logos/nhl/svg/PHI_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/COL_light.svg",time:"02:00",date:"2026-10-20"},
+ {id:"nyr-vs-ana-2026-10-20",homeCode:"NYR",awayCode:"ANA",url:"https://matchora.to/embed/match/2591621",home:"New York Rangers",away:"Anaheim Ducks",homeLogo:"https://assets.nhle.com/logos/nhl/svg/NYR_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/ANA_light.svg",time:"02:00",date:"2026-10-20"},
+ {id:"tor-vs-sjs-2026-10-20",homeCode:"TOR",awayCode:"SJS",url:"https://matchora.to/embed/match/2591623",home:"Toronto Maple Leafs",away:"San Jose Sharks",homeLogo:"https://assets.nhle.com/logos/nhl/svg/TOR_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/SJS_light.svg",time:"02:30",date:"2026-10-20"},
+ {id:"uta-vs-pit-2026-10-20",homeCode:"UTA",awayCode:"PIT",url:"https://matchora.to/embed/match/2591624",home:"Utah Mammoth",away:"Pittsburgh Penguins",homeLogo:"https://assets.nhle.com/logos/nhl/svg/UTA_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/PIT_light.svg",time:"04:00",date:"2026-10-20"}
 ];
 const state = {sport:"nhl",search:""};
 const $ = id => document.getElementById(id);
