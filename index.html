@@ -707,6 +707,51 @@ body{background:radial-gradient(ellipse at 50% -15%,#38141e 0,transparent 43%),v
 @media(max-width:600px){.league-choices{grid-template-columns:1fr;gap:14px;margin-top:26px}.league-choice{grid-template-columns:112px minmax(0,1fr);min-height:190px;padding:18px 17px;column-gap:14px;border-radius:25px}.league-choice .choice-top{margin-bottom:6px}.league-choice .league-logo-wrap{height:105px}.nhl-choice .league-logo-wrap img{width:105px;height:92px}.nba-choice .league-logo-wrap img{width:78px;height:100px}.league-choice .choice-bottom{gap:12px}.league-choice .choice-bottom h2{font-size:30px}.league-choice .choice-bottom p{font-size:12px}.league-choice .choice-enter{font-size:9px;letter-spacing:.7px}}
 
 
+
+/* Neon channel-switch tip below the Info legend */
+.channel-switch-tip{
+  grid-column:1/-1;
+  position:relative;
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  margin:7px 0 5px;
+  padding:15px 16px;
+  border:1px solid rgba(68,255,177,.72);
+  border-radius:14px;
+  color:#f7fffb;
+  background:linear-gradient(135deg,rgba(13,35,30,.96),rgba(10,15,20,.98) 70%);
+  box-shadow:0 0 6px rgba(68,255,177,.30),0 0 18px rgba(68,255,177,.13),inset 0 0 14px rgba(68,255,177,.045);
+  font-size:13px;
+  line-height:1.65;
+  overflow:hidden;
+}
+.channel-switch-tip:before{
+  content:"";
+  position:absolute;
+  left:0;top:10px;bottom:10px;width:3px;
+  border-radius:0 4px 4px 0;
+  background:#44ffb1;
+  box-shadow:0 0 10px #44ffb1,0 0 18px #44ffb1;
+}
+.channel-switch-tip-icon{
+  display:grid;place-items:center;flex:0 0 31px;height:31px;
+  border:1px solid rgba(68,255,177,.6);border-radius:9px;
+  color:#72ffc5;background:rgba(68,255,177,.09);
+  box-shadow:0 0 10px rgba(68,255,177,.15);
+  font-size:17px;font-weight:900;
+}
+.channel-switch-tip .tip-copy{display:grid;gap:7px;min-width:0;flex:1}
+.channel-switch-tip p{margin:0!important;min-width:0;color:#f4fff9!important;font-size:13px!important;line-height:1.65!important}
+.channel-switch-tip .tip-en{padding-top:7px;border-top:1px solid rgba(125,255,202,.2);color:#d8e6e0!important}
+.channel-switch-tip strong{color:#7dffca;text-shadow:0 0 9px rgba(68,255,177,.25)}
+@media(max-width:520px){
+  .channel-switch-tip{gap:10px;padding:13px 12px;font-size:12px}
+  .channel-switch-tip p{font-size:12px!important}
+  .channel-switch-tip-icon{flex-basis:28px;height:28px}
+}
+@media(prefers-reduced-motion:reduce){.channel-switch-tip{scroll-behavior:auto}}
+
 </style>
 </head>
 <body>
@@ -754,7 +799,7 @@ body{background:radial-gradient(ellipse at 50% -15%,#38141e 0,transparent 43%),v
     <div class="section-head"><div><h2 id="scheduleTitle">NHL Schedule</h2><p id="scheduleSub">Columbus Blue Jackets vs Minnesota Wild · Oct 19, 01:00 Riga time | Carolina Hurricanes vs Calgary Flames · Oct 19, 03:00 Riga time</p></div></div>
     <div class="games" id="games"></div>
     <div class="player" id="player"><div class="player-head"><strong id="playerTitle">Stream</strong><button class="close-player" id="closePlayer">Close ✕</button></div><div class="stream-wrap"><iframe id="streamFrame" title="Game player" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div></div>
-    <div class="stats-source-note info-support"><div class="info-heading-row"><strong>Info</strong><button class="info-chat-trigger" id="infoChatTrigger" type="button" aria-label="Open chat" title="Open chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H6l-3 2v-6.5A7.5 7.5 0 1 1 20 11.5Z"></path><path d="M7.5 11.5h.01M12 11.5h.01M16.5 11.5h.01"></path></svg></button></div><p><b>UPCOMING</b> — the match has not started yet.</p><p><b>LIVE</b> — the match is currently in progress.</p><p><b>Technical support:</b> <a href="mailto:sportneltv@gmail.com">sportneltv@gmail.com</a></p></div>
+    <div class="stats-source-note info-support"><div class="info-heading-row"><strong>Info</strong><button class="info-chat-trigger" id="infoChatTrigger" type="button" aria-label="Open chat" title="Open chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H6l-3 2v-6.5A7.5 7.5 0 1 1 20 11.5Z"></path><path d="M7.5 11.5h.01M12 11.5h.01M16.5 11.5h.01"></path></svg></button></div><p><b>UPCOMING</b> — the match has not started yet.</p><p><b>LIVE</b> — the match is currently in progress.</p><div class="channel-switch-tip" role="note" aria-label="Live channel help in Latvian and English"><span class="channel-switch-tip-icon" aria-hidden="true">↗</span><div class="tip-copy"><p lang="lv"><strong>Ja šeit nav tiešraides,</strong> tad galvenajā ekrānā var pārslēgt kanālu. Spied <strong>“Channels”</strong>. Var izvēlēties valodu turpat pie <strong>“Channels”</strong>.</p><p class="tip-en" lang="en"><strong>If there is no live broadcast here,</strong> you can switch the channel on the main screen. Press <strong>“Channels”.</strong> You can also choose the language right there next to <strong>“Channels”.</strong></p></div></div><p><b>Technical support:</b> <a href="mailto:sportneltv@gmail.com">sportneltv@gmail.com</a></p></div>
   </section>
 </main>
 <footer class="shell footer" style="display:block;text-align:center;padding:30px 18px 36px;line-height:1.8">
