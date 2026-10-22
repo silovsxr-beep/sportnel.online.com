@@ -918,8 +918,18 @@ body{background:radial-gradient(ellipse at 50% -15%,#38141e 0,transparent 43%),v
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const NHL_MATCHES = [
-  {id:"buf-vs-phi-2026-10-22",homeCode:"BUF",awayCode:"PHI",url:"https://matchora.to/embed/match/2591636",home:"Buffalo Sabres",away:"Philadelphia Flyers",homeLogo:"https://assets.nhle.com/logos/nhl/svg/BUF_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/PHI_light.svg",time:"02:30",date:"2026-10-22"},
-  {id:"ott-vs-fla-2026-10-22",homeCode:"OTT",awayCode:"FLA",url:"https://matchora.to/embed/match/2591637",home:"Ottawa Senators",away:"Florida Panthers",homeLogo:"https://assets.nhle.com/logos/nhl/svg/OTT_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/FLA_light.svg",time:"02:30",date:"2026-10-22"}
+  {id:"bos-vs-nsh-2026-10-23",homeCode:"BOS",awayCode:"NSH",url:"",home:"Boston Bruins",away:"Nashville Predators",homeLogo:"https://assets.nhle.com/logos/nhl/svg/BOS_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/NSH_light.svg",time:"02:00",date:"2026-10-23"},
+  {id:"njd-vs-ana-2026-10-23",homeCode:"NJD",awayCode:"ANA",url:"",home:"New Jersey Devils",away:"Anaheim Ducks",homeLogo:"https://assets.nhle.com/logos/nhl/svg/NJD_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/ANA_light.svg",time:"02:00",date:"2026-10-23"},
+  {id:"pit-vs-fla-2026-10-23",homeCode:"PIT",awayCode:"FLA",url:"",home:"Pittsburgh Penguins",away:"Florida Panthers",homeLogo:"https://assets.nhle.com/logos/nhl/svg/PIT_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/FLA_light.svg",time:"02:00",date:"2026-10-23"},
+  {id:"ott-vs-sjs-2026-10-23",homeCode:"OTT",awayCode:"SJS",url:"",home:"Ottawa Senators",away:"San Jose Sharks",homeLogo:"https://assets.nhle.com/logos/nhl/svg/OTT_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/SJS_light.svg",time:"02:00",date:"2026-10-23"},
+  {id:"tor-vs-nyr-2026-10-23",homeCode:"TOR",awayCode:"NYR",url:"",home:"Toronto Maple Leafs",away:"New York Rangers",homeLogo:"https://assets.nhle.com/logos/nhl/svg/TOR_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/NYR_light.svg",time:"02:00",date:"2026-10-23"},
+  {id:"nyi-vs-lak-2026-10-23",homeCode:"NYI",awayCode:"LAK",url:"",home:"New York Islanders",away:"Los Angeles Kings",homeLogo:"https://assets.nhle.com/logos/nhl/svg/NYI_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/LAK_light.svg",time:"02:30",date:"2026-10-23"},
+  {id:"dal-vs-wpg-2026-10-23",homeCode:"DAL",awayCode:"WPG",url:"",home:"Dallas Stars",away:"Winnipeg Jets",homeLogo:"https://assets.nhle.com/logos/nhl/svg/DAL_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/WPG_light.svg",time:"03:00",date:"2026-10-23"},
+  {id:"stl-vs-vgk-2026-10-23",homeCode:"STL",awayCode:"VGK",url:"",home:"St. Louis Blues",away:"Vegas Golden Knights",homeLogo:"https://assets.nhle.com/logos/nhl/svg/STL_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/VGK_light.svg",time:"03:00",date:"2026-10-23"},
+  {id:"cgy-vs-min-2026-10-23",homeCode:"CGY",awayCode:"MIN",url:"",home:"Calgary Flames",away:"Minnesota Wild",homeLogo:"https://assets.nhle.com/logos/nhl/svg/CGY_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/MIN_light.svg",time:"04:00",date:"2026-10-23"},
+  {id:"edm-vs-car-2026-10-23",homeCode:"EDM",awayCode:"CAR",url:"",home:"Edmonton Oilers",away:"Carolina Hurricanes",homeLogo:"https://assets.nhle.com/logos/nhl/svg/EDM_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/CAR_light.svg",time:"04:00",date:"2026-10-23"},
+  {id:"sea-vs-uta-2026-10-23",homeCode:"SEA",awayCode:"UTA",url:"",home:"Seattle Kraken",away:"Utah Mammoth",homeLogo:"https://assets.nhle.com/logos/nhl/svg/SEA_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/UTA_light.svg",time:"05:00",date:"2026-10-23"},
+  {id:"van-vs-det-2026-10-23",homeCode:"VAN",awayCode:"DET",url:"",home:"Vancouver Canucks",away:"Detroit Red Wings",homeLogo:"https://assets.nhle.com/logos/nhl/svg/VAN_light.svg",awayLogo:"https://assets.nhle.com/logos/nhl/svg/DET_light.svg",time:"05:00",date:"2026-10-23"}
 ];
 const state = {sport:"nhl",search:""};
 const $ = id => document.getElementById(id);
@@ -1011,17 +1021,8 @@ function localRigaToDate(dateText,h,m) {
  return guess;
 }
 const NBA_MATCHES = [
- {id:"was-vs-mil-2026-10-22",url:"https://matchora.to/embed/match/2601669",home:"Washington Wizards",away:"Milwaukee Bucks",homeLogo:"https://cdn.nba.com/logos/nba/1610612764/primary/L/logo.svg",awayLogo:"https://cdn.nba.com/logos/nba/1610612749/primary/L/logo.svg",time:"02:00",date:"2026-10-22"},
- {id:"orl-vs-atl-2026-10-22",url:"https://matchora.to/embed/match/2601668",home:"Orlando Magic",away:"Atlanta Hawks",homeLogo:"https://cdn.nba.com/logos/nba/1610612753/primary/L/logo.svg",awayLogo:"https://cdn.nba.com/logos/nba/1610612737/primary/L/logo.svg",time:"02:00",date:"2026-10-22"},
- {id:"mia-vs-min-2026-10-22",url:"https://matchora.to/embed/match/2601671",home:"Miami Heat",away:"Minnesota Timberwolves",homeLogo:"https://cdn.nba.com/logos/nba/1610612748/primary/L/logo.svg",awayLogo:"https://cdn.nba.com/logos/nba/1610612750/primary/L/logo.svg",time:"02:30",date:"2026-10-22"},
- {id:"bkn-vs-cha-2026-10-22",url:"https://matchora.to/embed/match/2601670",home:"Brooklyn Nets",away:"Charlotte Hornets",homeLogo:"https://cdn.nba.com/logos/nba/1610612751/primary/L/logo.svg",awayLogo:"https://cdn.nba.com/logos/nba/1610612766/primary/L/logo.svg",time:"02:30",date:"2026-10-22"},
- {id:"tor-vs-chi-2026-10-22",url:"https://matchora.to/embed/match/2601672",home:"Toronto Raptors",away:"Chicago Bulls",homeLogo:"https://cdn.nba.com/logos/nba/1610612761/primary/L/logo.svg",awayLogo:"https://cdn.nba.com/logos/nba/1610612741/primary/L/logo.svg",time:"02:30",date:"2026-10-22"},
- {id:"nop-vs-ind-2026-10-22",url:"https://matchora.to/embed/match/2601673",home:"New Orleans Pelicans",away:"Indiana Pacers",homeLogo:"https://cdn.nba.com/logos/nba/1610612740/primary/L/logo.svg",awayLogo:"https://cdn.nba.com/logos/nba/1610612754/primary/L/logo.svg",time:"03:00",date:"2026-10-22"},
- {id:"mem-vs-uta-2026-10-22",url:"https://matchora.to/embed/match/2601674",home:"Memphis Grizzlies",away:"Utah Jazz",homeLogo:"https://cdn.nba.com/logos/nba/1610612763/primary/L/logo.svg",awayLogo:"https://cdn.nba.com/logos/nba/1610612762/primary/L/logo.svg",time:"03:00",date:"2026-10-22"},
- {id:"hou-vs-dal-2026-10-22",url:"https://matchora.to/embed/match/2601675",home:"Houston Rockets",away:"Dallas Mavericks",homeLogo:"https://cdn.nba.com/logos/nba/1610612745/primary/L/logo.svg",awayLogo:"https://cdn.nba.com/logos/nba/1610612742/primary/L/logo.svg",time:"03:30",date:"2026-10-22"},
- {id:"lal-vs-gsw-2026-10-22",url:"https://matchora.to/embed/match/2601676",home:"Los Angeles Lakers",away:"Golden State Warriors",homeLogo:"https://cdn.nba.com/logos/nba/1610612747/primary/L/logo.svg",awayLogo:"https://cdn.nba.com/logos/nba/1610612744/primary/L/logo.svg",time:"05:00",date:"2026-10-22"},
- {id:"por-vs-phx-2026-10-22",url:"https://matchora.to/embed/match/2601677",home:"Portland Trail Blazers",away:"Phoenix Suns",homeLogo:"https://cdn.nba.com/logos/nba/1610612757/primary/L/logo.svg",awayLogo:"https://cdn.nba.com/logos/nba/1610612756/primary/L/logo.svg",time:"05:00",date:"2026-10-22"},
- {id:"lac-vs-sac-2026-10-22",url:"https://matchora.to/embed/match/2601678",home:"Los Angeles Clippers",away:"Sacramento Kings",homeLogo:"https://cdn.nba.com/logos/nba/1610612746/primary/L/logo.svg",awayLogo:"https://cdn.nba.com/logos/nba/1610612758/primary/L/logo.svg",time:"05:30",date:"2026-10-22"}
+ {id:"phi-vs-cle-2026-10-23",url:"",home:"Philadelphia 76ers",away:"Cleveland Cavaliers",homeLogo:"https://cdn.nba.com/logos/nba/1610612755/primary/L/logo.svg",awayLogo:"https://cdn.nba.com/logos/nba/1610612739/primary/L/logo.svg",time:"02:00",date:"2026-10-23"},
+ {id:"okc-vs-den-2026-10-23",url:"",home:"Oklahoma City Thunder",away:"Denver Nuggets",homeLogo:"https://cdn.nba.com/logos/nba/1610612760/primary/L/logo.svg",awayLogo:"https://cdn.nba.com/logos/nba/1610612743/primary/L/logo.svg",time:"04:30",date:"2026-10-23"}
 ];
 const schedule = NHL_MATCHES.map(m=>({...m,start:localRigaToDate(m.date,...m.time.split(":").map(Number))}));
 const nbaSchedule = NBA_MATCHES.map(m=>({...m,start:localRigaToDate(m.date,...m.time.split(":").map(Number))}));
@@ -1097,7 +1098,7 @@ function renderGames() {
  const title = state.sport === "nhl" ? "NHL Schedule" : "NBA Schedule";
  $("scheduleTitle").textContent = title;
  $("scheduleSub").textContent = state.sport === "nhl"
-  ? "Oct 21 · 11 NHL games · All times shown in Riga time"
+  ? "Oct 23 · 12 NHL games · All times shown in Riga time"
   : "Opening games · All times shown in Riga time";
  $("games").replaceChildren();
 
